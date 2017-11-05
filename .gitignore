@@ -1,0 +1,13 @@
+doc/*pdf
+doc/jnw_memos
+src/*pdf
+src/*csv
+jnw_overview_paper*
+*synctex.gz
+*.log
+*aux
+src/prob_curly_?_checks*
+nb/.ipynb*
+data/*out
+*__pycache__*
+data/numerics*
