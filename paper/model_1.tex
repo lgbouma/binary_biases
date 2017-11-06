@@ -82,10 +82,12 @@ Q_2 &= Q_{g,2}Q_{c,2} = Q_{g,0} q^{2/3} (1+q^{-\alpha})^{-3} q^{-5},
 \label{eq:detection_efficiency_2}
 \end{align}
 for $Q_{g,0}=R/a$, the transit probability in single star systems.
-The factors of $q^{2/3}$ and $q^{-5}$ in
-Eq.~\ref{eq:detection_efficiency_2} come from the assumed stellar 
+In Eq.~\ref{eq:detection_efficiency_2}, we have assumed a stellar 
 mass-luminosity-radius relation: $R\propto M \propto L^{1/\alpha}$.
-For $q=1$ both terms evaluate to unity, but they will later become relevant.
+The geometric transit probability is $Q_{g,2} = Q_{g,0}q^{2/3}$, and the 
+completeness is the latter term of Eq.~\ref{eq:detection_efficiency_2}.
+For $q=1$, the $q^{2/3}$ and $q^{-5}$ evaluate to unity, but they will later 
+become relevant.
 
 Summarizing, we have written the rate density for each system type
 (Eq.~\ref{eq:model1_occ_rate_density}) and the detection efficiency for each 
@@ -104,7 +106,7 @@ Analogous to Eq.~\ref{eq:detected_rate_density},
 \begin{equation}
 \tilde{\Gamma} = \Gamma_a \tilde{Q}.
 \end{equation}
-Accounting for dilution, one can show
+Accounting for dilution, and assuming $q=1$, the apparent rate density is
 \begin{equation}
 \Gamma_a = 
 w_a \Lambda_0 \delta^3(r_p, R_\star, a_p) +
@@ -150,7 +152,8 @@ Using Raghavan et al. (2010)'s $0.7-1.3M_\odot$ multiplicity fraction as our
 binary fraction\footnote{
 The binary fraction is the fraction of systems in a volume-limited sample that 
 are binary. It is equivalent to the multiplicity fraction if there are no 
-triple, quadruple, or higher order multiples.
+triple, quadruple, or higher order multiples. In that case, ${\rm BF} = n_b / 
+(n_s+n_b)$.
 }, we set ${\rm BF}=0.44$.
 The resulting correction to the rate density is $X_\Gamma(r_p) \approx 0.31$. 
 The correction at $r_p/\sqrt{2}$ is infinite.

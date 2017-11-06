@@ -21,7 +21,14 @@ The previous definition implicitly marginalizes the rate density over stellar
 multiplicity.
 For simplicity, this work only considers single and binary star systems.
 Then for a selected population of stars and planets the rate density can be 
-written
+written\footnote{
+    Eq.~\ref{eq:rate_density_marginalized} follows by writing the $i^{\rm 
+        th}$ system type's rate density as some normalization multiplied by a 
+    probability density:
+    $\Gamma_i(\vec{x}) = \mathcal{Z}_i p_i(\vec{x})$.
+    For Eq.~\ref{eq:rate_density_defn} to hold, we must have $\mathcal{Z}_i = 
+    \Lambda_i$.
+}
 \begin{equation}
 \Gamma(\vec{x})
 = \sum_{i=0}^{2} w_i \Gamma_i(\vec{x})
@@ -40,30 +47,19 @@ w_i = N_i/N_{\rm tot},
 \end{equation}
 for $N_{\rm tot} = \sum_i N_i$ the total number of selected stars, and 
 $N_0,N_1,N_2$ the number of selected single stars, primaries, and 
-secondaries respectively\footnote{
-Eq.~\ref{eq:rate_density_marginalized} follows by writing the $i^{\rm 
-th}$ system type's rate density as some normalization multiplied by a 
-probability density:
-$\Gamma_i(\vec{x}) = \mathcal{Z}_i p_i(\vec{x})$.
-For Eq.~\ref{eq:rate_density_defn} to hold, we must have $\mathcal{Z}_i = 
-\Lambda_i$.
-}.
+secondaries respectively.
+Both $N_1$ and $N_2$ are equal to the number of selected points on 
+the sky which are in fact binary systems.
 The relationship between the rate $\Lambda$ over a desired volume of 
 phase space $\Omega_{\rm desired}$ and $\Lambda_i$ is
 \begin{equation}
 \Lambda = \sum_i
-\left[
 \left(
 w_i \Lambda_i \int_{\Omega_{\rm desired}} p_i(\vec{x}) \,{\rm d}\Omega
-\right)
-\cdot
-\left(
-w_i \Lambda_i \int_{\Omega_{\rm total}} p_i(\vec{x}) \,{\rm d}\Omega
-\right)^{-1}
-\right],
+\right),
 \label{eq:occ_rate}
 \end{equation}
-where the inverse term is unity if $p_i(\vec{x})$ is appropriately normalized.
+where $p_i(\vec{x})$ is assumed to be normalized to unity.
 
 A transit survey will have a rate density of detected planets $\hat{\Gamma}$, 
 which for each system type will be the product of the rate density and the 

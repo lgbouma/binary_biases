@@ -127,16 +127,19 @@ w_b \Lambda_2 I_2(r_a),
 where the detection efficiencies are given in 
 Eqs.~\ref{eq:detection_efficiency_0}-\ref{eq:detection_efficiency_2}, and as 
 in the first model, $w_a=N_0/(N_0+N_1)$, $w_b=N_1/(N_0+N_1)$. The ratio of 
-primaries to singles, $\mu$, is now given by a variant of 
-Eq.~\ref{eq:mu_definition}:
+primaries to singles, $\mu$, is now less than that of Model \#1 (cf. 
+Eq.~\ref{eq:mu_definition}). This is because a distribution of light ratios 
+$\ell$ leads to a distribution of maximum selected distances. Integrating over 
+the mass ratios, one finds
 \begin{equation}
 \mu \equiv \frac{N_1}{N_0} = \frac{\rm BF}{1 - {\rm BF}} \left(2^{3/2} - 
-\int_{1}^{\sqrt{2}} u^2 (u^2 -1)^{1/\alpha} \,{\rm d}u\right),
+\int_{1}^{\sqrt{2}} u^2 (u^2 -1)^{1/\alpha} \,{\rm d}u\right).
 \label{eq:mu_model_2}
 \end{equation}
-where the latter dimensionless integral is easily found numerically.
-The $I_1(r_a)$ and $I_2(r_a)$ terms marginalize over the joint distribution of 
-apparent radius and mass ratio:
+
+This fully specifies the weights in Eq.~\ref{eq:model2_Gamma_a}.
+The $I_1(r_a)$ and $I_2(r_a)$ terms are found by marginalizing over the joint 
+distribution of apparent radius and mass ratio:
 \begin{align}
 I_i(r_a) &= 
 \int_0^1 p({\rm has\ detected\ planet}, r_a, q | {\rm star\ is\ type\ }i)
@@ -173,11 +176,9 @@ requires imposing the constraint that $r_a  = r_p
 \end{equation}
 which has no analytic solution except for special values of $\alpha$, the 
 mass-luminosity exponent.
-For $\alpha=3.5$, our nominal case, semianalytic solutions can be found.
-
-Since our main interest is in understanding the qualitative behavior 
-of the solutions, we focus on a few analytic limiting cases, and then 
-proceed numerically.
+For $\alpha=3.5$, our nominal case, semianalytic solutions could be found.
+However, since our main interest is in understanding the qualitative behavior 
+of the solutions, we focus on a few limiting cases, and proceed numerically.
 
 
 \paragraph{Correction to inferred rate density}
