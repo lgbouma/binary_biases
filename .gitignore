@@ -11,3 +11,4 @@ nb/.ipynb*
 data/*out
 *__pycache__*
 data/numerics*
+sandbox*
