@@ -1,53 +1,52 @@
-\subsection{Analytic Preliminaries}
-\label{sec:analytic_preliminaries}
-
-Define the occurrence rate density, $\Gamma$,
-as the expected number of planets per star per natural logarithmic bin 
-of planetary and stellar phase space:
+We define the occurrence rate density, $\Gamma$, as the expected number of 
+planets per star per bin of planetary or stellar phase space.
+Since we will mainly be concerned with the rate density's dependence on 
+planetary radii $r$, we write
 \begin{equation}
-\Gamma(\vec{x}) = \frac{d^n\Lambda}{\prod_{i=1}^{n} {\rm d} \ln x_i  }.
+\Gamma(r) = \frac{{\rm d}\Lambda}{{\rm d}r},
 \label{eq:rate_density_defn}
 \end{equation}
-$\vec{x}$ is an $n$-dimensional list of the continuous physical properties 
-that might affect the occurrence rate density. 
-For example,
-$\vec{x}=(r,P,R)$ where $r$ is the planet radius, $P$ is its orbital period, 
-and $R$ is the host star radius.
-The occurrence rate $\Lambda$ is found by integrating the rate density over a 
-specified volume of phase space (e.g., Youdin 2011).
+where $\Lambda$ is the occurrence rate.
+In this notation, ``the occurrence rate of planets of a particular size'' 
+translates to an integral of Eq.~\ref{eq:rate_density_defn}, evaluated over a 
+radius interval.
 
-
-The previous definition implicitly marginalizes the rate density over stellar 
+The above definition implicitly marginalizes the rate density over stellar 
 multiplicity.
-For simplicity, this work only considers single and binary star systems.
-Then for a selected population of stars and planets the rate density can be 
-written\footnote{
-    Eq.~\ref{eq:rate_density_marginalized} follows by writing the $i^{\rm 
-        th}$ system type's rate density as some normalization multiplied by a 
-    probability density:
-    $\Gamma_i(\vec{x}) = \mathcal{Z}_i p_i(\vec{x})$.
-    For Eq.~\ref{eq:rate_density_defn} to hold, we must have $\mathcal{Z}_i = 
-    \Lambda_i$.
-}
+In this study we only consider single and binary star systems.
+For a selected population of stars and planets, the rate density is then 
+the weighted sum of rate densities for each system type:
 \begin{equation}
-\Gamma(\vec{x})
-= \sum_{i=0}^{2} w_i \Gamma_i(\vec{x})
-= \sum_i w_i \Lambda_i p_i(\vec{x})
+N_{\rm tot} \Gamma(r) =
+N_0 \Gamma_0(r) +
+N_1 \Gamma_1(r) +
+N_2 \Gamma_2(r),
 \label{eq:rate_density_marginalized}
 \end{equation}
-where $i=0$ corresponds to single star systems, $i=1$ primaries of binaries, 
-and $i=2$ secondaries of binaries.
-$\Lambda_i$ is the occurrence rate integrated over all possible phase space  
-for the $i^{\rm th}$ system type, and $p_i(\vec{x})$ is the joint 
-probability density function so that $\Gamma_i(\vec{x}) = \Lambda_i 
-p_i(\vec{x})$.
-The weights are given by 
+where $i=0$ corresponds to single stars, $i=1$ to primaries of 
+binaries, and $i=2$ to secondaries of binaries.
+$N_{\rm tot} = \sum_i N_i$ is the total number of selected stars, and 
+$N_0,N_1,N_2$ are the number of selected single stars, primaries, and 
+secondaries.
+Since each selected binary system contributes both a 
+primary and secondary star, $N_1=N_2$.
+This redundancy in our notation will later prove its use.
+
+Finally, it is useful to write 
+$\Gamma_i(r)$, the rate density for each type of star, as the product of a 
+shape function and a constant:
 \begin{equation}
-w_i = N_i/N_{\rm tot},
+\Gamma_i(r) = \frac{{\rm d}\Lambda_i}{{\rm d}r} = Z_i p_i(r),
+\quad {\rm for}\ i\in\{0,1,2\}.
+\label{eq:rate_density_shape}
 \end{equation}
-for $N_{\rm tot} = \sum_i N_i$ the total number of selected stars, and 
-$N_0,N_1,N_2$ the number of selected single stars, primaries, and 
-secondaries respectively.
+The shape function is normalized to unity.
+The $Z_i$'s can be interpreted as each system type's occurrence rate 
+$\Lambda_i$, integrated over all planetary radii.
+They are equivalent to the number of planets per single star, primary, or 
+secondary.
+
+\begin{comment}
 Both $N_1$ and $N_2$ are equal to the number of selected points on 
 the sky which are in fact binary systems.
 The relationship between the rate $\Lambda$ over a desired volume of 
@@ -75,4 +74,4 @@ The detection efficiency includes the geometric transit probability, as well
 as any incompleteness effects.
 Foreman-Mackey et al. (2014) discuss how this 
 is calculated in practice.
-
+\end{comment}

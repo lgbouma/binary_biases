@@ -1,8 +1,10 @@
 \subsection{Model \#1: fixed stars, fixed planets, twin binaries}
 \label{sec:model_1}
 
-Consider a universe in which all planets are identical, and all stars are 
-either single or twin stars with otherwise identical physical properties.
+Since the effects of binarity are most pronounced when the two components are 
+similar, we begin by considering a universe in which all planets are 
+identical, and all stars are either single or twin stars with otherwise 
+identical physical properties.
 The occurrence rate density at a planet radius $r$, stellar radius $R$, and 
 semimajor axis $a$ for this model is
 \begin{equation}
@@ -44,7 +46,6 @@ In a signal-to-noise limited transit survey in which the observer does not
 know which stars are binaries, 
 \begin{equation}
 d_{\rm sel} \propto (r/R)^2 (L_{\rm sys} T_{\rm dur} A N_{\rm tra})^{1/2},
-\label{eq:d_sel}
 \end{equation}
 for $L_{\rm sys}=L_1(1+\ell)$ the system luminosity, $T_{\rm dur}$ the 
 transit duration, $A$ the detector area, and $N_{\rm tra}$ 
@@ -74,6 +75,8 @@ the luminosity of the secondary to the primary.
 
 The maximum detectable distance to single stars is assumed to be known, and so 
 $d_{{\rm sel},0} = d_{{\rm det},0}$.
+This means our naive astronomer assumes the fraction of their selected stars 
+which are searchable is 1 (this is their ``assumed completeness'').
 For binary systems there is a necessary incompleteness, and combining 
 Eqs.~\ref{eq:general_detection_efficiency} through~\ref{eq:dilution} yields
 \begin{align}
