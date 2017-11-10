@@ -46,7 +46,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ax=bigax
 
     if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-        fname = '../data/numerics/results_model_{:d}_Lambda2_{:.1f}.out'.format(
+        fname = '../data/numerics/results_model_{:d}_Lambda2_{:.2f}.out'.format(
                 model_number, Λ_2)
     else:
         fname = '../data/results_model_'+repr(model_number)+'.out'
@@ -69,7 +69,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     for error_case_number in [1,2,3]:
 
         if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-            fname = '../data/results_model_{:d}_error_case_{:d}_Lambda2_{:.1f}.out'.format(
+            fname = '../data/numerics/results_model_{:d}_error_case_{:d}_Lambda2_{:.2f}.out'.format(
                     model_number, error_case_number, Λ_2)
         else:
             fname = '../data/results_model_{:d}_error_case_{:d}.out'.format(
@@ -110,7 +110,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius, $r$ [$R_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
 
     ax.set_ylabel('planets per star, $\Lambda$', fontsize='large')
 
@@ -142,7 +142,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         #Howard 2012 boundary #1 and boundary #2:
         for lower_bound in [5.6,8]:
             if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-                fname = '../data/results_model_{:d}_Lambda2_{:.1f}.out'.format(
+                fname = '../data/numerics/results_model_{:d}_Lambda2_{:.2f}.out'.format(
                         model_number, Λ_2)
             else:
                 fname = '../data/results_model_{:d}.out'.format(
@@ -159,7 +159,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             for error_case_number in [1,2,3]:
 
                 if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-                    fname = '../data/results_model_{:d}_error_case_{:d}_Lambda2_{:.1f}.out'.format(
+                    fname = '../data/numerics/results_model_{:d}_error_case_{:d}_Lambda2_{:.2f}.out'.format(
                             model_number, error_case_number, Λ_2)
                 else:
                     fname = '../data/results_model_{:d}_error_case_{:d}.out'.format(
