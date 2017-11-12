@@ -1,5 +1,3 @@
-\section{Idealized Models of Transit Surveys}
-
 \subsection{Model \#1: fixed stars, fixed planets, twin binaries}
 \label{sec:model_1}
 
@@ -34,7 +32,7 @@ The occurrence rate over any interval that includes $r_p$ is then
 and the rate is zero over intervals that do not include $r_p$.
 
 We return to our group of binarity-ignoring astronomers. They do 
-not know the true planet population~--~they would like to discover it!
+not know the true rate density~--~they would like to discover it!
 In their signal-to-noise limited transit survey, they select stars 
 that they think can yield transit detections.
 Since the noise is Poissonian, they assume
@@ -44,7 +42,7 @@ Since the noise is Poissonian, they assume
 \propto F^{1/2}
 \propto L_{\rm sys}^{1/2} d^{-1}, \quad ({\rm incorrectly\ assumed})
 \end{equation}
-for $R$ the (constant) stellar radius, $F$ the photon flux, $L_{\rm sys}$ the 
+for $R$ the constant stellar radius, $F$ the photon flux, $L_{\rm sys}$ the 
 luminosity of a system, and $d$ its distance from us.
 At fixed planet radius, semimajor axis, stellar radius, and stellar luminosity,
 a constant signal-to-noise floor yields a maximum detectable 
@@ -56,7 +54,7 @@ The single stars have luminosity $L_1$, and the twin binaries have luminosity
 $2L_1$.
 Thus the twin binaries are selected out to a distance $\sqrt{2}$ times 
 that of single stars.
-This is a bad move; in reality the transit signal for any planet in a 
+This is a bad move, because the transit signal for any planet in a 
 twin binary will be diluted by a factor of two:
 \begin{equation}
 \frac{{\rm signal}}{{\rm noise}}
@@ -66,19 +64,38 @@ twin binary will be diluted by a factor of two:
 \end{equation}
 where the dilution is $\mathcal{D} \equiv L_{\rm host}/L_{\rm sys}$, for 
 $L_{\rm host}$ the the planet host's luminosity.
-This means that the actual maximum searchable distance for binaries is 
-$1/\sqrt{2}\times$ that of single stars.
+This means that the actual maximum searchable distance for binaries, $d_{\rm 
+det}$, is $1/\sqrt{2}$ times that of single stars.
 The situation is illustrated in Fig.~\ref{fig:model_1_volumes}: only one in 
 eight selected stars in binaries are truly searchable.
 
+\begin{figure}[!tb]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{figures/visualize_volumes.pdf}
+    \end{center}
+    \caption{
+        Cartoon of the different selected and searchable volumes for single 
+        stars (left column), and twin binaries (right column).
+        This model (\#1) assumes all stars have equal mass and luminosity.
+        Since the observer does not recognize the brighter binaries, they 
+        select 
+        them out to a larger distance, $\sqrt{2}\times$ that of single stars.
+        However, dilution causes the twin binaries to only be searchable in 
+        one 
+        eighth of their selected volume.
+    }
+    \label{fig:model_1_volumes}
+\end{figure}
+
+
 \paragraph{What do the observers ignoring binarity infer?} 
-The binarity-ignoring observers assume that every point on the sky with flux 
+The binarity-ignoring observers assume that all points on the sky with flux 
 above some minimum are searchable.
-They measure a detected planet rate density, and infer an apparent rate 
-density by correcting for $p_{\rm tra}$.
-The apparent rate density is
+They measure a detected planet rate density, and infer a rate 
+density by correcting for the transit probability.
+As a function of apparent radius, the apparent rate density is
 \begin{equation}
-\Gamma_a(r) = 
+\Gamma_a(r_a) = 
 \delta(r_p) Z_0 \frac{N_0}{N_0+N_1}  +
 \delta\left(\frac{r_p}{\sqrt{2}}\right) 
 (Z_1 p_{{\rm det},1} + Z_2 p_{{\rm det},2}) \frac{N_1}{N_0+N_1},
@@ -86,7 +103,8 @@ The apparent rate density is
 \end{equation}
 where $p_{{\rm det},1}$ ($p_{{\rm det},2}$) is the probability that a selected 
 primary (secondary) is searchable.
-For this example, $p_{{\rm det},1}=p_{{\rm det},2}=1/8$.
+In this example, $p_{{\rm det},1}=p_{{\rm det},2}=1/8$; the detection 
+efficiency is the ratio of the searchable to selected volumes.
 
 The true rate density (Eq.~\ref{eq:model_1_rate_density}) and the
 apparent rate density (Eq.~\ref{eq:model_1_apparent_rate_density})
@@ -100,156 +118,103 @@ selected stars. In reality, only one in eight binaries were searchable.
 %
 \item The inferred radii in binary systems are all $\sqrt{2}$ too small.
 \end{enumerate}
+By making an assumption about the true number of planets per single, primary, 
+and secondary star ($Z_0,Z_1,$ and $Z_2$), we can assess the severity of 
+these errors.
+Taking $Z_0=Z_1=Z_2$, we plot the resulting occurrence rates over bins 
+in planet radius in Fig.~\ref{fig:errcases_model_1}.
+Though it is impossible for an observer to isolate any one of the above 
+errors without also addressing the others, mathematically it is simply a 
+matter of modifying the appropriate terms in 
+Eq.~\ref{eq:model_1_apparent_rate_density}.
+The resulting rates are also shown in 
+Fig.~\ref{fig:errcases_model_1}, and demonstrate how each 
+error individually affects the overall inferred rate.
 
-We show the resulting occurrence rates over bins in planet radius in 
-Fig.~\ref{fig:errcases_model_1}.
-
-
-
-
-%NOTE: YOU CAN BUTCHER THE FUCK OUT OF THIS SECTION. JNW WANTS EACH CASE TO BE 
-%EXPLAINED, INDIVIDUALLY. DROP ALL THE "i" SUBSCRIPTS B/C THEY ARE APPARENTLY 
-%CONFUSING.
-
-
-To express the rate density of detected planets, $\hat{\Gamma} = \sum 
-Q_i\Gamma_i$, we need the detection efficiencies for each system type, which 
-are products of the geometric and selection probabilities:
-\begin{align}
-Q_i(\vec{x}) &= Q_{g,i}(\vec{x}) Q_{c,i}(\vec{x}),\quad {\rm where}\ 
-\vec{x}=(r,R,a).
-\label{eq:general_detection_efficiency}
-\end{align}
-Similar to Pepper et al. (2003), but in a new context, we take $Q_c$ as the 
-ratio of the number of stars that were searchable to the number of stars that 
-were selected.
-Assuming a homogeneous distribution of stars, this gives
-\begin{equation}
-Q_{c,i}(\vec{x}) = \left(
-\frac{d_{{\rm det},i}(\vec{x})}{d_{\rm sel}(\vec{x})}
-\right)^3,
-\end{equation}
-for $d_{\rm sel}$ the maximum distance to which surveyed stars are selected, 
-and $d_{{\rm det},i}$ the maximum distance to which planets can actually be 
-detected about the $i^{\rm th}$ system type.
-Note that $d_{\rm sel} \geq d_{{\rm det},i}$.
-In a signal-to-noise limited transit survey in which the observer does not 
-know which stars are binaries, 
-\begin{equation}
-d_{\rm sel} \propto (r/R)^2 (L_{\rm sys} T_{\rm dur} A N_{\rm tra})^{1/2},
-\end{equation}
-for $L_{\rm sys}=L_1(1+\ell)$ the system luminosity, $T_{\rm dur}$ the 
-transit duration, $A$ the detector area, and $N_{\rm tra}$ 
-the number of observed transits.
-However,
-\begin{equation}
-d_{{\rm det},i} \propto \mathcal{D}_i(r/R)^2 (L_{\rm sys} T_{\rm dur} A N_{\rm 
-    tra})^{1/2},
-\label{eq:d_det_i}
-\end{equation}
-for the dilution $\mathcal{D}_i$ given by
-\begin{align}
-\mathcal{D}_i
-&=
-\left.
-\begin{cases}
-1 & \text{for } i=0,\ {\rm single} \\
-L_1 / L_{\rm sys} = (1+\ell)^{-1}, & \text{for } i=1,\ {\rm primary} \\
-\ell L_1 / L_{\rm sys} = (1 + \ell^{-1})^{-1}, & 
-\text{for } i=2,\ {\rm secondary},
-\end{cases}
-\right.
-\label{eq:dilution}
-\end{align}
-where the light ratio $\ell$ of a given binary is defined as the ratio of 
-the luminosity of the secondary to the primary.
-
-The maximum detectable distance to single stars is assumed to be known, and so 
-$d_{{\rm sel},0} = d_{{\rm det},0}$.
-This means our naive astronomer assumes the fraction of their selected stars 
-which are searchable is 1 (this is their ``assumed completeness'').
-For binary systems there is a necessary incompleteness, and combining 
-Eqs.~\ref{eq:general_detection_efficiency} through~\ref{eq:dilution} yields
-\begin{align}
-Q_0 &= Q_{g,0}Q_{c,0} = Q_{g,0} \label{eq:detection_efficiency_0}\\
-Q_1 &= Q_{g,1}Q_{c,1} = Q_{g,0} (1+q^\alpha)^{-3} \\
-Q_2 &= Q_{g,2}Q_{c,2} = Q_{g,0} q^{2/3} (1+q^{-\alpha})^{-3} q^{-5}, 
-\label{eq:detection_efficiency_2}
-\end{align}
-for $Q_{g,0}=R/a$, the transit probability in single star systems.
-In Eq.~\ref{eq:detection_efficiency_2}, we have assumed a stellar 
-mass-luminosity-radius relation: $R\propto M \propto L^{1/\alpha}$.
-The geometric transit probability is $Q_{g,2} = Q_{g,0}q^{2/3}$, and the 
-completeness is the latter term of Eq.~\ref{eq:detection_efficiency_2}.
-For $q=1$, the $q^{2/3}$ and $q^{-5}$ evaluate to unity, but they will later 
-become relevant.
-
-Summarizing, we have written the rate density for each system type
-(Eq.~\ref{eq:model1_occ_rate_density}) and the detection efficiency for each 
-system type 
-(Eq.~\ref{eq:detection_efficiency_0}-\ref{eq:detection_efficiency_2}),
-and so have fully specified the rate density of detected planets, 
-in addition to the true rate density.
-
-
+\begin{figure}[!tb]
+    \begin{center}
+        \includegraphics[width=.6\textwidth]{figures/errcases_rate_density_vs_radius_model_1_brokenx.pdf}
+    \end{center}
+    \vspace{-0.5cm}
+    \caption{
+        Inferred planet occurrence rates over $0.01r_\oplus$ bins in planet 
+        radius,
+        for Model \#1.
+        This model has fixed stars, fixed planets, and twin binaries.
+        If the true planet radius is $r_p$, all planets 
+        detected in binaries will have apparent radii $r_a = r_p/\sqrt{2}$.
+        To illustrate the individual biases, we 
+        separated them:
+        ``only wrong $N_\star$'' means the only error is an incorrectly 
+        assumed 
+        number of selected stars;
+        ``only wrong $Q$'' means the only error is an incorrectly assumed 
+        detection efficiency (including both miscalculated transit 
+        probabilities 
+        and 
+        fraction of selected stars that are searchable);
+        ``only wrong $r_a$'' means the only error is misinterpretation of 
+        planetary radii, due to both transit depth dilution and also wrongly 
+        assumed host star radii.
+    }
+    \label{fig:errcases_model_1}
+\end{figure}
 
 
 \paragraph{Correction to inferred rate density and inferred rate}
 
-Define a rate density correction factor, $X_\Gamma$, as the ratio of the 
+We define a rate density correction factor, $X_\Gamma$, as the ratio of the 
 apparent to true rate densities:
 \begin{equation}
 X_\Gamma \equiv \frac{\Gamma_a}{\Gamma}.
 \end{equation}
-This factor can be a function of whatever parameters $\Gamma_a$ and $\Gamma$ 
-depend on; in this study, the planet radius is most relevant.
-For the twin-binaries model,
-\begin{equation}
-X_\Gamma(r)
-=
-\frac{w_a \Lambda_0\delta^3(r_p) + 
-    w_b(\Lambda_1 Q_{c,1} + \Lambda_2 Q_{c,2}) \delta^3(r_p/\sqrt{2})  }
-{(w_0\Lambda_0 + w_1\Lambda_1 + w_2\Lambda_2)\delta^3(r_p)}
-\label{eq:model1_correction}
-\end{equation}
-where $\delta^3(r_p)$ is shorthand for $\delta^3(r-r_p,R-R_\star,a-a_p)$.
+This correction factor can be a function of whatever parameters $\Gamma_a$ and 
+$\Gamma$ depend on; in this study, the planet radius is most relevant.
 
-If we take the rates $\Lambda_i$ to be equal, applying the definitions of 
-the weights gives a rate density correction factor at $r=r_p$ of
-$X_\Gamma(r_p) = (1+\mu)^{-1}$, where 
+Still assuming that the number of planets per single, primary, and 
+secondary star are equal ($Z_0=Z_1=Z_2$), we find a rate density correction 
+factor at the true planet radius of
+\begin{equation}
+X_\Gamma(r_p) = (1+\mu)^{-1},
+\label{eq:Z_eq_model_1_correction}
+\end{equation}
+where 
 \begin{align}
 \mu \equiv \frac{N_1}{N_0} &=
 \frac{n_b}{n_s} \left(\frac{d_{\rm sel,b}}{d_{\rm sel,s}}\right)^3 = 
-\frac{{\rm BF}}{1-{\rm BF}} (1+\ell)^{3/2},
+\frac{{\rm BF}}{1-{\rm BF}} (1+\ell)^{3/2}.
 \label{eq:mu_definition}
 \end{align}
-for $n_b$ and $n_s$ the number density of binaries and singles in a 
-volume limited sample.
-Using Raghavan et al. (2010)'s $0.7-1.3M_\odot$ multiplicity fraction as our 
-binary fraction\footnote{
+In Eq.~\ref{eq:mu_definition}, $n_b$ and $n_s$ are the number density of 
+binaries and singles in a volume limited sample, and the maximum selected 
+distance for binary and single systems are $d_{\rm sel,b}$ and $d_{\rm sel,s}$.
+The light ratio $\ell$ is defined relative to the primary, so that
+$L_{\rm sys} = L_1(1+\ell)$.
+The binary fraction in a volume limited sample is ``{\rm BF}''.
+For instance, Raghavan et al., (2010) found a multiplicity fraction\footnote{
     The binary fraction is the fraction of systems in a volume-limited sample 
-    that 
-    are binary. It is equivalent to the multiplicity fraction if there are no 
-    triple, quadruple, or higher order multiples. In that case, ${\rm BF} = 
-    n_b / 
-    (n_s+n_b)$.
-}, we set ${\rm BF}=0.44$.
-The resulting correction to the rate density is $X_\Gamma(r_p) \approx 0.31$. 
-The correction at $r_p/\sqrt{2}$ is infinite.
-The numerical realization of this model agrees with these analytic values, and 
-its output is shown in Fig~\ref{fig:errcases_model_1}.
-%beta = 2.2223355980148636
-If instead we assume that $\Lambda_0 = \Lambda_1$, but that $\Lambda_2=0$, we 
-find 
-$X_\Gamma(r_p) = (1+2\mu)/(1+\mu)^2$.
-Taking the same binary fraction, this evaluates to $X_\Gamma(r_p)\approx 0.53$.
-Since the correction to the rate is equal to that of rate density, at 
-$r=r_p$, the occurrence rate is underestimated by a factor of roughly 2 to 3.
+    that are binary. It is equivalent to the multiplicity fraction if there 
+    are no triple, quadruple, or higher order multiples. In that case, ${\rm 
+    BF} = n_b / (n_s+n_b)$.
+}
+for primaries with masses $0.7-1.3M_\odot$ of 0.44. 
+``Twin binaries'' are perhaps 10-20\% of the binaries in a volume-limited 
+sample, depending on how ``twin'' is defined.
+Thus a representative twin binary fraction to use in
+Eq.~\ref{eq:Z_eq_model_1_correction} would be ${\rm BF}\approx 
+0.05$-$0.1$. This yields a rate density correction $X_\Gamma(r_p)$ of 0.79 if 
+${\rm BF}=0.1$, and 0.88 if ${\rm BF}=0.05$.
+Rephrasing the result, the apparent rate would be half the true rate 
+if the twin binary fraction were $(2^{3/2}+1)^{-1}\approx 0.26$.
+Fortunately, in most contexts it is not that high.
 
-%Note that a correction to the inferred rate, $X_\Lambda$, can be 
-%defined analogously:
-%\begin{equation}
-%X_\Lambda \equiv \frac{\Lambda_a}{\Lambda}.
-%\end{equation}
-%For this twin binary model, the correction to the rate is the same as that to 
-%the rate density.
+An alternative assumption is that secondaries do not host planets. In this 
+case, $Z_0=Z_1$, and $Z_2=0$. The correction to the rate density at the true 
+planet radius becomes
+\begin{equation}
+X_\Gamma(r_p) = (1+2\mu)/(1+\mu)^2.
+\end{equation}
+This evaluates to 0.95 if ${\rm BF}=0.1$, and 0.99 if ${\rm BF}=0.05$.
+While it is hard to justify the assumption that secondaries are planet-less, 
+it is worth noting that $\Gamma_a/\Gamma$ is sensitive to the relative number 
+of planets per single, primary, and secondary.

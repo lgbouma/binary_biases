@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
     ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('$\Lambda_2/\Lambda_0$', fontsize='large')
+    ax.set_xlabel('$Z_2/Z_0$', fontsize='large')
     ax.set_ylabel('HJ rate (planets per thousand stars)', fontsize='large')
 
     outname = '../results/HJ_correction_inputrate_vs_HJratevalues'
