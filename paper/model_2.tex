@@ -256,6 +256,20 @@ X_\Gamma(r=r_p) \approx \frac{3c_0 \Lambda_0}{\Lambda_0+\Lambda_1+\Lambda_2}.
 If all the $Z_i$'s are equal, $X_\Gamma(r=r_p)\approx0.49$.
 If there are no planets around the secondaries, $X_\Gamma(r=r_p)\approx0.74$.
 
+\begin{figure}
+\centering
+\epsscale{1.3}
+\plottwo{figures/errcases_rate_density_vs_radius_model_2.pdf}{figures/errcases_rate_density_vs_radius_logs_model_2.pdf}
+\caption{
+Inferred planet occurrence rates as a function of planet radius in Model \#2 
+({\it top:} linear, {\it bottom:} logarithmic).
+This model has fixed planets and primaries, and varying secondary masses, 
+radii, and luminosities.
+The latter three lines are described in Fig.~\ref{fig:errcases_model_1}.
+\label{fig:errcases_model_2}}
+\end{figure}
+
+\begin{comment}
 \begin{figure}[!t]
     \centering
     \includegraphics[width=.6\textwidth]{figures/errcases_rate_density_vs_radius_model_2.pdf}
@@ -276,6 +290,7 @@ If there are no planets around the secondaries, $X_\Gamma(r=r_p)\approx0.74$.
     }
     \label{fig:errcases_model_2_log}
 \end{figure}
+\end{comment}
 
 \paragraph{Numerical approach}
 To maintain simplicity, we develop a Monte Carlo program to simulate our 
@@ -338,8 +353,7 @@ results for Model \#1, and the limiting case of Model \#2 described above.
 Following validation, assuming ${\rm BF}=0.44$, $\alpha=3.5$, 
 $\beta=\gamma=0$, and taking $Z_0=Z_1=Z_2=0.5$, we compute the true and 
 apparent occurrence rates over bins in planet radius.
-The results are shown in Figs.~\ref{fig:errcases_model_2_linear} 
-and~\ref{fig:errcases_model_2_log}.
+The results are shown in Fig.~\ref{fig:errcases_model_2}.
 Evidently, dilution produces a spectrum of apparent planetary radii. This 
 leads to overestimated rates everywhere except where there 
 are actually planets, where the rate is underestimated by a factor of two.

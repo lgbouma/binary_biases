@@ -5,21 +5,45 @@
 \usepackage{amsmath}
 \usepackage{comment}
 
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%\received{July 1, 2016}
+%\revised{September 27, 2016}
+%\accepted{\today}
+%% Command to document which AAS Journal the manuscript was submitted to.
+%% Adds "Submitted to " the arguement.
+\submitjournal{AAS journals.}
 
-\shortauthors{Bouma, Winn, Masuda}
+
+\shortauthors{Bouma et al.}
 \shorttitle{Binarity and Occurrence Rates}
 
 \begin{document}
     
 \title{ The effects of binarity on planet occurrence rates measured by transit 
 surveys}
-
-\author{
-L. G. Bouma, J. N. Winn, K. Masuda
-}
-
+%
+\correspondingauthor{L. Bouma}
+\email{luke@astro.princeton.edu}
+%
+\author{L. G. Bouma}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+\author{J. N. Winn}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+\author{K. Masuda}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+%
+%
 \begin{abstract}
-
+%
 This work aims to clarify the biases that stellar binarity introduces
 to occurrence rates inferred from transit surveys.
 In general, stellar multiplicity leads to diluted planetary 
@@ -42,8 +66,15 @@ For hot Jupiters, we find that the inferred occurrence rate is
 $\approx 1.3\times$ smaller than the true rate around single stars.
 We suggest that this latter effect contributes to the discrepant hot Jupiter 
 rates measured by {\it Kepler}\ and the California group's respective surveys.
+%
 \end{abstract}
-
+%
+\keywords{
+    methods: data analysis ---
+    planets and satellites: detection ---
+    surveys}
+%
+%
 \input{introduction}
 \input{methods}
 \input{results}
