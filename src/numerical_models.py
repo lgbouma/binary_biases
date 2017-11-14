@@ -6,6 +6,9 @@ Example usage:
 >>> python numerical_models.py --quickrun --modelnumber 3 --LambdaTwo 0.5
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
+
+Models #1-#3 are as-discussed in the text.
+Model #4 is a version of the Fulton+ (2017) gap.
 '''
 
 from __future__ import division, print_function
@@ -69,6 +72,9 @@ def numerical_transit_survey(
         # File names assume 2 digits of precision for Λ_2.
         raise NotImplementedError
 
+    if model_number > 4:
+        raise NotImplementedError
+
     ######################
     # STELLAR POPULATION #
     ######################
@@ -90,7 +96,7 @@ def numerical_transit_survey(
         q = 1
         μ = B * (1 + q**α)**(3/2)
         N_1 = int(N_0 * μ) # number of selected primaries
-    elif model_number == 2 or model_number == 3:
+    elif model_number == 2 or model_number == 3 or model_number == 4:
         integral = 0.484174086070513 # 17/10/14.2 analytic result
         N_d = N_0 * B * (2**(3/2) - 3*integral)
         N_1 = int(N_d) # number of primaries = number of double star systems
@@ -109,7 +115,7 @@ def numerical_transit_survey(
         df.loc[df['star_type'] == 'single', 'q'] = np.nan
         q = np.ones(N_1)
 
-    elif model_number == 2 or model_number == 3:
+    elif model_number == 2 or model_number == 3 or model_number == 4:
         df['q'] = np.nan
 
         # Inverse transform sampling to get samples of q
@@ -171,7 +177,7 @@ def numerical_transit_survey(
             assert np.isclose(_1, 1/8, rtol=1e-2) \
                    and \
                    np.isclose(_2, 1/8, rtol=1e-2)
-    elif model_number == 2 or model_number == 3:
+    elif model_number == 2 or model_number == 3 or model_number == 4:
         # primaries should be more complete than 1/8
         np.testing.assert_array_less(
                 1/8, #smaller
@@ -218,6 +224,24 @@ def numerical_transit_survey(
 
         df['r'] = r_samples
         df.loc[df['has_planet'] == False, 'r'] = np.nan
+
+    elif model_number == 4:
+        r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
+
+        # Inverse transform sample to get radii. Drawing from powerlaw
+        # distribution above r_pl, and constant below (to avoid pileup).
+        Δr = 1e-3
+        r_grid = np.arange(0, r_pu+Δr, Δr)
+        prob_r = np.minimum( r_grid**δ, r_pl**δ )
+        prob_r[(r_grid > 1.5) & (r_grid < 2)] = 0
+        prob_r /= trapz(prob_r, r_grid)
+        cdf_r = np.append(0, np.cumsum(prob_r)/np.max(np.cumsum(prob_r)))
+        func = interp1d(cdf_r, np.append(0, r_grid))
+        r_samples = func(np.random.uniform(size=N_0+N_1+N_2))
+
+        df['r'] = r_samples
+        df.loc[df['has_planet'] == False, 'r'] = np.nan
+
 
     # Detected planets are those that transit, and whose hosts are searchable.
     Q_g0 = 0.3 # arbitrary geoemtric transit probability around singles
@@ -280,9 +304,10 @@ def numerical_transit_survey(
         Δr = 0.01
         radius_bins = np.arange(0, 1+Δr, Δr)
         r_pu = 1
-    elif model_number == 3:
+    elif model_number == 3 or model_number == 4:
         Δr = 0.5
         radius_bins = np.arange(0, r_pu+Δr, Δr)
+        #radius_bins = np.logspace(-2,4/3,21) # thought about it, opted against
 
     true_dict = {}
     inferred_dict = {}

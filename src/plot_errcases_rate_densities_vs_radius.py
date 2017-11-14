@@ -29,7 +29,7 @@ import numpy as np
 from brokenaxes import brokenaxes
 
 def make_plot(model_number, logx=None, logy=None, withtext=None,
-        stdout=False, brokenx=False, Λ_2=None):
+        stdout=False, brokenx=None, Λ_2=None, xcut=None):
 
     # Make summary plot
     if not brokenx:
@@ -53,7 +53,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     df = pd.read_csv(fname)
 
-    if model_number == 3:
+    if model_number == 3 or model_number == 4:
         xvals = np.append(0, df['bin_left'])
         ytrue = np.append(0, df['true_Λ'])
         yinferred = np.append(0, df['inferred_Λ'])
@@ -76,7 +76,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                     model_number, error_case_number)
         df = pd.read_csv(fname)
 
-        if error_case_number == 3:
+        if error_case_number == 3 or model_number == 4:
             try:
                 np.testing.assert_almost_equal(
                         np.sum(df['inferred_Λ']),
@@ -87,7 +87,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 print(model_number, error_case_number)
                 print('assert failed')
 
-        if model_number == 3:
+        if model_number == 3 or model_number == 4:
             xvals = np.append(0, df['bin_left'])
             ytrue = np.append(0, df['true_Λ'])
             yinferred = np.append(0, df['inferred_Λ'])
@@ -133,6 +133,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             ax.set_xlim([0.5,1.02])
         elif (model_number == 1 or model_number == 2) and (logx or logy):
             ax.set_xlim([-0.02,1.02])
+
+    if xcut:
+        ax.set_xlim([-0.3,5.3])
 
     if model_number == 3:
 
@@ -203,6 +206,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         if isinstance(Λ_2,float) or isinstance(Λ_2,int):
             outname += '_Lambda2_{:.1f}'.format(Λ_2)
 
+    if xcut:
+        outname += '_xcut'
+
     f.savefig(outname+'.pdf', bbox_inches='tight')
 
 
@@ -221,3 +227,6 @@ if __name__ == '__main__':
     make_plot(3, Λ_2=0)
     make_plot(3, logy=True, Λ_2=0)
     make_plot(3, withtext=True, stdout=True, Λ_2=0)
+
+    make_plot(4, Λ_2=0.5)
+    make_plot(4, xcut=True, Λ_2=0.5)

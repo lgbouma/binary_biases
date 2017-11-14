@@ -29,7 +29,7 @@ import numpy as np
 from brokenaxes import brokenaxes
 
 def make_plot(model_number, logx=None, logy=None, withtext=None,
-        stdout=False, brokenx=None, Λ_2=None):
+        stdout=False, brokenx=None, Λ_2=None, xcut=None):
 
     # Make summary plot
     if isinstance(Λ_2,float) or isinstance(Λ_2,int):
@@ -53,7 +53,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 despine=True)
         ax=bigax
 
-    if model_number == 3:
+    if model_number == 3 or model_number == 4:
         xvals = np.append(0, df['bin_left'])
         ytrue = np.append(0, df['true_Λ'])
         yinferred = np.append(0, df['inferred_Λ'])
@@ -62,7 +62,10 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ytrue = np.append(df['true_Λ'],[0,0])
         yinferred = np.append(df['inferred_Λ'],[0,0])
 
-    ax.step(xvals, ytrue, where='post', label='true')
+    try:
+        ax.step(xvals, ytrue, where='post', label='true')
+    except:
+        import IPython; IPython.embed()
 
     ax.step(xvals, yinferred, where='post', label='inferred')
 
@@ -94,6 +97,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             ax.set_xlim([0.5,1.02])
         elif (model_number == 1 or model_number == 2) and (logx or logy):
             ax.set_xlim([-0.02,1.02])
+
+    if xcut:
+        ax.set_xlim([-0.3,5.3])
 
     if model_number == 3:
         # Assess HJ rate difference.
@@ -144,6 +150,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         if isinstance(Λ_2,float) or isinstance(Λ_2,int):
             outname += '_Lambda2_{:.1f}'.format(Λ_2)
 
+    if xcut:
+        outname += '_xcut'
+
     f.savefig(outname+'.pdf', bbox_inches='tight')
 
 
@@ -162,3 +171,6 @@ if __name__ == '__main__':
     make_plot(3, Λ_2=0)
     make_plot(3, logy=True, Λ_2=0)
     make_plot(3, withtext=True, stdout=True, Λ_2=0)
+
+    make_plot(4, Λ_2=0.5)
+    make_plot(4, xcut=True, Λ_2=0.5)
