@@ -304,8 +304,11 @@ def numerical_transit_survey(
         Δr = 0.01
         radius_bins = np.arange(0, 1+Δr, Δr)
         r_pu = 1
-    elif model_number == 3 or model_number == 4:
+    elif model_number == 3:
         Δr = 0.5
+        radius_bins = np.arange(0, r_pu+Δr, Δr)
+    elif model_number == 4:
+        Δr = 0.25
         radius_bins = np.arange(0, r_pu+Δr, Δr)
         #radius_bins = np.logspace(-2,4/3,21) # thought about it, opted against
 
