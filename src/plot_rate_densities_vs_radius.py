@@ -33,7 +33,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     # Make summary plot
     if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-        fname = '../data/numerics/results_model_{:d}_Lambda2_{:.1f}.out'.format(
+        fname = '../data/numerics/results_model_{:d}_Lambda2_{:.2f}.out'.format(
                 model_number, Λ_2)
     else:
         fname = '../data/results_model_'+repr(model_number)+'.out'
@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
         make_plot(model_number)
 
-    make_plot(1, brokenx=True)
+    make_plot(1, brokenx=True, Λ_2=0.5)
     make_plot(2, logy=True)
     make_plot(3, logy=True)
     make_plot(3, withtext=True, stdout=True)

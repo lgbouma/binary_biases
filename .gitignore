@@ -12,5 +12,3 @@ data/*out
 *__pycache__*
 data/numerics*
 sandbox*
-results/errcases_*
-results/rates_*
