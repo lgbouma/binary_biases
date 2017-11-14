@@ -1,13 +1,13 @@
 \subsection{Model \#3: Fixed primaries, varying planets and secondaries}
 \label{sec:model_3}
 
-In this model, as in the previous one, all single and primary stars have 
+As in the previous model, all single and primary stars in this model have 
 identical properties.
-Only the secondaries have masses, radii, and luminosities that vary between 
+The secondaries have masses, radii, and luminosities that vary between 
 systems: $M\propto R \propto L^{1/\alpha}$.
-The radii of planets are assigned independently of any host system
-property, and are sampled from an intrinsic radius distribution, which we take 
-as
+The only addition is that we now let the radii of planets vary: they are 
+assigned independently of any host system property, and are sampled from the 
+true radius distribution, which we take as
 \begin{align}
 p_r(r)
 &\propto
@@ -22,12 +22,12 @@ r^\delta & \text{for } r\geq 2r_\oplus \\
 Following Howard et al. (2012)'s measurement, we take $\delta = -2.92$.
 Our ``nominal model'' remains the same: the binary fraction is 0.44, 
 $\alpha=3.5$, $\beta=\gamma=0$.
-We take $Z_i$, the occurrence rate integrated over all planet radii for the 
-$i^{\rm th}$ system type, to be equal for singles, primaries, 
-and secondaries. 
+We take $Z_i$, the number of planets per single, primary, and secondary, to be 
+equal.
 
-For this model, we forgo analytic development and focus only on numerics.
-The occurrence rates are shown as a function of planet radius in 
+For this model, we forgo analytic development and simply run our Monte Carlo 
+program.
+The resulting occurrence rates are shown in 
 Fig.~\ref{fig:errcases_model_3_log}.
 For the assumed planetary and stellar distributions, the inferred rate is 
 underestimated over all radii.
@@ -43,13 +43,14 @@ underestimated over all radii.
         secondaries.
         The true planet radius distribution is a power law with exponent 
         $-2.92$ 
-        above $2R_\oplus$, below which it is uniform (e.g., Howard et al., 
+        above $2r_\oplus$, below which it is uniform ({\it e.g.}, Howard et 
+        al., 
         2012).
     }
     \label{fig:errcases_model_3_log}
 \end{figure}
 
-\paragraph{Hot Jupiter Occurrence Rates}
+\paragraph{Hot Jupiter occurrence rates}
 Taking Fig.~\ref{fig:errcases_model_3_log} and counting the number of planets 
 per star with $r>8r_\oplus$, we can compare the true and inferred hot Jupiter 
 occurrence rates.
@@ -75,18 +76,14 @@ This means far fewer detected hot Jupiters orbit secondaries, and so they
 hardly affect the inferred rate.
 While the ``true rate'' across the entire population is linearly dependent on 
 $Z_2$, the rate around 
-singles and primaries (green line) is independent of that around secondaries.
-Assuming that RV surveys are measuring the true rate around single stars (or 
-primaries), this suggests that binarity might contributes to the 
-HJ rate discrepancy at the $\sim 0.2\%$ level, independent of the HJ rate 
-around secondaries.
-
+singles and primaries (Fig.~\ref{fig:HJ_correction_inputrate_vs_HJratevalues} 
+green line) is independent of that around secondaries.
 
 \begin{figure}[!tb]
     \centering
     \includegraphics[width=.6\textwidth]{figures/HJ_correction_inputrate_vs_HJratevalues.pdf}
     \caption{
-        $X_i$ is the occurrence rate integrated over all possible phase 
+        $Z_i$ is the occurrence rate integrated over all possible phase 
         space for the $i^{\rm th}$ system type. $Z_2/Z_0=1$ 
         corresponds to an equal number of planets per secondary as per single 
         star;
@@ -106,16 +103,7 @@ around secondaries.
 \end{figure}
 
 
-\paragraph{The Rate of Earth Analogs}
-The rate (density) of Earth-like planets orbiting Sun-like stars has 
-been independently measured by Youdin, Petigura, Dong \& Zhu, 
-Foreman-Mackey et al., and Burke et al., (2011, 2013, 2013, 2014, and 2015 
-respectively).
-These efforts have found that the one-year terrestrial planet occurrence rate 
-varies between $\approx 0.03$ and $\approx 1$ per Sun-like star, depending on 
-assumptions that are made when retrieving the rate (Burke et al. 2015's 
-Fig.~17).
-
+\paragraph{The rate of Earth analogs}
 Our model does not explicitly include the rate density's period-dependence, 
 because stellar binarity does not appreciably bias the period-dependence of 
 occurrence rates measured by transit surveys\footnote{
@@ -138,8 +126,7 @@ At Earth's radius, the result is that the inferred rate is $0.84\times$ the
 true rate around single stars, assuming that the $Z_i$'s are equal.
 Similar to the above case of the hot Jupiters, if we vary the true $Z_2$ 
 while keeping $Z_0 = Z_1$, the ratio of the inferred to true rate 
-around single stars hardly 
-changes by only a few percent (shown in 
+around single stars changes by only a few percent (shown in 
 Fig.~\ref{fig:earth_inputrate_vs_etaearthratevalues}).
 The ratio of the inferred to the true rate, $(\Lambda_{\rm 
 inferred}/\Lambda)_{r=r_\oplus}$ varies substantially, but by at most $50\%$ 
