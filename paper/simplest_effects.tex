@@ -64,7 +64,7 @@ twin binary will be diluted by a factor of two:
 \end{equation}
 where the dilution is $\mathcal{D} \equiv L_{\rm host}/L_{\rm sys}$, for 
 $L_{\rm host}$ the the planet host's luminosity.
-This means that the actual maximum searchable distance for binaries, $d_{\rm 
+This means that the true maximum searchable distance for binaries, $d_{\rm 
 det}$, is $1/\sqrt{2}$ times that of single stars.
 The situation is illustrated in Fig.~\ref{fig:model_1_volumes}: only one in 
 eight selected stars in binaries are truly searchable.
@@ -91,9 +91,9 @@ eight selected stars in binaries are truly searchable.
 \paragraph{What do the observers ignoring binarity infer?} 
 The binarity-ignoring observers assume that all points on the sky with flux 
 above some minimum are searchable.
-They measure a detected planet rate density, and infer a rate 
-density by correcting for the transit probability.
-As a function of apparent radius, the apparent rate density is
+They correct their assumed number of searchable stars for the transit 
+probability.
+As a function of apparent radius, they then report an apparent rate density of
 \begin{equation}
 \Gamma_a(r_a) = 
 \delta(r_p) Z_0 \frac{N_0}{N_0+N_1}  +
@@ -118,13 +118,40 @@ selected stars. In reality, only one in eight binaries were searchable.
 %
 \item The inferred radii in binary systems are all $\sqrt{2}$ too small.
 \end{enumerate}
-By making an assumption about the true number of planets per single, primary, 
-and secondary star ($Z_0,Z_1,$ and $Z_2$), we can assess the severity of 
-these errors.
-Taking $Z_0=Z_1=Z_2$, we plot the resulting occurrence rates over bins 
-in planet radius in Fig.~\ref{fig:errcases_model_1}.
-Though it is impossible for an observer to isolate any one of the above 
-errors without also addressing the others, mathematically it is simply a 
+
+To assess the severity of these errors, we need to make assumptions about the 
+stellar and planetary populations.
+The important quantity for the stellar population is $N_1/N_0$, the ratio of 
+selected primaries (or binaries) to singles. We can define
+\begin{align}
+\mu \equiv \frac{N_1}{N_0} &=
+\frac{n_b}{n_s} \left(\frac{d_{\rm sel,b}}{d_{\rm sel,s}}\right)^3 = 
+\frac{{\rm BF}}{1-{\rm BF}} (1+\ell)^{3/2},
+\label{eq:mu_definition}
+\end{align}
+where $n_b$ and $n_s$ are the number density of binaries and singles in a 
+volume limited sample, and the maximum selected distance for binary and single 
+systems are $d_{\rm sel,b}$ and $d_{\rm sel,s}$.
+The light ratio $\ell$ is defined relative to the primary, so that
+$L_{\rm sys} = L_1(1+\ell)$.
+The binary fraction in a volume limited sample is ``{\rm BF}''.
+For instance, Raghavan et al., (2010) found a multiplicity fraction\footnote{
+    The binary fraction is the fraction of systems in a volume-limited sample 
+    that are binary. It is equivalent to the multiplicity fraction if there 
+    are no triple, quadruple, or higher order multiples. In that case, ${\rm 
+        BF} = n_b / (n_s+n_b)$.
+} of 0.44 for primaries with masses from $0.7M_\odot$ to $1.3M_\odot$. 
+``Twin binaries'' are perhaps 10-20\% of the binaries in a volume-limited 
+sample, depending on how ``twin'' is defined.
+Thus a representative twin binary fraction for this model is ${\rm BF}\approx 
+0.05$-$0.1$. 
+
+Further, we need to assume knowledge of the true number of planets per 
+single, primary, and secondary star ($Z_0,Z_1,$ and $Z_2$).
+Taking $Z_0=Z_1=Z_2=1/2$, we plot the resulting occurrence rates as a function 
+of planet radius in Fig.~\ref{fig:errcases_model_1}.
+Though it is impossible for an observer to isolate any one of binarity's 
+biases without also addressing the others, mathematically it is simply a 
 matter of modifying the appropriate terms in 
 Eq.~\ref{eq:model_1_apparent_rate_density}.
 The resulting rates are also shown in 
@@ -144,16 +171,15 @@ error individually affects the overall inferred rate.
         If the true planet radius is $r_p$, all planets 
         detected in binaries will have apparent radii $r_a = r_p/\sqrt{2}$.
         To illustrate the individual biases, we 
-        separated them:
+        separated them.
+        On this and future plots,
         ``only wrong $N_\star$'' means the only error is an incorrectly 
         assumed 
         number of selected stars;
         ``only wrong $Q$'' means the only error is an incorrectly assumed 
-        detection efficiency (including both miscalculated transit 
-        probabilities 
-        and 
-        fraction of selected stars that are searchable);
-        ``only wrong $r_a$'' means the only error is misinterpretation of 
+        completeness (including both miscalculated $p_{\rm tra}$ 
+        and fraction of selected stars that are searchable, $p_{\rm det}$);
+        ``only wrong $r_a$'' means the only error is in miscalculated        
         planetary radii, due to both transit depth dilution and also wrongly 
         assumed host star radii.
     }
@@ -171,48 +197,25 @@ X_\Gamma \equiv \frac{\Gamma_a}{\Gamma}.
 This correction factor can be a function of whatever parameters $\Gamma_a$ and 
 $\Gamma$ depend on; in this study, the planet radius is most relevant.
 
-Still assuming that the number of planets per single, primary, and 
+If we continue assuming that the number of planets per single, primary, and 
 secondary star are equal ($Z_0=Z_1=Z_2$), we find a rate density correction 
 factor at the true planet radius of
 \begin{equation}
-X_\Gamma(r_p) = (1+\mu)^{-1},
+X_\Gamma(r_p) = \frac{1}{1+\mu},
 \label{eq:Z_eq_model_1_correction}
 \end{equation}
-where 
-\begin{align}
-\mu \equiv \frac{N_1}{N_0} &=
-\frac{n_b}{n_s} \left(\frac{d_{\rm sel,b}}{d_{\rm sel,s}}\right)^3 = 
-\frac{{\rm BF}}{1-{\rm BF}} (1+\ell)^{3/2}.
-\label{eq:mu_definition}
-\end{align}
-In Eq.~\ref{eq:mu_definition}, $n_b$ and $n_s$ are the number density of 
-binaries and singles in a volume limited sample, and the maximum selected 
-distance for binary and single systems are $d_{\rm sel,b}$ and $d_{\rm sel,s}$.
-The light ratio $\ell$ is defined relative to the primary, so that
-$L_{\rm sys} = L_1(1+\ell)$.
-The binary fraction in a volume limited sample is ``{\rm BF}''.
-For instance, Raghavan et al., (2010) found a multiplicity fraction\footnote{
-    The binary fraction is the fraction of systems in a volume-limited sample 
-    that are binary. It is equivalent to the multiplicity fraction if there 
-    are no triple, quadruple, or higher order multiples. In that case, ${\rm 
-    BF} = n_b / (n_s+n_b)$.
-}
-for primaries with masses $0.7-1.3M_\odot$ of 0.44. 
-``Twin binaries'' are perhaps 10-20\% of the binaries in a volume-limited 
-sample, depending on how ``twin'' is defined.
-Thus a representative twin binary fraction to use in
-Eq.~\ref{eq:Z_eq_model_1_correction} would be ${\rm BF}\approx 
-0.05$-$0.1$. This yields a rate density correction $X_\Gamma(r_p)$ of 0.79 if 
-${\rm BF}=0.1$, and 0.88 if ${\rm BF}=0.05$.
-Rephrasing the result, the apparent rate would be half the true rate 
-if the twin binary fraction were $(2^{3/2}+1)^{-1}\approx 0.26$.
-Fortunately, in most contexts it is not that high.
+This yields a correction of 0.79 if ${\rm BF}=0.1$, and 0.88 if ${\rm 
+BF}=0.05$.
+Rephrasing the result, if the twin binary fraction were 
+$(2^{3/2}+1)^{-1}\approx 0.26$, then the apparent rate would be half the true 
+rate.
+Fortunately, in most contexts the twin binary fraction is not that high.
 
-An alternative assumption is that secondaries do not host planets. In this 
+An alternative assumption is that secondaries do not host planets. In that 
 case, $Z_0=Z_1$, and $Z_2=0$. The correction to the rate density at the true 
 planet radius becomes
 \begin{equation}
-X_\Gamma(r_p) = (1+2\mu)/(1+\mu)^2.
+X_\Gamma(r_p) = \frac{1+2\mu}{(1+\mu)^2}.
 \end{equation}
 This evaluates to 0.95 if ${\rm BF}=0.1$, and 0.99 if ${\rm BF}=0.05$.
 While it is hard to justify the assumption that secondaries are planet-less, 
