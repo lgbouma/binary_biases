@@ -3,16 +3,14 @@
 
 \begin{figure}[!tb]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/q_distribn_mag_limited.pdf}
+    \includegraphics[width=0.6\textwidth]{figures/mass_ratio_distribution.pdf}
     \caption{
-        The distribution of the mass ratio for a magnitude limited sample of 
-        binary stars. The underlying mass ratios are drawn from a uniform 
-        distribution in a volume-limited sample, quite similar to that of 
-        Raghavan 
-        et al. (2010)'s Fig. 13.
+        The mass ratio distribution for a magnitude-limited sample of 
+        binary stars, in which the underlying volume-limited distribution is 
+        uniform (quite similar to {\it e.g.}, Raghavan et al. (2010)'s 
+        Fig.~16).
         The entire bias can be understood analytically 
         (Eq.~\ref{eq:Malmquist_bias}).
-        {\bf todo: make y axis label p(secondary with q).}
     }
     \label{fig:q_distribn_mag_limited}
 \end{figure}
@@ -64,7 +62,8 @@ magnitude-limited.
 Given a binary, the probability of drawing a mass ratio $q$ in a 
 magnitude-limited sample scales as
 \begin{equation}
-p({\rm draw\ }q | {\rm system\ is\ binary}) \propto q^\beta (1+q^\alpha)^{3/2}
+p({\rm draw\ }q\,|\,{\rm system\ is\ binary}) \propto q^\beta 
+(1+q^\alpha)^{3/2}
 \label{eq:Malmquist_bias}
 \end{equation}
 where $q^\beta$ is the volume-limited probability of drawing a binary of mass 

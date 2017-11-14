@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Given that hot Jupiters are thought to be less common around less-massive
 stars, it would be more sensible to consider Λ_2 < Λ_0 , while letting single
@@ -5,7 +6,6 @@ stars and primaries host planets at the same rate.
 
 This plots the rates as a function of Λ_2 /Λ_0.
 '''
-# -*- coding: utf-8 -*-
 from __future__ import division, print_function
 import matplotlib as mpl
 mpl.use('pgf')
