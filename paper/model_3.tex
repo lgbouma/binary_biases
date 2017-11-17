@@ -26,7 +26,14 @@ We take $Z_i$, the number of planets per single, primary, and secondary, to be
 equal.
 
 For this model, we forgo analytic development and simply run our Monte Carlo 
-program.
+program\footnote{
+One might worry that our Monte Carlo program does not increase the number of 
+selected stars as the square of the planet radius (Eq.~\ref{eq:snr_true}).
+We can omit this dependence because in our model $N_1/N_0$ is independent of 
+desired planet radius, and all other terms in the rate densities ({\it e.g.}, 
+Eqs.~\ref{eq:model2_rate_density} and~\ref{eq:model2_Gamma_a}) are independent 
+of the number of selected stars.
+}.
 The resulting occurrence rates are shown in 
 Fig.~\ref{fig:errcases_model_3_log}.
 For the assumed planetary and stellar distributions, the inferred rate is 
