@@ -1,0 +1,402 @@
+\documentclass[12pt,modern]{aastex61}
+\usepackage{graphics,graphicx}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{comment}
+
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%\received{July 1, 2016}
+%\revised{September 27, 2016}
+%\accepted{\today}
+%% Command to document which AAS Journal the manuscript was submitted to.
+%% Adds "Submitted to " the arguement.
+\submitjournal{AAS journals.}
+
+
+\shortauthors{Bouma et al.}
+\shorttitle{Binarity and Occurrence Rates}
+
+\begin{document}
+    
+\title{ The effects of binarity on planet occurrence rates measured by transit 
+surveys}
+%
+\correspondingauthor{L. Bouma}
+\email{luke@astro.princeton.edu}
+%
+\author{L. G. Bouma}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+\author{J. N. Winn}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+\author{K. Masuda}
+\affiliation{
+    Department of Astrophysical Sciences,
+    Princeton University,
+    4 Ivy Lane, Princeton, NJ 08540, USA}
+%
+%
+\begin{abstract}
+%
+This derives the equations of the paper.
+
+%
+\end{abstract}
+%
+\keywords{
+    methods: data analysis ---
+    planets and satellites: detection ---
+    surveys}
+%
+%
+
+\newcommand{\pt}{\theta}
+\newcommand{\pa}{\theta_{\rm a}}
+\newcommand{\pn}{\theta_0}
+
+\newcommand{\pp}{\mathcal{P}}
+\newcommand{\ps}{\mathcal{S}}
+\renewcommand{\a}{_{\rm a}}
+\newcommand{\s}{_{\rm s}}
+
+\section{Preliminaries}
+
+\subsection{Searchable Distance}
+
+We can detect a signal if 
+\begin{equation}
+	{\text{signal}\over\text{noise}}\sim
+    {\delta_{\rm obs}\over(L/d^2)^{-1/2}},
+	\quad \delta_{\rm obs}:\text{observed depth}
+\end{equation}
+is above some threshold (it would probably make more sense to include the 
+duration information, but that would anyway be a trivial extension and so we 
+omit it here for brevity). Thus, the maximum searchable distance scales as
+\begin{equation}
+	d(\delta_{\rm obs}, L_{\rm sys}) \propto \delta_{\rm obs} \cdot L_{\rm 
+	sys}^{1/2}.
+\end{equation}
+We assume that the signal is detected if and only if a given star is searchable. 
+
+Using this distance, the number of searchable stars $N\s$ is given by
+\begin{equation}
+	N\s(\delta_{\rm obs}, L_{\rm sys})=n_0 \delta_{\rm obs}^3 L_{\rm 
+	sys}^{3/2},
+\end{equation}
+where $n_0$ is a normalization constant proportional to the volume density of the systems with a certain type of interest (e.g. single star, binary).
+We neglect the dependence of the normalization $n_0$ on the stellar type.
+
+\subsection{Relation between Apparent and Actual Stellar Properties}
+
+We assume that the apparent property of an unresolved binary is the same as that of the primary:
+\begin{equation}
+	M\a=M_1, \quad R\a=R_1, ...
+\end{equation}
+We also assume the stellar radius and luminosity is uniquely related to the stellar mass.
+
+Given these assumptions, the total luminosity of the system is
+%This assumption, along with a given $L$--$M$ relation, leads to
+\begin{equation}
+	L_{\rm sys}=L_1+L_2=L(M\a)+L(qM\a),
+\end{equation}
+where $q=M_2/M_1$. Note that $L_{\rm sys}$ is the true value (because $M\a$ is 
+the true primary mass), while the system luminosity estimated by an observer 
+would be $L(M\a)$, which based on the apparent stellar parameters (unless the 
+observer has a priori knowledge on the distance to a given system).
+
+\subsection{Apparent Number of Searchable Stars}
+
+Given the apparent signal $\delta_{\rm obs}$ and stellar mass $M\a$, the 
+maximum searchable distance for singles and binaries are proportional to 
+$\delta_{\rm obs}\cdot L(M\a)^{1/2}$ and $\delta_{\rm obs}\cdot 
+[L(M\a)+L(qM\a)]^{1/2}$. Thus, 
+the apparent number of searchable stars (i.e. points in the sky), which will 
+be selected by an ignorant observer, is 
+\begin{align}
+	\notag
+	N_{\rm s,a}(\delta_{\rm obs}, M\a)
+	%&=n_{\rm s,0}\delta_{\rm obs}^3L(M\a)^{3/2} + n_{\rm b,0}\delta_{\rm 
+	%obs}^3 \cdot [L(M\a)+L(qM\a)]^{3/2}\\
+	&=n_{\rm s}\delta_{\rm obs}^3 L(M\a)^{3/2}\left\{1+\int \mathrm{d}q\,f(q) 
+	{\mathrm{BF}\over{1-\mathrm{BF}}}\left[1+{L(qM\a) \over 
+	L(M\a)}\right]^{3/2}\right\}\\
+	&\equiv N\s^0(\delta_{\rm obs}, L(M\a)) \left[1+\mu(\mathrm{BF}, 
+	M\a)\right],
+\end{align}
+where $N\s^0$ is the number of searchable singles (this agrees with the actual value), $f(q)$ is the binary mass ratio distribution, and $\mathrm{BF}=n_{\rm b}/(n_{\rm s}+n_{\rm b})$ is the binary fraction in a volume-limited sample.
+
+\section{Apparent Occurrence Rate --- General Formula}
+
+A group of astronomers wants to measure the mean number of planets of a 
+certain type per star of a certain type.
+They simply observe a set points on the sky selected in a magnitude-limited way (or whatever, actually?) and detect $n$ planets of a desired class. Then they compute the occurrence as
+\begin{equation}
+\Lambda(\pp, \ps) = \frac{n(\pp, \ps)}{N_{\rm s}(\pp, \ps)} \times \frac{1}{p_{\rm tra}(\pp, \ps)}.
+\end{equation}
+Here $N_{\rm s}$ is the number of stars (among those initially selected) around which the planets of interest are searchable; $p_{\rm tra}$ is the transit probability.
+
+Let's see how the binary modifies this. The occurrence is computed based on the apparent planetary/stellar parameters $\pp\a$, $\ps\a$:
+\begin{equation}
+\Lambda\a(\pp\a, \ps\a) = \frac{n(\pp\a, \ps\a)}{N_{\rm s,a}(\pp\a, \ps\a)} \times \frac{1}{p_{\rm tra}(\pp\a, \ps\a)}.
+\end{equation}
+Here, $N_{\rm s}$ and $p_{\rm tra}$ are computed for the apparent parameter $\pp\a$ and $\ps\a$. In the presence of dilution, planets with $(\pp\a, \ps\a)$ are associated with systems of many different planetary and stellar properties, so $n_{\rm a}$ is given by the convolution of the true occurrence, $\Lambda(\pp, \ps)$, and number of searchable stars that give $(\pp\a, \ps\a)$ when the true system actually has $(\pp, \ps)$, $\mathcal{N}(\pp\a, \ps\a; \pp, \ps)$:
+\begin{equation}
+	n(\pp\a, \ps\a)=\sum_i n^i(\pp\a, \ps\a)
+	=\sum_i \int \mathrm{d}\pp\mathrm{d}\ps\,
+	%\mathcal{P}_{\rm tra}(\pp\a, \ps\a; \pt)
+	\mathcal{N}_{\rm s}^i(\pp\a,\ps\a; \pp, \ps)
+	\cdot\Lambda^i(\pp, \ps)\cdot p_{\rm tra}(\pp, \ps),
+\end{equation}
+where $i$ specifies the type of true host stars (0: single, 1: primary, 2: secondary).
+%where $b_i=1-\mathrm{BF}$ for $i=0$ (singles) and $b_i=\mathrm{BF}$ for $i=1,2$. In fact, the $b_i$ factor appears when we count the number of searchable systems $\mathcal{N}$; what matters here is the number density of binaries and singles, so $\mathrm{BF}$ is the binary fraction in a volume-limited sample. Here we factor it out just to simplify(?) the notation.
+
+So the problem essentially reduces to the evaluation of
+\begin{equation}
+	\mathcal{N}_{\rm s}(\pp\a,\ps\a; \pp, \ps)
+\end{equation}
+for planets around single stars, primaries in binaries, and secondaries in binaries. 
+
+\section{Evaluation of $\mathcal{N}$}
+
+Let us explicitly write $\pp=r$ and $\ps=M$; $R$ and $L$ are uniquely determined from the assumed mass--radius--luminosity relation. We neglect the $P$ dependence.
+
+\subsection{Single Stars}
+
+For $i=0$, 
+\begin{equation}
+	\mathcal{N}_{\rm s}^0(\pp\a,\ps\a; \pp, \ps)
+	=\delta(\pp\a-\pp)\delta(\ps\a-\ps) N\s^0(\pp,\ps),
+	%=\delta(r'-r)\delta(M'-M)\delta(R'-R) N\s((r/R)^2, L(M))
+\end{equation}
+so
+\begin{equation}
+	n^0(\pp\a, \ps\a)=N\s^0(\pp\a,\ps\a)\cdot \Lambda^0(\pp\a, \ps\a) \cdot p_{\rm tra}(\pp\a, \ps\a).
+\end{equation}
+If all the stars are singles, this yields
+\begin{equation}
+	\Lambda\a(\pp\a, \ps\a)=\Lambda^0(\pp\a, \ps\a),
+\end{equation}
+as expected (now $\mu=0$ and $N_{\rm s,a}=N\s^0$) --- the true occurrence is recovered.
+
+\subsection{Primaries in Binaries}
+
+Since we assume $\ps\a=\ps_1$,
+\begin{equation}
+	\mathcal{N}_{\rm s}^1(r', M'; r, M) \propto \delta(M'-M).
+	%=\mathcal{N}_{\rm s}^1(r', M', R'; r, M', R').
+\end{equation}
+In this case, $\mathcal{N}_{\rm s}^1$ is non-zero only at $r'=R'\sqrt{D'}$, where
+\begin{equation}
+	D' %= \delta \times {L_1 \over L_{\rm sys}} 
+	= \left[{r\over R(M')}\right]^2\times {L(M') \over L_{\rm sys}(M', q)}
+\end{equation}
+and the normalization is given by the number of searchable binaries (for signal $D'$):
+\begin{equation}
+	%N_{\rm s}(D', L_{\rm sys})
+	n_{\rm b}D'^3 L_{\rm sys}^{3/2}=N_{\rm s}^0(D', L(M'))\cdot\mu(\mathrm{BF},M').
+	%=N_{\rm s}(D', L(M')) \times \left[L_{\rm sys}(M', q) \over L(M') 
+	%\right]^{3/2}.
+\end{equation}
+Thus,
+\begin{equation}
+	\mathcal{N}_{\rm s}^1(r', M'; r, M)
+	=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^1(r', M'; r, M; q),
+\end{equation}
+where $f(q)$ is the binary mass ratio distribution and
+\begin{align}
+	\notag
+	\mathcal{N}_{{\rm s}, q}^1(r', M'; r, M; q)
+	%&=N_{\rm s}(D', L(M')) \left[L_{\rm sys}(M', q) \over L(M') 
+	%\right]^{3/2}\\
+	&=N_{\rm s}^0(D', L(M'))\cdot\mu(\mathrm{BF},M')\\
+	&\times\delta \left(r'-r\sqrt{{L(M') \over L_{\rm sys}(M', 
+	q)}}\right)\delta(M'-M).
+\end{align}
+
+\subsection{Secondaries in Binaries}
+
+In this case, $M=qM_1=qM'$, so
+\begin{equation}
+	\mathcal{N}_{\rm s}^2(r', M'; r, M)
+	\propto \delta\left(M'-{M\over q}\right).
+	%=\mathcal{N}_{\rm s}^2(r', M', R'; r, qM', R(qM')).
+\end{equation}
+Again $\mathcal{N}_{\rm s}^2$ is non-zero only at $r'=R'\sqrt{D'}$, but this time
+\begin{equation}
+	D' = \left[{r\over R(qM')}\right]^2 \times {L(qM') 
+	\over L_{\rm sys}(M', q)}.
+\end{equation}
+The normalization remains the same as the previous case (we are counting the searchable stars at a given observed depth $D'$, total luminosity of the binary is the same).
+Thus,
+\begin{equation}
+	\mathcal{N}_{\rm s}^2(r', M'; r, M)
+	=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^2(r', M'; r, M; q),
+\end{equation}
+where
+\begin{align}
+	\notag
+	\mathcal{N}_{\rm s}^2(r', M'; r, M; q)
+	%&=N_{\rm s}(D', L(M')) \left[L_{\rm sys}(M', q) \over L(M') 
+	%\right]^{3/2}\\
+	&=N_{\rm s}^0(D', L(M'))\cdot\mu(\mathrm{BF},M')\\
+	&\times \delta \left(r'-r\sqrt{ \left[{R(M')\over R(qM')}\right]^2 {L(qM') 
+	\over L_{\rm sys}(M', q)} }\right)\delta\left(M'-{M\over q}\right).
+\end{align}
+
+\section{Result}
+
+\subsection{Marginalization over the True Properties}
+
+Let's integrate out $\pp$ and $\ps$.
+
+\begin{align}
+	n^0(r\a, M\a)
+	&=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{\rm s}^0(r\a, M\a; r, M)
+	\cdot\Lambda^0(r, M) \cdot p_{\rm tra}(M)\\
+	&=\int\mathrm{d}r\mathrm{d}M\, N\s^0(\delta_{\rm obs}, 
+	L(M\a))\delta(r\a-r)\delta(M\a-M)
+	\cdot\Lambda^0(r, M) \cdot p_{\rm tra}(M)\\
+	&=N\s^0(\delta_{\rm obs}, L(M\a))\cdot\Lambda^0(r\a, M\a) \cdot p_{\rm 
+	tra}(M\a).
+\end{align}
+
+\begin{align}
+	n^1(r\a, M\a)
+	&=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{\rm s}^1(r\a, M\a; r, M)
+	\cdot\Lambda^1(r, M) \cdot p_{\rm tra}(M)\\
+	&=\int \mathrm{d}q\,f(q)\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{{\rm s}, q}^1(r\a, M\a; r, M; q)\cdot\Lambda^1(r, M) \cdot p_{\rm tra}(M)\\
+	&=N\s^0(\delta_{\rm obs}, L(M\a))\cdot p_{\rm tra}(M\a) \cdot
+	\mu(\mathrm{BF}, M\a) \int {\mathrm{d}q \over \alpha}\,f(q)\,\Lambda^1(r^*, M\a),
+	%\left[L_{\rm sys}(M', q) \over L(M') \right]^{3/2},
+\end{align}
+where $r^*=r\a/\alpha$ and 
+\begin{equation}
+	\alpha(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}.
+\end{equation}
+
+Finally,
+\begin{align}
+	n^2(r\a, M\a)
+	&=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{\rm s}^2(r\a, M\a; r, M)
+	\cdot\Lambda^2(r, M) \cdot p_{\rm tra}(M)\\
+	&=\int \mathrm{d}q\,f(q)\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{{\rm s}, q}^2(r\a, M\a; r, M; q)\cdot\Lambda^2(r, M) \cdot p_{\rm tra}(M)\\
+	&=%N_{\rm s}(D', L(M')
+	N\s^0(\delta_{\rm obs}, L(M\a))\cdot\mu(\mathrm{BF}, M\a)
+	\int {q \mathrm{d}q \over \beta}\,f(q)\,\Lambda^2(r^{**}, qM\a)\,p_{\rm tra}(qM\a),
+	%\left[L_{\rm sys}(M', q) \over L(M') \right]^{3/2},
+\end{align}
+where $r^{**}=r\a/\beta$ and 
+\begin{equation}
+	\beta(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm sys}(M\a, q)} }.
+\end{equation}
+
+\subsection{Final Formula}
+
+Note again that the denominators of $\Lambda\a$ are the same for singles, 
+primaries, and secondaries: $N_{\rm s,a}(\delta_{\rm obs}, M\a)$ and $p_{\rm 
+tra}(M\a)$. This is because we are calculating the occurrence at the same 
+apparent planet/star properties, and the observer can never distinguish 
+binaries from singles (and adopt the primary properties for binaries).
+Using the results above, the apparent occurrence is thus given by
+\begin{align}
+	&\Lambda\a(r\a, M\a)={1\over 1+\mu(\mathrm{BF}, M\a)}\times\\
+	%&=(1-\mathrm{BF})\cdot
+	&\left\{ \Lambda^0(r\a, M\a)+ \mu(\mathrm{BF}, M\a) \left[
+	\int {\mathrm{d}q \over A}\,f(q)\,\Lambda^1\left({r\a\over A}, M\a\right)\,
+	+\int {q \mathrm{d}q \over B}\,f(q)\,\Lambda^2\left({r\a\over B}, qM\a\right)\,
+	{R(qM\a) \over R(M\a)}
+	q^{-1/3} \right]
+	\right\},
+	 %\left[1+{L(qM\a) \over L(M\a)}\right]^{3/2}
+	 %\\
+	%&+\mathrm{BF}\cdot
+	%\int {q \mathrm{d}q \over B}\,f(q)\,\Lambda^2\left({r\a\over B}, qM\a\right)\,
+	%{R(qM\a) \over R(M\a)}q^{-1/3}
+	%\left[1+{L(qM\a) \over L(M\a)}\right]^{3/2},
+\end{align}
+where
+\begin{equation}
+	A=\left[1+{L(qM\a) \over L(M\a)}\right]^{-1/2}, \quad
+	B={R(M\a)\over R(qM\a)}\left[1+{L(M\a) \over L(qM\a)}\right]^{-1/2}.
+\end{equation}
+
+\section{Examples}
+
+\subsection{Twin Binary}
+
+We have $f(q)=\delta(q-1)$. Thus
+\begin{align}
+	\Lambda\a(r\a, M\a)
+	={1\over 1+\mu(\mathrm{BF}, M\a)}
+	\left\{\Lambda^0(r\a, M\a)
+	%+\mathrm{BF}\cdot 2^{3/2}\sqrt{2}\left[\Lambda^1(\sqrt{2}\,r\a, M\a)+\Lambda^2(\sqrt{2}\,r\a, M\a)\right].
+	+\mu(\mathrm{BF}, M\a)\cdot\sqrt{2}\left[\Lambda^1(\sqrt{2}\,r\a, M\a)+\Lambda^2(\sqrt{2}\,r\a, M\a)\right]
+	\right\},
+\end{align}
+where
+\begin{equation}
+	\mu(\mathrm{BF}, M\a)=\int \mathrm{d}q\,f(q) {\mathrm{BF}\over{1-\mathrm{BF}}}\left[1+{L(qM\a) \over L(M\a)}\right]^{3/2}
+	=2^{3/2}\cdot{\mathrm{BF}\over{1-\mathrm{BF}}}.
+\end{equation}
+
+\subsubsection{Same Planets}
+
+If $\Lambda^i(r, M)=Z^i\cdot\delta(r-r_0)$ (all the planets have the same radius),
+\begin{align}
+	\Lambda\a(r\a, M\a)
+	%=\Lambda_0\left[(1-\mathrm{BF})\cdot\delta(r\a-r_0)
+	%+2\mathrm{BF}\cdot 2^{3/2}\cdot\delta\left(r\a-{r_0\over\sqrt{2}}\right)\right].
+	={1 \over 1+\mu(\mathrm{BF})}
+	\left[Z^0 \cdot \delta(r\a-r_0)+(Z^1+Z^2)\cdot \mu(\mathrm{BF})\cdot \delta\left(r\a-{r_0\over\sqrt{2}}\right)\right].
+\end{align}
+This reproduces Eq.(9) of the draft, after correcting for the smaller number of apparently searchable stars for the diluted planets (factor of $(1/2)^3$). In the limit of $\mathrm{BF}\to1$ ($\mu\to\infty$), the above formula yields $\Lambda\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
+
+
+\subsection{Power Law World}
+
+If we assume 
+\begin{equation}
+	L(M) \sim M^\alpha \sim R^\alpha,
+\end{equation}
+we find
+\begin{align}
+	A=(1+q^\alpha)^{-1/2}, \quad 
+	B=q^{-1}(1+q^{-\alpha})^{-1/2},
+\end{align}
+so
+\begin{align}
+	\Lambda\a(r\a, M\a)=...
+	%&=(1-\mathrm{BF})\cdot\Lambda^0(r\a, M\a)\\
+	%&+\mathrm{BF}\cdot 
+	%\int \mathrm{d}q\,f(q)
+	%(1+q^\alpha)^2 \cdot \Lambda^1\left( r\a\sqrt{1+q^\alpha}, M\a\right)\\
+	%&+\mathrm{BF}\cdot
+	%\int {\mathrm{d}q}\,f(q)q^{8/3}
+	%\sqrt{1+q^{-\alpha}}(1+q^\alpha)^{3/2}
+	%\cdot\Lambda^2\left(r\a q\sqrt{1+q^{-\alpha}}, qM\a\right).
+\end{align}
+We may further assume
+\begin{equation}
+	f(q)\sim q^\beta, \quad \Lambda(r) \sim r^\gamma
+\end{equation}
+and keep calculating...
+
+
+%\acknowledgements
+%It was a pleasure to share discussions with Kento Masuda, who pointed us in 
+%this direction, and helped clarify that something like this was worth 
+%studying.
+%It was a pleasure discussing this work with F. Dai and T. Barclay.
+
+
+\newpage
+\bibliographystyle{yahapj}                            
+\bibliography{bibliography} 
+
+\end{document}
