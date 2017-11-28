@@ -1,5 +1,5 @@
 '''
-first, for models 1,2, 3:
+first, for models 1,2,3,4:
 >>> python numerical_models.py
 then:
 >>> python plot_rate_densities_vs_radius.py
@@ -161,12 +161,12 @@ if __name__ == '__main__':
 
     for model_number in [1,2,3]:
 
-        make_plot(model_number)
+        make_plot(model_number, Λ_2=0.5)
 
     make_plot(1, brokenx=True, Λ_2=0.5)
-    make_plot(2, logy=True)
-    make_plot(3, logy=True)
-    make_plot(3, withtext=True, stdout=True)
+    make_plot(2, logy=True, Λ_2=0.5)
+    make_plot(3, logy=True, Λ_2=0.5)
+    make_plot(3, withtext=True, stdout=True, Λ_2=0.5)
 
     make_plot(3, Λ_2=0)
     make_plot(3, logy=True, Λ_2=0)

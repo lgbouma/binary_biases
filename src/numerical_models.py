@@ -9,6 +9,8 @@ Alternatively, use a wrapper like `run_numerical_models.py`.
 
 Models #1-#3 are as-discussed in the text.
 Model #4 is a version of the Fulton+ (2017) gap.
+
+NB: running Model #1 requires hard-changing BF in `numerical_transit_survey`.
 '''
 
 from __future__ import division, print_function
@@ -24,7 +26,7 @@ def numerical_transit_survey(
         quickrun,
         model_number,
         Λ_2,
-        BF=0.44,
+        BF=0.1,
         α=3.5,
         β=0,
         γ=0,
@@ -150,10 +152,16 @@ def numerical_transit_survey(
     Q_c0 = 1
     single_is_searchable = np.ones(N_0).astype(bool)
 
-    Q_c1 = (1+q**α)**(-3)
+    # NOTE: the inclusion of this "searchability" draw is outdated. (In drafts
+    # before mid-November 2017, I made an error in counting searchable
+    # binaries -- I thought that e.g., 1 in 8 selected twin binaries would be
+    # searchable. However, a star is selected based on its flux and the
+    # planet's *apparent* radius, rather than the planet's true radius. Thus
+    # all selected twin binaries are searchable. (Per KM's 2017/11/21 note).
+    Q_c1 = 1 #(1+q**α)**(-3)
     primary_is_searchable = ( np.random.rand((N_1)) < Q_c1 )
 
-    Q_c2 = (1+q**(-α))**(-3) * q**(-5)
+    Q_c2 = 1 #(1+q**(-α))**(-3) * q**(-5)
     secondary_is_searchable = ( np.random.rand((N_2)) < Q_c2 )
 
     is_searchable = np.concatenate(
@@ -170,24 +178,6 @@ def numerical_transit_survey(
             len(df[df['star_type']=='secondary'])
     print("population's completeness fraction for secondaries: {:.3g}".
             format(_2))
-
-    if model_number == 1:
-        if slowrun and N_0>=1e6:
-            # we know that the completeness in model 1 should be 1/8.
-            assert np.isclose(_1, 1/8, rtol=1e-2) \
-                   and \
-                   np.isclose(_2, 1/8, rtol=1e-2)
-    elif model_number == 2 or model_number == 3 or model_number == 4:
-        # primaries should be more complete than 1/8
-        np.testing.assert_array_less(
-                1/8, #smaller
-                _1   #larger
-                )
-        # secondaries should be (much) less complete than 1/8
-        np.testing.assert_array_less(
-                _2, #smaller
-                1/8 #larger
-                )
 
     #####################
     # PLANET POPULATION #
@@ -413,6 +403,35 @@ def numerical_transit_survey(
     elif model_number == 2:
         c_0 = 0.494087 # mathematica, 171011_integrals.nb
         X_Λ_rp_analytic = 3*c_0*Λ_0/(Λ_0+Λ_1+Λ_2)
+
+        print('TODO: ADD SANITY CHECK FOR I_1')
+        import IPython; IPython.embed()
+
+        # Check via Eq 58 from email sent to KM and JNW 2017/11/28
+        q_grid = np.arange(1e-6, 1+1e-6, 1e-6)
+        prob_ml_q = q_grid**β * (1+q_grid**α)**(3/2)
+        N_q = trapz(prob_ml_q, q_grid)
+
+        # analytic grid to compute occ rate over
+        #r_a_anal = np.arange(0,1+1e-3,1e-3)
+        r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
+
+        I_1 = Λ_1/N_q * ( (r_p/r_a_anal)**2 -1 )**(β/α) * (r_p/r_a_anal)**4
+        I_1[r_a_anal == 0] = 0
+        I_1[r_a_anal == 1] = 0
+
+        μ = N_1/N_0
+        Λ_primaries_analytic = μ/(1+μ) * I_1
+
+        # expect everything from r_p/sqrt(2) to just below r_p to be from the
+        # primaries.
+        vals_num = inferred_dict['Λ'][(r_a_anal>0.72) & (r_a_anal<1)]
+        vals_anal = I_1[(r_a_anal>0.72) & (r_a_anal<1)]
+
+        #NOTE: the above disagree. This is not a good thing.
+
+
+        inferred_dict['Λ']
 
         np.testing.assert_almost_equal(
                 X_Λ_rp_numerics,
