@@ -320,12 +320,12 @@ Let's integrate out $\pp$ and $\ps$.
 	&=\int \mathrm{d}q\,f(q)\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{{\rm s}, q}^1(r\a, M\a; r, M; q)\cdot\Lambda^1(r, M) \cdot p_{\rm tra}(M)\\
 	&=N\s^0(\delta_{\rm obs}, L(M\a))\cdot p_{\rm tra}(M\a) \cdot
 	\mu(\mathrm{BF}, M\a) \int {\mathrm{d}q \over 
-	\alpha}\,f(q)\,\Lambda^1(r_a/\alpha, M\a),
+	\mathcal{A}}\,f(q)\,\Lambda^1(r_a/\mathcal{A}, M\a),
 	%\left[L_{\rm sys}(M_a, q) \over L(M_a) \right]^{3/2},
 \end{align}
 where
 \begin{equation}
-	\alpha(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}.
+	\mathcal{A}(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}.
 \end{equation}
 
 Finally,
@@ -338,17 +338,20 @@ Finally,
 	q}^2(r\a, M\a; r, M; q)\cdot\Lambda^2(r, M) \cdot p_{\rm tra}(M)
     \\
     &= N\s^0(\delta_{\rm obs},L(M\a)) \mu({\rm BF},M\a)
-    \int {\rm d}r{\rm d}q\, q f(q) \delta(r_a - r\beta) \Lambda^2(r,qM\a) 
+    \int {\rm d}r{\rm d}q\, q f(q) \delta(r_a - r\mathcal{B}) 
+    \Lambda^2(r,qM\a) 
     p_{\rm tra}(qM\a) \\
 	&=%N_{\rm s}(\delta_{\rm obs}, L(M_a)
 	N\s^0(\delta_{\rm obs}, L(M\a))\cdot\mu(\mathrm{BF}, M\a)
-	\int {q \mathrm{d}q \over \beta}\,f(q)\,\Lambda^2(r_a/\beta, qM\a)\,p_{\rm 
+	\int {q \mathrm{d}q \over \mathcal{B}}\,f(q)\,\Lambda^2(r_a/\mathcal{B}, 
+	qM\a)\,p_{\rm 
 	tra}(qM\a),
 	%\left[L_{\rm sys}(M_a, q) \over L(M_a) \right]^{3/2},
 \end{align}
 where
 \begin{equation}
-	\beta(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm sys}(M\a, q)} }.
+	\mathcal{B}(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm 
+	sys}(M\a, q)} }.
 \end{equation}
 
 \subsection{Final Formula}
@@ -358,7 +361,7 @@ primaries, and secondaries: $N_{\rm s,a}(\delta_{\rm obs}, M\a)$ and $p_{\rm
 tra}(M\a)$. This is because we are calculating the occurrence at the same 
 apparent planet/star properties, and the observer can never distinguish 
 binaries from singles (and adopt the primary properties for binaries).
-Using the results above, the apparent occurrence,
+Using the results above, the apparent occurrence rate,
 \begin{align}
 \Lambda\a(r\a,M\a) &= 
     \frac{1}{N_{\rm s,a}(r\a,M\a) p_{\rm tra}(r\a,M\a)} \times
@@ -370,50 +373,90 @@ evaluates to
 \Lambda\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)}\times
    \left\{ \Lambda^0(r\a, M\a)+ 
 \mu(\mathrm{BF}, M\a)
-\left[ \int {\mathrm{d}q \over \alpha}\,f(q)\,\Lambda^1\left({r\a\over 
-    \alpha}, 
+\left[ \int {\mathrm{d}q \over \mathcal{A}}\,f(q)\,\Lambda^1\left({r\a\over 
+    \mathcal{A}}, 
 M\a\right)\,
 \right.   
    \right. \\
 & \quad\quad\quad\quad\quad \left.\left.
-+\int {q \mathrm{d}q \over \beta}\,f(q)\,\Lambda^2\left({r\a\over \beta}, 
++\int {q \mathrm{d}q \over \mathcal{B}}\,f(q)\,\Lambda^2\left({r\a\over 
+\mathcal{B}}, 
 qM\a\right)\,
 {R(qM\a) \over R(M\a)}
 q^{-1/3} \right]	\right\}.  
 \end{align}
+
+\subsubsection{Simplifying above general result}
+To simplify, drop the explicit $M_a$ and BF 
+dependences, and assume $R\propto M$, so $R(qM_a)/R(M_a) = q$.
+Also, move all superscript numbers to subscripts.
+Then the apparent occurrence rate is
+\begin{equation}
+\Lambda\a(r\a) = \frac{1}{1+\mu}
+\left(
+    \Lambda_0(r\a) +
+    \mu \left[
+        \int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
+        \Lambda_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
+        +
+        \int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
+        \Lambda_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
+    \right]
+\right).
+\end{equation}
+For the power law case when $L\sim M^\alpha$,
+\begin{equation}
+\mathcal{A}(q)
+=(1+q^\alpha)^{-1/2},
+\quad
+\mathcal{B}(q)
+=q^{-1}(1+q^{-\alpha})^{-1/2}
+\end{equation}
 
 
 \section{Examples}
 
 \subsection{Twin Binary}
 
-We have $f(q)=\delta(q-1)$. Thus
+We have $f(q)=\delta(q-1)$. The apparent rate is
 \begin{align}
-	\Lambda\a(r\a, M\a)
-	={1\over 1+\mu(\mathrm{BF}, M\a)}
-	\left\{\Lambda^0(r\a, M\a)
-	%+\mathrm{BF}\cdot 2^{3/2}\sqrt{2}\left[\Lambda^1(\sqrt{2}\,r\a, M\a)+\Lambda^2(\sqrt{2}\,r\a, M\a)\right].
-	+\mu(\mathrm{BF}, M\a)\cdot\sqrt{2}\left[\Lambda^1(\sqrt{2}\,r\a, M\a)+\Lambda^2(\sqrt{2}\,r\a, M\a)\right]
-	\right\},
+\Lambda\a(r\a)
+={1\over 1+\mu(\mathrm{BF})}
+\left\{\Lambda_0(r\a)
++\mu(\mathrm{BF})\cdot \sqrt{2}\cdot\left[\Lambda_1(\sqrt{2}\,r\a)
++\Lambda_2(\sqrt{2}\,r\a)\right]
+\right\},
 \end{align}
 where
 \begin{equation}
-	\mu(\mathrm{BF}, M\a)=\int \mathrm{d}q\,f(q) {\mathrm{BF}\over{1-\mathrm{BF}}}\left[1+{L(qM\a) \over L(M\a)}\right]^{3/2}
+	\mu(\mathrm{BF})=\int \mathrm{d}q\,f(q) 
+	{\mathrm{BF}\over{1-\mathrm{BF}}}\left[1+{L(qM\a) \over 
+	L(M\a)}\right]^{3/2}
 	=2^{3/2}\cdot{\mathrm{BF}\over{1-\mathrm{BF}}}.
 \end{equation}
 
 \subsubsection{Same Planets}
 
-If $\Lambda^i(r, M)=Z^i\cdot\delta(r-r_0)$ (all the planets have the same radius),
+If $\Lambda_i(r, M)=Z_i\cdot\delta(r-r_0)$ (all the planets have the same 
+radius), by using the identity $\delta(ax+b)=\delta(x+b/a)/|a|$,
 \begin{align}
-	\Lambda\a(r\a, M\a)
-	%=\Lambda_0\left[(1-\mathrm{BF})\cdot\delta(r\a-r_0)
-	%+2\mathrm{BF}\cdot 2^{3/2}\cdot\delta\left(r\a-{r_0\over\sqrt{2}}\right)\right].
+	\Lambda\a(r\a)
 	={1 \over 1+\mu(\mathrm{BF})}
-	\left[Z^0 \cdot \delta(r\a-r_0)+(Z^1+Z^2)\cdot \mu(\mathrm{BF})\cdot \delta\left(r\a-{r_0\over\sqrt{2}}\right)\right].
+	\left[Z_0 \cdot \delta(r\a-r_0)+(Z_1+Z_2)\cdot \sqrt{2} 
+	\mu(\mathrm{BF})\cdot 
+	\delta\left(r\a-\frac{r_0}{\sqrt{2}}\right)\right].
+    \label{eq:model1_apparent_rate}
 \end{align}
-This reproduces Eq.(9) of the draft, after correcting for the smaller number of apparently searchable stars for the diluted planets (factor of $(1/2)^3$). In the limit of $\mathrm{BF}\to1$ ($\mu\to\infty$), the above formula yields $\Lambda\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
+This reproduces Eq.(9) of the draft (after removing the $p_{\rm det}$ terms).
+In the limit of $\mathrm{BF}\to1$ ($\mu\to\infty$), the above formula yields 
+$\Gamma\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
 
+Eq.~\ref{eq:model1_apparent_rate} is technically abusing notation, because 
+$\Lambda$ must be dimensionless, and $\delta(r-r_0)$ has units 
+of inverse length.
+Since the equation is meant to convey the idea: ``at a given apparent radius, 
+the apparent number of planets per star is $x$'', and the delta function is 
+more succinct than listing out discrete cases, we leave it as-is.
 
 \subsection{Power Law World}
 
@@ -432,11 +475,12 @@ so
 	%&=(1-\mathrm{BF})\cdot\Lambda^0(r\a, M\a)\\
 	%&+\mathrm{BF}\cdot 
 	%\int \mathrm{d}q\,f(q)
-	%(1+q^\alpha)^2 \cdot \Lambda^1\left( r\a\sqrt{1+q^\alpha}, M\a\right)\\
+	%(1+q^\mathcal{A})^2 \cdot \Lambda^1\left( r\a\sqrt{1+q^\mathcal{A}}, 
+	%M\a\right)\\
 	%&+\mathrm{BF}\cdot
 	%\int {\mathrm{d}q}\,f(q)q^{8/3}
-	%\sqrt{1+q^{-\alpha}}(1+q^\alpha)^{3/2}
-	%\cdot\Lambda^2\left(r\a q\sqrt{1+q^{-\alpha}}, qM\a\right).
+	%\sqrt{1+q^{-\mathcal{A}}}(1+q^\mathcal{A})^{3/2}
+	%\cdot\Lambda^2\left(r\a q\sqrt{1+q^{-\mathcal{A}}}, qM\a\right).
 \end{align}
 We may further assume
 \begin{equation}
