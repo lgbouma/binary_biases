@@ -44,7 +44,8 @@ surveys}
 %
 \begin{abstract}
 %
-This derives the equations of the paper.
+This note formally derives a general equation for the apparent occurrence rate 
+used in the paper.
 
 %
 \end{abstract}
@@ -74,6 +75,7 @@ We can detect a signal if
 	{\text{signal}\over\text{noise}}\sim
     {\delta_{\rm obs}\over(L/d^2)^{-1/2}},
 	\quad \delta_{\rm obs}:\text{observed depth}
+    \label{eq:snr_limited}
 \end{equation}
 is above some threshold (it would probably make more sense to include the 
 duration information, but that would anyway be a trivial extension and so we 
@@ -121,26 +123,106 @@ maximum searchable distance for singles and binaries are proportional to
 $\delta_{\rm obs}\cdot L(M\a)^{1/2}$ and $\delta_{\rm obs}\cdot 
 [L(M\a)+L(qM\a)]^{1/2}$. Thus, 
 the apparent number of searchable stars (i.e. points in the sky), which will 
-be selected by an ignorant observer, can be written 
+be selected by an ignorant observer, is proportional to
 \begin{align}
 	\notag
-	N_{\rm s,a}(\delta_{\rm obs}, M\a)
-	%&=n_{\rm s,0}\delta_{\rm obs}^3L(M\a)^{3/2} + n_{\rm b,0}\delta_{\rm 
-	%obs}^3 \cdot [L(M\a)+L(qM\a)]^{3/2}\\
-	&\propto n_{\rm s}\delta_{\rm obs}^3 L(M\a)^{3/2}\left[ 1+\int 
-	\mathrm{d}q\,f(q) 
-	{\mathrm{BF}\over{1-\mathrm{BF}}}\left(1+{L(qM\a) \over 
-	L(M\a)}\right)^{3/2}\right]\\
+N_{\rm s,a}(\delta_{\rm obs}, M\a)
+&\propto n_{\rm s}\delta_{\rm obs}^3 L(M\a)^{3/2}\left[1+\mu(\mathrm{BF}, 
+M\a)\right],
+\end{align}
+and we can define
+\begin{align}
 	N_{\rm s,a}(\delta_{\rm obs}, M\a)
     &\equiv N\s^0(\delta_{\rm obs}, L(M\a)) \left[1+\mu(\mathrm{BF}, 
 	M\a)\right],
+    \label{eq:N_selected}
 \end{align}
 where $N\s^0$ is the number of searchable singles (this agrees with the actual 
-value), $f(q)$ is the binary mass ratio distribution, $\mathrm{BF}=n_{\rm 
-b}/(n_{\rm s}+n_{\rm b})$ is the binary fraction in a volume-limited sample, 
+value), $\mathrm{BF}=n_{\rm b}/(n_{\rm s}+n_{\rm b})$ 
+is the binary fraction in a volume-limited sample, 
 and $n_s$ is the number density of singles in a volume-limited sample.
 Proportionality constants subsumed into the definition of $N_s^0$ include 
 {\it e.g.}, the telescope area and the survey duration.
+
+\subsubsection{What is $\mu$?}
+In Eq.~\ref{eq:N_selected}, $\mu$ is the ratio of the number of single to 
+double star systems (that are searchable for an observed signal $\delta_{\rm 
+obs}$).
+If we make various simplifying assumptions, it turns out that this number 
+depends only on the binary fraction and the 
+binary mass ratio distribution in a volume-limited sample.
+The proof is as follows.
+
+In a shell of thickness ${\rm d}r$, there are $n_d(r) 4\pi r^2 {\rm d}r$ 
+searchable double star systems.
+The number density of searchable double star systems $n_d(r)$ is constant up 
+to the maximum searchable distance for singles, $d_0$. At greater distances, 
+$n_d(r)$ decreases, because only some binaries have sufficient flux to make 
+the SNR cut.
+Specifically,
+\begin{equation}
+n_d(r) = 
+\begin{cases}
+n_b,	\quad r\leq d_0\\
+n_b \int_{q_{\rm min}(r)}^1 {\rm d}q\, f(q), \quad d_0 < r < \sqrt{2}d_0 \\
+\end{cases}
+\end{equation}
+where $f(q)$ is the mass ratio distribution in a volume-limited sample, 
+$q_{\rm min}(r)$ is the minimum mass ratio required to provide sufficient flux 
+for searchability.
+Assuming $L\propto M^\alpha$,
+\begin{equation}
+q_{\rm min}(r) =
+\left(
+    \left( \frac{r}{d_0}\right)^2
+    - 1
+\right)^{\frac{1}{\alpha}}.
+\end{equation}
+Using the common parametrization $f(q) \sim q^\beta$, and setting $\beta=0$,
+\begin{equation}
+n_d(r) = 
+\begin{cases}
+n_b,	\quad r\leq d_0\\
+n_b (1-q_{\rm min}(r)), \quad d_0 < r < \sqrt{2}d_0. \\
+\end{cases}
+\end{equation}
+Integrating,
+\begin{align}
+N_d = \int {\rm d} N_d &= \int n_d(r) 4\pi r^2 {\rm d}r \\
+&=
+4\pi n_b \left(
+    \frac{d_0^3}{3} +
+    \left[\frac{r^3}{3}\right]^{\sqrt{2 d_0}}_{d_0}
+    -
+    \int_{d_0}^{\sqrt{2}d_0} \left(
+    \left(\frac{r}{d_0}\right)^2 -1
+    \right)^{\frac{1}{\alpha}}
+    r^2 \,{\rm d}r
+\right) \\
+&=
+\frac{4 \pi n_b}{3} d_0^3 \left(
+2^{3/2} -
+3 \int_{1}^{\sqrt{2}} {\rm d}u\, u^2 (u^2 - 1)^{1/\alpha}
+\right), \label{eq:dimensionless_integral}
+\\
+&\equiv
+\frac{4 \pi n_b}{3} d_0^3 \left(
+2^{3/2} - 3 I
+\right),
+\end{align}
+where the penultimate line substituted $u=r/d_0$.
+For the common case $\alpha=3.5$, the dimensionless integral $I$ evaluates to 
+$\approx 0.484174$.
+
+Thus
+\begin{equation}
+\mu \equiv \frac{N_d}{N_s^0}
+= \frac{n_b}{n_s} \left(2^{3/2} - 3 I\right)
+= \frac{{\rm BF}}{1 - {\rm BF}} \left(2^{3/2} - 3 I\right).
+\label{eq:mu_final}
+\end{equation}
+For the twin binary case, $I=0$, and for the power law volume-limited 
+distribution, $I$ takes the form given in Eq.~\ref{eq:dimensionless_integral}.
 
 
 \section{Apparent Occurrence Rate --- General Formula}
@@ -245,7 +327,8 @@ true parameters $(r,M)$ is
 	\mathcal{N}_{\rm s}^1(r_a, M_a; r, M)
 	=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^1(r_a, M_a; r, M; q),
 \end{equation}
-where $f(q)$ is the binary mass ratio distribution and
+where $f(q)$ is the binary mass ratio distribution in the SNR-limited sample 
+and
 \begin{align}
 	\notag
 	\mathcal{N}_{{\rm s}, q}^1(r_a, M_a; r, M; q)
@@ -258,7 +341,7 @@ Note that while the observed depth is a function of the true parameters
 (Eq.~\ref{eq:delta_obs_primaries}), since we are counting 
 detected planets of a given {\it apparent} size, we will not need to worry 
 about this dependence.
-
+As discussed in the main text, we have $f(q) \sim q^\beta (1+q^\alpha)^{3/2}$.
 
 \subsection{Secondaries in Binaries}
 
@@ -403,6 +486,7 @@ Then the apparent occurrence rate is
         \Lambda_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
     \right]
 \right).
+\label{eq:simple_apparent_occ_rate}
 \end{equation}
 For the power law case when $L\sim M^\alpha$,
 \begin{equation}
@@ -411,6 +495,7 @@ For the power law case when $L\sim M^\alpha$,
 \quad
 \mathcal{B}(q)
 =q^{-1}(1+q^{-\alpha})^{-1/2}
+\label{eq:powerlaw_A_B}
 \end{equation}
 
 
@@ -435,21 +520,21 @@ where
 	=2^{3/2}\cdot{\mathrm{BF}\over{1-\mathrm{BF}}}.
 \end{equation}
 
-\subsubsection{Same Planets}
+\subsubsection{Same Planets (Model \# 1)}
 
 If $\Lambda_i(r, M)=Z_i\cdot\delta(r-r_0)$ (all the planets have the same 
 radius), by using the identity $\delta(ax+b)=\delta(x+b/a)/|a|$,
 \begin{align}
 	\Lambda\a(r\a)
 	={1 \over 1+\mu(\mathrm{BF})}
-	\left[Z_0 \cdot \delta(r\a-r_0)+(Z_1+Z_2)\cdot \sqrt{2} 
+	\left[Z_0 \cdot \delta(r\a-r_0)+(Z_1+Z_2)\cdot 
 	\mu(\mathrm{BF})\cdot 
 	\delta\left(r\a-\frac{r_0}{\sqrt{2}}\right)\right].
     \label{eq:model1_apparent_rate}
 \end{align}
 This reproduces Eq.(9) of the draft (after removing the $p_{\rm det}$ terms).
 In the limit of $\mathrm{BF}\to1$ ($\mu\to\infty$), the above formula yields 
-$\Gamma\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
+$\Lambda\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
 
 Eq.~\ref{eq:model1_apparent_rate} is technically abusing notation, because 
 $\Lambda$ must be dimensionless, and $\delta(r-r_0)$ has units 
@@ -464,36 +549,102 @@ If we assume
 \begin{equation}
 	L(M) \sim M^\alpha \sim R^\alpha,
 \end{equation}
-we find
-\begin{align}
-	A=(1+q^\alpha)^{-1/2}, \quad 
-	B=q^{-1}(1+q^{-\alpha})^{-1/2},
-\end{align}
-so
-\begin{align}
-	\Lambda\a(r\a, M\a)=...
-	%&=(1-\mathrm{BF})\cdot\Lambda^0(r\a, M\a)\\
-	%&+\mathrm{BF}\cdot 
-	%\int \mathrm{d}q\,f(q)
-	%(1+q^\mathcal{A})^2 \cdot \Lambda^1\left( r\a\sqrt{1+q^\mathcal{A}}, 
-	%M\a\right)\\
-	%&+\mathrm{BF}\cdot
-	%\int {\mathrm{d}q}\,f(q)q^{8/3}
-	%\sqrt{1+q^{-\mathcal{A}}}(1+q^\mathcal{A})^{3/2}
-	%\cdot\Lambda^2\left(r\a q\sqrt{1+q^{-\mathcal{A}}}, qM\a\right).
-\end{align}
-We may further assume
+we find 
 \begin{equation}
-	f(q)\sim q^\beta, \quad \Lambda(r) \sim r^\gamma
+\mathcal{A}(q)
+=(1+q^\alpha)^{-1/2},
+\quad
+\mathcal{B}(q)
+=q^{-1}(1+q^{-\alpha})^{-1/2}.
+\end{equation}
+
+This gives a value of $\mu({\rm BF})$ stated in Eq.~\ref{eq:mu_final}.
+Now recall Eq.~\ref{eq:simple_apparent_occ_rate} for the apparent occurrence 
+rate. We restate it here:
+\begin{equation}
+\Lambda\a(r\a) = \frac{1}{1+\mu}
+\left(
+\Lambda_0(r\a) +
+\mu \left[
+\int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
+\Lambda_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
++
+\int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
+\Lambda_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
+\right]
+\right).
+\end{equation}
+
+\subsubsection{Same Planets (Model \# 2)}
+For our ``Model \#2'', we again want $\Lambda_i(r) = Z_i \cdot \delta(r-r_0)$.
+To achieve this, write
+\begin{equation}
+f(q) = \frac{q^\beta (1+q^\alpha)^{3/2}}{\mathcal{N}_q},
+\end{equation}
+for $\mathcal{N}_q$ the normalization.
+For $i=1$, call the integral on the left the $[\ldots]$ ``$I_1$''.
+Then
+\begin{align}
+I_1(r_a) &\equiv \int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
+    \Lambda_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
+    \\
+&= \frac{1}{\mathcal{N}_q} \int {\rm d}q\, q^\beta (1+q^\alpha)^2
+    \Lambda_1(r_a (1+q^\alpha)^{1/2})
+    \\
+&= \frac{Z_1}{\mathcal{N}_q} \int {\rm d}q\, q^\beta (1+q^\alpha)^2
+    \delta(r_a (1+q^\alpha)^{1/2} - r_0) \\
+&= \frac{Z_1}{\mathcal{N}_q}
+    \left( \left(\frac{r_0}{r_a}\right)^2 - 1  \right)^{\beta/\alpha}
+    \left( \frac{r_0}{r_a}\right)^4.
+    \label{eq:model_2_i_1}
+\end{align}
+The penultimate line used the fact that $r_a(1+q^\alpha)^{1/2}=r_0$ has only 
+one root:
+\begin{equation}
+q(r_a) = \left(\left(\frac{r_0}{r_a}\right)^2 - 1\right)^{1/\alpha}.
+\end{equation}
+Eq.~\ref{eq:model_2_i_1} should be used as a sanity check on any 
+Monte Carlo numerics.
+
+Attempting the same thing for $i=2$,
+\begin{align}
+I_2(r_a) &\equiv \int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
+\Lambda_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
+\\
+&= \frac{Z_2}{\mathcal{N}_q} \int {\rm d}q\,
+    q^{\beta+\frac{8}{3}} 
+    (1+q^\alpha)^{3/2}
+    (1+q^{-\alpha})^{1/2}
+    \delta(r_a q (1+q^{-\alpha})^{1/2} - r_0).
+\end{align}
+Unfortunately, analytic roots of $r_a q (1+q^{-\alpha})^{1/2} = r_0$ do not 
+exist.
+Schematically, since for any function $g(x)$,
+\begin{equation}
+\delta(g(x)) = \sum_{x_i \in \{{\rm roots}\}} \frac{\delta(x-x_i)}{|g'(x_i)|},
+\end{equation}
+if the roots are found numerically then
+\begin{equation}
+I_2(r_a) = \frac{Z_2}{\mathcal{N}_q}
+    \sum_{q_i \in \{{\rm roots}\}}
+q_i^{\beta+\frac{8}{3}} 
+(1+q_i^\alpha)^{3/2}
+(1+q_i^{-\alpha})^{1/2}.
+\end{equation}
+But this doesn't really give much insight.
+
+\subsubsection{Power law planets (Model \# 3)}
+
+Assume now that
+\begin{equation}
+    \Lambda(r) \sim r^\delta
 \end{equation}
 and keep calculating...
 
 
-%\acknowledgements
-%It was a pleasure to share discussions with Kento Masuda, who pointed us in 
-%this direction, and helped clarify that something like this was worth 
-%studying.
-%It was a pleasure discussing this work with F. Dai and T. Barclay.
+
+
+
 
 
 \newpage
