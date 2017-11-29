@@ -511,6 +511,7 @@ We have $f(q)=\delta(q-1)$. The apparent rate is
 +\mu(\mathrm{BF})\cdot \sqrt{2}\cdot\left[\Lambda_1(\sqrt{2}\,r\a)
 +\Lambda_2(\sqrt{2}\,r\a)\right]
 \right\},
+\label{eq:apparent_rate_twin_binary}
 \end{align}
 where
 \begin{equation}
@@ -542,6 +543,43 @@ of inverse length.
 Since the equation is meant to convey the idea: ``at a given apparent radius, 
 the apparent number of planets per star is $x$'', and the delta function is 
 more succinct than listing out discrete cases, we leave it as-is.
+
+\subsubsection{Power Law Distribution of Planets}
+
+Imagine instead that we took $\Lambda_i(r,M) = Z_i r^\delta$.
+From Eq.~\ref{eq:apparent_rate_twin_binary}, we get an apparent rate
+\begin{equation}
+\Lambda_a(r_a) = r_a^\delta \left[
+\frac{Z_0}{1+\mu({\rm BF})}
++
+2^{\frac{\delta}{2} + 1 } \frac{\mu({\rm BF})}{1+\mu({\rm BF})} \left(
+Z_1 + Z_2
+\right)
+\right].
+\end{equation}
+
+Consider the case when the $Z_i$'s are identical. If we compare 
+$\Lambda_a(r_a)$ with $\Lambda(r)$, we must impose that $r_a$ and $r$ are 
+indistinguishable (i.e.: the observer cannot tell them apart).
+Note that the true rate is
+\begin{equation}
+\Lambda(r) = r^\delta \left[
+\frac{Z_0}{1+2\mu} + \frac{\mu}{1+2\mu} (Z_1+Z_2)
+\right]
+\end{equation}
+We then get a correction factor
+\begin{equation}
+X_\Lambda \equiv \left. \frac{\Lambda_a(r_a)}{\Lambda(r)} 
+\right|_{r_a\rightarrow r}
+=
+\frac{2^{\frac{\delta}{2}+2}\mu + 1}{\mu + 1}.
+\end{equation}
+
+For the case of ${\rm BF}=0.1$, $\mu\approx 0.153$. Taking $\delta=-2.92$ from 
+Howard et al. (2012),  we get a correction factor $X_\Lambda = 
+\Lambda_a/\Lambda = 1.06$.
+In other words, the apparent rate is an {\it over}estimate of the true rate, 
+with a relative error of 6\%.
 
 \subsection{Power Law World}
 
