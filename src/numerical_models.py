@@ -3,16 +3,20 @@
 See README.md for full description.
 
 Example usage:
->>> python numerical_models.py --quickrun --modelnumber 3 --LambdaTwo 0.5
+>>> python numerical_models.py --quickrun --modelnumber 3 --LambdaTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --modelnumber 1 --LambdaTwo 0.5 --binaryfrac 0.1
+>>> python numerical_models.py --modelnumber 5 --LambdaTwo 0.5 --binaryfrac 0.1
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
 
-Models #1-#3 are as-discussed in the text.
-Model #4 is a version of the Fulton+ (2017) gap.
+The models are as follows:
+Model #1: twin binary, same planet
+Model #2: varying q, same planet
+Model #3: varying q, varying r
+Model #4: varying q, r with a gap
+Model #5: twin binary, varying r
 
-NB: running Model #1 requires hard-changing BF in `numerical_transit_survey`.
 '''
-
 from __future__ import division, print_function
 
 import numpy as np, pandas as pd, matplotlib.pyplot as plt
@@ -26,7 +30,7 @@ def numerical_transit_survey(
         quickrun,
         model_number,
         Λ_2,
-        BF=0.1,
+        BF,
         α=3.5,
         β=0,
         γ=0,
@@ -74,8 +78,11 @@ def numerical_transit_survey(
         # File names assume 2 digits of precision for Λ_2.
         raise NotImplementedError
 
-    if model_number > 4:
+    if model_number > 5 or model_number < 1:
         raise NotImplementedError
+
+    if not (BF > 0):
+        raise AssertionError
 
     ######################
     # STELLAR POPULATION #
@@ -94,7 +101,7 @@ def numerical_transit_survey(
     B = BF / (1-BF) # prefactor in definition of μ
 
     # Get number of selected primaries.
-    if model_number == 1:
+    if model_number == 1 or model_number == 5:
         q = 1
         μ = B * (1 + q**α)**(3/2)
         N_1 = int(N_0 * μ) # number of selected primaries
@@ -112,7 +119,7 @@ def numerical_transit_survey(
         ), ignore_index=True )
 
     # Assign values of `q` to primaries and secondaries
-    if model_number == 1:
+    if model_number == 1 or model_number == 5:
         df['q'] = q
         df.loc[df['star_type'] == 'single', 'q'] = np.nan
         q = np.ones(N_1)
@@ -199,7 +206,7 @@ def numerical_transit_survey(
         df['r'] = r_p
         df.loc[df['has_planet'] == False, 'r'] = np.nan
 
-    elif model_number == 3:
+    elif model_number == 3 or model_number == 5:
         r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
 
         # Inverse transform sample to get radii. Drawing from powerlaw
@@ -207,10 +214,35 @@ def numerical_transit_survey(
         Δr = 1e-3
         r_grid = np.arange(0, r_pu+Δr, Δr)
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
-        prob_r /= trapz(prob_r, r_grid)
+        norm_r = trapz(prob_r, r_grid)
+        prob_r /= norm_r
         cdf_r = np.append(0, np.cumsum(prob_r)/np.max(np.cumsum(prob_r)))
         func = interp1d(cdf_r, np.append(0, r_grid))
         r_samples = func(np.random.uniform(size=N_0+N_1+N_2))
+
+        np.testing.assert_almost_equal(trapz(prob_r, r_grid), 1)
+
+        #NOTE the below plot is a sanity check to ensure that I understand the
+        #sampling.
+        if False:
+            import matplotlib.pyplot as plt
+            plt.close('all')
+            bin_width = 0.5
+            r_bins = np.arange(0,22.5+bin_width,bin_width)
+            plt.hist(r_samples, bins=r_bins, normed=False, alpha=0.5,
+                    histtype='stepfilled', color='steelblue', edgecolor='none')
+
+            prob_r_on_bins = np.minimum( r_bins**δ, r_pl**δ )
+            prob_r_on_bins /= trapz(prob_r_on_bins, r_bins)
+            analytic = prob_r_on_bins*(N_0+N_1+N_2)*bin_width
+            plt.plot(r_bins, analytic)
+            plt.yscale('log')
+            plt.savefig('temp3.pdf')
+
+            numeric, _ = np.histogram(r_samples, bins=r_bins)
+            import IPython; IPython.embed()
+        #NOTE END
+
 
         df['r'] = r_samples
         df.loc[df['has_planet'] == False, 'r'] = np.nan
@@ -232,9 +264,8 @@ def numerical_transit_survey(
         df['r'] = r_samples
         df.loc[df['has_planet'] == False, 'r'] = np.nan
 
-
     # Detected planets are those that transit, and whose hosts are searchable.
-    Q_g0 = 0.3 # arbitrary geoemtric transit probability around singles
+    Q_g0 = 0.6 # arbitrary geoemtric transit probability around singles
     Q_g1 = Q_g0
     Q_g2 = Q_g0 * q**(2/3)
 
@@ -294,7 +325,7 @@ def numerical_transit_survey(
         Δr = 0.01
         radius_bins = np.arange(0, 1+Δr, Δr)
         r_pu = 1
-    elif model_number == 3:
+    elif model_number == 3 or model_number == 5:
         Δr = 0.5
         radius_bins = np.arange(0, r_pu+Δr, Δr)
     elif model_number == 4:
@@ -347,9 +378,9 @@ def numerical_transit_survey(
             {'bin_left': edges[:-1],
              'true_Λ': true_dict['Λ'],
              'inferred_Λ': inferred_dict['Λ'],
-             'true_single_Λ': true_dict['single']['N_p']/N_0,
-             'true_primary_Λ': true_dict['primary']['N_p']/N_1,
-             'true_secondary_Λ': true_dict['secondary']['N_p']/N_2
+             'true_single_Λ': true_dict['single']['N_p']/N_tot,
+             'true_primary_Λ': true_dict['primary']['N_p']/N_tot,
+             'true_secondary_Λ': true_dict['secondary']['N_p']/N_tot
             }
             )
 
@@ -438,6 +469,68 @@ def numerical_transit_survey(
                 X_Λ_rp_analytic,
                 decimal=2
                 )
+
+    elif model_number == 5:
+
+        r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
+        r_anal = np.array(true_dict['r'])[1:] - np.diff(true_dict['r'])/2
+
+        # Comparing the analytic and numeric (true) Λ(r) distributions, above
+        # 2r_\oplus
+        μ = N_1/N_0
+        Λ_num = np.array(true_dict['Λ'])
+        Λ_anal = r_anal**δ/norm_r * (
+                Λ_0/(1+2*μ) + (Λ_1+Λ_2) * μ/(1+2*μ)
+                )
+
+        vals_num = Λ_num[(r_anal>3) & (r_anal<=22)]
+
+        assert np.allclose(np.diff(true_dict['r']), np.diff(true_dict['r'])[0])
+        bin_width = np.diff(true_dict['r'])[0]
+        vals_anal = bin_width * Λ_anal[(r_anal>3) & (r_anal<=22)]
+
+        if False:
+            # The following was a sanity check.
+            import matplotlib.pyplot as plt
+            plt.close('all')
+            f,ax = plt.subplots()
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num/vals_anal,
+                    label='numeric/analytic')
+            ax.legend(loc='best')
+            f.savefig('temp2.pdf')
+
+        assert np.isclose(norm_r, 2**(δ+1) * (1 - 1/(δ+1)), rtol=1e-2)
+
+        # TEST: ensure that the numerically realized values for the
+        # distribution are within 1% of the expected analytic values.
+        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
+
+        if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
+            print('\n'*10)
+            print('WARNING: you should use more points to lower Poisson noise')
+            print('\n'*10)
+
+        #FIXME TODO from here
+
+        # Comparing the analytic and numeric (apparent) Λ_a(r_a) distributions
+        import IPython; IPython.embed()
+
+        # The numerical and analytic values differ because the planet radius
+        # distributions are normalized differently. (Analytically it was a
+        # straight power law, and numerically you're trying to make it power
+        # law / constant).
+        norm = np.mean(vals_num / vals_anal)
+
+
+        # Comparing the analytic and numeric Λ_a(r_a) distributions
+        μ = N_1/N_0
+        Λ_a_anal = r_a_anal**δ * (
+                Λ_0/(1+μ) + 2**(δ/2 + 1) * μ/(1+μ) * (Λ_1+Λ_2)
+                )
+
+        vals_num = inferred_dict['Λ'][(r_a_anal>3) & (r_a_anal<=22)]
+        vals_anal = Λ_a_anal[(r_a_anal>3) & (r_a_anal<=22)]
+
 
     ###############
     # ERROR CASES #
@@ -572,10 +665,13 @@ if __name__ == '__main__':
         help='1, 2 or 3.')
     parser.add_argument('-ltwo', '--LambdaTwo', type=float, default=None,
         help='integrated occ rate for secondaries')
+    parser.add_argument('-bf', '--binaryfrac', type=float, default=None,
+        help='BF = n_b/(n_s+n_b), for n number density')
 
     args = parser.parse_args()
 
     numerical_transit_survey(
         args.quickrun,
         args.modelnumber,
-        args.LambdaTwo)
+        args.LambdaTwo,
+        args.binaryfrac)
