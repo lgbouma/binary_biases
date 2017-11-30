@@ -244,8 +244,8 @@ In the presence of dilution, planets with $(\pp\a, \ps\a)$ are associated with
 systems of many different planetary and stellar properties, so $N_{\rm 
 det}(\pp\a, \ps\a)$ is 
 given by the convolution of the true occurrence, $\Lambda(\pp, \ps)$, and 
-number of searchable stars that give $(\pp\a, \ps\a)$ when the true system 
-actually has $(\pp, \ps)$, $\mathcal{N}(\pp\a, \ps\a; \pp, \ps)$:
+$\mathcal{N}(\pp\a, \ps\a; \pp, \ps)$, the number of searchable stars that 
+give $(\pp\a, \ps\a)$ when the true system actually has $(\pp, \ps)$:
 \begin{equation}
 	N_{\rm det}(\pp\a, \ps\a)=\sum_i N_{\rm det}^i(\pp\a, \ps\a)
 	=\sum_i \int \mathrm{d}\pp\mathrm{d}\ps\,
@@ -546,14 +546,16 @@ more succinct than listing out discrete cases, we leave it as-is.
 
 \subsubsection{Power Law Distribution of Planets}
 
-Imagine instead that we took $\Lambda_i(r,M) = Z_i r^\delta$.
+Imagine instead that we took $\Lambda_i(r,M) = Z_i f(r) = Z_i 
+r^\delta/\mathcal{N}_r$, for $f(r)$ the radius shape function, 
+$\mathcal{N}_r$ the shape function's normalization, and $Z_i$ the number of 
+planets per star.
 From Eq.~\ref{eq:apparent_rate_twin_binary}, we get an apparent rate
 \begin{equation}
-\Lambda_a(r_a) = r_a^\delta \left[
+\Lambda_a(r_a) = \frac{r_a^\delta}{\mathcal{N}_r} \left[
 \frac{Z_0}{1+\mu({\rm BF})}
 +
-2^{\frac{\delta}{2} + 1 } \frac{\mu({\rm BF})}{1+\mu({\rm BF})} \left(
-Z_1 + Z_2
+2^{\frac{\delta+1}{2} } \frac{\mu({\rm BF})}{1+\mu({\rm BF})} \left(Z_1 + Z_2
 \right)
 \right].
 \end{equation}
@@ -563,7 +565,7 @@ $\Lambda_a(r_a)$ with $\Lambda(r)$, we must impose that $r_a$ and $r$ are
 indistinguishable (i.e.: the observer cannot tell them apart).
 Note that the true rate is
 \begin{equation}
-\Lambda(r) = r^\delta \left[
+\Lambda(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
 \frac{Z_0}{1+2\mu} + \frac{\mu}{1+2\mu} (Z_1+Z_2)
 \right]
 \end{equation}
@@ -580,6 +582,10 @@ Howard et al. (2012),  we get a correction factor $X_\Lambda =
 \Lambda_a/\Lambda = 1.06$.
 In other words, the apparent rate is an {\it over}estimate of the true rate, 
 with a relative error of 6\%.
+
+As a side-note, this particular model (twin binaries, power law planet 
+distribution) is a good unit test for the numerics. As of git commit 
+\texttt{9b8f55c}, the two agree.
 
 \subsection{Power Law World}
 
@@ -631,18 +637,28 @@ I_1(r_a) &\equiv \int \frac{{\rm d}q}{\mathcal{A}(q)} f(q)
     \\
 &= \frac{Z_1}{\mathcal{N}_q} \int {\rm d}q\, q^\beta (1+q^\alpha)^2
     \delta(r_a (1+q^\alpha)^{1/2} - r_0) \\
-&= \frac{Z_1}{\mathcal{N}_q}
-    \left( \left(\frac{r_0}{r_a}\right)^2 - 1  \right)^{\beta/\alpha}
+&= \frac{Z_1}{\mathcal{N}_q} \frac{2}{\alpha} \frac{r_0}{r_a^2} 
+   \left(\left(\frac{r_0}{r_a}\right)^2 -1
+       \right)^{\frac{1-\alpha}{\alpha}}
+   \int {\rm d}q\, q^\beta (1+q^\alpha)^2 
+       \delta\left( q - \left( \left(\frac{r_0}{r_a}\right)^2 -1
+       \right)^{\frac{1}{\alpha}} \right) \\
+&= \frac{Z_1}{\mathcal{N}_q} \frac{2}{\alpha} \frac{r_0}{r_a^2}
+    \left( \left(\frac{r_0}{r_a}\right)^2 - 1  
+    \right)^{\frac{\beta-\alpha+1}{\alpha}}
     \left( \frac{r_0}{r_a}\right)^4.
     \label{eq:model_2_i_1}
 \end{align}
 The penultimate line used the fact that $r_a(1+q^\alpha)^{1/2}=r_0$ has only 
 one root:
 \begin{equation}
-q(r_a) = \left(\left(\frac{r_0}{r_a}\right)^2 - 1\right)^{1/\alpha}.
+q(r_a) = \left(\left(\frac{r_0}{r_a}\right)^2 - 1\right)^{1/\alpha},
 \end{equation}
-Eq.~\ref{eq:model_2_i_1} should be used as a sanity check on any 
-Monte Carlo numerics.
+and for any function $f(q)$ with a single root $q_i$,
+\begin{equation}
+\delta(f(q)) = \frac{\delta(q-q_i)}{|f'(q_i)|}.
+\end{equation}
+Eq.~\ref{eq:model_2_i_1} is a good unit test for Monte Carlo numerics.
 
 Attempting the same thing for $i=2$,
 \begin{align}
@@ -657,19 +673,15 @@ I_2(r_a) &\equiv \int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
 \end{align}
 Unfortunately, analytic roots of $r_a q (1+q^{-\alpha})^{1/2} = r_0$ do not 
 exist.
-Schematically, since for any function $g(x)$,
-\begin{equation}
-\delta(g(x)) = \sum_{x_i \in \{{\rm roots}\}} \frac{\delta(x-x_i)}{|g'(x_i)|},
-\end{equation}
-if the roots are found numerically then
+If the roots are found numerically then
 \begin{equation}
 I_2(r_a) = \frac{Z_2}{\mathcal{N}_q}
     \sum_{q_i \in \{{\rm roots}\}}
 q_i^{\beta+\frac{8}{3}} 
 (1+q_i^\alpha)^{3/2}
-(1+q_i^{-\alpha})^{1/2}.
+(1+q_i^{-\alpha})^{1/2},
 \end{equation}
-But this doesn't really give much insight.
+but this doesn't really give much insight.
 
 \subsubsection{Power law planets (Model \# 3)}
 
