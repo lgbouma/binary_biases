@@ -3,8 +3,9 @@
 See README.md for full description.
 
 Example usage:
->>> python numerical_models.py --quickrun --modelnumber 3 --LambdaTwo 0.5 --binaryfrac 0.44
 >>> python numerical_models.py --modelnumber 1 --LambdaTwo 0.5 --binaryfrac 0.1
+>>> python numerical_models.py --modelnumber 2 --LambdaTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --quickrun --modelnumber 3 --LambdaTwo 0.5 --binaryfrac 0.44
 >>> python numerical_models.py --modelnumber 5 --LambdaTwo 0.5 --binaryfrac 0.1
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
@@ -426,43 +427,64 @@ def numerical_transit_survey(
                 )
 
     elif model_number == 2:
+
+        # TEST #1: Verify that the inferred rate value at the true planet
+        # radius agrees with analytic expectation.
+
         c_0 = 0.494087 # mathematica, 171011_integrals.nb
         X_Λ_rp_analytic = 3*c_0*Λ_0/(Λ_0+Λ_1+Λ_2)
-
-        print('TODO: ADD SANITY CHECK FOR I_1')
-        import IPython; IPython.embed()
-
-        # Check via Eq 58 from email sent to KM and JNW 2017/11/28
-        q_grid = np.arange(1e-6, 1+1e-6, 1e-6)
-        prob_ml_q = q_grid**β * (1+q_grid**α)**(3/2)
-        N_q = trapz(prob_ml_q, q_grid)
-
-        # analytic grid to compute occ rate over
-        #r_a_anal = np.arange(0,1+1e-3,1e-3)
-        r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
-
-        I_1 = Λ_1/N_q * ( (r_p/r_a_anal)**2 -1 )**(β/α) * (r_p/r_a_anal)**4
-        I_1[r_a_anal == 0] = 0
-        I_1[r_a_anal == 1] = 0
-
-        μ = N_1/N_0
-        Λ_primaries_analytic = μ/(1+μ) * I_1
-
-        # expect everything from r_p/sqrt(2) to just below r_p to be from the
-        # primaries.
-        vals_num = inferred_dict['Λ'][(r_a_anal>0.72) & (r_a_anal<1)]
-        vals_anal = I_1[(r_a_anal>0.72) & (r_a_anal<1)]
-
-        #NOTE: the above disagree. This is not a good thing.
-
-
-        inferred_dict['Λ']
 
         np.testing.assert_almost_equal(
                 X_Λ_rp_numerics,
                 X_Λ_rp_analytic,
                 decimal=2
                 )
+
+        # TEST #2: Verify that the inferred rate from 0.73r_true to 0.99r_true
+        # is that predicted analytically, to within 0.5%.
+
+        q_grid = np.arange(1e-6, 1+1e-6, 1e-6)
+        prob_ml_q = q_grid**β * (1+q_grid**α)**(3/2)
+        norm_q = trapz(prob_ml_q, q_grid)
+
+        r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
+        r_anal = np.array(true_dict['r'])[1:] - np.diff(true_dict['r'])/2
+        np.testing.assert_array_equal(r_anal, r_a_anal)
+        assert np.allclose(np.diff(inferred_dict['r']), np.diff(inferred_dict['r'])[0])
+        bin_width = np.diff(inferred_dict['r'])[0]
+
+        # Derived 2017/11/30.1. Has the same functional form as the one derived
+        # on 2017/10/10.1 (but has explicit normalization).
+        I_1 = Λ_1/norm_q * 2/α * r_p/(r_a_anal**2) * \
+                              ( (r_p/r_a_anal)**2 -1 )**((β-α+1)/α) * \
+                              (r_p/r_a_anal)**4
+        I_1[r_a_anal == 0] = 0
+        I_1[r_a_anal == 1] = 0
+
+        μ = N_1/N_0
+        Λ_primaries_analytic = bin_width * μ/(1+μ) * I_1
+
+        # Expect everything from r_p/sqrt(2) to just below r_p to be from the
+        # primaries. Going down to 0.73, not 1/sqrt(2) because the funky r_a(q)
+        # relation for the i=2 case goes ABOVE sqrt(2) (!). This is lets us
+        # verify the numerics work regardless.
+        vals_num = inferred_dict['Λ'][(r_a_anal>0.73) & (r_a_anal<0.99)]
+        vals_anal = Λ_primaries_analytic[(r_a_anal>0.73) & (r_a_anal<0.99)]
+
+        # Assert the numeric and analytic distributions agree to 0.5%.
+        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=5e-3)
+
+        if False:
+            # A one-time sanity check.
+            plt.close('all')
+            f,ax = plt.subplots()
+            ax.plot(r_anal[(r_anal>0.73) & (r_anal<0.99)], vals_num, label='numeric')
+            ax.plot(r_anal[(r_anal>0.73) & (r_anal<0.99)], vals_anal, label='analytic')
+            ax.set_yscale('log')
+            ax.legend(loc='best')
+            f.savefig('temp0.pdf')
+
+        del vals_num, vals_anal
 
     elif model_number == 5:
 
