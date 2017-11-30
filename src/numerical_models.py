@@ -222,9 +222,8 @@ def numerical_transit_survey(
 
         np.testing.assert_almost_equal(trapz(prob_r, r_grid), 1)
 
-        #NOTE the below plot is a sanity check to ensure that I understand the
-        #sampling.
         if False:
+            # The below plot is a sanity check that I ran one time.
             import matplotlib.pyplot as plt
             plt.close('all')
             bin_width = 0.5
@@ -238,11 +237,6 @@ def numerical_transit_survey(
             plt.plot(r_bins, analytic)
             plt.yscale('log')
             plt.savefig('temp3.pdf')
-
-            numeric, _ = np.histogram(r_samples, bins=r_bins)
-            import IPython; IPython.embed()
-        #NOTE END
-
 
         df['r'] = r_samples
         df.loc[df['has_planet'] == False, 'r'] = np.nan
@@ -475,7 +469,7 @@ def numerical_transit_survey(
         r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
         r_anal = np.array(true_dict['r'])[1:] - np.diff(true_dict['r'])/2
 
-        # Comparing the analytic and numeric (true) Λ(r) distributions, above
+        # Compare the analytic and numeric (true) Λ(r) distributions, above
         # 2r_\oplus
         μ = N_1/N_0
         Λ_num = np.array(true_dict['Λ'])
@@ -490,7 +484,7 @@ def numerical_transit_survey(
         vals_anal = bin_width * Λ_anal[(r_anal>3) & (r_anal<=22)]
 
         if False:
-            # The following was a sanity check.
+            # The following was a sanity check that I ran one time.
             import matplotlib.pyplot as plt
             plt.close('all')
             f,ax = plt.subplots()
@@ -499,37 +493,61 @@ def numerical_transit_survey(
             ax.legend(loc='best')
             f.savefig('temp2.pdf')
 
-        assert np.isclose(norm_r, 2**(δ+1) * (1 - 1/(δ+1)), rtol=1e-2)
-
-        # TEST: ensure that the numerically realized values for the
+        # TEST: ensure that the numerically realized values for the true
         # distribution are within 1% of the expected analytic values.
+        # (Not exact because of Poisson noise). Print a warning if it seems
+        # that Poisson noise is too high.
         assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-
+        assert np.isclose(norm_r, 2**(δ+1) * (1 - 1/(δ+1)), rtol=1e-2)
         if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
             print('\n'*10)
             print('WARNING: you should use more points to lower Poisson noise')
             print('\n'*10)
 
-        #FIXME TODO from here
+        # Compare the analytic and numeric (apparent) Λ_a(r_a) distributions,
+        # above r_a ~= 2r_\oplus and below r_pu/sqrt(2).
+        # (I was too lazy to derive the analytic form from r_pu/sqrt(2) to
+        # r_pu, but you expect to see a drop in the numeric value because of
+        # those HJs being diluted, but it's a small effect and the resulting
+        # numerics look fine, CF. the "temp" test plots below).
 
-        # Comparing the analytic and numeric (apparent) Λ_a(r_a) distributions
-        import IPython; IPython.embed()
+        del vals_num, vals_anal
+        Λ_a_num = np.array(inferred_dict['Λ'])
 
-        # The numerical and analytic values differ because the planet radius
-        # distributions are normalized differently. (Analytically it was a
-        # straight power law, and numerically you're trying to make it power
-        # law / constant).
-        norm = np.mean(vals_num / vals_anal)
-
-
-        # Comparing the analytic and numeric Λ_a(r_a) distributions
-        μ = N_1/N_0
-        Λ_a_anal = r_a_anal**δ * (
-                Λ_0/(1+μ) + 2**(δ/2 + 1) * μ/(1+μ) * (Λ_1+Λ_2)
+        # As derived 2017/11/29.3
+        Λ_a_anal = r_a_anal**δ / (norm_r *(1+μ)) * (
+                Λ_0 + 2**((δ+1)/2) * μ * (Λ_1+Λ_2)
                 )
 
-        vals_num = inferred_dict['Λ'][(r_a_anal>3) & (r_a_anal<=22)]
-        vals_anal = Λ_a_anal[(r_a_anal>3) & (r_a_anal<=22)]
+        vals_num = Λ_a_num[(r_a_anal>3) & (r_a_anal<=r_pu/2**(1/2))]
+
+        assert np.allclose(np.diff(inferred_dict['r']),
+                           np.diff(inferred_dict['r'])[0])
+        bin_width = np.diff(true_dict['r'])[0]
+
+        vals_anal = bin_width * Λ_a_anal[(r_a_anal>3) & (r_a_anal<r_pu/2**(1/2))]
+
+        # TEST: ensure that the numerically realized values for the apparent
+        # distribution are within 1% of the expected analytic values.
+        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
+
+        if False:
+            # The following were tests used when debugging.
+            import matplotlib.pyplot as plt
+            plt.close('all')
+            f,ax = plt.subplots()
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num/vals_anal,
+                    label='numeric/analytic')
+            ax.legend(loc='best')
+            f.savefig('temp2.pdf')
+
+            plt.close('all')
+            f,ax = plt.subplots()
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num, label='numeric')
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_anal, label='analytic')
+            ax.set_yscale('log')
+            ax.legend(loc='best')
+            f.savefig('temp1.pdf')
 
 
     ###############
