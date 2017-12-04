@@ -594,25 +594,58 @@ From Eq.~\ref{eq:apparent_rate_twin_binary}, we get an apparent rate density
 Consider the case when the $Z_i$'s are identical. If we compare 
 $\Gamma_a(r_a)$ with $\Gamma(r)$, we must impose that $r_a$ and $r$ are 
 indistinguishable (i.e.: the observer cannot tell them apart).
-Note that the true rate density is
+Note that the true rate density for stars selected in the sample is
 \begin{equation}
-\Gamma(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
+\Gamma_{\rm sel}(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
 \frac{Z_0}{1+2\mu} + \frac{\mu}{1+2\mu} (Z_1+Z_2)
-\right]
+\right],
 \end{equation}
-We then get a correction factor
+while the true rate density for a volume-limited sample of stars is
 \begin{equation}
-X_\Gamma \equiv \left. \frac{\Gamma_a(r_a)}{\Gamma(r)} 
-\right|_{r_a\rightarrow r}
-=
-\frac{2^{\frac{\delta}{2}+2}\mu + 1}{\mu + 1}.
+\Gamma_{\rm vl}(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
+\frac{Z_0}{1+2(n_b/n_s)} + \frac{(n_b/n_s)}{1+2(n_b/n_s)} (Z_1+Z_2)
+\right],
 \end{equation}
+for $n_b$ and $n_s$ the number density of binaries and singles in a 
+volume-limited sample.
 
+The stand-alone term ``true rate density'' is ill defined, and should probably 
+be avoided.
+In different contexts, it might refer to either a) 
+$\Gamma_{\rm sel}(r)$, b) $\Gamma_{\rm vl}(r)$, or even c) $\Gamma_0(r)$, the 
+rate around singles.
+The meaning that most people probably {\it want} true rate density to have is
+$\Gamma_0(r)$~---~simply ``I have a star that is single; how many planets are 
+there?''.
+This is also a sensible definition because it is {\it independent} of any 
+complications of planet formation that would make $Z_1$ or $Z_2$ different 
+from $Z_0$.
+One way to deal with this, rather than making the arbitrary choice, would be 
+to just plot out all the possible options.
+
+We could define a ``correction factor'' relative to $\Gamma_0$, or to 
+$\Gamma_{\rm sel}$, or to $\Gamma_{\rm vl}$.
+If the $Z_i$'s are equal, these are all identical:
+\begin{align}
+\notag
+X_\Gamma &\equiv 
+\left. \frac{\Gamma_a(r_a)}{\Gamma_0(r)} 
+\right|_{r_a\rightarrow r,\ Z_i{\rm 's}\ {\rm equal}} \\
+\notag&=
+\left. \frac{\Gamma_a(r_a)}{\Gamma_{\rm sel}(r)} 
+\right|_{r_a\rightarrow r,\ Z_i{\rm 's}\ {\rm equal}} \\
+\notag&=
+\left. \frac{\Gamma_a(r_a)}{\Gamma_{\rm vl}(r)} 
+\right|_{r_a\rightarrow r,\ Z_i{\rm 's}\ {\rm equal}} \\
+&=
+\frac{1 + 2^{\frac{\delta+3}{2}}\mu}{1 + \mu}.
+\end{align}
 For the case of ${\rm BF}=0.1$, $\mu\approx 0.153$. Taking $\delta=-2.92$ from 
 Howard et al. (2012),  we get a correction factor $X_\Gamma = 
-\Gamma_a/\Gamma = 1.06$.
-In other words, the apparent rate density is an {\it over}estimate of the true 
-rate density, with a relative error of 6\%.
+\Gamma_a/\Gamma = 1.004$.
+In other words, the apparent rate density is an {\it over}estimate of the rate 
+density of selected stars, with a relative error $\delta \Gamma = |\Gamma - 
+\Gamma\a | / \Gamma$ of 0.4\%.
 
 As a side-note, this particular model (twin binaries, power law planet 
 distribution) is a good unit test for the numerics.
@@ -752,16 +785,17 @@ I_2(r\a) = \frac{Z_2}{\mathcal{N}_q \mathcal{N}_r} r_a^\delta
 \end{equation}
 The net effect of binarity is to just {\it scale} the overall distribution!
 
-Note that the true rate density is
+Note that the true rate density for the selected stars is
 \begin{equation}
-\Gamma(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
+\Gamma_{\rm sel}(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
 \frac{Z_0}{1+2\mu} + \frac{\mu}{1+2\mu} (Z_1+Z_2)
 \right].
 \end{equation}
-The rate density correction factor, $X_\Gamma = \Gamma\a/\Gamma$, will be
+The correction factor with respect to selected stars, $X_\Gamma = 
+\Gamma\a/\Gamma_{\rm sel}$, will be
 \begin{align}
-X_\Gamma &\equiv \left. \frac{\Gamma_a(r_a)}{\Gamma(r)} 
-\right|_{r_a\rightarrow r} \\
+X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_{\rm sel}(r)} 
+\right|_{r_a\rightarrow r,\ Z_i{\rm 's\ equal}} \\
 &=
 \frac{1+2\mu}{3(1+\mu)}
 \left[1 + \mu
@@ -776,8 +810,10 @@ X_\Gamma &\equiv \left. \frac{\Gamma_a(r_a)}{\Gamma(r)}
 For $\alpha = 3.5$, $\beta=0$, $\delta=-2.92$, the term in $(\ldots)\approx 
 1.41425 \approx \sqrt{2}$, where the latter surprising numerical fluke holds 
 to the first four decimal places.
-For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma = 1.28$, an apparent rate 
-which is {\it higher} than the true rate by 28\%!
+For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_{\rm sel} = 1.28$, an 
+apparent rate which is {\it higher} than the true rate by 28\%!
+Note that this result is the same as $\Gamma\a/\Gamma0$ and 
+$\Gamma\a/\Gamma_{\rm vl}$ in the limit where all the $Z_i$'s are equal.
 
 More realistically, we'll take a power law above some cutoff (to avoid the 
 divergence for $\delta<0$), but nonetheless the above indicates we're going to 
