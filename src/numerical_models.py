@@ -666,11 +666,11 @@ def run_unit_tests(
             print('\n'*10)
 
         # Compare the analytic and numeric (apparent) Λ_a(r_a) distributions,
-        # above r_a ~= 2r_\oplus and below r_pu/sqrt(2).  (I was too lazy to
-        # derive the analytic form from r_pu/sqrt(2) to r_pu, but you expect to
-        # see a drop in the numeric value because of those HJs being diluted,
-        # but it's a small effect and the resulting numerics look fine, CF. the
-        # "temp" test plots below).
+        # above r_a ~= 2r_\oplus and below r_pu/sqrt(2).  (I didn't derive the
+        # analytic form from r_pu/sqrt(2) to r_pu, but you expect to see a drop
+        # in the numeric value because of those HJs being diluted, but it's a
+        # small effect and the resulting numerics look fine, CF. the "temp"
+        # test plots below).
 
         del vals_num, vals_anal
         Λ_a_num = np.array(inferred_dict['Λ'])
