@@ -10,11 +10,11 @@ Model #4: varying q, r with a gap
 Model #5: twin binary, varying r
 
 Example usage, for each model type:
->>> python numerical_models.py --modelnumber 1 --LambdaTwo 0.5 --binaryfrac 0.1
->>> python numerical_models.py --modelnumber 2 --LambdaTwo 0.5 --binaryfrac 0.44
->>> python numerical_models.py --modelnumber 3 --LambdaTwo 0.5 --binaryfrac 0.44
->>> python numerical_models.py --modelnumber 4 --LambdaTwo 0.5 --binaryfrac 0.44
->>> python numerical_models.py --modelnumber 5 --LambdaTwo 0.5 --binaryfrac 0.1
+>>> python numerical_models.py --modelnumber 1 --ZsubTwo 0.5 --binaryfrac 0.1
+>>> python numerical_models.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --modelnumber 3 --ZsubTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
 '''
@@ -29,7 +29,7 @@ from math import pi as π
 import os, argparse, decimal
 
 
-def check_inputs(γ, Λ_2, model_number, BF):
+def check_inputs(γ, Z_2, model_number, BF):
     '''
     Verify that input values are reasonable, otherwise raise errors.
     '''
@@ -37,8 +37,8 @@ def check_inputs(γ, Λ_2, model_number, BF):
     if γ != 0:
         raise NotImplementedError
 
-    if abs(decimal.Decimal(str(Λ_2)).as_tuple().exponent) > 2:
-        # File names assume 2 digits of precision for Λ_2.
+    if abs(decimal.Decimal(str(Z_2)).as_tuple().exponent) > 2:
+        # File names assume 2 digits of precision for Z_2.
         raise NotImplementedError
 
     if model_number > 5 or model_number < 1:
@@ -171,7 +171,7 @@ def make_stellar_population(quickrun, model_number, BF, α, β, γ, δ):
     return N_0, N_1, N_2, is_searchable, df, q
 
 
-def make_planet_population(model_number, df, q, is_searchable, Λ_0, Λ_1, Λ_2,
+def make_planet_population(model_number, df, q, is_searchable, Z_0, Z_1, Z_2,
         N_0, N_1, N_2, δ, debugging=False):
     '''
     Given the dataframe of stars, assign planets. Further, assign whether they
@@ -184,9 +184,9 @@ def make_planet_population(model_number, df, q, is_searchable, Λ_0, Λ_1, Λ_2,
     #######################################################
     # Select stars with planets, and assign planet radii. #
     #######################################################
-    single_has_planet = ( np.random.rand((N_0)) < Λ_0 )
-    primary_has_planet = ( np.random.rand((N_1)) < Λ_1 )
-    secondary_has_planet = ( np.random.rand((N_2)) < Λ_2 )
+    single_has_planet = ( np.random.rand((N_0)) < Z_0 )
+    primary_has_planet = ( np.random.rand((N_1)) < Z_1 )
+    secondary_has_planet = ( np.random.rand((N_2)) < Z_2 )
 
     has_planet = np.concatenate(
         (single_has_planet,  primary_has_planet, secondary_has_planet)
@@ -315,7 +315,7 @@ def observe_planets(df, α):
 
 
 def calculate_true_and_apparent_rates(
-        model_number, df, Q_g0, N_0, N_1, N_2, Λ_0, Λ_1, Λ_2, r_pu,
+        model_number, df, Q_g0, N_0, N_1, N_2, Z_0, Z_1, Z_2, r_pu,
         quickrun, slowrun
         ):
     '''
@@ -339,8 +339,8 @@ def calculate_true_and_apparent_rates(
                other tidbits.
 
     Also saves `outdf` to the following path:
-        '../data/numerics/results_model_{:d}_Lambda2_{:.2f}'.format(
-                model_number, Λ_2)
+        '../data/numerics/results_model_{:d}_Zsub2_{:.2f}'.format(
+                model_number, Z_2)
     '''
 
     if model_number == 1 or model_number == 2:
@@ -409,7 +409,7 @@ def calculate_true_and_apparent_rates(
             )
 
     savdir = '../data/numerics/'
-    fname = 'results_model_{:d}_Lambda2_{:.2f}'.format( model_number, Λ_2)
+    fname = 'results_model_{:d}_Zsub2_{:.2f}'.format( model_number, Z_2)
     if quickrun:
         fname = 'quickrun_' + fname
     outdf.to_csv(savdir+fname+'.out', index=False)
@@ -420,7 +420,7 @@ def calculate_true_and_apparent_rates(
     if slowrun:
         np.testing.assert_almost_equal(
                 np.sum(outdf['true_Λ']),
-                (N_0*Λ_0 + N_1*Λ_1 + N_2*Λ_2)/N_tot,
+                (N_0*Z_0 + N_1*Z_1 + N_2*Z_2)/N_tot,
                 decimal=3
                 )
 
@@ -438,7 +438,7 @@ def run_unit_tests(
         N_0, N_1, N_2,
         N_p_at_r_p_true, N_p_at_r_p_inferred, r_pu,
         α, β, γ, δ,
-        Λ_0, Λ_1, Λ_2, BF,
+        Z_0, Z_1, Z_2, BF,
         debugging=False
         ):
     '''
@@ -485,7 +485,7 @@ def run_unit_tests(
         # radius agrees with analytic expectation.
 
         c_0 = 0.494087 # mathematica, 171011_integrals.nb
-        X_Λ_rp_analytic = 3*c_0*Λ_0/(Λ_0+Λ_1+Λ_2)
+        X_Λ_rp_analytic = 3*c_0*Z_0/(Z_0+Z_1+Z_2)
 
         np.testing.assert_almost_equal(
                 X_Λ_rp_numerics,
@@ -518,7 +518,7 @@ def run_unit_tests(
 
         # Derived 2017/11/30.1. Has the same functional form as the one derived
         # on 2017/10/10.1 (but has explicit normalization).
-        I_1 = Λ_1/norm_q * 2/α * r_p/(r_a_anal**2) * \
+        I_1 = Z_1/norm_q * 2/α * r_p/(r_a_anal**2) * \
                               ( (r_p/r_a_anal)**2 -1 )**((β-α+1)/α) * \
                               (r_p/r_a_anal)**4
         I_1[r_a_anal == 0] = 0
@@ -570,7 +570,7 @@ def run_unit_tests(
         norm_r = trapz(prob_r, r_grid)
 
         Λ_anal = r_anal**δ/norm_r * (
-                Λ_0/(1+2*μ) + (Λ_1+Λ_2) * μ/(1+2*μ)
+                Z_0/(1+2*μ) + (Z_1+Z_2) * μ/(1+2*μ)
                 )
 
         vals_num = Λ_num[(r_anal>3) & (r_anal<=22)]
@@ -607,11 +607,11 @@ def run_unit_tests(
         # it more closely, it won't. You can derive an analytic result for the
         # f(r)~r^δ case.  But numerically, we have finite edge effects. A
         # r=20rearth planet can be diluted to much below 20rearth/sqrt(2), if
-        # it orbits a secondary.  So to make a good analytic prediction, you
-        # need to include the finite edge effects.  This might be possible, but
-        # it'd certainly be painful.  We've validated enough other cases that
-        # the numerics should be trusted (provided they're tested for a variety
-        # of upper cutoffs on the radius distribution).
+        # it orbits a secondary.  So to make a sufficiently precise analytic
+        # prediction, you need to include the finite edge effects.  This might
+        # be possible, but it'd certainly be painful.  We've validated enough
+        # other cases that the numerics should be trusted (provided they're
+        # tested for a variety of upper cutoffs on the radius distribution).
 
 
     elif model_number == 5:
@@ -634,7 +634,7 @@ def run_unit_tests(
         prob_r /= norm_r
 
         Λ_anal = r_anal**δ/norm_r * (
-                Λ_0/(1+2*μ) + (Λ_1+Λ_2) * μ/(1+2*μ)
+                Z_0/(1+2*μ) + (Z_1+Z_2) * μ/(1+2*μ)
                 )
 
         vals_num = Λ_num[(r_anal>3) & (r_anal<=22)]
@@ -677,7 +677,7 @@ def run_unit_tests(
 
         # As derived 2017/11/29.3
         Λ_a_anal = r_a_anal**δ / (norm_r *(1+μ)) * (
-                Λ_0 + 2**((δ+1)/2) * μ * (Λ_1+Λ_2)
+                Z_0 + 2**((δ+1)/2) * μ * (Z_1+Z_2)
                 )
 
         vals_num = Λ_a_num[(r_a_anal>3) & (r_a_anal<=r_pu/2**(1/2))]
@@ -714,14 +714,14 @@ def run_unit_tests(
 def numerical_transit_survey(
         quickrun,
         model_number,
-        Λ_2,
+        Z_2,
         BF,
         α=3.5,
         β=0,
         γ=0,
         δ=-2.92,
-        Λ_0=0.5,
-        Λ_1=0.5
+        Z_0=0.5,
+        Z_1=0.5
         ):
     '''
     Inputs:
@@ -735,17 +735,17 @@ def numerical_transit_survey(
         γ = 0       # exponent in p(has planet|secondary w/ q) ~ q^γ
         δ = -2.92   # exponent in p(r) ~ r^δ, from Howard+ 2012
 
-        Λ_0 = 0.5 # fraction of selected singles with planet
-        Λ_1 = 0.5 # fraction of selected primaries with planet
-        Λ_2 = 0.5 # fraction of selected secondaries with planet.
+        Z_0 = 0.5 # fraction of selected singles with planet
+        Z_1 = 0.5 # fraction of selected primaries with planet
+        Z_2 = 0.5 # fraction of selected secondaries with planet.
 
     Outputs:
         Four data files (in ../data/):
 
-        'results_model_{:d}_Lambda2_{:.2f}'.format( model_number, Λ_2)
+        'results_model_{:d}_Zsub2_{:.2f}'.format( model_number, Z_2)
 
-        'results_model_{:d}_error_case_{:d}_Lambda2_{:.2f}.out'.format(
-            model_number, error_case_number, Λ_2)
+        'results_model_{:d}_error_case_{:d}_Zsub2_{:.2f}.out'.format(
+            model_number, error_case_number, Z_2)
 
         The output data files contain binned occurrence rates as a function of
         true and apparent radius.
@@ -758,20 +758,20 @@ def numerical_transit_survey(
 
     slowrun = not quickrun
 
-    check_inputs(γ, Λ_2, model_number, BF)
+    check_inputs(γ, Z_2, model_number, BF)
 
     N_0, N_1, N_2, is_searchable, df, q = \
             make_stellar_population(quickrun, model_number, BF, α, β, γ, δ)
 
     has_planet, planet_transits, df, Q_g0, r_pu = \
-            make_planet_population(model_number, df, q, is_searchable, Λ_0,
-                    Λ_1, Λ_2, N_0, N_1, N_2, δ, debugging=debugging)
+            make_planet_population(model_number, df, q, is_searchable, Z_0,
+                    Z_1, Z_2, N_0, N_1, N_2, δ, debugging=debugging)
 
     df = observe_planets(df, α)
 
     true_dict, inferred_dict, N_p_at_r_p_true, N_p_at_r_p_inferred = \
             calculate_true_and_apparent_rates(
-            model_number, df, Q_g0, N_0, N_1, N_2, Λ_0, Λ_1, Λ_2, r_pu,
+            model_number, df, Q_g0, N_0, N_1, N_2, Z_0, Z_1, Z_2, r_pu,
             quickrun, slowrun
             )
 
@@ -780,7 +780,7 @@ def numerical_transit_survey(
             N_0, N_1, N_2,
             N_p_at_r_p_true, N_p_at_r_p_inferred, r_pu,
             α, β, γ, δ,
-            Λ_0, Λ_1, Λ_2, BF, debugging=debugging
+            Z_0, Z_1, Z_2, BF, debugging=debugging
             )
 
 
@@ -795,7 +795,7 @@ if __name__ == '__main__':
         help='use --quickrun if you want models to run fast.')
     parser.add_argument('-mn', '--modelnumber', type=int, default=None,
         help='1, 2 or 3.')
-    parser.add_argument('-ltwo', '--LambdaTwo', type=float, default=None,
+    parser.add_argument('-ztwo', '--ZsubTwo', type=float, default=None,
         help='integrated occ rate for secondaries')
     parser.add_argument('-bf', '--binaryfrac', type=float, default=None,
         help='BF = n_b/(n_s+n_b), for n number density')
@@ -805,5 +805,5 @@ if __name__ == '__main__':
     numerical_transit_survey(
         args.quickrun,
         args.modelnumber,
-        args.LambdaTwo,
+        args.ZsubTwo,
         args.binaryfrac)

@@ -1,4 +1,7 @@
 '''
+OUTDATED: Dec 5, 2017, I opted against plotting/showing "error cases" because
+they're just confusing for no good reason.
+
 first, for models 1,2, 3:
 >>> python numerical_models.py
 then:

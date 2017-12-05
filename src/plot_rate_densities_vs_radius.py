@@ -29,12 +29,12 @@ import numpy as np
 from brokenaxes import brokenaxes
 
 def make_plot(model_number, logx=None, logy=None, withtext=None,
-        stdout=False, brokenx=None, Λ_2=None, xcut=None):
+        stdout=False, brokenx=None, Z_2=None, xcut=None):
 
     # Make summary plot
-    if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-        fname = '../data/numerics/results_model_{:d}_Lambda2_{:.2f}.out'.format(
-                model_number, Λ_2)
+    if isinstance(Z_2,float) or isinstance(Z_2,int):
+        fname = '../data/numerics/results_model_{:d}_Zsub2_{:.2f}.out'.format(
+                model_number, Z_2)
     else:
         fname = '../data/results_model_'+repr(model_number)+'.out'
 
@@ -147,8 +147,8 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                     transform=ax.transAxes, fontsize='x-small')
             outname += '_withtext'
 
-        if isinstance(Λ_2,float) or isinstance(Λ_2,int):
-            outname += '_Lambda2_{:.1f}'.format(Λ_2)
+        if isinstance(Z_2,float) or isinstance(Z_2,int):
+            outname += '_Zsub2_{:.1f}'.format(Z_2)
 
     if xcut:
         outname += '_xcut'
@@ -161,16 +161,16 @@ if __name__ == '__main__':
 
     for model_number in [1,2,3]:
 
-        make_plot(model_number, Λ_2=0.5)
+        make_plot(model_number, Z_2=0.5)
 
-    make_plot(1, brokenx=True, Λ_2=0.5)
-    make_plot(2, logy=True, Λ_2=0.5)
-    make_plot(3, logy=True, Λ_2=0.5)
-    make_plot(3, withtext=True, stdout=True, Λ_2=0.5)
+    make_plot(1, brokenx=True, Z_2=0.5)
+    make_plot(2, logy=True, Z_2=0.5)
+    make_plot(3, logy=True, Z_2=0.5)
+    make_plot(3, withtext=True, stdout=True, Z_2=0.5)
 
-    make_plot(3, Λ_2=0)
-    make_plot(3, logy=True, Λ_2=0)
-    make_plot(3, withtext=True, stdout=True, Λ_2=0)
+    make_plot(3, Z_2=0)
+    make_plot(3, logy=True, Z_2=0)
+    make_plot(3, withtext=True, stdout=True, Z_2=0)
 
-    make_plot(4, Λ_2=0.5)
-    make_plot(4, xcut=True, Λ_2=0.5)
+    make_plot(4, Z_2=0.5)
+    make_plot(4, xcut=True, Z_2=0.5)
