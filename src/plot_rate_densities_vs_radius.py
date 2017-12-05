@@ -29,14 +29,15 @@ import numpy as np
 from brokenaxes import brokenaxes
 
 def make_plot(model_number, logx=None, logy=None, withtext=None,
-        stdout=False, brokenx=None, Z_2=None, xcut=None):
+        stdout=False, brokenx=None, Z_2=None, xcut=None, r_pu=None):
+
+    assert Z_2 > -1
+
+    plt.close('all')
 
     # Make summary plot
-    if isinstance(Z_2,float) or isinstance(Z_2,int):
-        fname = '../data/numerics/results_model_{:d}_Zsub2_{:.2f}.out'.format(
-                model_number, Z_2)
-    else:
-        fname = '../data/results_model_'+repr(model_number)+'.out'
+    fname = '../data/numerics/results_model_{:d}_Zsub2_{:.2f}_rpu_{:.1f}.out'.format(
+            model_number, Z_2, r_pu)
 
     df = pd.read_csv(fname)
 
@@ -55,19 +56,21 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     if model_number == 3 or model_number == 4:
         xvals = np.append(0, df['bin_left'])
-        ytrue = np.append(0, df['true_Λ'])
+        ytrueselected = np.append(0, df['true_Λ'])
+        ytruesingle = np.append(0, df['true_single_Λ'])
         yinferred = np.append(0, df['inferred_Λ'])
     elif model_number == 1 or model_number == 2:
         xvals = np.append(df['bin_left'],[1,1.1])
-        ytrue = np.append(df['true_Λ'],[0,0])
+        ytrueselected = np.append(df['true_Λ'],[0,0])
+        ytruesingle = np.append(df['true_single_Λ'],[0,0])
         yinferred = np.append(df['inferred_Λ'],[0,0])
 
-    try:
-        ax.step(xvals, ytrue, where='post', label='true')
-    except:
-        import IPython; IPython.embed()
-
     ax.step(xvals, yinferred, where='post', label='inferred')
+
+    ax.step(xvals, ytrueselected, where='post', label='true (selected)')
+
+    ax.step(xvals, ytruesingle, where='post', label='true (single)',
+            linestyle='--')
 
     if brokenx:
         ax.legend(loc='upper left',fontsize='medium')
@@ -110,33 +113,43 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             inds = df['bin_left'] > lower_bound
             #Λ_HJ_true = trapz(df[inds]['true_Λ'], df[inds]['bin_left'])
             #Λ_HJ_inferred = trapz(df[inds]['inferred_Λ'], df[inds]['bin_left'])
-            Λ_HJ_true = np.sum(df[inds]['true_Λ'])
+            Λ_HJ_true_sel = np.sum(df[inds]['true_Λ'])
+            Λ_HJ_true_sing = np.sum(df[inds]['true_single_Λ'])
             Λ_HJ_inferred = np.sum(df[inds]['inferred_Λ'])
 
             #Λ_true = trapz(df['true_Λ'], df['bin_left'])
             #Λ_inferred = trapz(df['inferred_Λ'], df['bin_left'])
-            Λ_true = np.sum(df['true_Λ'])
+            Λ_true_sel = np.sum(df['true_Λ'])
+            Λ_true_sing = np.sum(df['true_single_Λ'])
             Λ_inferred = np.sum(df['inferred_Λ'])
 
             txt = \
             '''
             with $r>${:.1f}$R_\oplus$,
-            $\Lambda$_HJ_true:      {:.4f} planets per star
+            selected $\Lambda$_HJ_true:      {:.4f} planets per star
+            single   $\Lambda$_HJ_true:      {:.4f} planets per star
             $\Lambda$_HJ_inferred:  {:.4f} planets per star
-            true/inferred:  {:.2f}.
+            true(selected)/inferred:  {:.2f}.
+            true(single)/inferred:  {:.2f}.
 
             Integrated over all $r$,
-            $\Lambda$_true:         {:.3f} planets per star
+            selected $\Lambda$_true:         {:.3f} planets per star
+            single $\Lambda$_true:           {:.3f} planets per star
             $\Lambda$_inferred:     {:.3f} planets per star
-            true/inferred:  {:.2f}.
+            true(selected)/inferred:  {:.2f}.
+            true(single)/inferred:  {:.2f}.
             '''.format(
             lower_bound,
-            Λ_HJ_true,
+            Λ_HJ_true_sel,
+            Λ_HJ_true_sing,
             Λ_HJ_inferred,
-            Λ_HJ_true/Λ_HJ_inferred,
-            Λ_true,
+            Λ_HJ_true_sel/Λ_HJ_inferred,
+            Λ_HJ_true_sing/Λ_HJ_inferred,
+            Λ_true_sel,
+            Λ_true_sing,
             Λ_inferred,
-            Λ_true/Λ_inferred
+            Λ_true_sel/Λ_inferred,
+            Λ_true_sing/Λ_inferred,
             )
             if stdout:
                 print(txt)
@@ -147,8 +160,18 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                     transform=ax.transAxes, fontsize='x-small')
             outname += '_withtext'
 
+        else:
+            Z_0 = 0.5
+            txt = '$Z_2/Z_0 =\ ${:.1f}'.format(Z_2/Z_0)
+            ax.text(0.96,0.5,txt,horizontalalignment='right',
+                    verticalalignment='center',
+                    transform=ax.transAxes, fontsize='x-small')
+
         if isinstance(Z_2,float) or isinstance(Z_2,int):
-            outname += '_Zsub2_{:.1f}'.format(Z_2)
+            outname += '_Zsub2_{:.2f}'.format(Z_2)
+
+        if isinstance(r_pu,float) or isinstance(r_pu,int):
+            outname += '_rpu_{:.1f}'.format(r_pu)
 
     if xcut:
         outname += '_xcut'
@@ -159,18 +182,26 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
 if __name__ == '__main__':
 
-    for model_number in [1,2,3]:
+    for r_pu, model_number in zip([1, 1, 22.5], [1,2,3]):
 
-        make_plot(model_number, Z_2=0.5)
+        make_plot(model_number, Z_2=0.5, r_pu=r_pu)
 
-    make_plot(1, brokenx=True, Z_2=0.5)
-    make_plot(2, logy=True, Z_2=0.5)
-    make_plot(3, logy=True, Z_2=0.5)
-    make_plot(3, withtext=True, stdout=True, Z_2=0.5)
+    make_plot(1, brokenx=True, Z_2=0.5, r_pu=1)
+    make_plot(2, logy=True, Z_2=0.5, r_pu=1)
+    make_plot(3, logy=True, Z_2=0.5, r_pu=22.5)
+    make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(3, Z_2=0)
-    make_plot(3, logy=True, Z_2=0)
-    make_plot(3, withtext=True, stdout=True, Z_2=0)
+    make_plot(4, Z_2=0.5, r_pu=22.5)
+    make_plot(4, xcut=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(4, Z_2=0.5)
-    make_plot(4, xcut=True, Z_2=0.5)
+    # Change as a function of Z_2/Z_0
+    for Z_2 in [0, 0.25]:
+        make_plot(3, Z_2=Z_2, r_pu=22.5)
+        make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
+        make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+
+    # Change as a function of r_pu
+    for r_pu in [15,17.5,20,22.5,25]:
+        make_plot(3, Z_2=0.5, r_pu=r_pu)
+        make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
+        make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)

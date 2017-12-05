@@ -11,9 +11,9 @@ Model #5: twin binary, varying r
 
 Example usage, for each model type:
 >>> python numerical_models.py --modelnumber 1 --ZsubTwo 0.5 --binaryfrac 0.1
->>> python numerical_models.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44
->>> python numerical_models.py --modelnumber 3 --ZsubTwo 0.5 --binaryfrac 0.44
->>> python numerical_models.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44
+>>> python numerical_models.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
+>>> python numerical_models.py --modelnumber 3 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
+>>> python numerical_models.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 >>> python numerical_models.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
@@ -29,7 +29,7 @@ from math import pi as π
 import os, argparse, decimal
 
 
-def check_inputs(γ, Z_2, model_number, BF):
+def check_inputs(γ, Z_2, model_number, BF, r_pu):
     '''
     Verify that input values are reasonable, otherwise raise errors.
     '''
@@ -46,6 +46,10 @@ def check_inputs(γ, Z_2, model_number, BF):
 
     if not (BF > 0):
         raise AssertionError
+
+    if model_number in [2,3,4]:
+        if not r_pu > 0:
+            raise AssertionError
 
 
 def make_stellar_population(quickrun, model_number, BF, α, β, γ, δ):
@@ -172,7 +176,7 @@ def make_stellar_population(quickrun, model_number, BF, α, β, γ, δ):
 
 
 def make_planet_population(model_number, df, q, is_searchable, Z_0, Z_1, Z_2,
-        N_0, N_1, N_2, δ, debugging=False):
+        N_0, N_1, N_2, δ, r_pu, debugging=False):
     '''
     Given the dataframe of stars, assign planets. Further, assign whether they
     transit, and whether they are detected.
@@ -201,7 +205,7 @@ def make_planet_population(model_number, df, q, is_searchable, Z_0, Z_1, Z_2,
         df.loc[df['has_planet'] == False, 'r'] = np.nan
 
     elif model_number == 3 or model_number == 5:
-        r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
+        r_pl = 2 # [Rearth]. Lower bound for truncation.
 
         # Inverse transform sample to get radii. Drawing from powerlaw
         # distribution above r_pl, and constant below (to avoid pileup).
@@ -236,7 +240,7 @@ def make_planet_population(model_number, df, q, is_searchable, Z_0, Z_1, Z_2,
         df.loc[df['has_planet'] == False, 'r'] = np.nan
 
     elif model_number == 4:
-        r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
+        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
 
         # Inverse transform sample to get radii. Drawing from powerlaw
         # distribution above r_pl, and constant below (to avoid pileup).
@@ -402,14 +406,15 @@ def calculate_true_and_apparent_rates(
             {'bin_left': edges[:-1],
              'true_Λ': true_dict['Λ'],
              'inferred_Λ': inferred_dict['Λ'],
-             'true_single_Λ': true_dict['single']['N_p']/N_tot,
-             'true_primary_Λ': true_dict['primary']['N_p']/N_tot,
-             'true_secondary_Λ': true_dict['secondary']['N_p']/N_tot
+             'true_single_Λ': true_dict['single']['N_p']/N_0,
+             'true_primary_Λ': true_dict['primary']['N_p']/N_1,
+             'true_secondary_Λ': true_dict['secondary']['N_p']/N_2
             }
             )
 
     savdir = '../data/numerics/'
-    fname = 'results_model_{:d}_Zsub2_{:.2f}'.format( model_number, Z_2)
+    fname = 'results_model_{:d}_Zsub2_{:.2f}_rpu_{:.1f}'.format(
+            model_number, Z_2, r_pu)
     if quickrun:
         fname = 'quickrun_' + fname
     outdf.to_csv(savdir+fname+'.out', index=False)
@@ -563,7 +568,7 @@ def run_unit_tests(
         # 2r_\oplus
         Λ_num = np.array(true_dict['Λ'])
 
-        r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
+        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
         Δr = 1e-3
         r_grid = np.arange(0, r_pu+Δr, Δr)
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
@@ -584,7 +589,6 @@ def run_unit_tests(
         # (Not exact because of Poisson noise). Print a warning if it seems
         # that Poisson noise is too high.
         assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-        assert np.isclose(norm_r, 2**(δ+1) * (1 - 1/(δ+1)), rtol=5e-3)
         if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
             print('\n'*10)
             print('WARNING: you should use more points to lower Poisson noise')
@@ -627,7 +631,7 @@ def run_unit_tests(
         Λ_num = np.array(true_dict['Λ'])
 
         Δr = 1e-3
-        r_pl, r_pu = 2, 22.5 # [Rearth]. Lower and upper bound for truncation.
+        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
         r_grid = np.arange(0, r_pu+Δr, Δr)
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
         norm_r = trapz(prob_r, r_grid)
@@ -716,6 +720,7 @@ def numerical_transit_survey(
         model_number,
         Z_2,
         BF,
+        r_pu,
         α=3.5,
         β=0,
         γ=0,
@@ -729,6 +734,9 @@ def numerical_transit_survey(
         model_number = 3
 
         BF = 0.44   # binary fraction. BF = n_d / (n_s+n_d). Raghavan+ 2010 solar.
+
+        r_pu = 22.5 # maximum allowed radius (only applicable for the power law
+                    # radius distribution)
 
         α = 3.5     # exponent in L~M^α
         β = 0       # exponent in p_vol_limited(q) ~ q^β
@@ -758,14 +766,14 @@ def numerical_transit_survey(
 
     slowrun = not quickrun
 
-    check_inputs(γ, Z_2, model_number, BF)
+    check_inputs(γ, Z_2, model_number, BF, r_pu)
 
     N_0, N_1, N_2, is_searchable, df, q = \
             make_stellar_population(quickrun, model_number, BF, α, β, γ, δ)
 
     has_planet, planet_transits, df, Q_g0, r_pu = \
             make_planet_population(model_number, df, q, is_searchable, Z_0,
-                    Z_1, Z_2, N_0, N_1, N_2, δ, debugging=debugging)
+                    Z_1, Z_2, N_0, N_1, N_2, δ, r_pu, debugging=debugging)
 
     df = observe_planets(df, α)
 
@@ -799,6 +807,8 @@ if __name__ == '__main__':
         help='integrated occ rate for secondaries')
     parser.add_argument('-bf', '--binaryfrac', type=float, default=None,
         help='BF = n_b/(n_s+n_b), for n number density')
+    parser.add_argument('-rpu', '--upperradiuscutoff', type=float, default=None,
+        help='the maximum allowed planet radius in units of Rearth')
 
     args = parser.parse_args()
 
@@ -806,4 +816,5 @@ if __name__ == '__main__':
         args.quickrun,
         args.modelnumber,
         args.ZsubTwo,
-        args.binaryfrac)
+        args.binaryfrac,
+        args.upperradiuscutoff)
