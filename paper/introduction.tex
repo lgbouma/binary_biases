@@ -3,20 +3,22 @@
 A group of astronomers wants to measure the mean number of planets of a 
 certain type per star of a certain type.
 Ignoring stellar multiplicity, they perform a signal-to-noise limited transit 
-survey and detect $N_{\rm det}$ signals that seem to be from the desired 
-class of planet.
-They count the apparent number of selected stars, $N_\star$.
-Assuming their survey is limited by Poisson noise, the group computes
-their detection efficiency $p_{\rm det}$ as a function of planetary and 
-stellar properties, in order to know which of the selected stars were
-searchable.
+survey, and detect a set of planets that appear to be of the desired class.
+They then choose the stars (among those initially surveyed) around which the 
+planets of interest appeared to be searchable.
 Correcting for the geometric transit probability $p_{\rm tra}$, they report an 
-apparent occurrence rate $\Lambda_{\rm a}$:
+apparent rate density,
 \begin{equation}
-\Lambda_{\rm a} = \frac{N_{\rm det}}{N_\star} \times \frac{1}{p_{\rm tra}}
-								  \times \frac{1}{p_{\rm det}}.
+\Gamma\a(\pp\a, \ps\a) = \frac{N_{\rm det}(\pp\a, \ps\a)}{N_{\rm s,a}(\pp\a, 
+    \ps\a)} \times \frac{1}{p_{\rm tra}(\pp\a, \ps\a)}.
 \label{eq:wouldnt_it_be_nice}
 \end{equation}
+where $\pp\a$, $\ps\a$ are the apparent planetary and stellar parameters, 
+respectively.
+Here $N_{\rm det}(\pp\a, \ps\a)$ is the number of 
+detected planets with parameters $\pp\a,\ps\a$, per unit $\pp\a$ and $\ps\a$. 
+The quantity $N_{\rm s,a}(\pp\a, \ps\a)$ is the number of unresolved 
+point-sources on the sky the appear to be searchable.
 
 There are many potential pitfalls.  Some genuine transit signals can be missed
 by the detection pipeline.  Some apparent transit signals are spurious, from
@@ -43,11 +45,15 @@ This means marginalizing over ``occurrence rates in single star systems'',
 
 Outside of astrophysical differences, there are observational biases for every 
 term in Eq.~\ref{eq:wouldnt_it_be_nice}.
-There are errors in $N_{\rm det}$ due to planet radius misclassification.
-There are errors in $N_\star$ because a given selected star might in fact be 
-two stars.
-There are errors in $p_{\rm tra}$ because stars in binaries may have different 
-masses and radii than assumed in the single-star case.
+There are errors in $N_{\rm det}$ due to planet radius 
+misclassification.
+There are errors in $N_{{\rm s,a}}$ because a given point on the sky
+There are errors in $p_{\rm tra}(\pp\a,\ps\a)$ because stars in binaries may 
+have different masses and radii than assumed in the single-star case.
+Binarity might also affect the observers' ability to correctly select 
+searchable stars (but see Sec.~\ref{sec:model_1} for discussion of why this is 
+a second-order effect).
+
 Finally, there are errors in $p_{\rm det}$ because detection efficiencies 
 for planets orbiting single stars, primaries, and secondaries are all 
 different.
