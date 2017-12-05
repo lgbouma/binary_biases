@@ -14,39 +14,33 @@ what the observer infers. These errors are
 
 1. misinterpretation of planetary radii (b/c of transit depth dillution; also
    b/c of wrongly assumed host star radii),
-2. incorrectly assumed detection efficiency (transit probability and
-   fraction of selected stars that are searchable),
-3. incorrectly assumed number of selected stars.
+2. incorrectly assumed number of selected stars.
 
-Apart from the "nominal" models, we also consider "error case 1", "error case
-2", and "error case 3". They are defined s.t.:
-
-    error_case_1: errors 1 & 2 are corrected, leaving error #3
-    error_case_2: errors 1 & 3 are corrected, leaving error #2
-    error_case_3: errors 2 & 3 are corrected, leaving error #1.
+The detection efficiency, rather surprisingly, does not seem to be biased in
+any leading-order manner.
 
 ----------
 The simulation works as follows.
 
 First, the user specifies their inputs: the binary fraction, the model class
-(#1,2,3), various exponents (α,β,γ,δ), and the true occurrence rates, `Λ_i`.
+(#1,2,3), various exponents (α,β,γ,δ), and the `Z_i`'s.
 
 The population of selected stars is constructed as follows.  First, we note
 that each selected star has a `star_type` (single, primary, secondary), a
 binary mass ratio, if applicable, and the property of whether it is
 "searchable".
 
+Every star in the main `numerical_transit_survey` function is assumed to be
+searchable (for planets of whatever size are assigned). This doesn't make any
+sense if the stars are though to be part of some volume-limited sample. This is
+explicitly the point -- the only stars being counted are the ones that are
+searchable. At a fixed planet radius and period, this corresponds to a
+magnitude-limited sample of stars.
+
 The absolute number of stars is arbitrary; we take 10^6 single stars
 throughout. The number of binaries is calculated according to analytic
 formulae. The binary mass ratios are, when applicable, samples from the
 appropriate magnitude-limited distribution (given α and β).
-
-Whether a star is "searchable" depends entirely on its "completeness" fraction.
-By "completeness", we mean the ratio of the actual number of searchable stars
-to the assumed number of searchable stars (for a given planet size, period,
-etc.).  Assuming homogeneuously distributed stars, this is equivalent to the
-ratio of the searchable to selected volumes.  In our model, this volume ratio
-is a function of only the binary mass ratio.
 
 The procedure for assigning planets is then as follows:
     * each selected star of type i gets a planet at rate `Λ_i`
@@ -83,7 +77,7 @@ USAGE
 Change parameters in the "inputs" section below. Run with Python3.X
 
 ----------
-The following tests are implemented:
+The following tests/sanity checks are implemented:
 
 * γ == 0
 * there are as many selected primaries as secondaries
@@ -94,12 +88,22 @@ The following tests are implemented:
   average occurrence rate, to three decimals
 
 Model #1:
-* completeness fractions are very close to 1/8
 * numerical value of `X_Γ` at `r_p` matches analytic prediction
 
 Model #2:
 * numerical value of `X_Γ` at `r_p` matches analytic prediction
+* the inferred rate from 0.73rtrue to 0.99rtrue is that predicted analytically,
+  to within 0.5%. (No more precise b/c # of Poisson noise in bins).
 
-Models #2 and #3:
-* primaries are all more complete than 1/8
-* secondaries are all less complete than 1/8
+Model #3:
+* the numerically realized TRUE rate (for the selected stars) agrees with the
+  analytic one (from 3rearth to 22rearth).
+
+Model #4:
+* none
+
+Model #5:
+* the analytic and numeric (true, for selected stars) Λ(r) distributions, above
+  3rearth and below 22rearth, agree.
+* the analytic and numeric (apparent) Λa(ra) distributions, above ra ~=
+  2r\oplus and below rpu/sqrt(2) agree to within 1%.
