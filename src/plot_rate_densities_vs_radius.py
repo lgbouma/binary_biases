@@ -205,3 +205,8 @@ if __name__ == '__main__':
         make_plot(3, Z_2=0.5, r_pu=r_pu)
         make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
         make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
+
+    # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
+    # discrepancy" do you get?
+    # Answer: multiplicative factor of 1.17x
+    make_plot(3, withtext=True, stdout=True, Z_2=0., r_pu=15.0)
