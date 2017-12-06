@@ -14,7 +14,7 @@ Example usage, for each model type:
 >>> python numerical_models.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 >>> python numerical_models.py --modelnumber 3 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 >>> python numerical_models.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
->>> python numerical_models.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1
+>>> python numerical_models.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 22.5
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
 '''
@@ -663,7 +663,6 @@ def run_unit_tests(
         # Poisson noise is too high.
 
         assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-        assert np.isclose(norm_r, 2**(δ+1) * (1 - 1/(δ+1)), rtol=1e-2)
         if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
             print('\n'*10)
             print('WARNING: you should use more points to lower Poisson noise')
@@ -690,7 +689,7 @@ def run_unit_tests(
                            np.diff(inferred_dict['r'])[0])
         bin_width = np.diff(true_dict['r'])[0]
 
-        vals_anal = bin_width * Λ_a_anal[(r_a_anal>3) & (r_a_anal<r_pu/2**(1/2))]
+        vals_anal = bin_width * Λ_a_anal[(r_a_anal>3) & (r_a_anal<=r_pu/2**(1/2))]
 
         # TEST: ensure that the numerically realized values for the apparent
         # distribution are within 1% of the expected analytic values.
@@ -701,18 +700,33 @@ def run_unit_tests(
             import matplotlib.pyplot as plt
             plt.close('all')
             f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num/vals_anal,
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_num/vals_anal,
                     label='numeric/analytic')
             ax.legend(loc='best')
             f.savefig('temp2.pdf')
 
             plt.close('all')
             f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num, label='numeric')
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_anal, label='analytic')
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_num, label='numeric')
+            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_anal, label='analytic')
             ax.set_yscale('log')
             ax.legend(loc='best')
             f.savefig('temp1.pdf')
+
+        # TEST: Eq 55 of the 2017/12/04 email to JNW and KM. In the regime for
+        # which "power law" applies and there are no edge effects, ensure the
+        # analytics and numerics agree to 0.5% relative tolerance. NOTE for
+        # this to actually be convincing, it is better to use e.g., δ=-2, or
+        # δ=-1.  (Because δ=-2.92 leads to a very small shift). The test passes
+        # for these cases. E.g., here μ=0.3142696, if δ=-1, Γ_a/Γ_sel is
+        # approximately 1.72 (analytically). The numerics agree.
+        X_num = Λ_a_num/Λ_num
+        mu = N_1/N_0
+        assert np.isclose(
+                np.mean(X_num[(r_anal>3) & (r_anal<=r_pu/2**(1/2))]),
+                (1+2**((δ+3)/2)*mu)/(1+mu),
+                rtol=5e-3
+                )
 
 
 def numerical_transit_survey(
