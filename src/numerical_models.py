@@ -408,7 +408,10 @@ def calculate_true_and_apparent_rates(
              'inferred_Λ': inferred_dict['Λ'],
              'true_single_Λ': true_dict['single']['N_p']/N_0,
              'true_primary_Λ': true_dict['primary']['N_p']/N_1,
-             'true_secondary_Λ': true_dict['secondary']['N_p']/N_2
+             'true_secondary_Λ': true_dict['secondary']['N_p']/N_2,
+             'frac_inferred_single_Λ': inferred_dict['single']['N_p']/N_tot_apparent,
+             'frac_inferred_primary_Λ': inferred_dict['primary']['N_p']/N_tot_apparent,
+             'frac_inferred_secondary_Λ': inferred_dict['secondary']['N_p']/N_tot_apparent
             }
             )
 

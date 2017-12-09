@@ -29,7 +29,21 @@ import numpy as np
 from brokenaxes import brokenaxes
 
 def make_plot(model_number, logx=None, logy=None, withtext=None,
-        stdout=False, brokenx=None, Z_2=None, xcut=None, r_pu=None):
+        stdout=False, brokenx=None, Z_2=None, xcut=None, r_pu=None,
+        standardlines=True):
+    '''
+    withtext: includes summary text from integration on plot
+
+    stdout: write "withtext" text to stdout
+
+    xcut: mainly for model #1, overplotted over different axes
+
+    standardlines:
+        if True: plots "inferred", "true (selected)", and "true (single)" rates.
+        if False, plots "inferred", "frac (single)", "frac (primary)", "frac
+            (secondary)" and "true (single)".
+        by default, True
+    '''
 
     assert Z_2 > -1
 
@@ -65,12 +79,32 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ytruesingle = np.append(df['true_single_Λ'],[0,0])
         yinferred = np.append(df['inferred_Λ'],[0,0])
 
-    ax.step(xvals, yinferred, where='post', label='inferred')
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
 
-    ax.step(xvals, ytrueselected, where='post', label='true (selected)')
+    ax.step(xvals, yinferred, where='post', label='inferred', c=colors[0])
 
-    ax.step(xvals, ytruesingle, where='post', label='true (single)',
-            linestyle='--')
+    if standardlines:
+
+        ax.step(xvals, ytrueselected, where='post', label='true (selected)',
+                c=colors[1])
+
+        ax.step(xvals, ytruesingle, where='post', label='true (single)',
+                linestyle='--', c=colors[2])
+
+    elif not standardlines:
+
+        yfracsingle = np.append(0, df['frac_inferred_single_Λ'])
+        yfracprimary = np.append(0, df['frac_inferred_primary_Λ'])
+        yfracsecondary = np.append(0, df['frac_inferred_secondary_Λ'])
+
+        ax.step(xvals, yfracsingle, where='post', label='frac (single)',
+                linestyle=':', c=colors[0])
+        ax.step(xvals, yfracprimary, where='post', label='frac (primary)',
+                linestyle='-.', c=colors[0])
+        ax.step(xvals, yfracsecondary, where='post', label='frac (secondary)',
+                linestyle='--', c=colors[0])
+        ax.step(xvals, ytruesingle, where='post', label='true (single)',
+                linestyle='-', c=colors[1])
 
     if brokenx:
         ax.legend(loc='upper left',fontsize='medium')
@@ -94,6 +128,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                  repr(model_number)
     if brokenx:
         outname += '_brokenx'
+
+    if not standardlines:
+        outname += '_fraclines'
 
     if not brokenx:
         if (model_number == 1 or model_number == 2) and not (logx or logy):
@@ -199,6 +236,9 @@ if __name__ == '__main__':
         make_plot(3, Z_2=Z_2, r_pu=22.5)
         make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
         make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+
+    for Z_2 in [0, 0.25, 0.5]:
+        make_plot(3, Z_2=Z_2, r_pu=22.5, standardlines=False)
 
     # Change as a function of r_pu
     for r_pu in [15,17.5,20,22.5,25]:
