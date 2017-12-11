@@ -235,13 +235,13 @@ For a given set of $(\delta_{\rm obs}, M\a)$  and $q$, the searchable distance f
 \end{equation}
 If $\mathrm{BF}$ is independent of $q$, $L\sim M^\alpha$, and $f(q)\sim q^\beta$:
 \begin{equation}
-	{N_d \over N_s^0}
+	\mu = {N_d \over N_s^0}
 	=\frac{{\rm BF}}{1 - {\rm BF}}\cdot {1\over{1+\beta}}\int_0^1 \left(1+q^\alpha\right)^{3/2} q^\beta\mathrm{d}q,
 \end{equation}
 which may be written in a closed form using the hypergeometric function. 
 Integrating by parts and using $u\equiv(1+q^\alpha)^{1/2}$, this reduces to
 \begin{align}
-	{N_d \over N_s^0}
+	\mu = {N_d \over N_s^0}
 	\notag
 	&=\frac{{\rm BF}}{1 - {\rm BF}} \left(1\over{1+\beta}\right)^2
 	\left\{
@@ -541,29 +541,28 @@ qM\a\right)\,
 q^{-1/3} \right]	\right\}.  
 \end{align}
 
-\edit1{MODIFIED UP TO THIS POINT}
-
-\edit2{TODO: follow the above analytics to below limiting cases}
-
 \subsubsection{Simplifying above general result}
-To simplify, drop the explicit $M_a$ and BF 
-dependences, and assume $R\propto M$, so $R(qM_a)/R(M_a) = q$.
-Also, move all superscript numbers to subscripts.
+To simplify, drop the explicit BF dependences, and assume $R\propto M$, so 
+$R(qM_a)/R(M_a) = q$. Also, move all superscript numbers to subscripts.
 Then the apparent rate density is
-\begin{equation}
-\Gamma\a(r\a) = \frac{1}{1+\mu}
-\left(
-    \Gamma_0(r\a) +
-    \mu \left[
-        \int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
-        \Gamma_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
-        +
-        \int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
-        \Gamma_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
-    \right]
-\right).
+\begin{align}
+\notag
+\Gamma\a(r\a,M\a) &= {1\over 1+\mu}\times
+\left\{ \Gamma^0(r\a, M\a)+ 
+\frac{{\rm BF}}{1 - {\rm BF}}
+\left[ \int {\mathrm{d}q \over \mathcal{A}^4}\,f(q)\,\Gamma^1\left({r\a\over 
+    \mathcal{A}}, 
+M\a\right)\,
+\right.   
+\right. \\
+& \quad\quad\quad\quad\quad \left.\left.
++\int {q \mathrm{d}q \over 
+{\mathcal{A}^3\mathcal{B}}}\,f(q)\,\Gamma^2\left({r\a\over 
+    \mathcal{B}}, 
+qM\a\right)\,
+q^{2/3} \right]	\right\}.  
 \label{eq:simple_apparent_occ_rate}
-\end{equation}
+\end{align}
 For the power law case when $L\sim M^\alpha$,
 \begin{equation}
 \mathcal{A}(q)
@@ -579,7 +578,9 @@ For the power law case when $L\sim M^\alpha$,
 
 \subsection{Twin Binary}
 
-We have $f(q)=\delta(q-1)$. The apparent rate density is
+We have $f(q)=\delta(q-1)$. Since all stars have the exact same mass (both 
+true mass and apparent mass), we will drop the $M\a$ dependence.
+The apparent rate density is then
 \begin{align}
 \Gamma\a(r\a)
 ={1\over 1+\mu(\mathrm{BF})}
@@ -591,15 +592,16 @@ We have $f(q)=\delta(q-1)$. The apparent rate density is
 \end{align}
 where
 \begin{equation}
-	\mu(\mathrm{BF})=\int \mathrm{d}q\,f(q) 
-	{\mathrm{BF}\over{1-\mathrm{BF}}}\left[1+{L(qM\a) \over 
-	L(M\a)}\right]^{3/2}
+	\mu(\mathrm{BF})
+   	=\int_0^1 \frac{{\rm BF}}{1 - {\rm BF}}\left[1+{L(qM\a) \over 
+    L(M\a)}\right]^{3/2} f(q)\,\mathrm{d}q
 	=2^{3/2}\cdot{\mathrm{BF}\over{1-\mathrm{BF}}}.
 \end{equation}
 
+
 \subsubsection{Same Planets (Model \# 1)}
 
-If $\Gamma_i(r, M)=Z_i\cdot\delta(r-r_0)$ (all the planets have the same 
+If $\Gamma_i(r)=Z_i\cdot\delta(r-r_0)$ (all the planets have the same 
 radius), by using the identity $\delta(ax+b)=\delta(x+b/a)/|a|$,
 \begin{align}
 	\Gamma\a(r\a)
@@ -621,7 +623,7 @@ $\Gamma\a=(Z^1+Z^2)\,\delta(r\a-{r_0/\sqrt{2}})$.
 
 \subsubsection{Power Law Distribution of Planets}
 
-Imagine instead that we took $\Gamma_i(r,M) = Z_i f(r) = Z_i 
+Imagine instead that we took $\Gamma_i(r) = Z_i f(r) = Z_i 
 r^\delta/\mathcal{N}_r$, for $f(r)$ the radius shape function, 
 $\mathcal{N}_r$ the shape function's normalization, and $Z_i$ the number of 
 planets per star.
@@ -654,7 +656,7 @@ while the true rate density for a volume-limited sample of stars is
 for $n_b$ and $n_s$ the number density of binaries and singles in a 
 volume-limited sample.
 
-The stand-alone term ``true rate density'' is ill defined, and should probably 
+The stand-alone term ``true rate density'' is ill defined, and should 
 be avoided.
 In different contexts, it might refer to either a) 
 $\Gamma_{\rm sel}(r)$, b) $\Gamma_{\rm vl}(r)$, or even c) $\Gamma_0(r)$, the 
@@ -667,6 +669,8 @@ complications of planet formation that would make $Z_1$ or $Z_2$ different
 from $Z_0$.
 One way to deal with this, rather than making the arbitrary choice, would be 
 to just plot out all the possible options.
+In general though, we will give highest preference to $\Gamma_0(r)$, since it 
+can be compared with the results of other surveys.
 
 We could define a ``correction factor'' relative to $\Gamma_0$, or to 
 $\Gamma_{\rm sel}$, or to $\Gamma_{\rm vl}$.
@@ -701,11 +705,13 @@ only the power law matters.
 
 \subsection{Power Law World}
 
-If we assume 
+Now assume $f(q) = q^\beta/\mathcal{N}_q$, for $\mathcal{N}_q$ the 
+normalization.
+As previously noted, if we assume
 \begin{equation}
 	L(M) \sim M^\alpha \sim R^\alpha,
 \end{equation}
-we find 
+we have 
 \begin{equation}
 \mathcal{A}(q)
 =(1+q^\alpha)^{-1/2},
@@ -717,46 +723,58 @@ we find
 This gives a value of $\mu({\rm BF})$ stated in Eq.~\ref{eq:mu_final}.
 Now recall Eq.~\ref{eq:simple_apparent_occ_rate} for the apparent rate 
 density. We restate it here:
-\begin{equation}
-\Gamma\a(r\a) = \frac{1}{1+\mu}
-\left(
-\Gamma_0(r\a) +
-\mu \left[
-\int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
-\Gamma_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
-+
-\int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
-\Gamma_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
-\right]
-\right).
-\end{equation}
+\begin{align}
+\notag
+\Gamma\a(r\a,M\a) &= {1\over 1+\mu}\times
+\left\{ \Gamma^0(r\a, M\a)+ 
+\frac{{\rm BF}}{1 - {\rm BF}}
+\left[ \int {\mathrm{d}q \over \mathcal{A}^4}\,f(q)\,\Gamma^1\left({r\a\over 
+    \mathcal{A}}, 
+M\a\right)\,
+\right.   
+\right. \\
+& \quad\quad\quad\quad\quad \left.\left.
++\int {q \mathrm{d}q \over 
+    {\mathcal{A}^3\mathcal{B}}}\,f(q)\,\Gamma^2\left({r\a\over 
+    \mathcal{B}}, 
+qM\a\right)\,
+q^{2/3} \right]	\right\}.
+\end{align}
+
+Since in this model we will have stars with different masses, it makes more 
+sense to keep the explicit ``$M\a$'' dependence in our equations.
 
 \subsubsection{Same Planets (Model \# 2)}
-For our ``Model \#2'', we again want $\Gamma_i(r) = Z_i \cdot \delta(r-r_0)$.
-To achieve this, write
+For our ``Model \#2'', we assume
 \begin{equation}
-f(q) = \frac{q^\beta (1+q^\alpha)^{3/2}}{\mathcal{N}_q},
+\Gamma_i(r,M) = Z_i \cdot \delta(r-r_0) M^\gamma / \mathcal{N}_M,
 \end{equation}
-for $\mathcal{N}_q$ the normalization.
-For $i=1$, call the integral on the left the $[\ldots]$ ``$I_1$''.
+where $\mathcal{N}_M$ has the correct units to make $Z_i$ dimensionless.
+In most cases we'll take $\gamma=0$, but we'll carry it through the 
+calculations here.
+
+For $i=1$, call the integral on the left of the $[\ldots]$ ``$I_1$''.
 Then
 \begin{align}
-I_1(r_a) &\equiv \int \frac{{\rm d}q}{\mathcal{A}(q)} f(q) 
-    \Gamma_1\left( \frac{r\a}{\mathcal{A}(q)} \right)
+I_1(r\a,M\a) &\equiv \int \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+    \Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right)
     \label{eq:defn_I1}
     \\
 &= \frac{1}{\mathcal{N}_q} \int {\rm d}q\, q^\beta (1+q^\alpha)^2
-    \Gamma_1(r_a (1+q^\alpha)^{1/2})
+    \Gamma_1(r_a (1+q^\alpha)^{1/2}, M\a)
     \\
-&= \frac{Z_1}{\mathcal{N}_q} \int {\rm d}q\, q^\beta (1+q^\alpha)^2
+&= \frac{Z_1 M\a^\gamma}{\mathcal{N}_q \mathcal{N}_M} \int {\rm d}q\, q^\beta 
+(1+q^\alpha)^2
     \delta(r_a (1+q^\alpha)^{1/2} - r_0) \\
-&= \frac{Z_1}{\mathcal{N}_q} \frac{2}{\alpha} \frac{r_0}{r_a^2} 
+&= \frac{Z_1 M\a^\gamma}{\mathcal{N}_q \mathcal{N}_M} \frac{2}{\alpha} 
+\frac{r_0}{r_a^2} 
    \left(\left(\frac{r_0}{r_a}\right)^2 -1
        \right)^{\frac{1-\alpha}{\alpha}}
    \int {\rm d}q\, q^\beta (1+q^\alpha)^2 
        \delta\left( q - \left( \left(\frac{r_0}{r_a}\right)^2 -1
        \right)^{\frac{1}{\alpha}} \right) \\
-&= \frac{Z_1}{\mathcal{N}_q} \frac{2}{\alpha} \frac{r_0}{r_a^2}
+&= \frac{Z_1 M\a^\gamma}{\mathcal{N}_q \mathcal{N}_M} \frac{2}{\alpha} 
+\frac{r_0}{r_a^2}
     \left( \left(\frac{r_0}{r_a}\right)^2 - 1  
     \right)^{\frac{\beta-\alpha+1}{\alpha}}
     \left( \frac{r_0}{r_a}\right)^4.
@@ -771,16 +789,22 @@ and for any function $f(q)$ with a single root $q_i$,
 \begin{equation}
 \delta(f(q)) = \frac{\delta(q-q_i)}{|f'(q_i)|}.
 \end{equation}
-Eq.~\ref{eq:model_2_i_1} is a good unit test for Monte Carlo numerics.
+Eq.~\ref{eq:model_2_i_1} is a good unit test for numerics.
 
 Attempting the same thing for $i=2$,
 \begin{align}
-I_2(r_a) &\equiv \int \frac{q {\rm d}q}{\mathcal{B}(q)} f(q)
-\Gamma_2\left(\frac{r\a}{\mathcal{B}(q)}\right) q^{2/3}
+I_2(r\a,M\a) &\equiv \int \frac{q {\rm d}q}{\mathcal{A}^3\mathcal{B}} f(q)
+\Gamma_2\left(\frac{r\a}{\mathcal{B}}, qM\a\right) q^{2/3}
 \label{eq:defn_I2}
 \\
-&= \frac{Z_2}{\mathcal{N}_q} \int {\rm d}q\,
-    q^{\beta+\frac{8}{3}} 
+&=
+Z_2 \int \frac{q {\rm d}q}{\mathcal{A}^3\mathcal{B}} f(q)
+\delta\left(\frac{r\a}{\mathcal{B}} - r_0\right)
+\frac{(qM\a)^{\gamma}}{\mathcal{N}_M}
+q^{2/3}
+\\
+&= \frac{Z_2 M\a^\gamma}{\mathcal{N}_q\mathcal{N}_M} \int {\rm d}q\,
+    q^{\beta+\gamma+\frac{8}{3}} 
     (1+q^\alpha)^{3/2}
     (1+q^{-\alpha})^{1/2}
     \delta(r_a q (1+q^{-\alpha})^{1/2} - r_0).
@@ -789,9 +813,9 @@ Unfortunately, analytic roots of $r_a q (1+q^{-\alpha})^{1/2} = r_0$ do not
 exist.
 If the roots are found numerically then
 \begin{equation}
-I_2(r_a) = \frac{Z_2}{\mathcal{N}_q}
+I_2(r\a,M\a) = \frac{Z_2}{\mathcal{N}_q}
     \sum_{q_i \in \{{\rm roots}\}}
-q_i^{\beta+\frac{8}{3}} 
+q_i^{\beta+\gamma+\frac{8}{3}} 
 (1+q_i^\alpha)^{3/2}
 (1+q_i^{-\alpha})^{1/2},
 \end{equation}
@@ -799,65 +823,80 @@ but this doesn't really give much insight.
 
 \subsubsection{Power law planets (Model \# 3)}
 
-Power law planets, a realistic mass ratio distribution.
-In other words, now assume
+Power law planets are a slightly more realistic mass ratio distribution.
+If we now assume
 \begin{equation}
-    \Gamma_i(r,M) = Z_i f(r) = Z_i r^\delta / \mathcal{N}_r.
+    \Gamma_i(r,M) = Z_i \times \frac{r^\delta}{\mathcal{N}_r} \times
+    \frac{M^\gamma}{\mathcal{N}_M},
 \end{equation}
-Surprisingly, this might give more insight than Model \#2.
-
+where $Z_i$ is dimensionless, and the normalization constants carry 
+the units (each side has units $[r^{-1} M^{-1}]$).
 From Eq.~\ref{eq:simple_apparent_occ_rate}, we can write
 \begin{equation}
-\Gamma\a(r\a) = \frac{1}{1+\mu} \left(
-\Gamma_0(r\a) + \mu  \left[
-I_1(r_a) + I_2(r_a)
+\Gamma\a(r\a,M\a) = \frac{1}{1+\mu} \left(
+\Gamma_0(r\a,M\a) + \frac{{\rm BF}}{1-{\rm BF}} 
+\left[ I_1(r_a,M\a) + I_2(r_a,M\a)
 \right]
 \right),
 \end{equation}
-where $I_1(r_a)$ and $I_2(r_a)$ are defined in the same way as in 
+where $I_1(r\a,M\a)$ and $I_2(r\a,M\a)$ are defined in the same way as in 
 Eqs.~\ref{eq:defn_I1} and~\ref{eq:defn_I2}.
 Doing the calculation, we find
-\begin{equation}
-I_1(r\a) = \frac{Z_1}{\mathcal{N}_q \mathcal{N}_r} r_a^\delta
-\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta}{2}+2}
-\end{equation}
+\begin{align}
+I_1(r\a,M\a) &= 
+\int \frac{{\rm d}q}{\mathcal{A}} f(q)
+\Gamma^1 \left(\frac{r\a}{\mathcal{A}},M\a\right)
+\\
+&=
+\frac{Z_1}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M} 
+r\a^\delta M\a^\gamma
+\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+1}{2}}
+\end{align}
 and
-\begin{equation}
-I_2(r\a) = \frac{Z_2}{\mathcal{N}_q \mathcal{N}_r} r_a^\delta
-\int {\rm d}q\,q^{\beta+\delta+\frac{8}{3}} 
+\begin{align}
+I_2(r\a,M\a) &=
+\int \frac{q\,{\rm d}q}{\mathcal{A}^3 \mathcal{B}} f(q)
+\Gamma^2 \left(\frac{r\a}{\mathcal{B}},qM\a\right)
+\\
+&= \frac{Z_2}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M} 
+r\a^\delta M\a^\gamma
+\int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{8}{3}} 
                (1+q^\alpha)^{\frac{3}{2}}
                (1+q^{-\alpha})^{\frac{\delta+1}{2}}.
-\end{equation}
+\end{align}
 The net effect of binarity is to just {\it scale} the overall distribution!
 
-Note that the true rate density for the selected stars is
-\begin{equation}
-\Gamma_{\rm sel}(r) = \frac{r^\delta}{\mathcal{N}_r} \left[
-\frac{Z_0}{1+2\mu} + \frac{\mu}{1+2\mu} (Z_1+Z_2)
-\right].
-\end{equation}
-The correction factor with respect to selected stars, $X_\Gamma = 
-\Gamma\a/\Gamma_{\rm sel}$, will be
+Note that the true rate density for a volume-limited sample is
 \begin{align}
-X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_{\rm sel}(r)} 
-\right|_{r_a\rightarrow r,\ Z_i{\rm 's\ equal}} \\
+\Gamma_{\rm vl}(r,M) &= \frac{r^\delta M^\gamma}{\mathcal{N}_r\mathcal{N}_M} 
+\left[
+\frac{Z_0}{1+2(n_b/n_s)} + \frac{(n_b/n_s)}{1+2(n_b/n_s)} (Z_1+Z_2)
+\right] \\
+&= \frac{r^\delta M^\gamma Z_0}{\mathcal{N}_r\mathcal{N}_M}
+\quad\quad ({\rm assuming}\ Z_0=Z_1=Z_2),
+\end{align}
+which when $Z_0=Z_1=Z_2$ is equal to $\Gamma_0$, and $\Gamma_{\rm sel}$.
+The correction factor with respect to single stars, $X_\Gamma = 
+\Gamma\a/\Gamma_0$, is then
+\begin{align}
+X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)} 
+\right|_{r\a\rightarrow r,\ M\a\rightarrow M,\ Z_i{\rm 's\ equal}} \\
 &=
-\frac{1+2\mu}{3(1+\mu)}
-\left[1 + \mu
+\frac{1}{1+\mu}
+\left[1 + \frac{2}{\mathcal{N}_q} \frac{{\rm BF}}{1-{\rm BF}}
 \left(
-\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta}{2}+2} +
-\int {\rm d}q\,q^{\beta+\delta+\frac{8}{3}} 
+\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+1}{2}} +
+\int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{8}{3}} 
     (1+q^\alpha)^{\frac{3}{2}}
     (1+q^{-\alpha})^{\frac{\delta+1}{2}}
 \right)\right].
 \end{align}
 
-For $\alpha = 3.5$, $\beta=0$, $\delta=-2.92$, the term in $(\ldots)\approx 
-1.41425 \approx \sqrt{2}$, where the latter surprising numerical fluke holds 
-to the first four decimal places.
-For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_{\rm sel} = 1.28$, an 
-apparent rate which is {\it higher} than the true rate by 28\%!
-Note that this result is the same as $\Gamma\a/\Gamma0$ and 
+For $\alpha = 3.5$, $\beta=0$, $\gamma=0$, $\delta=-2.92$, the sum of the 
+integrals in $(\ldots)\approx 1.16393$. %171211_model_integrals.nb
+For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.36$, an 
+apparent rate which is {\it higher} than the true rate by 36\%!
+Note that this result is the same as $\Gamma\a/\Gamma_{\rm sel}$ and 
 $\Gamma\a/\Gamma_{\rm vl}$ in the limit where all the $Z_i$'s are equal.
 
 More realistically, we'll take a power law above some cutoff (to avoid the 
