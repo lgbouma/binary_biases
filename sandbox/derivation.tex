@@ -844,13 +844,13 @@ Eqs.~\ref{eq:defn_I1} and~\ref{eq:defn_I2}.
 Doing the calculation, we find
 \begin{align}
 I_1(r\a,M\a) &= 
-\int \frac{{\rm d}q}{\mathcal{A}} f(q)
+\int \frac{{\rm d}q}{\mathcal{A}^4} f(q)
 \Gamma^1 \left(\frac{r\a}{\mathcal{A}},M\a\right)
 \\
 &=
 \frac{Z_1}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M} 
 r\a^\delta M\a^\gamma
-\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+1}{2}}
+\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+4}{2}}
 \end{align}
 and
 \begin{align}
@@ -883,9 +883,9 @@ X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)}
 \right|_{r\a\rightarrow r,\ M\a\rightarrow M,\ Z_i{\rm 's\ equal}} \\
 &=
 \frac{1}{1+\mu}
-\left[1 + \frac{2}{\mathcal{N}_q} \frac{{\rm BF}}{1-{\rm BF}}
+\left[1 + \frac{1}{\mathcal{N}_q} \frac{{\rm BF}}{1-{\rm BF}}
 \left(
-\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+1}{2}} +
+\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+4}{2}} +
 \int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{8}{3}} 
     (1+q^\alpha)^{\frac{3}{2}}
     (1+q^{-\alpha})^{\frac{\delta+1}{2}}
@@ -893,9 +893,9 @@ X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)}
 \end{align}
 
 For $\alpha = 3.5$, $\beta=0$, $\gamma=0$, $\delta=-2.92$, the sum of the 
-integrals in $(\ldots)\approx 1.16393$. %171211_model_integrals.nb
-For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.36$, an 
-apparent rate which is {\it higher} than the true rate by 36\%!
+integrals in $(\ldots)\approx 1.41425$. %171211_model_integrals.nb
+For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.01448$, an 
+apparent rate which is {\it higher} than the true rate by 1.4\%!
 Note that this result is the same as $\Gamma\a/\Gamma_{\rm sel}$ and 
 $\Gamma\a/\Gamma_{\rm vl}$ in the limit where all the $Z_i$'s are equal.
 
