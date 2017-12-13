@@ -907,6 +907,206 @@ need to write a different argument about whether binarity might explain the HJ
 rate discrepancy (apparently, it goes the wrong way!)
 
 
+\subsubsection{Constant rate density of planets}
+Combining a power law distribution with a constant below some minimum radius 
+would be reasonable (Model \#3).
+Here, we'll have
+\begin{align}
+\notag
+\Gamma_i(r,M) &= Z_i \times \frac{r^\delta}{\mathcal{N}_r} \times
+\frac{M^\gamma}{\mathcal{N}_M}\quad\quad (r>r_\ell),\\
+&= Z_i \times \frac{r_\ell^\delta}{\mathcal{N}_r} \times
+\frac{M^\gamma}{\mathcal{N}_M}\equiv c_\ell \quad\quad (r<r_\ell).
+\end{align}
+
+Once again,
+\begin{equation}
+\Gamma\a(r\a,M\a) = \frac{1}{1+\mu} \left(
+\Gamma_0(r\a,M\a) + \frac{{\rm BF}}{1-{\rm BF}} 
+\left[ I_1(r_a,M\a) + I_2(r_a,M\a)
+\right]
+\right).
+\end{equation}
+At $r\a>r_\ell$, the integrals $I_1(r\a,M\a)$ and $I_2(r\a,M\a)$ are given by 
+Eqs.~\ref{eq:I_1_powerlaw_r} and~\ref{eq:I_2_powerlaw_r} respectively.
+\paragraph{Case $i=1$:}
+At $r\a<r_\ell$, they can be evaluated as follows:
+\begin{align}
+I_1(r\a,M\a) &\equiv \int \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+\Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right) \\
+&=
+\int_{r\a/\mathcal{A}>r_\ell} \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+\Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right)
++
+\int_{r\a/\mathcal{A}<r_\ell} \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+\Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right) \\
+&=
+\int_{q_\ell(r\a)}^1 \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+\Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right)
++
+\int_{0}^{q_\ell(r\a)} \frac{{\rm d}q}{\mathcal{A}^4} f(q) 
+\Gamma_1\left( \frac{r\a}{\mathcal{A}}, M\a \right) \\
+&=
+\frac{Z_1 r\a^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M} 
+\int_{q_\ell(r\a)}^1 {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+4}{2}}
++ 
+\frac{Z_1 r_\ell^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M} 
+\int_0^{q_\ell(r\a)} {\rm d}q\, 
+(1+q^\alpha)^2 q^\beta,
+\end{align}
+where $q_\ell(r\a)$ is found by inverting $r\a/\mathcal{A}=r_\ell$:
+\begin{equation}
+q_\ell(r\a) = \left(\left(\frac{r_\ell}{r\a}\right)^2 - 
+1\right)^{\frac{1}{\alpha}}.
+\end{equation}
+
+\paragraph{Case $i=2$:}
+For $i=2$, the situation is slightly more complicated. I will specify that 
+$\alpha=3.5$, or else the existence of different classes of minima in 
+$r\a/\mathcal{B}=r_\ell$ might confuse the matter.
+If so, then there are two subcases.
+\textit{For subcase \#1,} $\left(\frac{r_\ell}{r\a}\right)^2 > 2$. Then
+\begin{align}
+I_2(r\a,M\a) &=
+\int \frac{q^{5/3}\,{\rm d}q}{\mathcal{A}^3 \mathcal{B}} f(q)
+\Gamma^2 \left(\frac{r\a}{\mathcal{B}},qM\a\right) \\
+&=
+\int_0^{q_{\ell,1}(r\a)} (\ldots)
++
+\int_{q_{\ell,1}(r\a)}^{q_t} (\ldots)
++
+\int_{q_t}^{1} (\ldots)
+\label{eq:intermed_q}\\
+&=
+\int_0^{q_{\ell,1}(r\a)} (\ldots)
++
+\int_{q_{\ell,1}(r\a)}^{1} (\ldots),
+\end{align}
+where $(\ldots)$ indicates the same integrand as in the first line.
+Here, $q_t$ is the turning point of $q^2(1+q^{-\alpha})$ (see 
+Figs.~\ref{fig:func_of_q_0} and~\ref{fig:func_of_q_1}),
+and $q_{\ell,1}(r\a)$ is the sole root of
+\begin{equation}
+q^2 (1+q^{-\alpha}) = \left(\frac{r_\ell}{r\a}\right)^2,
+\end{equation} 
+which must be found numerically.
+In Eq~\ref{eq:intermed_q}, the left-most term has $r\a/\mathcal{B} > r_\ell$, 
+while the right two terms have $r\a/\mathcal{B} < r_\ell$ (and so they can be 
+safely merged).
+Simplifying,
+\begin{align}
+\notag
+I_2(r\a,M\a) &= 
+    \frac{1}{\mathcal{N}_q}
+    \int_0^{q_{\ell,1}(r\a)} 
+    {\rm d}q\, q^{8/3} (1+q^\alpha)^{3/2} q^\beta
+    \Gamma^2 \left(\frac{r\a}{\mathcal{B}},qM\a\right)
+    \\
+&\quad\quad\quad+
+\frac{1}{\mathcal{N}_q}
+\int_{q_{\ell,1}(r\a)}^{1}
+    {\rm d}q\, q^{8/3} (1+q^\alpha)^{3/2} q^\beta
+    \Gamma^2 \left(\frac{r\a}{\mathcal{B}},qM\a\right),
+\end{align}
+and plugging in the rate densities, we get
+\begin{align}
+\notag
+I_2(r\a,M\a) &= 
+\frac{Z_2 r\a^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M}
+\int_0^{q_{\ell,1}(r\a)} 
+{\rm d}q\,
+q^{\beta+\gamma+\delta+\frac{8}{3}} 
+(1+q^\alpha)^{\frac{3}{2}}
+(1+q^{-\alpha})^{\frac{\delta+1}{2}}
+\\
+&\quad\quad\quad+
+\frac{Z_2 r_\ell^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M}
+\int_{q_{\ell,1}(r\a)}^{1}
+{\rm d}q\, q^{\beta + \gamma + \frac{8}{3}} (1+q^\alpha)^{3/2} 
+(1+q^{-\alpha})^{\frac{1}{2}}.
+\quad\quad \left({\rm for}\ \left(\frac{r_\ell}{r\a}\right)^2 > 2\right)
+\end{align}
+
+\textit{For subcase \#2,} if $q_t^2 (1+q_t^{-\alpha}) < 
+\left(\frac{r_\ell}{r\a}\right)^2 < 2 $,
+then there are two roots, $q_{\ell,1}$ (which is $<q_t$) and $q_{\ell,2}$ 
+(which is $>q_t$). Each must be found 
+numerically. Their existence makes the integrals silly:
+\begin{align}
+I_2(r\a,M\a) &=
+\int \frac{q^{5/3}\,{\rm d}q}{\mathcal{A}^3 \mathcal{B}} f(q)
+\Gamma^2 \left(\frac{r\a}{\mathcal{B}},qM\a\right) \\
+&=
+\int_0^{q_{\ell,1}(r\a)} (\ldots)
++
+\int_{q_{\ell,1}(r\a)}^{q_t} (\ldots)
++
+\int_{q_t}^{q_{\ell,2}(r\a)} (\ldots)
++
+\int_{q_{\ell,2}(r\a)}^1 (\ldots)
+\\
+&=
+\int_0^{q_{\ell,1}(r\a)} (\ldots)
++
+\int_{q_{\ell,1}(r\a)}^{q_{\ell,2}(r\a)} (\ldots)
++
+\int_{q_{\ell,2}(r\a)}^1 (\ldots),
+\end{align}
+where the left and right-most terms have $r\a/\mathcal{B}>r_\ell$, and the 
+center term has $r\a/\mathcal{B}<r_\ell$.
+Numerically, $q_t = 0.9210924370$ and 
+$q_t^2(1+q^{-\alpha})=1.9796263301$.
+
+Plugging in the rate densities, we get
+\begin{align}
+\notag
+I_2(r\a,M\a) &=
+\frac{Z_2 r\a^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M}
+\int_0^{q_{\ell,1}(r\a)} 
+{\rm d}q\,
+q^{\beta+\gamma+\delta+\frac{8}{3}} 
+(1+q^\alpha)^{\frac{3}{2}}
+(1+q^{-\alpha})^{\frac{\delta+1}{2}}
+\\
+\notag
+&\quad\quad\quad+
+\frac{Z_2 r_\ell^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M}
+\int_{q_{\ell,1}(r\a)}^{q_{\ell,2}(r\a)}
+{\rm d}q\, q^{\beta + \gamma + \frac{8}{3}} (1+q^\alpha)^{3/2} 
+(1+q^{-\alpha})^{\frac{1}{2}}
+\\
+\notag
+&\quad\quad\quad+
+\frac{Z_2 r\a^\delta M\a^\gamma}{\mathcal{N}_q \mathcal{N}_r \mathcal{N}_M}
+\int_{q_{\ell,2}(r\a)}^1
+{\rm d}q\,
+q^{\beta+\gamma+\delta+\frac{8}{3}} 
+(1+q^\alpha)^{\frac{3}{2}}
+(1+q^{-\alpha})^{\frac{\delta+1}{2}}
+\\
+&\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
+\ldots\ {\rm for}\ q_t^2 
+(1+q_t^{-\alpha}) < 
+\left(\frac{r_\ell}{r\a}\right)^2 < 2.
+\end{align}
+
+This should actually be enough to integrate semi-analytically with a computer.
+
+
+\begin{figure}[!th]
+    \centering
+    \includegraphics[width=.7\textwidth]{funcq_of_q_0.png}
+    \caption{For $\alpha=3.5$, there is a single minimum of $q^2 
+    (1+q^{-\alpha})$.}
+    \label{fig:func_of_q_0}
+\end{figure}
+\begin{figure}[!th]
+    \centering
+    \includegraphics[width=.7\textwidth]{funcq_of_q_1.png}
+    \caption{For $\alpha=3.5$, there is a single minimum of $q^2 
+        (1+q^{-\alpha})$.}
+    \label{fig:func_of_q_1}
+\end{figure}
 
 \newpage
 \bibliographystyle{yahapj}                            
