@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 '''
 visualize the selected and searchable volumes for single stars and twin
 binaries.
 '''
+# -*- coding: utf-8 -*-
 from __future__ import division, print_function
 from matplotlib import rc
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
@@ -54,10 +54,7 @@ def make_sphere(radius, txt, ax, ind):
     x1, y1, _ = proj3d.proj_transform(-2**(-3/2)*radius, 2**(-3/2)*radius, 0,
                                       ax.get_proj())
     #beginning of arrow
-    if ind == 2: #nb top-right
-        prefactor = 1
-    else:
-        prefactor = 1
+    prefactor = 1.2 if ind != 2 else 1
     x2, y2, _ = proj3d.proj_transform(-prefactor*radius, 1*radius, 1*radius, ax.get_proj())
 
     ann = ax.annotate(
@@ -77,16 +74,15 @@ def make_sphere(radius, txt, ax, ind):
     ax.patch.set_alpha(0.) # make background transparent
 
 
-fig = plt.figure(figsize=(4,5.5))
+fig = plt.figure(figsize=(4,4))
 
-inds = [1,2,3,4,5,6]
-radii = [1, 2**(1/2), 1/2, 2**(-1/2), 1, 2**(-1/2)]
-txts = ['$d_0$', '$\sqrt{2}d_0$', '$d_0/2$',
-        '$d_0/\sqrt{2}$', '$d_0$', '$d_0/\sqrt{2}$']
+inds = [1,2,3,4]
+radii = [1, 2**(1/2), 1, 2**(-1/2)]
+txts = ['$1$', '$\sqrt{2}$', '$1$', '$1/\sqrt{2}$']
 
 for ind, r, txt in zip(inds, radii, txts):
 
-    ax = fig.add_subplot(3,2,ind,projection='3d')
+    ax = fig.add_subplot(2,2,ind,projection='3d')
 
     make_sphere(r, txt, ax, ind)
 
@@ -97,12 +93,10 @@ ax.text2D(.3, .05, 'single stars', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
 ax.text2D(.7, .05, 'twin binaries', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
-ax.text2D(.05, .79, '$r_{\mathrm{a}}=r_p$', transform=fig.transFigure,
+ax.text2D(.05, .3, 'searchable', transform=fig.transFigure,
      fontsize='large', va='center', ha='left', rotation=90)
-ax.text2D(.05, .5, '$r_{\mathrm{a}}=r_p/\sqrt{2}$', transform=fig.transFigure,
+ax.text2D(.05, .7, 'selected', transform=fig.transFigure,
         fontsize='large', va='center', ha='left', rotation=90)
-ax.text2D(.05, .21, '$r=r_p$', transform=fig.transFigure,
-     fontsize='large', va='center', ha='left', rotation=90)
 
 fig.savefig('../results/visualize_volumes.pdf', dpi=300,
         bbox_inches='tight', transparent=True)
