@@ -455,7 +455,7 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
     return Γ_a, Γ_0
 
 
-def get_apparent_radius_grid(model_number):
+def get_apparent_radius_grid(model_number, slowrun=False):
 
     if model_number == 1:
         r_a_grid = np.array([2**(-1/2),1])
@@ -464,10 +464,16 @@ def get_apparent_radius_grid(model_number):
         r_a_grid = np.arange(5e-3,1+5e-3,5e-3)
 
     elif model_number in [5]:
-        r_a_grid = np.arange(1e-2,r_pu+1e-2,1e-2)
+        if not slowrun:
+            r_a_grid = np.arange(1e-2,r_pu+1e-2,1e-2)
+        elif slowrun:
+            r_a_grid = np.arange(1e-2,r_pu+1e-2,1e-2)
 
     elif model_number in [3, 4, 6]:
-        r_a_grid = np.arange(1e-1,r_pu+1e-1,1e-1)
+        if not slowrun:
+            r_a_grid = np.arange(1e-1,r_pu+1e-1,1e-1)
+        elif slowrun:
+            r_a_grid = np.arange(2e-2,r_pu+2e-2,2e-2)
 
     return r_a_grid
 
@@ -554,6 +560,8 @@ if __name__ == '__main__':
         help='BF = n_b/(n_s+n_b), for n number density')
     parser.add_argument('-rpu', '--upperradiuscutoff', type=float, default=None,
         help='the maximum allowed planet radius in units of Rearth')
+    parser.add_argument('-sr', '--slowrun', action='store_true', default=False,
+        help='use --slowrun if you want models to run high-resoln models.')
 
     args = parser.parse_args()
 
@@ -565,7 +573,7 @@ if __name__ == '__main__':
 
     M_a_grid = np.array([1.0])
 
-    r_a_grid = get_apparent_radius_grid(model_number)
+    r_a_grid = get_apparent_radius_grid(model_number, args.slowrun)
 
     Γ_a, Γ_0 = get_apparent_rate_density(r_a_grid, M_a_grid, model_number)
 
