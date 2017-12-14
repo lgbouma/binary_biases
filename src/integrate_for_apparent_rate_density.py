@@ -90,10 +90,8 @@ def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None):
         g_of_q = r - r_0
         for i, eps in enumerate(np.diff(q_grid)):
             g_prime_of_q = (g_of_q[i+1] - g_of_q[i])/eps
-        #TODO: EVALUATING THIS IS MAYBE WORTH DOING, BUT I'M NOT SURE. THE
-        #ALTERNATIVE IS JUST PLOTTING UP MY ANALYTICS FOR I_1, AND SAYING THAT
-        #IDK HOW TO TAKE A NUMERICAL DERIVATIVE AND/OR ROOT-FIND FOR I_2.
-        # find root(s)(?)
+        #TODO: I currently don't know how to take this numerical derivative
+        #and/or root-find in a reliable way for this.
         _ = np.argmin( abs(g_of_q) )
         Γ_1 = Z_1/prefactor * (np.isclose(r,r_0,atol=1e-10)).astype(int)
 
@@ -123,7 +121,7 @@ def Gamma_2(r, M, Z_2, model_number, prefactor=None, norm_r=None):
 
     elif model_number == 2:
         raise NotImplementedError
-    #NOTE same story as for Gamma_1, except now the multiple roots matters.
+        #same story as for Gamma_1, except now the multiple roots matters.
 
     elif model_number == 3:
         f_r = np.minimum( r**δ, r_pl**δ )
@@ -315,10 +313,11 @@ def run_unit_tests(
                 Γ_0[sel_inds] + BF/(1-BF)*(I_1 + I_2)
               )
 
-        assert np.all(np.isclose(
-            Γ_a[sel_inds][r_a < r_pl*2**(-1/2)],
-            Γ_a_from_math[r_a < r_pl*2**(-1/2)],
-            rtol=5e-6))
+        if Z_0 == Z_1 == Z_2:
+            assert np.all(np.isclose(
+                Γ_a[sel_inds][r_a < r_pl*2**(-1/2)],
+                Γ_a_from_math[r_a < r_pl*2**(-1/2)],
+                rtol=5e-6))
 
 
     elif model_number == 5:
@@ -505,6 +504,8 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
         prob_r[(r_grid > 1.5) & (r_grid < 2)] = 0
         norm_r = trapz(prob_r, r_grid)
+    elif model_number == 1:
+        norm_r = 1
 
     A_q = A(q)
     B_q = B(q)
@@ -531,8 +532,8 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
 def write_output(df):
 
     savdir = '../data/numerics/'
-    outname = 'integrate_model_{:d}_Zsub2_{:.2f}.out'.format(
-            model_number, Z_2
+    outname = 'integrate_model_{:d}_Zsub2_{:.2f}_rpu_{:.2f}.out'.format(
+            model_number, Z_2, r_pu
             )
     df.to_csv(savdir+outname, index=False)
     print('saved to {:s}'.format(savdir+outname))

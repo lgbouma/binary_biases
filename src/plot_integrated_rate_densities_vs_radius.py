@@ -42,8 +42,8 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     plt.close('all')
 
     # Make summary plot
-    fname = '../data/numerics/integrate_model_{:d}_Zsub2_{:.2f}.out'.format(
-            model_number, Z_2)
+    fname = '../data/numerics/integrate_model_{:d}_Zsub2_{:.2f}_rpu_{:.2f}.out'.format(
+            model_number, Z_2, r_pu)
 
     df = pd.read_csv(fname)
 
@@ -205,14 +205,33 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
 if __name__ == '__main__':
 
-    make_plot(2, logy=True, Z_2=0.5)
-    make_plot(5, logx=True, logy=True, Z_2=0.5)
-    make_plot(6, logx=True, logy=True, Z_2=0.5)
+    #note: not running
+    #make_plot(2, logy=True, Z_2=0.5, r_pu=1)
 
-    make_plot(3, Z_2=0.5)
-    make_plot(3, withtext=True, Z_2=0.5)
-    make_plot(3, logx=False, logy=True, Z_2=0.5)
-    make_plot(3, logx=True, logy=True, Z_2=0.5)
+    make_plot(5, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    make_plot(6, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(4, Z_2=0.5, xcut=True)
-    make_plot(4, logy=True, Z_2=0.5, xcut=True)
+    make_plot(3, Z_2=0.5, r_pu=22.5)
+    make_plot(3, withtext=True, Z_2=0.5, r_pu=22.5)
+    make_plot(3, logx=False, logy=True, Z_2=0.5, r_pu=22.5)
+    make_plot(3, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+
+    make_plot(4, Z_2=0.5, xcut=True, r_pu=22.5)
+    make_plot(4, logy=True, Z_2=0.5, xcut=True, r_pu=22.5)
+
+    # Change as a function of Z_2/Z_0
+    for Z_2 in [0, 0.25]:
+        make_plot(3, Z_2=Z_2, r_pu=22.5)
+        make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
+        make_plot(3, logx=True, logy=True, Z_2=Z_2, r_pu=22.5)
+        make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+
+    # Change as a function of r_pu
+    for r_pu in [15,17.5,20,22.5,25]:
+        make_plot(3, Z_2=0.5, r_pu=r_pu)
+        make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
+        make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
+
+    # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
+    # discrepancy" do you get?
+    make_plot(3, withtext=True, stdout=True, Z_2=0, r_pu=15)
