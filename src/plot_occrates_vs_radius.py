@@ -46,6 +46,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     '''
 
     assert Z_2 > -1
+    Z_0 = 0.5
 
     plt.close('all')
 
@@ -111,9 +112,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius, $r$ [$R_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('planets per star, $\Lambda$', fontsize='large')
+    ax.set_ylabel('number of planets per star, $\Lambda$', fontsize='large')
 
     if logx:
         ax.set_xscale('log')
@@ -198,7 +199,6 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             outname += '_withtext'
 
         else:
-            Z_0 = 0.5
             txt = '$Z_2/Z_0 =\ ${:.1f}'.format(Z_2/Z_0)
             ax.text(0.96,0.5,txt,horizontalalignment='right',
                     verticalalignment='center',

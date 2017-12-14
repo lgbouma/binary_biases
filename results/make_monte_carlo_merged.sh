@@ -39,16 +39,3 @@ pdftk \
   occ_rate_vs_radius_model_3_withtext_Zsub2_0.50_rpu_22.5.pdf \
   occ_rate_vs_radius_model_3_withtext_Zsub2_0.50_rpu_25.0.pdf \
   output rates_monte_carlo_fn_of_rpu.pdf
-
-
-
-# OUTDATED: "error cases" plots.
-
-#pdftk \
-#  errcases_rate_density_vs_radius_model_1_brokenx.pdf \
-#  errcases_rate_density_vs_radius_model_2.pdf \
-#  errcases_rate_density_vs_radius_logs_model_2.pdf \
-#  errcases_rate_density_vs_radius_model_3_Zsub2_0.5.pdf \
-#  errcases_rate_density_vs_radius_logs_model_3_Zsub2_0.5.pdf \
-#  errcases_rate_density_vs_radius_model_3_withtext_Zsub2_0.5.pdf \
-#  output errcases_merged.pdf

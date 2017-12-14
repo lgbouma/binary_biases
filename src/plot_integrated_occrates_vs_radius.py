@@ -15,7 +15,7 @@ pgf_with_custom_preamble = {
 mpl.rcParams.update(pgf_with_custom_preamble)
 
 import matplotlib.pyplot as plt, pandas as pd, numpy as np
-from scipy.integrate import trapz
+from scipy import integrate
 
 from brokenaxes import brokenaxes
 
@@ -41,6 +41,12 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     plt.close('all')
 
+    # Make summary plot
+    fname = '../data/numerics/integrate_model_{:d}_Zsub2_{:.2f}_rpu_{:.2f}.out'.format(
+            model_number, Z_2, r_pu)
+
+    df = pd.read_csv(fname)
+
     if not brokenx:
         f, ax = plt.subplots(figsize=(4,4))
     else:
@@ -54,12 +60,6 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 despine=True)
         ax=bigax
 
-    # Make summary plot
-    fname = '../data/numerics/integrate_model_{:d}_Zsub2_{:.2f}_rpu_{:.2f}.out'.format(
-            model_number, Z_2, r_pu)
-
-    df = pd.read_csv(fname)
-
     if model_number in [1,2]:
         xvals = np.array(df['r'])
         yinferred = np.array(df['Γ_a'])
@@ -71,14 +71,33 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         xsingle = xvals
         ytruesingle = np.array(df['Γ_0'])
 
+        delta_r = 0.5 if model_number != 4 else 0.25
+
+        bin_lefts = np.arange(0, max(xvals)+delta_r, delta_r)
+        bin_pairs = list(zip(bin_lefts, bin_lefts + delta_r))
+        Λinferred, Λtruesingle = np.array([]), np.array([])
+        for bin_pair in bin_pairs:
+            inds = (xvals > bin_pair[0]) & (xvals < bin_pair[1])
+            Λinferred = np.append(
+                        Λinferred, integrate.trapz(yinferred[inds], xvals[inds])
+                        )
+            Λtruesingle = np.append(
+                        Λtruesingle, integrate.trapz(ytruesingle[inds], xvals[inds])
+                        )
+
+        yinferred = Λinferred
+        ytruesingle = Λtruesingle
+        xvals = bin_lefts
+
+
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
     c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
 
     if not many_Zs:
-        ax.plot(xvals, yinferred, label='inferred', c=colors[0])
+        ax.step(xvals, yinferred, label='inferred', c=colors[0], where='post')
     else:
-        ax.plot(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=colors[0])
+        ax.step(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+            Z_2/Z_0), c=colors[0], where='post')
 
     if many_Zs:
         for ind, Z_2 in enumerate([0.25,0]):
@@ -90,23 +109,39 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             xvals = np.array(df['r'])
             yinferred = np.array(df['Γ_a'])
 
+            delta_r = 0.5 if model_number != 4 else 0.25
+
+            bin_lefts = np.arange(0, max(xvals)+delta_r, delta_r)
+            bin_pairs = list(zip(bin_lefts, bin_lefts + delta_r))
+            Λinferred = np.array([])
+            for bin_pair in bin_pairs:
+                inds = (xvals > bin_pair[0]) & (xvals < bin_pair[1])
+                Λinferred = np.append(
+                            Λinferred, integrate.trapz(yinferred[inds], xvals[inds])
+                            )
+
+            yinferred = Λinferred
+            xvals = bin_lefts
+
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            ax.plot(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=c[ind], linestyle=ls[ind])
-
+            ax.step(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+            Z_2/Z_0), c=c[ind], linestyle=ls[ind], where='post')
 
     if standardlines:
 
-        ax.plot(xsingle, ytruesingle, label='true (singles)', linestyle='-',
-                c=colors[1])
+        ax.step(xvals, ytruesingle, where='post', label='true (singles)',
+                linestyle='-', c=colors[1])
 
-    ax.legend(loc='best',fontsize='medium')
+    if brokenx:
+        ax.legend(loc='upper left',fontsize='medium')
+    else:
+        ax.legend(loc='best',fontsize='medium')
 
     ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('rate density, $\Gamma$ [$r_\oplus^{-1}$]', fontsize='large')
+    ax.set_ylabel('number of planets per star, $\Lambda$', fontsize='large')
 
     if logx:
         ax.set_xscale('log')
@@ -114,16 +149,16 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ax.set_yscale('log')
 
     if logy and not logx:
-        outname = '../results/int_rate_density_vs_radius_logy_model_'+\
+        outname = '../results/int_occ_rate_vs_radius_logy_model_'+\
                  repr(model_number)
     elif not logy and logx:
-        outname = '../results/int_rate_density_vs_radius_logx_model_'+\
+        outname = '../results/int_occ_rate_vs_radius_logx_model_'+\
                  repr(model_number)
     elif logx and logy:
-        outname = '../results/int_rate_density_vs_radius_logs_model_'+\
+        outname = '../results/int_occ_rate_vs_radius_logs_model_'+\
                  repr(model_number)
     else:
-        outname = '../results/int_rate_density_vs_radius_model_'+\
+        outname = '../results/int_occ_rate_vs_radius_model_'+\
                  repr(model_number)
     if brokenx:
         outname += '_brokenx'
@@ -142,6 +177,8 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     if model_number == 3:
         # Assess HJ rate difference.
+        from scipy.integrate import trapz
+
         #Howard 2012 boundary #1 and boundary #2:
         for lower_bound in [5.6,8]:
             inds = df['r'] > lower_bound
@@ -208,6 +245,8 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
 
 if __name__ == '__main__':
+
+    Z_0 = 0.5
 
     #note: not running
     #make_plot(2, logy=True, Z_2=0.5, r_pu=1)
