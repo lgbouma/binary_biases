@@ -121,10 +121,10 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ax.set_yscale('log')
 
     if logx or logy:
-        outname = '../results/rate_density_vs_radius_logs_model_'+\
+        outname = '../results/occ_rate_vs_radius_logs_model_'+\
                  repr(model_number)
     else:
-        outname = '../results/rate_density_vs_radius_model_'+\
+        outname = '../results/occ_rate_vs_radius_model_'+\
                  repr(model_number)
     if brokenx:
         outname += '_brokenx'
