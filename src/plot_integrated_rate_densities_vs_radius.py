@@ -65,7 +65,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         yinferred = np.array(df['Γ_a'])
         xsingle = np.append(xvals,1)
         ytruesingle = np.append(np.array(df['Γ_0']), 0)
-    elif model_number in [3,4,5,6]:
+    elif model_number in [3,4,5,6,7]:
         xvals = np.array(df['r'])
         yinferred = np.array(df['Γ_a'])
         xsingle = xvals
@@ -102,7 +102,10 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ax.plot(xsingle, ytruesingle, label='true (singles)', linestyle='-',
                 c=colors[1])
 
-    ax.legend(loc='best',fontsize='medium')
+    if model_number != 7:
+        ax.legend(loc='best',fontsize='medium')
+    else:
+        ax.legend(loc='upper left',fontsize='small')
 
     ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
 
@@ -140,7 +143,12 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     if xcut:
         ax.set_xlim([-0.3,5.3])
 
-    if model_number == 3:
+    if model_number == 3 or model_number==7:
+        Z_2 = 0.0
+        fname = '../data/numerics/integrate_model_{:d}_Zsub2_{:.2f}_rpu_{:.2f}.out'.format(
+                model_number, Z_2, r_pu)
+        df = pd.read_csv(fname)
+
         # Assess HJ rate difference.
         #Howard 2012 boundary #1 and boundary #2:
         for lower_bound in [5.6,8]:
@@ -186,17 +194,17 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                     transform=ax.transAxes, fontsize='x-small')
             outname += '_withtext'
 
-        else:
+        elif model_number==3:
             txt = '$Z_2/Z_0 =\ ${:.1f}'.format(Z_2/Z_0)
             ax.text(0.96,0.5,txt,horizontalalignment='right',
                     verticalalignment='center',
                     transform=ax.transAxes, fontsize='x-small')
 
-        if (isinstance(Z_2,float) or isinstance(Z_2,int)) and not many_Zs:
-            outname += '_Zsub2_{:.2f}'.format(Z_2)
-
         if isinstance(r_pu,float) or isinstance(r_pu,int):
             outname += '_rpu_{:.1f}'.format(r_pu)
+
+    if (isinstance(Z_2,float) or isinstance(Z_2,int)) and not many_Zs:
+        outname += '_Zsub2_{:.2f}'.format(Z_2)
 
     if xcut:
         outname += '_xcut'
@@ -212,34 +220,36 @@ if __name__ == '__main__':
     #note: not running
     #make_plot(2, logy=True, Z_2=0.5, r_pu=1)
 
-    make_plot(5, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
-    make_plot(6, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(5, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(6, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(3, Z_2=0.5, r_pu=22.5)
-    make_plot(3, withtext=True, Z_2=0.5, r_pu=22.5)
-    make_plot(3, logx=False, logy=True, Z_2=0.5, r_pu=22.5)
-    make_plot(3, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, withtext=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, logx=False, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(4, Z_2=0.5, xcut=True, r_pu=22.5)
-    make_plot(4, logy=True, Z_2=0.5, xcut=True, r_pu=22.5)
+    #make_plot(4, Z_2=0.5, xcut=True, r_pu=22.5)
+    #make_plot(4, logy=True, Z_2=0.5, xcut=True, r_pu=22.5)
 
-    # Change as a function of Z_2/Z_0
-    for Z_2 in [0, 0.25]:
-        make_plot(3, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, logx=True, logy=True, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+    ## Change as a function of Z_2/Z_0
+    #for Z_2 in [0, 0.25]:
+    #    make_plot(3, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, logx=True, logy=True, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
 
-    # As a function of Z_2/Z_0, on the same plot (...)
-    make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5)
-    make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True)
+    ## As a function of Z_2/Z_0, on the same plot (...)
+    #make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5)
+    #make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True)
+    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5)
+    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, withtext=True)
 
-    # Change as a function of r_pu
-    for r_pu in [15,17.5,20,22.5,25]:
-        make_plot(3, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
+    ## Change as a function of r_pu
+    #for r_pu in [15,17.5,20,22.5,25]:
+    #    make_plot(3, Z_2=0.5, r_pu=r_pu)
+    #    make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
+    #    make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
 
-    # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
-    # discrepancy" do you get?
-    make_plot(3, withtext=True, stdout=True, Z_2=0, r_pu=15)
+    ## If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
+    ## discrepancy" do you get?
+    #make_plot(3, withtext=True, stdout=True, Z_2=0, r_pu=15)

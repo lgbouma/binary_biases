@@ -14,6 +14,7 @@ XModel #2: varying q, same planet (WARNING: not implemented)
 /Model #4: varying q, r with a gap
 /Model #5: twin binary, powerlaw r
 /Model #6: varying q, powerlaw r
+/Model #7: varying q, r ~ gaussian(14re, 2re)
 
 Example usage, for each model type:
 >>> python integrate_for_apparent_rate_density.py --modelnumber 1 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 1
@@ -22,6 +23,7 @@ Example usage, for each model type:
 >>> python integrate_for_apparent_rate_density.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 >>> python integrate_for_apparent_rate_density.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 22.5
 >>> python integrate_for_apparent_rate_density.py --modelnumber 6 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
+>>> python integrate_for_apparent_rate_density.py --modelnumber 7 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 
 '''
 from __future__ import division, print_function
@@ -42,7 +44,7 @@ global BF, model_number, r_pu, r_pl
 r_pl = 2 # [Rearth]. Lower bound for truncation.
 
 
-def Gamma_0(r, M, Z_0, model_number, norm_r=None):
+def Gamma_0(r, M, Z_0, model_number, norm_r=None, gaussianparams=None):
     '''
     occ rate density around singles
     '''
@@ -64,10 +66,16 @@ def Gamma_0(r, M, Z_0, model_number, norm_r=None):
         f_r = 0 if (r > 1.5) & (r < 2) else min( r**δ, r_pl**δ )
         Γ_0 = Z_0 * f_r / norm_r
 
+    elif model_number == 7:
+        mean, sigma = gaussianparams[0], gaussianparams[1]
+        f_r = np.exp(- (r-mean)**2 / (2 * sigma**2) )
+        Γ_0 = Z_0 * f_r / norm_r
+
     return Γ_0
 
 
-def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None):
+def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None,
+        gaussianparams=None):
     '''
     occ rate density around primaries
 
@@ -90,8 +98,8 @@ def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None):
         g_of_q = r - r_0
         for i, eps in enumerate(np.diff(q_grid)):
             g_prime_of_q = (g_of_q[i+1] - g_of_q[i])/eps
-        #TODO: I currently don't know how to take this numerical derivative
-        #and/or root-find in a reliable way for this.
+        #NOTE: I currently don't know how to take this numerical derivative
+        #and/or root-find in a reliable way for this. Hence, not implemented.
         _ = np.argmin( abs(g_of_q) )
         Γ_1 = Z_1/prefactor * (np.isclose(r,r_0,atol=1e-10)).astype(int)
 
@@ -107,10 +115,16 @@ def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None):
         f_r[(r > 1.5) & (r < 2)] = 0
         Γ_1 = Z_1 * f_r / norm_r
 
+    elif model_number == 7:
+        mean, sigma = gaussianparams[0], gaussianparams[1]
+        f_r = np.exp(- (r-mean)**2 / (2 * sigma**2) )
+        Γ_1 = Z_1 * f_r / norm_r
+
     return Γ_1
 
 
-def Gamma_2(r, M, Z_2, model_number, prefactor=None, norm_r=None):
+def Gamma_2(r, M, Z_2, model_number, prefactor=None, norm_r=None,
+        gaussianparams=None):
     '''
     occ rate density around secondaries
     '''
@@ -135,6 +149,11 @@ def Gamma_2(r, M, Z_2, model_number, prefactor=None, norm_r=None):
         f_r[(r > 1.5) & (r < 2)] = 0
         Γ_2 = Z_2 * f_r / norm_r
 
+    elif model_number == 7:
+        mean, sigma = gaussianparams[0], gaussianparams[1]
+        f_r = np.exp(- (r-mean)**2 / (2 * sigma**2) )
+        Γ_2 = Z_2 * f_r / norm_r
+
     return Γ_2
 
 
@@ -154,7 +173,7 @@ def f_of_q(q, model_number):
     if model_number in [1,5]:
         f_q = signal.unit_impulse(len(q), -1)
 
-    elif model_number in [2,3,4,6]:
+    elif model_number in [2,3,4,6,7]:
         f_q = q**β
 
     norm_q = trapz(f_q, q)
@@ -306,7 +325,9 @@ def run_unit_tests(
         # subcase #2, when double-valued
         if np.any(d_inds):
             raise NotImplementedError
-            I_2[d_inds] += 0 # todo
+            # not implemented b/c this subcase is crazy, and the integrator
+            # works on either side of this small range of r_a.
+            I_2[d_inds] += 0
 
         # Finally, use them compute Γ_a, apparent rate density
         Γ_a_from_math = (1/(1+μ))*(
@@ -359,7 +380,7 @@ def get_mu(BF, model_number):
     if model_number in [1,5]:
         μ = BF/(1-BF) * 2**(3/2)
 
-    elif model_number in [2,3,4,6]:
+    elif model_number in [2,3,4,6,7]:
         I = 0.4841741 # see derivation pdf
         μ = BF/(1-BF) * ( 2**(3/2) - 3*I )
 
@@ -367,9 +388,10 @@ def get_mu(BF, model_number):
 
 
 def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
-        debugging=False):
+        debugging=False,gaussianparams=None):
 
-    Γ_0 = Gamma_0(r_a, M_a, Z_0, model_number, norm_r=norm_r)
+    Γ_0 = Gamma_0(r_a, M_a, Z_0, model_number, norm_r=norm_r,
+            gaussianparams=gaussianparams)
 
     #NOTE: for model #2, this prefactor is wrong. need to implement
     #derivative? or something else to capture the noramlization funkiness.
@@ -379,7 +401,8 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
             model_number,
             prefactor=1/A_q,
             norm_r=norm_r,
-            q_grid=q)
+            q_grid=q,
+            gaussianparams=gaussianparams)
 
     I_1 = trapz(f_q * (A_q**(-4)) * Γ_1, q, axis=0)
 
@@ -388,7 +411,8 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
             Z_2,
             model_number,
             prefactor=1/B_q,
-            norm_r=norm_r)
+            norm_r=norm_r,
+            gaussianparams=gaussianparams)
 
     I_2 = trapz((q**(5/3)) * \
                 f_q * \
@@ -420,9 +444,8 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
                 (Γ_a-Γ_a_from_math)/Γ_a)
                 )
 
-            #NOTE: every point should match. Your numerical integration agrees with
+            #NOTE: every point matches! Your numerical integration agrees with
             #your analytic integration for Γ_a. Ditto for Γ_0.
-            #import IPython; IPython.embed()
             Γ_0_from_math = r_a**δ * Z_0 / (norm_r)
             X_from_math = Γ_a_from_math/Γ_0_from_math
             X_num = Γ_a/Γ_0
@@ -475,6 +498,12 @@ def get_apparent_radius_grid(model_number, slowrun=False):
         elif slowrun:
             r_a_grid = np.arange(2e-2,r_pu+2e-2,2e-2)
 
+    elif model_number == 7:
+        if not slowrun:
+            r_a_grid = np.arange(1e-1,r_pu+1e-1,1e-1)
+        elif slowrun:
+            r_a_grid = np.arange(1e-2,r_pu+1e-2,1e-2)
+
     return r_a_grid
 
 
@@ -483,7 +512,7 @@ def get_q_grid(model_number):
     if model_number in [1,5]:
         q = np.arange(0.1,1+0.1,0.1)
 
-    elif model_number in [2,3,4,6]:
+    elif model_number in [2,3,4,6,7]:
         # 1e-5 needed for any non-resolution limited result
         q = np.arange(2e-6,1+2e-6,2e-6)
 
@@ -499,6 +528,8 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
 
     f_q, norm_q = f_of_q(q, model_number)
 
+    gaussianparams = None if model_number != 7 else [14,2]
+
     if model_number in [5,6]:
         norm_r = trapz(r_a_grid**δ, r_a_grid)
     elif model_number == 3:
@@ -512,6 +543,11 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
         norm_r = trapz(prob_r, r_grid)
     elif model_number == 1:
         norm_r = 1
+    elif model_number == 7:
+        mean, sigma = gaussianparams[0], gaussianparams[1]
+        r_grid = np.arange(1e-3, r_pu+1e-3, 1e-3)
+        prob_r = np.exp(- (r_grid-mean)**2 / (2 * sigma**2) )
+        norm_r = trapz(prob_r, r_grid)
 
     A_q = A(q)
     B_q = B(q)
@@ -523,7 +559,7 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
             if r_a_ind % max(1,len(r_a_grid)//10) == 0:
                 print('{:d}/{:d}, {:.2f}'.format(r_a_ind,len(r_a_grid),r_a))
             _0, _1 = Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=norm_r,
-                    norm_q=norm_q)
+                    norm_q=norm_q, gaussianparams=gaussianparams)
             Γ_a.append(_0)
             Γ_0.append(_1)
 
