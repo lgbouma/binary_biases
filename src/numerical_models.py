@@ -22,7 +22,6 @@ Alternatively, use a wrapper like `run_numerical_models.py`.
 from __future__ import division, print_function
 
 import numpy as np, pandas as pd, matplotlib.pyplot as plt
-from astropy import units as u, constants as c
 from scipy.integrate import trapz
 from scipy.interpolate import interp1d
 from math import pi as π

@@ -54,7 +54,7 @@ print('taking Z into account, p = {:.3f}'.format(
     ))
 
 ####################
-eta *= 1.3
+eta *= 1.13
 ndet = np.zeros((m))
 
 seed = 42
