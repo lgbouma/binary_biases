@@ -5,6 +5,8 @@
 \usepackage{amsmath}
 \usepackage{comment}
 \usepackage{grffile} % checks for multiple dots in figure filenames
+\usepackage{empheq} % for boxing equations
+\newcommand*\widefbox[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
 %% Reintroduced the \received and \accepted commands from AASTeX v5.2
 %\received{July 1, 2016}
@@ -101,10 +103,10 @@ discover all for which
 \label{eq:S_N_thresh}
 \end{equation}
 The observed transit depth $\delta_{\rm obs}$ constitutes the signal, ${\rm 
-S}$. The survey is shot-noise dominated, and so the noise ${\rm N}$
-scales as the inverse root of the photon flux received from any stellar 
-system, ${\rm N} \propto (L_{\rm sys}/d^2)^{-1/2}$, for $L_{\rm sys}$ the 
-system luminosity and $d$ its distance.
+S}$. The survey is shot-noise dominated, and the fractional photon noise 
+${\rm N}$ scales as the inverse root of the photon flux received from any 
+stellar system, ${\rm N} \propto (L_{\rm sys}/d^2)^{-1/2}$, for $L_{\rm sys}$ 
+the system luminosity and $d$ its distance.
 The solid angle coverage, telescope area, and survey duration are part of the 
 ``const'' term of Eq.~\ref{eq:S_N_thresh}. The transit duration also 
 affects detectability, but we omit it in this work for brevity.
@@ -522,7 +524,7 @@ and~\ref{eq:model_1_apparent_rate_density}) do not explicitly mention
 detection efficiency.
 If we were to take a smooth detection probability in S/N, we would need to 
 include an explicit detection efficiency term in 
-Eq.~\ref{eq:defn_apparent_rate_density} is to inversely weight for planets 
+Eq.~\ref{eq:defn_apparent_rate_density} to inversely weight for planets 
 that had low probabilities of being detected.
 However, our ``detection probability'' is a step function in S/N 
 (Eq.~\ref{eq:S_N_thresh}).
@@ -1623,7 +1625,8 @@ Using the results above, the apparent rate density,
 \sum_i n_{\rm det}^i (r\a,M\a),
 \end{align}
 evaluates to
-\begin{align}
+
+\begin{empheq}[box=\widefbox]{align}
 \notag
 \Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)}\times
 \left\{ \Gamma^0(r\a, M\a)+ 
@@ -1641,7 +1644,7 @@ qM\a\right)\,
 {R(qM\a) \over R(M\a)}
 q^{-1/3} \right]	\right\}.
 \label{eq:general_Gamma_a}
-\end{align}
+\end{empheq}
 This equation is used to derive Eqs.~\ref{eq:model5_apparent_rate_density} 
 and~\ref{eq:powerlaw_vary_binary}, and is numerically integrated to create 
 Figs.~\ref{fig:occ_rate_model_3_log},~\ref{fig:model_4}, 
