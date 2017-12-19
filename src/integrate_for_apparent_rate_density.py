@@ -1,21 +1,39 @@
 '''
-We wrote a general equation for the apparent rate density, as a function of the
-apparent planet radius r_a and apparent mass M_a.
+----------
+usage: integrate_for_apparent_rate_density.py [-h] [-mn MODELNUMBER]
+	[-ztwo ZSUBTWO] [-bf BINARYFRAC] [-rpu UPPERRADIUSCUTOFF] [-sr]
 
-Here, we evaluate it for particular "true" (volume-limited) occurrence rate
-densities.
+Integrate the general equation for apparent rate density.
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+  -mn MODELNUMBER, --modelnumber MODELNUMBER
+                        1 through 7.
+
+  -ztwo ZSUBTWO, --ZsubTwo ZSUBTWO
+                        integrated occ rate for secondaries
+
+  -bf BINARYFRAC, --binaryfrac BINARYFRAC
+                        BF = n_b/(n_s+n_b), for n number density
+
+  -rpu UPPERRADIUSCUTOFF, --upperradiuscutoff UPPERRADIUSCUTOFF
+                        the maximum allowed planet radius in units of Rearth
+
+  -sr, --slowrun        use --slowrun if you want models to run high-resoln
+                        models.
+----------
 
 The models are as follows:
 /Model #1: twin binary, same planet
-
 XModel #2: varying q, same planet (WARNING: not implemented)
-
 /Model #3: varying q, powerlaw+const r
 /Model #4: varying q, r with a gap
 /Model #5: twin binary, powerlaw r
 /Model #6: varying q, powerlaw r
 /Model #7: varying q, r ~ gaussian(14re, 2re)
 
+----------
 Example usage, for each model type:
 >>> python integrate_for_apparent_rate_density.py --modelnumber 1 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 1
 >>> python integrate_for_apparent_rate_density.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
@@ -24,7 +42,6 @@ Example usage, for each model type:
 >>> python integrate_for_apparent_rate_density.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 22.5
 >>> python integrate_for_apparent_rate_density.py --modelnumber 6 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
 >>> python integrate_for_apparent_rate_density.py --modelnumber 7 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
-
 '''
 from __future__ import division, print_function
 
@@ -98,8 +115,8 @@ def Gamma_1(r, M, Z_1, model_number, prefactor=None, norm_r=None, q_grid=None,
         g_of_q = r - r_0
         for i, eps in enumerate(np.diff(q_grid)):
             g_prime_of_q = (g_of_q[i+1] - g_of_q[i])/eps
-        #NOTE: I currently don't know how to take this numerical derivative
-        #and/or root-find in a reliable way for this. Hence, not implemented.
+        #NOTE: I would need to take this numerical derivative and/or root-find
+        #in a reliable way for this. Hence, not implemented.
         _ = np.argmin( abs(g_of_q) )
         Γ_1 = Z_1/prefactor * (np.isclose(r,r_0,atol=1e-10)).astype(int)
 
@@ -135,7 +152,7 @@ def Gamma_2(r, M, Z_2, model_number, prefactor=None, norm_r=None,
 
     elif model_number == 2:
         raise NotImplementedError
-        #same story as for Gamma_1, except now the multiple roots matters.
+        #same story as for Gamma_1, except now the multiple roots matter.
 
     elif model_number == 3:
         f_r = np.minimum( r**δ, r_pl**δ )
@@ -389,12 +406,22 @@ def get_mu(BF, model_number):
 
 def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
         debugging=False,gaussianparams=None):
+    '''
+    Γ_a: apparent rate density, at r_a=r_a
+    Γ_0: true rate density, at r=r_a
+    ndet_a0: N of detections (per unit r_a,M_a) about singles, at r_a=r_a.
+        units are: N_{\rm s}^0(δ_obs) * p_tra(M_a)
+    ndet_a1: N of detections (per unit r_a,M_a) about primaries, at r_a=r_a
+        units are: N_{\rm s}^0(δ_obs) * p_tra(M_a)
+    ndet_a2: N of detections (per unit r_a,M_a) about primaries, at r_a=r_a
+        units are: N_{\rm s}^0(δ_obs) * p_tra(M_a)
+    '''
 
     Γ_0 = Gamma_0(r_a, M_a, Z_0, model_number, norm_r=norm_r,
             gaussianparams=gaussianparams)
 
-    #NOTE: for model #2, this prefactor is wrong. need to implement
-    #derivative? or something else to capture the noramlization funkiness.
+    #NOTE: for model #2, this prefactor is wrong -- would need to implement
+    #a funky numerical derivative.
     Γ_1 = Gamma_1(
             r_a/A_q, M_a,
             Z_1,
@@ -424,6 +451,10 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
     Γ_a = (1/(1+μ))*(
             Γ_0 + BF/(1-BF)*(I_1 + I_2)
           )
+
+    ndet_a0 = Γ_0
+    ndet_a1 = BF/(1-BF) * I_1
+    ndet_a2 = BF/(1-BF) * I_2
 
     if debugging:
 
@@ -475,7 +506,7 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
             X_from_math = Γ_a_from_math/Γ_0_from_math
             X_num = Γ_a/Γ_0
 
-    return Γ_a, Γ_0
+    return Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2
 
 
 def get_apparent_radius_grid(model_number, slowrun=False):
@@ -552,23 +583,33 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
     A_q = A(q)
     B_q = B(q)
 
-    Γ_a, Γ_0 = [], []
+    Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2 = [], [], [], [], []
     print('ind/max_ind, rvalue')
     for r_a_ind, r_a in enumerate(r_a_grid):
         for M_a in M_a_grid:
             if r_a_ind % max(1,len(r_a_grid)//10) == 0:
                 print('{:d}/{:d}, {:.2f}'.format(r_a_ind,len(r_a_grid),r_a))
-            _0, _1 = Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=norm_r,
-                    norm_q=norm_q, gaussianparams=gaussianparams)
+            _0, _1, _2, _3, _4 = Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ,
+                    norm_r=norm_r, norm_q=norm_q,
+                    gaussianparams=gaussianparams)
             Γ_a.append(_0)
             Γ_0.append(_1)
+            ndet_a0.append(_2)
+            ndet_a1.append(_3)
+            ndet_a2.append(_4)
 
     Γ_a = np.array(Γ_a)
     Γ_a = Γ_a.reshape(len(r_a_grid),len(M_a_grid)).flatten()
     Γ_0 = np.array(Γ_0)
     Γ_0 = Γ_0.reshape(len(r_a_grid),len(M_a_grid)).flatten()
+    ndet_a0 = np.array(ndet_a0)
+    ndet_a0 = ndet_a0.reshape(len(r_a_grid),len(M_a_grid)).flatten()
+    ndet_a1 = np.array(ndet_a1)
+    ndet_a1 = ndet_a1.reshape(len(r_a_grid),len(M_a_grid)).flatten()
+    ndet_a2 = np.array(ndet_a2)
+    ndet_a2 = ndet_a2.reshape(len(r_a_grid),len(M_a_grid)).flatten()
 
-    return Γ_a, Γ_0
+    return Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2
 
 
 def write_output(df):
@@ -589,7 +630,7 @@ if __name__ == '__main__':
         description='Integrate the general equation for apparent rate density.')
 
     parser.add_argument('-mn', '--modelnumber', type=int, default=None,
-        help='1, 2 or 3.')
+        help='1 through 7.')
     parser.add_argument('-ztwo', '--ZsubTwo', type=float, default=None,
         help='integrated occ rate for secondaries')
     parser.add_argument('-bf', '--binaryfrac', type=float, default=None,
@@ -611,9 +652,15 @@ if __name__ == '__main__':
 
     r_a_grid = get_apparent_radius_grid(model_number, args.slowrun)
 
-    Γ_a, Γ_0 = get_apparent_rate_density(r_a_grid, M_a_grid, model_number)
+    Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2 = get_apparent_rate_density(
+            r_a_grid,
+            M_a_grid,
+            model_number)
 
-    df = pd.DataFrame({'r':r_a_grid, 'Γ_a':Γ_a, 'Γ_0':Γ_0})
+    df = pd.DataFrame(
+            {'r':r_a_grid, 'Γ_a':Γ_a, 'Γ_0':Γ_0, 'ndet_a0':ndet_a0,
+             'ndet_a1':ndet_a1, 'ndet_a2':ndet_a2}
+            )
 
     write_output(df)
 
