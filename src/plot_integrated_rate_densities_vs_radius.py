@@ -74,10 +74,11 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
     c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
 
+    gammastr = r'$\Gamma_{\mathrm{a}}(r_{\mathrm{a}})$'
     if not many_Zs:
-        ax.plot(xvals, yinferred, label='inferred', c=colors[0])
+        ax.plot(xvals, yinferred, label=gammastr, c=colors[0])
     else:
-        ax.plot(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+        ax.plot(xvals, yinferred, label=gammastr+', $Z_2/Z_0$={:.1f}'.format(
             Z_2/Z_0), c=colors[0])
 
     if many_Zs:
@@ -93,13 +94,13 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            ax.plot(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+            ax.plot(xvals, yinferred, label=gammastr+', $Z_2/Z_0$={:.1f}'.format(
             Z_2/Z_0), c=c[ind], linestyle=ls[ind])
 
 
     if standardlines:
 
-        ax.plot(xsingle, ytruesingle, label='true (singles)', linestyle='-',
+        ax.plot(xsingle, ytruesingle, label='$\Gamma_0(r)$', linestyle='-',
                 c=colors[1])
 
     if model_number != 7:
@@ -107,9 +108,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='upper left',fontsize='small')
 
-    ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('rate density, $\Gamma$ [$r_\oplus^{-1}$]', fontsize='large')
+    ax.set_ylabel('rate density [$r_\oplus^{-1}$]', fontsize='large')
 
     if logx:
         ax.set_xscale('log')

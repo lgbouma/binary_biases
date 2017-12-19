@@ -93,10 +93,11 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
     c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
 
+    lambdastr = r'$\Lambda_{\mathrm{a}}(r_{\mathrm{a}})$'
     if not many_Zs:
-        ax.step(xvals, yinferred, label='inferred', c=colors[0], where='post')
+        ax.step(xvals, yinferred, label=lambdastr, c=colors[0], where='post')
     else:
-        ax.step(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+        ax.step(xvals, yinferred, label=lambdastr+', $Z_2/Z_0$={:.1f}'.format(
             Z_2/Z_0), c=colors[0], where='post')
 
     if many_Zs:
@@ -126,12 +127,12 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            ax.step(xvals, yinferred, label='inferred, $Z_2/Z_0$={:.1f}'.format(
+            ax.step(xvals, yinferred, label=lambdastr+', $Z_2/Z_0$={:.1f}'.format(
             Z_2/Z_0), c=c[ind], linestyle=ls[ind], where='post')
 
     if standardlines:
 
-        ax.step(xvals, ytruesingle, where='post', label='true (singles)',
+        ax.step(xvals, ytruesingle, where='post', label='$\Lambda_0(r)$',
                 linestyle='-', c=colors[1])
 
     if brokenx:
@@ -143,9 +144,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             ax.legend(loc='upper left',fontsize='small')
 
 
-    ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('number of planets per star, $\Lambda$', fontsize='large')
+    ax.set_ylabel('number of planets per star', fontsize='large')
 
     if logx:
         ax.set_xscale('log')

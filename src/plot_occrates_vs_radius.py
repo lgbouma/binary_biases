@@ -1,4 +1,6 @@
 '''
+This script plots the output of the Monte Carlo simulation.
+
 first, for models 1,2,3,4:
 >>> python numerical_models.py
 then:
@@ -82,15 +84,16 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
 
-    ax.step(xvals, yinferred, where='post', label='inferred', c=colors[0])
+    lambdastr = r'$\Lambda_{\mathrm{a}}(r_{\mathrm{a}})$'
+    ax.step(xvals, yinferred, where='post', label=lambdastr, c=colors[0])
 
     if standardlines:
 
-        ax.step(xvals, ytrueselected, where='post', label='true (selected)',
-                c=colors[1])
+        #ax.step(xvals, ytrueselected, where='post', label='true (selected)',
+        #        c=colors[1])
 
-        ax.step(xvals, ytruesingle, where='post', label='true (single)',
-                linestyle='--', c=colors[2])
+        ax.step(xvals, ytruesingle, where='post', label='$\Lambda_0(r)$',
+                linestyle='-', c=colors[1])
 
     elif not standardlines:
 
@@ -112,9 +115,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius, $r$ [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('number of planets per star, $\Lambda$', fontsize='large')
+    ax.set_ylabel('number of planets per star', fontsize='large')
 
     if logx:
         ax.set_xscale('log')
