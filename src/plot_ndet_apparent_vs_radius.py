@@ -110,6 +110,8 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                     label='$n_{\mathrm{det}}^2(r_{\mathrm{a}})$'+ndetstr+Zstr,
                     c=colors[ind], linestyle=':')
 
+            print(Z_2, min(y_1/y_a), max(y_1/y_a), max(y_1/y_a)/min(y_1/y_a))
+
 
     if many_Zs:
         box = ax.get_position()

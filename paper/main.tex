@@ -847,6 +847,27 @@ At $r\a < 2r_\oplus$, the ratios are $\sim 1.6 \times$ and $\sim 3.1 \times$
 as many detected planets orbiting primaries than secondaries for the same 
 $Z_2/Z_0$ values.
 
+Further, Fig.~\ref{fig:frac_model_3} shows that going from apparent 
+radii of $2r_\oplus$ to $\approx 1.4r_\oplus$, the fraction of detected 
+planets with binary companions increases by $\approx 6-12\%$, depending on the 
+assumed value of $Z_2/Z_0$.
+Let the fraction of detected planets from primaries at a given apparent radius 
+be $F_1(r\a)$.
+In the planet-less secondaries case, one can then see by analyzing 
+Eqs~\ref{eq:n_det_0} and~\ref{eq:n_det_1} semi-analytically that 
+$F_1(2r_\oplus)/F_1(2r_\oplus/\sqrt{2}) \approx 1.19$.
+%check_companion_fractions.py, and LB's notes 2017/12/21.0
+More intuitively, this ``shift'' is a feature of any radius distribution that 
+declines at large radii, and flattens below some cutoff $r_c$.
+Thinking only about dilution from primaries is simplest:
+at apparent radii $r\a < r_c/\sqrt{2}$, relatively more planets will be 
+``diluted'' into the given $r\a$, since there are more planets in 
+the undiluted distribution from $r\a$ to $\sqrt{2}r\a$.
+This prediction is compared against current measurements in 
+Sec.~\ref{sec:discussion}.
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Further models: radius gaps, Gaussian HJ distributions}
 \label{sec:further_models}
@@ -1152,6 +1173,32 @@ For instance, if hot Jupiters are less likely to be confirmed in binary
 systems, this might bias the rates low.
 
 
+\paragraph{Fraction of detected planets with binary companions vs. apparent 
+radius}
+A prediction of Fig.~\ref{fig:frac_model_3} is that the fraction of detected 
+planets with binary companions increases by $\approx 6-12\%$ going from 
+$2r_\oplus$ to $\approx 1.4r_\oplus$.
+In \citet{ziegler_robo-ao_2017}'s recent summary of the Robo-AO KOI survey, 
+they reported the nearby star fraction rates for planet candidates binned by 
+Earths ($r\a < 1.6r_\oplus$), Neptunes ($1.6r_\oplus < r\a < 3.9 r_\oplus$), 
+Saturns ($3.9r_\oplus < r\a < 9 r_\oplus$), and Jupiters ($r\a > 9r_\oplus$).
+The nearby star rates and their $1\sigma$ uncertainties 
+(following~\cite{burgasser_binarity_2003}'s procedure) are as
+follows:
+\begin{itemize}
+    \item Earths: $16.3 \pm 1.0\%$, from 1480 systems.
+    \item Neptunes: $13.0 \pm 0.8\%$, from 2058 systems.
+    \item Saturns: $13.6 \pm 2.0\%$, from 338 systems.
+    \item Jupiters: $19.0 \pm 2.8\%$, from 247 systems.
+\end{itemize} 
+where the absolute normalization of the rates are less than those typical for 
+Sun-like stars at least in part because of Robo-AO's sensitivity 
+(see~\citealt{ziegler_robo-ao_2017}'s Fig.~2).
+The uptick in the companion rate for Jupiters is likely tied to a large 
+astrophysical false positive rate~\citep{santerne_sophie_2012}.
+Although the data do not support as large of an uptick in companion rate 
+as our Fig.~\ref{fig:frac_model_3} suggests, going from Neptunes to Earths,
+there is still a weak increase in the detected planet companion fraction.
 
 
 \paragraph{Does a detected planet orbit the primary or secondary?}
@@ -1192,8 +1239,6 @@ a system that hosts a detected transiting planet, the planet is much
 more likely to orbit the primary.
 This statement is independent of the fact that planets are often confirmed to 
 orbit the primary by inferring the stellar density from the transit duration.
-
-
 
 
 \paragraph{Utility in future occurrence rate measurements}
