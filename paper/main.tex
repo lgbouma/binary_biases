@@ -465,15 +465,14 @@ cancellation of $N\s^0(r\a)$ terms, leaving only the $\mu$ weights.
 \label{sec:general_formula}
 
 To generalize the procedure of Sec.~\ref{sec:simplest}, we consider an SNR 
-limited transit survey in which all the primaries and single stars have 
-identical properties.
-For example, they might all be solar analogs, roughly similar to 
-the stars that {\it Kepler} surveyed~\citep{batalha_selection_2010}.
+limited transit survey in which the true masses of all the singles and 
+primaries are known by the observer.
 We let the properties of the secondaries vary, and assume that there are some 
 functions $L(M)$ and $R(M)$ that specify a star's luminosity and radius in 
 terms of its mass.
-We then allow for an arbitrary volume-limited mass ratio distribution 
-$f(q)$, and also for arbitrary true rate densities for singles, primaries, 
+We then allow for a volume-limited mass ratio distribution $f(q)$, which is 
+assumed to be independent of the primary's mass.
+We also allow arbitrary true rate densities for singles, primaries, 
 and doubles ($\Gamma_0, \Gamma_1, \Gamma_2$).
 Since the properties of the secondaries vary, we must consider not only the 
 dependence of the rate densities on planet radius, but also on stellar mass.
@@ -603,8 +602,7 @@ realistic regimes.
 In general, we will write the rate density for each type of star, 
 $\Gamma_i(r)$, as the product of a shape function and a constant:
 \begin{equation}
-\Gamma_i(r) = \frac{{\rm d}\Lambda_i}{{\rm d}r} = Z_i f_i(r),
-\quad {\rm for\ }i\in\{0,1,2\},
+\Gamma_i(r) = Z_i f_i(r), \quad {\rm for\ }i\in\{0,1,2\},
 \end{equation}
 where as always, $i=0$ corresponds to single stars, $i=1$ to primaries of 
 binaries, and $i=2$ to secondaries of binaries.
@@ -745,9 +743,14 @@ $\sim$few percent level.
     \caption{
         {\it Left:} rate density and {\it right:} rate (over $0.5r_\oplus$ 
         bins) as a function of planet radius for the distribution specified by 
-        Eq.~\ref{eq:model3_radius_distribution}. This model has identical 
-        primaries and single stars, and varying secondaries. We use an 
-        arbitrary normalization of $Z_0=0.5$ throughout.}
+        Eq.~\ref{eq:model3_radius_distribution}. 
+        This model assumes that the true properties of all the singles and 
+        primaries are known to the observer, and that the volume-limited mass 
+        ratios of secondaries are drawn from a uniform distribution. We use an 
+        arbitrary normalization of $Z_0=0.5$ throughout.
+        The rate (left) and rate density (right) are related by $\Lambda|_a^b 
+        = \int_{a}^{b}\Gamma\,{\rm d}r$.
+    }
     \label{fig:occ_rate_model_3_log}
 \end{figure}
 
@@ -766,9 +769,9 @@ r^\delta & \text{for } r\geq 2r_\oplus \\
 \right.
 \label{eq:model3_radius_distribution}
 \end{align}
-As before, all single and primary stars in this model have identical 
-properties. The secondaries have masses, radii, and luminosities that vary 
-between systems: $R \propto M \propto L^{\frac{1}{\alpha}}$.
+As before, we assume that the observers know the true properties of all 
+singles and primaries. The secondaries have masses, radii, and luminosities 
+that vary between systems: $R \propto M \propto L^{\frac{1}{\alpha}}$.
 Our ``nominal model'' remains the same: 
 $\alpha=3.5$, $\beta=\gamma=0$, $\delta=-2.92$.
 
@@ -851,16 +854,16 @@ Further, Fig.~\ref{fig:frac_model_3} shows that going from apparent
 radii of $2r_\oplus$ to $\approx 1.4r_\oplus$, the fraction of detected 
 planets with binary companions increases by $\approx 6-12\%$, depending on the 
 assumed value of $Z_2/Z_0$.
-Let the fraction of detected planets from primaries at a given apparent radius 
-be $F_1(r\a)$.
-In the planet-less secondaries case, one can then see by analyzing 
-Eqs~\ref{eq:n_det_0} and~\ref{eq:n_det_1} semi-analytically that 
-$F_1(2r_\oplus)/F_1(2r_\oplus/\sqrt{2}) \approx 1.19$.
+Let the fraction of total detected planets from primaries at a given 
+apparent radius be $F_1(r\a)$, and from secondaries let it be $F_2(r\a)$.
+In the planet-less secondaries case ($F_2(r\a)=0$), one can 
+analyze Eqs~\ref{eq:n_det_0} and~\ref{eq:n_det_1} semi-analytically and show 
+that $F_1(2r_\oplus)/F_1(2r_\oplus/\sqrt{2}) \approx 1.19$.
 %check_companion_fractions.py, and LB's notes 2017/12/21.0
 More intuitively, this ``shift'' is a feature of any radius distribution that 
-declines at large radii, and flattens below some cutoff $r_c$.
-Thinking only about dilution from primaries is simplest:
-at apparent radii $r\a < r_c/\sqrt{2}$, relatively more planets will be 
+declines at large radii, and flattens below some cutoff $r_{\rm c}$.
+This is because (for dilution about primaries)
+at apparent radii $r\a < r_{\rm c}/\sqrt{2}$, relatively more planets will be 
 ``diluted'' into the given $r\a$, since there are more planets in 
 the undiluted distribution from $r\a$ to $\sqrt{2}r\a$.
 This prediction is compared against current measurements in 
@@ -921,8 +924,8 @@ radius dimension.
         {\it Left:} rate density and {\it right:} rate (over $0.25r_\oplus$ 
         bins) as a function of planet radius in a model with a radius gap 
         (Eq.~\ref{eq:model4_radius_distribution}).
-        Similar to Fig.~\protect\ref{fig:occ_rate_model_3_log}, this model has 
-        fixed primaries and single stars, but varying secondaries.
+        Other than the intrinsic radius distribution, this model has the same 
+        assumptions as Fig.~\protect\ref{fig:occ_rate_model_3_log}.
     }
     \label{fig:model_4}
 \end{figure}
@@ -1028,27 +1031,36 @@ below the cutoff in apparent radius would simply drop to zero.
 
 A second assumption we used is that the detection efficiency is a 
 step function in SNR.
-The detection efficiencies of real transit surveys are smooth functions in 
-SNR; see for example the injection \& recovery simulations performed on {\it 
-    Kepler}\ data by~\citet{christiansen_measuring_2016}, and the resulting 
-smooth 
-functional form adopted by~\citet{fulton_california-_2017}.
+The detection efficiencies of real transit survey pipelines are smooth 
+functions in SNR; see for example the injection \& recovery simulations 
+performed by~\citet{christiansen_measuring_2016} on {\it Kepler}\ data, 
+and the resulting smooth functional form adopted 
+by~\citet{fulton_california-_2017}.
 If we were to take a smooth detection probability in SNR, we would need to 
 include a detection efficiency term in 
 Eq.~\ref{eq:defn_apparent_rate_density} to inversely weight for planets 
-that had low probabilities of being detected.
+with low probabilities of being detected.
 
 The simplest way to avoid the conceptual complications of accounting for 
 finite detection efficiency is to raise the SNR floor, to {\it e.g.,} 
-${\rm SNR} \approx 12$ in \citet{fulton_california-_2017}'s Fig 5.
-To a good approximation, this allows one to discuss stars that are 
+${\rm SNR} \approx 12$ for {\it Kepler} 
+(\citealt{fulton_california-_2017}, Fig.~5).
+To a good approximation, this allows one to use the boolean distinctions 
 ``searchable'' and ``not searchable'' for signals of an observed depth (at 
 fixed orbital period).
-For {\it Kepler} specifically, coupled with high resolution imaging of a
-comparison sample of non-KOI host stars, this would facilitate the process 
-of directly comparing the observed KOI distribution of apparent radii with the 
-distributions discussed in this study.
+This also makes the survey strictly SNR-limited, rather than ``fuzzily 
+SNR-limited''.
+Since this threshold is set in an arbitrary manner anyway\footnote{For 
+example, {\it Kepler}'s threshold of ${\rm SNR}=7.1$ was set for there to be 
+no more than one statistical false alarm across the full {\it Kepler} 
+campaign~\citep{jenkins_tests_2002}. Equally valid would have been to insist 
+on no more than $10^{-3}$ false alarms per survey, raising the detection floor.
+}, this simplification would put occurrence rate studies on 
+clearer conceptual 
+ground, and facilitate the process of converting the observed distributions
+of apparent radii into true radius distributions.
 
+\begin{comment}
 If one insists on using a smooth detection efficiency, then life probably 
 becomes more complicated.
 It might then be necessary to model the detection pipeline's efficiency while 
@@ -1057,6 +1069,7 @@ Since the relative number of detections (at fixed $\delta_{\rm obs}$) coming
 from singles, primaries, and secondaries changes as a function of the 
 intrinsic distribution of planet parameters (Fig.~\ref{fig:frac_model_3}), 
 some complicated deconvolution might be required.
+\end{comment}
 
 
 \paragraph{The rate of Earth analogs}
@@ -1191,14 +1204,13 @@ follows:
     \item Saturns: $13.6 \pm 2.0\%$, from 338 systems.
     \item Jupiters: $19.0 \pm 2.8\%$, from 247 systems.
 \end{itemize} 
-where the absolute normalization of the rates are less than those typical for 
+where the values of the rates are less than the $\sim 45\%$ typical for 
 Sun-like stars at least in part because of Robo-AO's sensitivity 
-(see~\citealt{ziegler_robo-ao_2017}'s Fig.~2).
+(\citealt{ziegler_robo-ao_2017}'s Fig.~2;~\citealt{raghavan_survey_2010}).
 The uptick in the companion rate for Jupiters is likely tied to a large 
 astrophysical false positive rate~\citep{santerne_sophie_2012}.
-Although the data do not support as large of an uptick in companion rate 
-as our Fig.~\ref{fig:frac_model_3} suggests, going from Neptunes to Earths,
-there is still a weak increase in the detected planet companion fraction.
+Going from Neptunes to Earths, the data suggest a weak increase in the 
+detected planet companion fraction, perhaps of a few percent.
 
 
 \paragraph{Does a detected planet orbit the primary or secondary?}
@@ -1288,12 +1300,12 @@ primaries, and secondaries.
 The assumptions that make the model tractable are:
 \begin{enumerate}
     \item the transit survey is SNR limited;
-    \item all the primaries and single stars have identical properties;
-    \item the properties of the secondaries can vary, but there are known 
-    functions $L(M)$ and $R(M)$ that specify a star's luminosity and radius in 
-    terms of its mass;
-    \item the binarity-ignoring observers assume that binaries have the same 
-    properties as the primaries.
+    \item the true properties of all the singles and primaries are known to 
+    the observer;
+    \item the observers assume that binaries have the same properties as the 
+    primaries;
+    \item there are functions $L(M)$ and $R(M)$ that specify a star's 
+    luminosity and radius in terms of its mass.
 \end{enumerate}
 Allowing for these conditions, many results follow:
 \begin{itemize}
