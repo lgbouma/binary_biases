@@ -258,8 +258,8 @@ def run_unit_tests(
         if Z_0 == Z_1 == Z_2:
             assert np.isclose(
                     np.mean(X_num[(r_a>r_pl) & (r_a<=r_pu)]),
-                    1/(1+μ) * (1 + 1/norm_q * BF/(1-BF) * (1.41425)),
-                    rtol=1e-6
+                    1/(1+μ) * (1 + 1/norm_q * BF/(1-BF) * (1.50249)),
+                    rtol=5e-6
                     )
 
         ##################################################################
@@ -387,7 +387,7 @@ def run_unit_tests(
         μ = get_mu(BF, model_number)
         assert np.isclose(
                 np.mean(X_num[(r_a>1) & (r_a<=r_pu/2**(1/2))]),
-                1/(1+μ) * (1 + 1/norm_q * BF/(1-BF) * (1.41425)),
+                1/(1+μ) * (1 + 1/norm_q * BF/(1-BF) * (1.50249)),
                 rtol=1e-6
                 )
 
@@ -441,7 +441,8 @@ def Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ, norm_r=None, norm_q=None,
             norm_r=norm_r,
             gaussianparams=gaussianparams)
 
-    I_2 = trapz((q**(5/3)) * \
+    #NOTE: q^{5/3} vs q^{2/3} requires some thought.
+    I_2 = trapz((q**(2/3)) * \
                 f_q * \
                 (A_q**(-3)) * \
                 (B_q**(-1)) * \
@@ -584,14 +585,19 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
     B_q = B(q)
 
     Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2 = [], [], [], [], []
+
     print('ind/max_ind, rvalue')
+
     for r_a_ind, r_a in enumerate(r_a_grid):
         for M_a in M_a_grid:
+
             if r_a_ind % max(1,len(r_a_grid)//10) == 0:
                 print('{:d}/{:d}, {:.2f}'.format(r_a_ind,len(r_a_grid),r_a))
+
             _0, _1, _2, _3, _4 = Gamma_a(r_a, M_a, f_q, q, A_q, B_q, μ,
                     norm_r=norm_r, norm_q=norm_q,
                     gaussianparams=gaussianparams)
+
             Γ_a.append(_0)
             Γ_0.append(_1)
             ndet_a0.append(_2)

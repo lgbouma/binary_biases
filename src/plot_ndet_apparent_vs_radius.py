@@ -163,7 +163,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         ax.set_xlim([-0.3,5.3])
 
     if many_Zs and logx:
-        ax.set_xlim([0.5,22])
+        ax.set_xlim([0.2,22])
 
     if model_number == 3 or model_number==7:
 
