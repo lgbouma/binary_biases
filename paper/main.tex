@@ -486,31 +486,34 @@ rate density follows:
 \Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)}\times
 \left\{ \Gamma_0(r\a, M\a)+ 
 \frac{{\rm BF}}{1 - {\rm BF}}
-\left[ \int {\mathrm{d}q \over \mathcal{A}^4}\,f(q)\,\Gamma_1\left({r\a\over 
-    \mathcal{A}}, 
+\left[ \int \mathrm{d}q \,
+       \frac{f(q)}{\mathcal{A}^3}\cdot
+       \frac{1}{\mathcal{A}} \Gamma_1\left({r\a\over \mathcal{A}}, 
 M\a\right)\,
 \right.   
 \right. \\
 & \quad\quad\quad\quad\quad \left.\left.
-+\int {q \mathrm{d}q \over 
-    {\mathcal{A}^3\mathcal{B}}}\,f(q)\,\Gamma_2\left({r\a\over 
-    \mathcal{B}}, 
-qM\a\right)\,
++\int {\rm d}q\, \frac{f(q)}{\mathcal{A}^3}\cdot \frac{q}{\mathcal{B}}
+    \Gamma_2\left({r\a\over \mathcal{B}}, qM\a\right)\cdot
 {R(qM\a) \over R(M\a)}
 q^{-1/3} \right]	\right\},
 \label{eq:general_Gamma_a}
 \end{align}
-where 
+where ${\rm BF}$ is the volume-limited binary fraction, and $\mathcal{A}$ 
+($\mathcal{B}$) is the dilution term for primaries (secondaries).
+The dilution terms can be written
 \begin{equation}
 \mathcal{A}(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}
+= (1+q^\alpha)^{-1/2},
 \end{equation}
 and
 \begin{equation}
 \mathcal{B}(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm 
             sys}(M\a, q)} }
+= q^{-1} (1+q^{-\alpha})^{-1/2}
 \end{equation}
-are the dilution terms appropriate to primaries and secondaries, and as before 
-${\rm BF}$ is the volume-limited binary fraction.
+where the latter equalities assume $L\propto M^\alpha \propto R^\alpha$ (the 
+former are more general).
 
 A derivation of Eq.~\ref{eq:general_Gamma_a} is given in the 
 \hyperref[sec:appendix]{Appendix}; here we highlight its qualitative 
@@ -520,15 +523,15 @@ the apparent rate densities from singles, primaries, and secondaries.
 The contribution from singles is not affected by binarity.
 In the contributions from primaries and secondaries,
 planets with $(r\a, M\a)$ are associated with 
-systems of many different planetary and stellar properties.
-This means that $n_{\rm det}(r\a, M\a)$ is given by a convolution of the 
-true rate density, $\Gamma(r, M)$, and the number per unit $(r\a, M\a)$ of 
-searchable stars that give $(r\a, M\a)$  when the true system actually has 
-$(r, M)$.
-This convolution has been evaluated, leaving only a dependence on the mass 
-ratio distribution.
-Finally, the latter term in the apparent rate density of secondaries comes 
-from a correction for the overestimated transit probability.
+systems of different planetary and stellar properties, as determined
+by the mass ratio $q$ of each binary.
+This corresponds to true planet radii and stellar masses 
+$(r\a/\mathcal{A},M\a)$ for primaries, and $(r\a/\mathcal{B},qM\a)$ for 
+secondaries.
+These contributions are then integrated over the mass ratio distribution 
+including the effect of Malmquist bias, $f(q)/\mathcal{A}^3$, discussed 
+further below. Finally, the latter term in the apparent rate density of 
+secondaries comes from a correction for the overestimated transit probability.
 
 
 \paragraph{Ratio of searchable binaries to singles}
