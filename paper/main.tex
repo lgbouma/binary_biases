@@ -593,6 +593,7 @@ important to draw binaries from a correctly biased mass-ratio distribution
     gunther_new_2017}.
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\input{results}
@@ -700,10 +701,12 @@ We assume that stars are a one-parameter family, given by $R \propto M \propto
 L^{\frac{1}{\alpha}}$, so that a given value of $q$ determines everything 
 about a secondary.
 
-Using Eq.~\ref{eq:general_Gamma_a}, we can show that when $Z_0=Z_1=Z_2$,
+We are mostly interested in the apparent rate density's radius dependence.
+Marginalizing Eq.~\ref{eq:general_Gamma_a} over apparent stellar mass, we find
+that when $Z_0=Z_1=Z_2$,
 \begin{align}
-X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)} 
-\right|_{r\a\rightarrow r,\ M\a\rightarrow M} \\
+X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)} 
+\right|_{r\a\rightarrow r} \\
 &=
 \notag
 \frac{1}{1+\mu}
@@ -714,7 +717,7 @@ X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)}
 \right. \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
 \left.\left.
-\int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{8}{3}} 
+\int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{5}{3}} 
 (1+q^\alpha)^{\frac{3}{2}}
 (1+q^{-\alpha})^{\frac{\delta+1}{2}}
 \right)\right].
@@ -723,10 +726,10 @@ X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a,M\a)}{\Gamma_0(r,M)}
 
 For $\alpha = 3.5$, $\beta=0$, $\gamma=0$, $\delta=-2.92$, the 
 summed integrals in Eq.~\ref{eq:powerlaw_vary_binary} give $(\ldots)\approx 
-1.41425$. %171211_model_integrals.nb
-For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.014$; the
-apparent rate density is higher than the rate density around singles by 1.4\%.
-To summarize, this model suggests that for a power-law radius distribution 
+1.50249$. %171211_model_integrals.nb
+For ${\rm BF}=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.048$; the
+apparent rate density is higher than the rate density around singles by 4.8\%.
+In summary, this model suggests that for a power-law radius distribution 
 ($2r_\oplus \lesssim r\a \lesssim 17r_\oplus$) in which there are the same 
 number of planets orbiting singles, primaries, and secondaries, binarity 
 influences apparent planet occurrence rates around Sun-like stars at the 
@@ -781,10 +784,9 @@ $\alpha=3.5$, $\beta=\gamma=0$, $\delta=-2.92$.
 At apparent radii $r\a > 2r_\oplus$, the results of this model are the same as 
 those from Sec.~\ref{sub:powerlaw_varying_binaries}.
 For $r\a < 2r_\oplus$, the equations are quite tedious, though still tractable.
-To compute $\Gamma\a(r\a)$, we simply insert 
-Eq.~\ref{eq:model3_radius_distribution} into Eq.~\ref{eq:general_Gamma_a}, and 
-integrate using a computer program.
-We refer the interested reader to our online 
+We insert Eq.~\ref{eq:model3_radius_distribution} into 
+Eq.~\ref{eq:general_Gamma_a}, and integrate using a computer 
+program. We refer the interested reader to our online 
 implementation\footnote{\url{https://github.com/lgbouma/binary_biases}}.
 The output is validated against analytic predictions in the $r\a > 
 2r_\oplus$ and the $r\a < 2r_\oplus/\sqrt{2}$ regimes, and is plotted in
@@ -844,14 +846,27 @@ We explore this quantitatively in Fig.~\ref{fig:frac_model_3}.
 The lines in this figure are computed using the expressions given in the 
 appendix for the number of detections coming from singles, primaries, and 
 secondaries (Eqs.~\ref{eq:n_det_0},~\ref{eq:n_det_1}, and~\ref{eq:n_det_2}).
+
+In short, the answer to our question is ``it depends on the number of planets 
+orbiting secondaries, and also on the apparent radius of the detected planet''.
 In the scenario that high-resolution imaging finds a system with $r\a > 
-2r_\oplus$ in a binary, of order $\sim 3\times$ more detected planets orbit 
+2r_\oplus$ in a binary, roughly $\sim 2.5\times$ more detected planets orbit 
 primaries than secondaries, for the $Z_2/Z_0=1$ case.
-For the $Z_2/Z_0=0.5$ case, of order $\sim 7\times$ more detected planet 
+For the $Z_2/Z_0=0.5$ case, $\sim 5\times$ more detected planet 
 planets orbit primaries than secondaries.
-At $r\a < 2r_\oplus$, the ratios are $\sim 1.6 \times$ and $\sim 3.1 \times$ 
-as many detected planets orbiting primaries than secondaries for the same 
-$Z_2/Z_0$ values.
+So, for ``large'' apparent radii (relative to the cutoff in the 
+intrinsic rate density), yes, detected planets in binaries are more 
+likely to orbit the primary.
+
+The situation for $r\a < 2r_\oplus$ is more nuanced.
+For the $Z_2=0$ and $Z_2/Z_0=0.5$ cases, detected planets in binaries are 
+still always more likely to orbit the primary.
+However, if there are as many planets orbiting the secondaries as the 
+primaries, there is actually a turn-over radius, $\approx 0.4r_\oplus$, 
+beyond which more of the detected planets in binaries come from secondaries: 
+they have all been ``diluted down'' from larger true planetary radii!
+Although this (apparent) radius is at the limit of current sensitivities, this 
+effect will be interesting for future instruments to investigate.
 
 Further, Fig.~\ref{fig:frac_model_3} shows that going from apparent 
 radii of $2r_\oplus$ to $\approx 1.4r_\oplus$, the fraction of detected 
@@ -951,7 +966,8 @@ For $Z_2/Z_0>0$,
 the apparent HJ rate is {\it greater} than the true rate for singles.
 The effect is maximal when there are as many hot Jupiters orbiting secondaries 
 as singles, in which case
-$\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 0.84$
+$\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 0.81$.
+%int_rate_density_vs_radius_model_7_withtext*manyZs.pdf
 For the case when no hot Jupiters orbit secondaries, $\Lambda_{{\rm HJ},0} 
 \approx \Lambda_{\rm HJ,a}$ to within one percent.
 
@@ -1195,21 +1211,26 @@ A prediction of Fig.~\ref{fig:frac_model_3} is that the fraction of detected
 planets with binary companions increases by $\approx 6-12\%$ going from 
 $2r_\oplus$ to $\approx 1.4r_\oplus$.
 In \citet{ziegler_robo-ao_2017}'s recent summary of the Robo-AO KOI survey, 
-they reported the nearby star fraction rates for planet candidates binned by 
-Earths ($r\a < 1.6r_\oplus$), Neptunes ($1.6r_\oplus < r\a < 3.9 r_\oplus$), 
-Saturns ($3.9r_\oplus < r\a < 9 r_\oplus$), and Jupiters ($r\a > 9r_\oplus$).
-The nearby star rates and their $1\sigma$ uncertainties 
-(following~\cite{burgasser_binarity_2003}'s procedure) are as
-follows:
+they reported the fraction of planet-hosting stars with Robo-AO detected 
+companion stars, binning by Earths ($r\a < 1.6r_\oplus$), Neptunes 
+($1.6r_\oplus < r\a < 3.9 r_\oplus$), Saturns ($3.9r_\oplus < r\a < 9 
+r_\oplus$), and Jupiters ($r\a > 9r_\oplus$).
+The reported nearby star rates and their $1\sigma$ uncertainties are:
 \begin{itemize}
     \item Earths: $16.3 \pm 1.0\%$, from 1480 systems.
     \item Neptunes: $13.0 \pm 0.8\%$, from 2058 systems.
     \item Saturns: $13.6 \pm 2.0\%$, from 338 systems.
     \item Jupiters: $19.0 \pm 2.8\%$, from 247 systems.
 \end{itemize} 
-where the values of the rates are less than the $\sim 45\%$ typical for 
+where the uncertainties were calculated 
+following~\citet{burgasser_binarity_2003}.
+The absolute values of the rates are less than the $\sim 45\%$ typical for 
 Sun-like stars at least in part because of Robo-AO's sensitivity 
 (\citealt{ziegler_robo-ao_2017}'s Fig.~2;~\citealt{raghavan_survey_2010}).
+Another reason for the lower measured companion rates could be that planetary 
+systems are less likely to have 
+binary companions (as~\citealt{kraus_impact_2016} argued for close binary 
+companions).
 The uptick in the companion rate for Jupiters is likely tied to a large 
 astrophysical false positive rate~\citep{santerne_sophie_2012}.
 Going from Neptunes to Earths, the data suggest a weak increase in the 
@@ -1234,13 +1255,15 @@ primary and the secondary.
 
 Assuming a broken power-law radius distribution, we showed in 
 Fig.~\ref{fig:frac_model_3} that assuming a detected planet has equal 
-probability of orbiting the primary or secondary leads to an overestimate of
-binarity's population-level effects.
+probability of orbiting the primary or secondary probably is rarely correct.
 A planet orbiting the secondary does lead to extreme corrections.
 However, at $r\a \gtrsim 2r_\oplus$, these cases are rare outliers.
-At $r\a \lesssim 2r_\oplus$, for all of the trial values of $Z_2/Z_0$ assumed 
-in Fig.~\ref{fig:frac_model_3}, a detected planet is always more likely to 
-orbit the primary than the secondary.
+At $r_\oplus \lesssim r\a \lesssim 2r_\oplus$, for all of the trial values of 
+$Z_2/Z_0$ assumed in Fig.~\ref{fig:frac_model_3}, a detected planet is always 
+more likely to orbit the primary than the secondary.
+Only at very small apparent radii, $r\a \approx 0.5r_\oplus$, and only if 
+secondaries host as many planets as singles and primaries, does this norm 
+break down.
 
 Of course, our model's assumptions (see the list in Sec.~\ref{sec:conclusion}) 
 might not apply to the {\it Kepler}\ dataset.
