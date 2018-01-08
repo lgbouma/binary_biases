@@ -154,16 +154,15 @@ There are errors in $n_{\rm det}(\pp\a,\ps\a)$ due to misclassification of
 both planet radii and stellar properties.
 There are errors in $N_{{\rm s,a}}(\pp\a,\ps\a)$ because a 
 searchable point on the sky might be two searchable stars.
-There are errors in $p_{\rm tra}(\pp\a,\ps\a)$ because stars in binaries may 
-have different masses and radii than assumed in the single-star case.
-Binarity might also affect the observers' ability to correctly select 
-searchable stars.
+Finally, there are errors in $p_{\rm tra}(\pp\a,\ps\a)$ because stars in 
+binaries may have different masses and radii than assumed in the single-star 
+case.
 
 Correcting for binarity's observational biases is non-trivial.
 For instance, in counting the number of searchable stars, even after realizing 
 that binaries count as two stars, one must note that the multiplicity fraction 
 of stars that are searchable for a given observed transit depth is greater 
-than that the multiplicity fraction in a volume limited sample.
+than the multiplicity fraction in a volume limited sample.
 This is the familiar Malmquist bias: at a fixed $\delta_{\rm obs}$, binaries 
 are searchable out to larger distances than single stars because they are more 
 luminous.
@@ -250,8 +249,8 @@ ratio.
 We assume that the stellar radius and luminosity are uniquely related to the 
 stellar mass.
 The observers, with no a priori knowledge of the distance to a system, would 
-measure a flux, assume a stellar mass $M\a=M_1$, and estimate a stellar 
-radius $R\a = R(M\a)$ and an under-luminous system luminosity of $L_{\rm 
+measure a flux, and estimate a stellar mass $M\a=M_1$, a stellar 
+radius $R\a = R(M\a)$, and an under-estimated system luminosity of $L_{\rm 
 sys,a}(M\a) = L(M\a)$.
 
 The planets will be detected if and only if their host stars are searchable.
@@ -485,21 +484,23 @@ rate density follows:
 \Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)}\times
 \left\{ \Gamma_0(r\a, M\a)+ 
 \frac{{\rm BF}}{1 - {\rm BF}}
-\left[ \int \mathrm{d}q \,
+\left[ \int_0^1 \mathrm{d}q \,
        \frac{f(q)}{\mathcal{A}^3}\cdot
        \frac{1}{\mathcal{A}} \Gamma_1\left({r\a\over \mathcal{A}}, 
 M\a\right)\,
 \right.   
 \right. \\
 & \quad\quad\quad\quad\quad \left.\left.
-+\int {\rm d}q\, \frac{f(q)}{\mathcal{A}^3}\cdot \frac{q}{\mathcal{B}}
++\int_0^1 {\rm d}q\, \frac{f(q)}{\mathcal{A}^3}\cdot \frac{q}{\mathcal{B}}
     \Gamma_2\left({r\a\over \mathcal{B}}, qM\a\right)\cdot
 {R(qM\a) \over R(M\a)}
 q^{-1/3} \right]	\right\},
 \label{eq:general_Gamma_a}
 \end{align}
-where ${\rm BF}$ is the volume-limited binary fraction, and $\mathcal{A}$ 
-($\mathcal{B}$) is the dilution term for primaries (secondaries).
+where ${\rm BF}$ is the volume-limited binary fraction, 
+and $\mathcal{A}(q,M\a)$ [$\mathcal{B}(q,M\a)$] are the dilution terms for 
+primaries [secondaries], whose functional dependences are omitted for 
+notational simplicity.
 The dilution terms can be written
 \begin{equation}
 \mathcal{A}(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}
@@ -520,8 +521,7 @@ immediately omitted.
 
 
 A derivation of Eq.~\ref{eq:general_Gamma_a} is given in the 
-\hyperref[sec:appendix]{Appendix}; here we highlight its qualitative 
-features.
+\hyperref[sec:appendix]{Appendix}; its qualitative features are as follows.
 The terms inside the curly braces $\{ \ldots \}$ are the sum of 
 the apparent rate densities from singles, primaries, and secondaries.
 The contribution from singles is not affected by binarity.
@@ -578,7 +578,7 @@ which may be written in a closed form using the hypergeometric function.
 
 This can be understood as a Malmquist bias: at fixed observed transit 
 depth, for singles and primaries with the same luminosity, binaries are 
-searchable to a greater distance.
+searchable to a greater distance;
 In particular, the sample of searchable binaries is magnitude-limited.
 Given a searchable binary, the probability that it has a mass ratio $q$ 
 scales as
@@ -714,18 +714,18 @@ X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)}
 \frac{1}{1+\mu}
 \left[1 + \frac{1}{\mathcal{N}_q} \frac{{\rm BF}}{1-{\rm BF}}\times 
 \left(
-\int {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+4}{2}} +
+\int_0^1 {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\delta+4}{2}} +
 \right.
 \right. \\
 &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
 \left.\left.
-\int {\rm d}q\,q^{\beta+\gamma+\delta+\frac{5}{3}} 
+\int_0^1 {\rm d}q\,q^{\beta+\delta+\frac{5}{3}} 
 (1+q^\alpha)^{\frac{3}{2}}
 (1+q^{-\alpha})^{\frac{\delta+1}{2}}
-\right)\right].
+\right)\right],
 \label{eq:powerlaw_vary_binary}
 \end{align}
-
+where $\gamma$ does not appear because of the marginalization over $M\a$.
 For $\alpha = 3.5$, $\beta=0$, $\gamma=0$, $\delta=-2.92$, the 
 summed integrals in Eq.~\ref{eq:powerlaw_vary_binary} give $(\ldots)\approx 
 1.50249$. %171211_model_integrals.nb
@@ -820,7 +820,7 @@ HJ},0}/\Lambda_{\rm HJ,a} = 1.13$, where
 and similarly for $\Lambda_{\rm HJ,0}$.
 %occ_rate_vs_radius_model_3_withtext_Zsub2_0.00_rpu_22.5.pdf
 If $Z_2/Z_0>0$, binarity affects the apparent hot Jupiter rate less: when 
-$Z_2/Z_0=0.5$, we find $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 1.06$
+$Z_2/Z_0=0.5$, we find $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 1.06$.
 
 \paragraph{Fraction of detected planets from a given source}
 
@@ -879,10 +879,12 @@ radii of $2r_\oplus$ to $\approx 1.4r_\oplus$, the fraction of detected
 planets with binary companions increases by $\approx 6-12\%$, depending on the 
 assumed value of $Z_2/Z_0$.
 Let the fraction of total detected planets from primaries at a given 
-apparent radius be $F_1(r\a)$, and from secondaries let it be $F_2(r\a)$.
+apparent radius be $F_1(r\a)$, so $F_1(r\a) \equiv n_{\rm det}^1(r\a)/n_{\rm 
+det}^{\rm tot}$.
+Let the analogous quantity for secondaries be $F_2(r\a)$.
 In the planet-less secondaries case ($F_2(r\a)=0$), one can 
 analyze Eqs~\ref{eq:n_det_0} and~\ref{eq:n_det_1} semi-analytically and show 
-that $F_1(2r_\oplus)/F_1(2r_\oplus/\sqrt{2}) \approx 1.19$.
+that $F_1(2r_\oplus/\sqrt{2})/F_1(2r_\oplus) \approx 1.19$.
 %check_companion_fractions.py, and LB's notes 2017/12/21.0
 Intuitively speaking, this ``shift'' is a feature of any radius distribution 
 that declines at large radii, and flattens below some cutoff $r_{\rm c}$.
@@ -962,14 +964,14 @@ island in period-radius space, rather than as a continuous component of a
 power law distribution.
 This means that the apparent HJ rates computed in 
 Sec.~\ref{sec:model_3} are probably inaccurate.
-If we instead consider a Gaussian radius shape function,
+Instead, let us consider a Gaussian radius shape function,
 \begin{equation}
 f(r) \propto \exp \left( -\frac{(r-\bar{r})^2}{2\sigma^2} \right),
 \end{equation}
 with $\bar{r} = 14r_\oplus$ and $\sigma = 2r_\oplus$.
 As always, $\Gamma_i(r) = Z_i f(r)$.
 We then compute $\Gamma\a(r\a)$, and plot it in Fig.~\ref{fig:gaussian_HJ}.
-Integrating to find hot Jupiter rates,
+Integrating for $r\a > 8r_\oplus$ to find hot Jupiter rates,
 we find the opposite effect as in the power law model.
 For $Z_2/Z_0>0$, 
 the apparent HJ rate is {\it greater} than the true rate for singles.
@@ -979,6 +981,10 @@ $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 0.81$.
 %int_rate_density_vs_radius_model_7_withtext*manyZs.pdf
 For the case when no hot Jupiters orbit secondaries, $\Lambda_{{\rm HJ},0} 
 \approx \Lambda_{\rm HJ,a}$ to within one percent.
+Qualitatively, the apparent HJ rate can be greater than the true rate for 
+singles because binary systems can have an extra star that yields 
+hot Jupiter detections.
+
 
 \begin{figure}[!tb]
     \centering
@@ -1030,9 +1036,9 @@ These efforts revealed that the one-year terrestrial planet occurrence rate
 is between $\approx\! 0.03$ and $\approx\!1$ per Sun-like star,
 depending on assumptions that are made when calculating the rate 
 (\citealt{burke_terrestrial_2015}'s Fig.~17).
-In Sec.~\ref{sec:model_3}, our power law model indicates that when singles and 
-secondaries host the same number of planets, the apparent rate is 50\% higher 
-than the true rate around single stars.
+In Sec.~\ref{sec:model_3}, our power law model indicates that when primaries, 
+singles, and secondaries host the same number of planets, the apparent rate is 
+50\% higher than the true rate around single stars.
 Though this bias seems large, it is currently smaller than the other 
 systematic factors that dominate the dispersion in $\eta_\oplus$ 
 measurements.
@@ -1073,7 +1079,7 @@ Refitting for the metallicity exponent in $\Lambda_{\rm HJ} \propto 10^{\beta
 account for a $\approx 20\%$ relative difference in the measured rates between 
 the CKS and {\it Kepler}\ samples~--~not a factor of two\footnote{
     \citet{petigura_CKS_2017} recently found $\beta = 3.4^{0.9}_{-0.8}$.
-    This gives an $\approx 25\%$ relative difference, indicating metallicity 
+    This gives a $\approx 25\%$ relative difference, indicating metallicity 
     could 
     account for about half of the ``hot Jupiter rate discrepancy''.
 }.
@@ -1138,7 +1144,7 @@ systems, this might bias the rates low.
 Alternatively, {\it TESS}\ is expected to discover over $10^4$ 
 giant planets~\citep{ricker_transiting_2014,sullivan_transiting_2015}.
 Though they will be difficult to distinguish from false positives, one 
-possible use of this sample will to measure an occurrence rate of 
+possible use of this sample will be to measure an occurrence rate of 
 short-period giant planets with minimal error from counting statistics.
 Our models suggest that binarity will only become an appreciable fraction of 
 the error budget at the $\approx 10\%$ precision level.
@@ -1447,11 +1453,11 @@ $\Gamma(r, M)$, and $\mathcal{N}(r\a, M\a; r, M)$, the number (per
 unit $(r\a, M\a)$) of searchable stars that give $(r\a, M\a)$  when 
 the true system actually has $(r, M)$. Mathematically,
 \begin{align}
-n_{\rm det}(r_a, M_a) &=
-\sum_i n_{\rm det}^i(r_a, M_a) \\
+n_{\rm det}(r_a, M\a) &=
+\sum_i n_{\rm det}^i(r_a, M\a) \\
 &=
 \sum_i \int \mathrm{d}r \mathrm{d}M \,
-\mathcal{N}_{\rm s}^i(r_a,M_a; r,M)
+\mathcal{N}_{\rm s}^i(r_a,M\a; r,M)
 \cdot\Gamma_i(r,M) \cdot p_{\rm tra}(r,M),
 \label{eq:n_det}
 \end{align}
@@ -1476,90 +1482,96 @@ M\a) \cdot p_{\rm tra}(r\a, M\a).
 \end{equation}
 
 \paragraph{Primaries in binaries}
-The number of primaries with apparent parameters $(r_a,M_a)$ given the 
+The number of primaries with apparent parameters $(r_a,M\a)$ given the 
 true parameters $(r,M)$ is
 \begin{equation}
-\mathcal{N}_{\rm s}^1(r_a, M_a; r, M)
-=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^1(r_a, M_a, q; r, M),
+\mathcal{N}_{\rm s}^1(r_a, M\a; r, M)
+=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^1(r_a, M\a, q; r, M),
 \label{eq:fancyN_s_1}
 \end{equation}
 where $f(q)$ is the volume-limited binary mass ratio distribution.
 
 Since we assume $\ps\a=\ps_1$,
 \begin{equation}
-\mathcal{N}_{{\rm s},q}^1(r_a, M_a, q; r, M) \propto \delta(M_a-M).
+\mathcal{N}_{{\rm s},q}^1(r_a, M\a, q; r, M) \propto \delta(M\a-M).
 \end{equation}
 In this case, $\mathcal{N}_{{\rm s},q}^1$ is non-zero only at 
 $r_a=R_a\sqrt{\delta_{\rm obs}}$, 
 and the observed depth is
 \begin{equation}
 \delta_{\rm obs}
-= \left[{r\over R(M_a)}\right]^2\times {L(M_a) \over L_{\rm sys}(M_a, q)}
-\equiv \left[{r\over R(M_a)}\right]^2\times \mathcal{A}(q,M\a)^2
+= \left[{r\over R(M\a)}\right]^2\times {L(M\a) \over L_{\rm sys}(M\a, q)}
+\equiv \left[{r\over R(M\a)}\right]^2\times \mathcal{A}(q,M\a)^2,
 \label{eq:delta_obs_primaries} 
+\end{equation}
+where
+\begin{equation}
+\mathcal{A}(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}.
 \end{equation}
 The normalization of $\mathcal{N}_{{\rm s},q}^1$ is given by the number of 
 binaries that are searchable for a signal $\delta_{\rm obs}$ and that have the 
 mass ratio $q$:
 \begin{equation}
 N_{\rm s}^0(\delta_{\rm obs}, 
-L(M_a))\cdot
-{n_b\over n_s}\left[L_{\rm sys}(M_a, q) \over L(M\a)\right]^{3/2}
-=N_{\rm s}^0(\delta_{\rm obs}, L(M_a))
+L(M\a))\cdot
+{n_b\over n_s}\left[L_{\rm sys}(M\a, q) \over L(M\a)\right]^{3/2}
+=N_{\rm s}^0(\delta_{\rm obs}, L(M\a))
 \cdot \frac{{\rm BF}}{1 - {\rm BF}} \cdot {1 \over \mathcal{A}(q,M\a)^3}.
 \label{eq:primary_normalization}
 \end{equation}
-
 Thus,
 \begin{align}
 \notag
-\mathcal{N}_{{\rm s}, q}^1(r_a, M_a, q; r, M)
-&=N_{\rm s}^0(\delta_{\rm obs}, L(M_a))
+\mathcal{N}_{{\rm s}, q}^1(r_a, M\a, q; r, M)
+&=N_{\rm s}^0(\delta_{\rm obs}, L(M\a))
 \cdot \frac{{\rm BF}}{1 - {\rm BF}} \cdot {1 \over \mathcal{A}(q,M\a)^3}\\
-&\times\delta \left[r_a-r\mathcal{A}(q,M\a)\right]\delta(M_a-M).
-%&=N_{\rm s}^0(\delta_{\rm obs}, L(M_a))\cdot\mu(\mathrm{BF},M_a)\\
-%&\times\delta \left(r_a-r\sqrt{{L(M_a) \over L_{\rm sys}(M_a, 
-%q)}}\right)\delta(M_a-M).
+&\times\delta \left[r_a-r\mathcal{A}(q,M\a)\right]\delta(M\a-M).
 \label{eq:N_s_1}
 \end{align}
 
 
 \paragraph{Secondaries in binaries}
-In this case, $M=qM_1=qM_a$, so
+In this case, $M=qM_1=qM\a$, so
 \begin{equation}
-\mathcal{N}_{{\rm s},q}^2(r_a, M_a, q; r, M)
-\propto \delta\left(M_a-{M\over q}\right).
+\mathcal{N}_{{\rm s},q}^2(r_a, M\a, q; r, M)
+\propto \delta\left(M\a-{M\over q}\right).
 \label{eq:fancyN_s_2_prop}
 \end{equation}
 Again $\mathcal{N}_{\rm s}^2$ is non-zero only at $r_a=R_a\sqrt{\delta_{\rm 
         obs}}$, but this 
 time
 \begin{equation}
-\delta_{\rm obs} = \left[{r\over R(qM_a)}\right]^2 \times {L(qM_a) 
-    \over L_{\rm sys}(M_a, q)}.
+\delta_{\rm obs} = \left[{r\over R(qM\a)}\right]^2 \times {L(qM\a) 
+    \over L_{\rm sys}(M\a, q)}
+    \equiv \left[{r\over R(M\a)}\right]^2\times \mathcal{B}(q,M\a)^2,
+\end{equation}
+where
+\begin{equation}
+\mathcal{B}(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm 
+            sys}(M\a, q)} }.
 \end{equation}
 The normalization remains the same as the previous case (we are counting the 
-searchable stars at a given observed depth $\delta_{\rm obs}$, total 
+searchable stars at a given observed depth $\delta_{\rm obs}$, and the total 
 luminosity of the binary is the same).
 Thus,
 \begin{equation}
-\mathcal{N}_{\rm s}^2(r_a, M_a; r, M)
-=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^2(r_a, M_a, q; r, M),
+\mathcal{N}_{\rm s}^2(r_a, M\a; r, M)
+=\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^2(r_a, M\a, q; r, M),
 \end{equation}
 where
 \begin{align}
 \notag
-\mathcal{N}_{\rm s}^2(r_a, M_a; r, M; q)
-&=N_{\rm s}^0(\delta_{\rm obs}, L(M_a)) \cdot \frac{{\rm BF}}{1 - {\rm BF}} 
+\mathcal{N}_{{\rm s},q}^2(r\a, M\a, q; r, M)
+&=N_{\rm s}^0(\delta_{\rm obs}, L(M\a)) \cdot \frac{{\rm BF}}{1 - {\rm BF}} 
 \cdot {1 \over \mathcal{A}(q,M\a)^3}\\
-&\times \delta \left(r_a-r\sqrt{ \left[{R(M_a)\over R(qM_a)}\right]^2 
-    {L(qM_a) 
-        \over L_{\rm sys}(M_a, q)} }\right)\delta\left(M_a-{M\over q}\right).
+&\times 
+	\delta \left[r_a-r\mathcal{B}(q,M\a)\right]
+	\delta\left(M\a-{M\over q}\right).
 \label{eq:mathcal_N_s_2}
 \end{align}
 
 One might worry in Eq.~\ref{eq:mathcal_N_s_2} that we opt to write 
-$\mathcal{N}\s^2 \propto \delta(M_a - M/q)$, rather than $\propto \delta(M_a q 
+$\mathcal{N}\s^2 \propto \delta(M\a - M/q)$, rather than $\propto \delta(M\a q 
 - M)$ or some other delta function with the same functional dependence, 
 but a different normalization once integrated.
 We do this because the delta function in Eq.~\ref{eq:mathcal_N_s_2} is 
@@ -1585,35 +1597,27 @@ n_{\rm det}^1(r\a, M\a)
 \cdot\Gamma_1(r, M) \cdot p_{\rm tra}(M)\\
 &=N\s^0(\delta_{\rm obs}, L(M\a))\cdot p_{\rm tra}(M\a) \cdot
 {\mathrm{BF}\over{1-\mathrm{BF}}} \int {\mathrm{d}q \over 
-    \mathcal{A}^4}\,f(q)\,\Gamma_1\left({r_a\over\mathcal{A}}, M\a\right),
+    \mathcal{A}^4}\,f(q)\,\Gamma_1\left({r_a\over\mathcal{A}}, M\a\right).
 \label{eq:n_det_1}
 \end{align}
-where
-\begin{equation}
-\mathcal{A}(q, M\a)=\sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}.
-\end{equation}
 Finally,
 \begin{align}
 n_{\rm det}^2(r\a, M\a)
+\notag
 &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_{\rm s}^2(r\a, M\a; r, M)
 \cdot\Gamma_2(r, M) \cdot p_{\rm tra}(M)\\
 &=
 N\s^0(\delta_{\rm obs}, L(M\a))\cdot \frac{{\rm BF}}{1 - {\rm BF}}
 \int {q \mathrm{d}q \over 
-{\mathcal{A}^3\mathcal{B}}}\,f(q)\,\Gamma_2(r_a/\mathcal{B}, 
-qM\a)\,p_{\rm 
-    tra}(qM\a),
+{\mathcal{A}^3\mathcal{B}}}\,f(q)\,\Gamma_2\left({r_a\over\mathcal{B}}, 
+qM\a\right)\,p_{\rm 
+    tra}(qM\a).
 \label{eq:n_det_2}
 \end{align}
-where
-\begin{equation}
-\mathcal{B}(q, M\a)={R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm 
-            sys}(M\a, q)} }.
-\end{equation}
 
 
 \paragraph{General formula for apparent occurrence rate}
-Using the results above, the apparent rate density,
+Using the above results, the apparent rate density,
 \begin{align}
 \Gamma\a(r\a,M\a) &= 
 \frac{1}{N_{\rm s,a}(r\a,M\a) p_{\rm tra}(r\a,M\a)} \times
@@ -1638,6 +1642,7 @@ M\a\right)\,
 qM\a\right)\,
 {R(qM\a) \over R(M\a)}
 q^{-1/3} \right]	\right\}.
+\label{eq:final_formula}
 \end{align}
 This equation is used to derive Eqs.~\ref{eq:model5_apparent_rate_density} 
 and~\ref{eq:powerlaw_vary_binary}, and is numerically integrated to create 
@@ -1647,6 +1652,34 @@ It is validated in limits in which it is possible to write down the answer
 (e.g., Eq.~\ref{eq:model_1_apparent_rate_density}), and also against a Monte 
 Carlo realization of the twin binary models (Secs.~\ref{sec:model_1} 
 and~\ref{sec:model_2}).
+
+Noting the definition of $\mu$ in Eq.~\ref{eq:mu_general},
+Eq.~\ref{eq:final_formula} can also be expressed as
+\begin{align}
+\notag
+\notag
+\Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)} \cdot
+   \left[ \Gamma_0(r\a, M\a)\phantom{\tilde \Gamma}\right.&\\
+   &\left.+\mu(\mathrm{BF}, M\a)\cdot
+   %\tilde\Gamma_1(r\a, M\a)
+   \left\langle {1 \over \mathcal{A}}\cdot\Gamma_1\left({r\a\over\mathcal{A}}, M\a\right)
+   +%\tilde\Gamma_2(r\a, M\a)
+   {q \over \mathcal{B}}\cdot\Gamma_2\left({r\a\over\mathcal{B}}, qM\a\right) \cdot {R(qM\a) \over R(M\a)}q^{-1/3}\right\rangle
+   \right],
+\end{align}
+where the angle brackets denote averaging over $f(q)/\mathcal{A}^3$. This form
+shows that the fraction $\mu$ and mass ratio distribution 
+$f(q)/\mathcal{A}^3$ of binaries {\it in the searchable volume} are enough to 
+describe the contributions from binaries to $\Gamma\a$.
+The fraction $\mu$ gives the relative contributions from singles and binaries,
+and $f(q)/\mathcal{A}^3$ weights the contributions from binaries with various 
+mass ratios.
+The apparent rate density at each mass ratio ({\it i.e.}, the terms in
+the angle brackets) is the rate density of systems that give the apparent
+$(r\a, M\a)$, corrected for the overestimated transit probability around
+secondaries.
+
+
 
 
 \newpage
