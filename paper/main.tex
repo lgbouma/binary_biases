@@ -678,7 +678,7 @@ secondaries comes from a correction for the overestimated transit probability.
 
 
 \paragraph{Ratio of searchable binaries to singles}
-We must also specify the exact form of $\mu({\rm BF},M\a)$, the ratio of 
+We must also specify the exact form of $\mu$, the ratio of 
 the number of searchable binary systems to singles.
 Given the observed signal $\delta_{\rm obs}$ and apparent stellar mass $M\a$, 
 recall that the maximum searchable distance for singles and binaries are 
@@ -692,15 +692,14 @@ Applying Equation~\ref{eq:N_searchable_prop},
 f(q)\,\mathrm{d}q.
 \label{eq:mu_general}
 \end{equation}
-If $\mathrm{BF}$ is independent of $q$, $L \propto M^\alpha$, and $f(q) 
+If the binary fraction is independent of $q$, $L \propto M^\alpha$, and $f(q) 
 \propto q^\beta$, this simplifies to
 \begin{equation}
 \mu =\frac{{\rm BF}}{1 - {\rm BF}}\cdot {1\over{1+\beta}}\int_0^1 
-\left(1+q^\alpha\right)^{3/2} q^\beta \,\mathrm{d}q,
+\left(1+q^\alpha\right)^{3/2} q^\beta \,\mathrm{d}q.
 \label{eq:mu_power_laws}
 \end{equation}
-which can also be rewritten using the hypergeometric function.
-
+%which can also be rewritten using the hypergeometric function.
 \begin{figure}[!tb]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/mass_ratio_distribution.pdf}
@@ -714,7 +713,6 @@ which can also be rewritten using the hypergeometric function.
     }
     \label{fig:q_distribn_mag_limited}
 \end{figure}
-
 This can be understood as a Malmquist bias: at fixed observed transit 
 depth, for singles and primaries with the same luminosity, binaries are 
 searchable to a greater distance;
@@ -743,7 +741,7 @@ important to draw binaries from a correctly biased mass-ratio distribution
 
 \section{Realistic Star and Planet Distributions}
 \label{sec:more_complicated}
-This section applies our general equation for the apparent rate 
+We now apply our general equation for the apparent rate 
 density (Equation~\ref{eq:general_Gamma_a}) to study binarity's effects in 
 regimes of observational interest.
 In what follows, we will write the rate density for each type of star, 
@@ -767,7 +765,7 @@ relative values of the $Z_i$'s.
 \subsubsection{Twin binaries}
 We begin introducing realism by keeping all binaries as twins, but letting the 
 planet radius distributions vary.
-Specifically, we take
+First, we assume a power law,
 \begin{equation}
 \Gamma_i(r) = Z_i f(r) = Z_i r^\delta/\mathcal{N}_r,
 \end{equation}
@@ -785,7 +783,7 @@ The resulting apparent rate density is
 \end{equation}
 which is quite similar to the twin binary, fixed-planet case 
 (Equation~\ref{eq:model_1_apparent_rate_density}), 
-except for the radius dependence and normalization.
+except that the radius dependence and normalization are different.
 As in Section~\ref{sec:model_1}, $\mu = 2^{3/2} n\b/n\s$.
 If the $Z_i$'s are equal, the ``correction factor'' relative to the rate 
 density for singles becomes quite simple:
@@ -796,29 +794,30 @@ density for singles becomes quite simple:
 \frac{1 + 2^{\frac{\delta+3}{2}}\mu}{1 + \mu}.
 \label{eq:power_law_correction}
 \end{align}
-If the binary fraction $0.1$, $\mu\approx 0.15$. Taking $\delta=-2.92$ from 
+If the binary fraction is $0.1$, $\mu\approx 0.15$. Taking $\delta=-2.92$ from 
 \citet{howard_planet_2012},  we get a correction factor $\Gamma\a/\Gamma_0 = 
 1.004$.
 In other words, the apparent rate density is an {\it over}estimate compared to 
 the rate density of single stars, with a relative difference $\delta \Gamma_0 
 = |\Gamma_0 - \Gamma\a | / \Gamma_0$ of 0.4\%.
 This is quite a small effect!
-Note though that it could change if the $Z_i$'s are not equal.
-Also, the power law radius distribution $f(r) \propto r^\delta$ diverges for 
-$\delta < 0$; \citet{howard_planet_2012}'s results indicate that this
-approximation is good for $r\a\gtrsim 2r_\oplus$.
-Similarly, it is nonsensical for $f(r)$ to be finite above some upper radius 
-limit $r_u$, perhaps around $\approx 24r_\oplus$, based on the most inflated 
-hot Jupiters.
-An upper cut-off of $r_u$ would lead to smaller values of $\Gamma(r\a)$ 
-down to $r_u/\sqrt{2}$, compared to an intrinsic power law without the cut-off.
-We are not particularly interested in this effect; there are better 
+Clearly though, it cannot apply at small radii, since $f(r) \propto r^\delta$ 
+diverges; \citet{howard_planet_2012}'s 
+results indicate that the power law planet radius distribution holds for 
+$r\a\gtrsim 2r_\oplus$.
+It is similarly nonsensical for $f(r)$ to be finite above some upper radius 
+limit $r_{\rm u}$, perhaps around $\approx 24r_\oplus$, based on the most 
+inflated hot Jupiters.
+An upper cut-off of $r_{\rm u}$ would lead to smaller values of $\Gamma(r\a)$ 
+down to $r_{\rm u}/\sqrt{2}$, compared to an intrinsic power law without the 
+cut-off.
+We are not particularly interested in this effect because there are better 
 models for hot Jupiter occurrence rates that we will discuss in 
 Section~\ref{sec:further_models}.
-If the assumptions behind this model (listed in 
-Section~\ref{sec:general_formula}) are at all applicable in real transit surveys, 
-this suggests that for $2r_\oplus \lesssim r\a \lesssim 17r_\oplus$, 
-binarity's impact on derived occurrence rates is quite small.
+If the assumptions behind this model are at all applicable to real transit 
+surveys, Equation~\ref{eq:power_law_correction} suggests that for $2r_\oplus 
+\lesssim r\a \lesssim 17r_\oplus$, binarity's impact on apparent occurrence 
+rates is quite small.
 
 
 
@@ -831,7 +830,7 @@ $f(q) = q^\beta/\mathcal{N}_q$, for $\mathcal{N}_q$ the normalization.
 This changes $\mu$ (Equation~\ref{eq:mu_general} simplifies to 
 Equation~\ref{eq:mu_power_laws}).
 It may also affect the rate density, which could be a function of the 
-(varying) stellar mass.
+varying stellar mass.
 Absorbing this dependence into a power law as well,
 \begin{equation}
 \Gamma_i(r,M) = Z_i \times \frac{r^\delta}{\mathcal{N}_r} \times
@@ -875,7 +874,7 @@ For $n\b / (n\b + n\s)=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.048$; the
 relative difference between the apparent rate density and the rate density 
 around singles is 4.8\%.
 This indicates that considering only twin binaries gave us correct 
-intuition: for a power-law radius distribution 
+intuition: for a power law radius distribution 
 ($2r_\oplus \lesssim r\a \lesssim 17r_\oplus$) in which there are the same 
 number of planets orbiting singles, primaries, and secondaries, binarity 
 influences apparent planet occurrence rates around Sun-like stars at the 
@@ -885,7 +884,7 @@ $\sim$few percent level.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Varying stars; broken power-law planet radius distribution}
+\subsection{Varying stars; broken power law planet radius distribution}
 \label{sec:model_3}
 
 \begin{figure}[!t]
@@ -910,7 +909,7 @@ $\sim$few percent level.
     \label{fig:occ_rate_model_3_log}
 \end{figure}
 
-Though the details of the true radius distribution $\Gamma_i(r)$ at 
+Though the details of the planet radius distribution $\Gamma_i(r)$ at 
 $r<2r_\oplus$ are currently an active topic of research, we can consider how 
 binarity affects this regime under different plausible assumptions.
 For instance, assume that the true radius shape function is
@@ -925,7 +924,7 @@ r^\delta & \text{for } r\geq 2r_\oplus \\
 \right.
 \label{eq:model3_radius_distribution}
 \end{align}
-As in the previous model, we assume that the observers know the true 
+As in the previous model, we presume that the observers know the true 
 properties of all singles and primaries. The masses, radii, 
 and luminosities of stars vary as $R \propto M \propto L^{\frac{1}{\alpha}}$.
 Our ``nominal model'' remains the same: 
@@ -979,7 +978,7 @@ $Z_2/Z_0=0.5$, we find $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 1.06$.
         (dotted lines).
         Three different values for $Z_2/Z_0$ are selected: $1$ (blue), $0.5$ 
         (orange), $0$ (green).
-        The assumed true planet radius distribution is a broken power-law
+        The assumed true planet radius distribution is a broken power law
         (Equation~\ref{eq:model3_radius_distribution}; same as 
         Figure~\ref{fig:occ_rate_model_3_log}).
     }
@@ -1182,8 +1181,9 @@ planets orbiting Sun-like stars has been independently measured by
 These efforts found that the one-year terrestrial planet occurrence rate 
 is between $\approx\! 0.03$ and $\approx\!1$ per Sun-like star,
 depending on assumptions that are made when calculating the
-rate~\citep[see][, Figure~17]{burke_terrestrial_2015}.
-In Section~\ref{sec:model_3}, our power law model indicates that when primaries, 
+rate~\citep[see][Figure~17]{burke_terrestrial_2015}.
+In Section~\ref{sec:model_3}, our power law model indicates that when 
+primaries, 
 singles, and secondaries host the same number of planets, the apparent rate is 
 50\% higher than the true rate around single stars.
 Though this bias seems large, it is currently smaller than the other 
@@ -1248,19 +1248,19 @@ high~\citep{bastien_radial_2014}.
 
 Ignoring these complications, in this work we concentrated on binarity's 
 effects on star counts and the apparent radii of detected planets.
-Assuming a power-law radius distribution, and that no secondaries host HJs,
+Assuming a power law radius distribution, and that no secondaries host HJs,
 our results from Section~\ref{sec:model_3} indicate that binarity 
 could lead to underestimated HJ rates relative to singles by a multiplicative 
 factor of at most $\approx 1.13$.
 We later pointed out in Section~\ref{sec:further_models} that assuming a 
-power-law radius distribution is probably wrong if one wishes to study the HJ 
+power law radius distribution is probably wrong if one wishes to study the HJ 
 rate discrepancy.
 If we instead assumed a Gaussian radius 
 distribution~\citep[following][]{petigura_CKS_2017}, apparent 
 HJ rates are {\it greater} than the true rate around singles: the effect goes 
 the wrong way.
 \begin{comment}
-If we believe the assumed power-law radius distribution, we can ask whether 
+If we believe the assumed power law radius distribution, we can ask whether 
 this ``correction factor'' might help resolve the discrepancy.
 Explicitly, we ask: what is the probability of \citet{wright_frequency_2012}'s 
 result, given a rate drawn from the stated bounds of~\citet{petigura_CKS_2017}?
@@ -1279,7 +1279,7 @@ find that 14\% of RV surveys would detect at least 10 hot Jupiters, still
 suggesting a weak discrepancy.
 
 This suggestion should be taken with caution, because it (likely incorrectly) 
-assumes a power-law radius distribution.
+assumes a power law radius distribution.
 \end{comment}
 The ``hot Jupiter island'' reported by~\citet{petigura_CKS_2017} cannot 
 possibly be part of a continuous power law. 
@@ -1305,24 +1305,24 @@ hot Jupiters.
 
 
 \paragraph{Practical effects: smooth detection efficiencies; finite SNR floors}
-To apply this study to {\it Kepler}\ and other real
-transit surveys, a few practical concerns become pressing.
+To apply this study to real transit surveys, a few practical concerns become 
+pressing.
 One concern is that space-based missions with telemetric requirements
 are often required to select target stars.
 Even if the selection process is aimed at creating an SNR-limited
 survey, as~\citet{batalha_selection_2010} did for {\it Kepler},
-uncertainties about stellar parameters and on-sky instrument performance
+uncertainties in stellar parameters and the modeled instrument performance
 can lead to deviations away from an SNR-limited stellar sample.
 
 Further, in most transit surveys the detection efficiency is not
 a step function in SNR.
 Transit survey pipeline detection efficiencies are usually smooth
-functions in SNR; see for example the injection \& recovery 
+functions in SNR; see for example the injection-recovery 
 simulations 
 performed by~\citet{christiansen_measuring_2016} on {\it Kepler}\ data, 
-and the resulting smooth functional form adopted 
+and the resulting smooth detection efficiency adopted 
 by~\citet{fulton_california-_2017}.
-If we were to take a smooth detection probability in SNR, we would need to 
+If we were to assume a smooth detection probability in SNR, we would need to 
 include a detection efficiency term in 
 Equation~\ref{eq:apparent_rate_density} to inversely weight for planets 
 with low probabilities of being detected.
@@ -1334,8 +1334,8 @@ ${\rm SNR} \approx 12$ for {\it Kepler}
 To a good approximation, this allows one to use the boolean distinctions 
 ``searchable'' and ``not searchable'' for signals of an observed depth (at 
 fixed orbital period).
-This also makes the survey strictly SNR-limited, rather than ``fuzzily 
-SNR-limited''.
+By making the survey strictly SNR-limited, rather than ``fuzzily 
+SNR-limited'', binarity's effects become much easier to model.
 Since the minimum SNR for detection is set in an arbitrary manner 
 anyway\footnote{For example, {\it Kepler}'s threshold of ${\rm SNR}=7.1$ was 
 set for there to be no more than one statistical false alarm across the full 
@@ -1347,7 +1347,7 @@ clearer conceptual
 ground, and facilitate the process of converting the observed distributions
 of apparent radii into true radius distributions.
 
-Finally, our calculations have ignored the fact that any given transit 
+Finally, our calculations also ignore the fact that any given transit 
 survey's finite SNR floor might censor the apparent rate density.
 If the surveyed stars all have the same size, this is equivalent to 
 saying that there might be a cutoff in apparent planet radii, below which no 
@@ -1430,7 +1430,7 @@ using the same assumption that detected planets are as likely to orbit the
 primary and the secondary.
 \end{comment}
 
-Assuming a broken power-law radius distribution, we showed in 
+Assuming a broken power law radius distribution, we showed in 
 Figure~\ref{fig:frac_model_3} that there are many cases where a detected 
 planet 
 is much more likely to orbit the primary.
@@ -1538,7 +1538,7 @@ The assumptions that make the model tractable are:
 Allowing for these conditions, many results follow:
 \begin{itemize}
 %
-\item Assuming a power-law planet radius distribution, and that the same 
+\item Assuming a power law planet radius distribution, and that the same 
 number of planets orbit singles, primaries, and secondaries, binarity 
 influences apparent planet occurrence rates around Sun-like stars at the 
 $\sim$few percent level from radii $2r_\oplus \lesssim r\a \lesssim 
