@@ -138,7 +138,7 @@ assuming the survey is signal-to-noise limited, and given the true
 underlying planet occurrence rates.
 
 This paper is organized as follows.  The next section enumerates the
-various errors that arise from unrecognized binaries.  Then, in
+various errors that arise from unrecognized binaries.  Then in
 Section~\ref{sec:simplest}, we develop an idealized model of a transit
 survey in which all planets have identical properties, and all stars
 are identical except that some fraction are in binary systems.  This
@@ -268,8 +268,9 @@ secondary star of a binary.  Such differences could be caused by the
 requirement for long-term dynamical stability, or differences in the
 planet formation process.  When the search sample includes both
 singles and binaries, the detected planets are thereby drawn from
-different occurrence distributions~\citep[see, {\it
-e.g.},][]{wang_occurrence_2015}.
+different occurrence 
+distributions~\citep[{\it e.g.},][]{
+    wang_occurrence_2015,kraus_impact_2016}.
 
 The other problem is an observational effect.  Even after the
 astronomers learn about binaries and attempt to correct for their
@@ -345,8 +346,8 @@ We can now understand that the observers are unwittingly reporting an
 {\it apparent} occurrence rate $\Lambda\a(r\a)$, a function of
 apparent radii.  The apparent occurrence rate is the same as the {\it
 true} occurrence rate for transit signals of amplitude $\delta_{\rm
-obs} = (r\a/R\a)^2$, but this latter quantity is typically not what
-observers are interested in studying.
+obs} = (r\a/R\a)^2$, but this latter quantity is less astrophysically
+significant.
 
 Finally, it is helpful to introduce an apparent rate density
 $\Gamma\a$, the average number of planets per star per unit apparent
@@ -1211,8 +1212,8 @@ Jupiter rate discrepancy''.  }.  \citeauthor{guo_metallicity_2017}\!
 concluded that ``other factors, such as binary contamination and
 imperfect stellar properties'' must also be at play.
 
-The hypothesis that binarity might matter is grounded in the fact that
-radial velocity and transit surveys treat binarity differently.
+Binarity might affect the inferred occurrence rates because 
+radial velocity and transit surveys treat binaries differently.
 Radial velocity surveys typically reject both visual and spectroscopic
 binaries \citep[\textit{e.g.},][]{wright_frequency_2012}.  Transit
 surveys observe binaries, but the question of whether they were
@@ -1345,7 +1346,7 @@ below the cutoff in apparent radius would simply drop to zero.
 
 \paragraph{Connecting high resolution imaging to occurrence rates}
 One reason to address stellar multiplicity in transit surveys is that
-it changes the interpretation of planet candidates on a
+it can radically alter the interpretation of planet candidates on a
 system-by-system level.  Consequently, high resolution imaging
 campaigns have measured the multiplicities of almost all {\it Kepler}\
 Objects of Interest~\citep{
@@ -1355,31 +1356,43 @@ Objects of Interest~\citep{
   wang_influence_2015,wang_influence_2015-1,baranec_robo-ao_2016,ziegler_robo-ao_2017}.
 The results of these programs have been collected
 by~\citet{furlan_kepler_2017}, and they represent an important advance
-in understanding the KOI sample's multiplicity statistics.  In
-particular, they can be immediately applied to rectify binarity's
-effects on the mass-radius diagram~\citep{furlan_densities_2017}.
+in understanding the KOI sample's multiplicity statistics.  
+An immediate application is to reassess the radii of detected planets.
+Doing so, \citet{hirsch_assessing_2017} find that for their sample of KOIs
+in binaries, the planet radii are underestimated by factors $r/r\a = 1.17$
+if all planets orbit primaries, and $r/r\a = 1.65$ if detected
+planets are equally likely to orbit primaries and singles.
+%In particular, they can be immediately applied to rectify binarity's
+%effects on the mass-radius diagram~\citep{furlan_densities_2017}.
 
-These high resolution imaging campaigns are beginning to connect with
+These results are beginning to connect with
 occurrence rate calculations: using~\citet{furlan_kepler_2017}'s
-catalog, recent studies tested the effects of removing KOI hosts with
+catalog, recent studies have tested the effects of removing KOI hosts with
 known companions, reducing contamination in the ``numerator'' of the
 occurrence rate (\citealt{fulton_california-_2017};
-\citealt{petigura_CKS_2017}).  While this is a good first step, the
+\citealt{petigura_CKS_2017}).  
+While these are good first steps, the
 denominator remains uncorrected.  To count the number of stars that
 were searched, further work on understanding the multiplicity
-statistics of KOI and non-KOI stars is necessary. It may be possible
-to perform through a non-KOI star high-resolution imaging effort, or
-perhaps by combining {\it Gaia} parallaxes with measured photometric
-fluxes to identify binary systems.
+statistics of KOI and non-KOI stars is necessary. In particular,
+a non-KOI star high-resolution imaging effort could help estimate
+the systematic errors incurred by assuming all surveyed stars are
+single.
+An alternate approach would be to combine {\it Gaia}
+parallaxes with measured photometric fluxes and identify binary systems
+as those that are 
+overluminous~\citep[\textit{e.g.},][]{widmark_inferring_2018}.
 
 \paragraph{Does a detected planet orbit the primary or secondary?}
-A separate important step towards rectifying binarity's effects is
+An important step towards rectifying binarity's effects is
 identifying the transit host star for detected planets in binaries.
 The current wisdom is that, unless the planet can be confirmed to
 orbit either component through analysis of the transit durations or
-centroids, nothing substantive can be said about the likelihood of a
+centroids, little can be said about the likelihood of a
 planet orbiting the primary vs. the
-secondary~\citep[\textit{e.g.},][]{ciardi_understanding_2015,ziegler_robo-ao_2017}.
+secondary~\citep[\textit{e.g.},][but see~\citealt{hirsch_assessing_2017}'s 
+approach to weighting radius corrections by planet 
+occurrence]{ciardi_understanding_2015,ziegler_robo-ao_2017}.
 
 \begin{comment}
   \citet{ciardi_understanding_2015} studied the effects of stellar
@@ -1545,7 +1558,7 @@ rates.
 
 
 \acknowledgements{
-It was a pleasure sharing discussions about this study with T.
+It was a pleasure discussing this study with T.
 Barclay, W.  Bhatti, and F. Dai.  This work made use of NASA's
 Astrophysics Data System Bibliographic Services.
 %
