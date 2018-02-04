@@ -432,8 +432,11 @@ b}(r\a) / N_\star^0(r\a)$ between the number of searchable binary
 systems and the number of searchable singles at any $r\a$.  This
 quantity is useful because although $N_\star^{\rm b}$ and $N_\star^0$
 vary as a function of the observed transit depth, $\mu$ remains fixed.
-Applying this definition, at $r\a=r\p/\sqrt{2}$, some detections will
-come from primaries,
+For twin binaries, Equation~\ref{eq:N_searchable_prop} gives
+$\mu = 2^{3/2} n_{\rm b}/n_{\rm s}$, where $n_{\rm b}$ is the number
+density of binaries in a volume-limited sample.
+Applying $\mu$'s definition, at $r\a=r\p/\sqrt{2}$, some detections
+will come from primaries,
 \begin{equation}
 n_{\rm det}^1(r\a) =
     \mu N_\star^0(r\a) Z_1 p_{\rm tra}
@@ -447,9 +450,7 @@ n_{\rm det}^2(r\a) =
 \end{equation}
 where $Z_1$ is the number of planets per primary, $Z_2$ is the number
 of planets per secondary, and $p_{\rm tra}$ is the same for identical
-stars.  For twin binaries, Equation~\ref{eq:N_searchable_prop} gives
-$\mu = 2^{3/2} n_{\rm b}/n_{\rm s}$, where $n_{\rm b}$ is the number
-density of binaries in a volume-limited sample.
+stars.  
 
 The last item we need to write down the apparent rate density
 $\Gamma\a(r\a)$ is the number of unresolved point-sources on sky that
@@ -467,12 +468,22 @@ under-counting.
 Using Equation~\ref{eq:apparent_rate_density}, the apparent rate
 density reported when ignoring binarity is
 \begin{align}
-    \Gamma\a(r\a) = 
+    \Gamma\a(r\a) &= 
     \frac{1}{1+\mu} Z_0 \cdot
     \delta(r\a-r\p)  +
     \frac{\mu}{1+\mu} (Z_1 + Z_2) \cdot
-    \delta\left(r\a-\frac{r\p}{\sqrt{2}} \right).
+    \delta\left(r\a-\frac{r\p}{\sqrt{2}} \right)
     \label{eq:model_1_apparent_rate_density}
+    %\\
+    %&=
+    %\frac{1}{1+\mu} \left(
+    %\Gamma_0(r\a) + \frac{n\b}{n\s} \left[
+    %2^{3/2}\,2^{1/2} \Gamma_1(2^{1/2}r\a)
+    %+
+    %2^{3/2}\,2^{1/2} \Gamma_2(2^{1/2}r\a)
+    %\right]
+    %\right).
+    %
 \end{align}
 The first term is from singles, and the second is from binaries.  The
 number of searchable singles at a given apparent radius,
