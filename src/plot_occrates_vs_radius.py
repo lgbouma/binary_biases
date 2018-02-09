@@ -4,9 +4,9 @@ This script plots the output of the Monte Carlo simulation.
 first, for models 1,2,3,4:
 >>> python numerical_models.py
 then:
->>> python plot_rate_densities_vs_radius.py
+>>> python plot_occrates_vs_radius.py
 
-makes plots for paper
+makes plot for Model # 1 of paper
 '''
 # -*- coding: utf-8 -*-
 from __future__ import division, print_function
@@ -222,33 +222,33 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
 if __name__ == '__main__':
 
-    for r_pu, model_number in zip([1, 1, 22.5], [1,2,3]):
+    # for r_pu, model_number in zip([1, 1, 22.5], [1,2,3]):
 
-        make_plot(model_number, Z_2=0.5, r_pu=r_pu)
+    #     make_plot(model_number, Z_2=0.5, r_pu=r_pu)
 
     make_plot(1, brokenx=True, Z_2=0.5, r_pu=1)
-    make_plot(2, logy=True, Z_2=0.5, r_pu=1)
-    make_plot(3, logy=True, Z_2=0.5, r_pu=22.5)
-    make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=22.5)
+    # make_plot(2, logy=True, Z_2=0.5, r_pu=1)
+    # make_plot(3, logy=True, Z_2=0.5, r_pu=22.5)
+    # make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(4, Z_2=0.5, r_pu=22.5)
-    make_plot(4, xcut=True, Z_2=0.5, r_pu=22.5)
+    # make_plot(4, Z_2=0.5, r_pu=22.5)
+    # make_plot(4, xcut=True, Z_2=0.5, r_pu=22.5)
 
-    # Change as a function of Z_2/Z_0
-    for Z_2 in [0, 0.25]:
-        make_plot(3, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+    # # Change as a function of Z_2/Z_0
+    # for Z_2 in [0, 0.25]:
+    #     make_plot(3, Z_2=Z_2, r_pu=22.5)
+    #     make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
+    #     make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
 
-    for Z_2 in [0, 0.25, 0.5]:
-        make_plot(3, Z_2=Z_2, r_pu=22.5, standardlines=False)
+    # for Z_2 in [0, 0.25, 0.5]:
+    #     make_plot(3, Z_2=Z_2, r_pu=22.5, standardlines=False)
 
-    # Change as a function of r_pu
-    for r_pu in [15,17.5,20,22.5,25]:
-        make_plot(3, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
+    # # Change as a function of r_pu
+    # for r_pu in [15,17.5,20,22.5,25]:
+    #     make_plot(3, Z_2=0.5, r_pu=r_pu)
+    #     make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
+    #     make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
 
-    # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
-    # discrepancy" do you get?
-    make_plot(3, withtext=True, stdout=True, Z_2=0., r_pu=15.0)
+    # # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
+    # # discrepancy" do you get?
+    # make_plot(3, withtext=True, stdout=True, Z_2=0., r_pu=15.0)
