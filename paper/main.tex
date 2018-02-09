@@ -195,8 +195,8 @@ stars for which such planets could be detected ($N_\star$) and the
 number of detected planets ($N_{\rm det}$) are both large, then the
 astronomers' estimate for the occurrence rate ($\Lambda$) is simply
 \begin{equation}
-\Lambda(r,M) = \frac{N_{\rm det}(r,M)}{N_\star(r,M)}
-                    \times \frac{1}{p_{\rm tra}(r,M)},
+\Lambda = \frac{N_{\rm det}}{N_\star}
+                    \times \frac{1}{p_{\rm tra}},
 \label{eq:occ_rate_simple}
 \end{equation}
 where $p_{\rm tra}$ is the geometric transit probability, needed to
@@ -313,74 +313,6 @@ regardless of whether the host star is single or part of a binary.
 \subsection{One type of star, one type of planet}
 \label{sec:model_1}
 
-Since the effects of binarity are most pronounced when the two
-components are similar, we begin by considering a universe in which
-all stars are identical, with mass $M$, radius $R$, and luminosity
-$L$.  Some fraction of them exist in twin binaries.  All planets have
-size $r\p$.  Our goal is to compare the occurrence inferred by
-observers who ignore binarity with the true occurrence in single star
-systems.
-
-To clarify our terminology, we define ``apparent properties'' as the
-properties that one would infer about a system under the assumption
-that the host star is single. For instance, the  ``apparent planet
-radius'', $r\a$, is the planet radius that one would infer from a
-transit signal, assuming that the host star is single.  The observed
-transit depth is given by the ratio of the apparent planet radius and
-the apparent stellar radius, $R\a$:
-\begin{equation}
-  \delta_{\rm obs}
-  = \left(\frac{r\a}{R\a}\right)^2
-  = \left[{r\over R_{\rm host}}\right]^2\times {L_{\rm host} \over
-          L_{\rm sys}},
-  \label{eq:delta_obs_general} 
-\end{equation}
-for $r$ the planet radius, $R_{\rm host}$ ($L_{\rm host}$) the host
-star's radius (luminosity), and $L_{\rm sys}$ the entire system's
-luminosity.  In the example at hand, $R_{\rm host} =R\a = R$, since
-all stars have the same size. For single star systems we have
-$r=r\a=r\p$. In twin binaries, $r\a=r\p/\sqrt{2}$, since $L_{\rm
-sys}=2L$.
-
-We can now understand that the observers are unwittingly reporting an
-{\it apparent} occurrence rate $\Lambda\a(r\a)$, a function of
-apparent radii.  The apparent occurrence rate is the same as the {\it
-true} occurrence rate for transit signals of amplitude $\delta_{\rm
-obs} = (r\a/R\a)^2$, but this latter quantity is less astrophysically
-significant.
-
-Finally, it is helpful to introduce an apparent rate density
-$\Gamma\a$, the average number of planets per star per unit apparent
-planet radius. Analogous to Equation~\ref{eq:occ_rate_simple},  
-\begin{equation}
-  \Gamma\a(r\a) = \frac{n_{\rm det}(r\a)}{N_\star(r\a)}
-      \times \frac{1}{p_{\rm tra}(r\a)},
-\label{eq:apparent_rate_density}
-\end{equation}
-where $n_{\rm det}={\rm d}N_{\rm det}/{\rm d}r\a$ is the number  of
-detected planets, per unit $r\a$, with apparent radius $r\a$.  In
-Equation~\ref{eq:apparent_rate_density}, we neglect the dependence on
-stellar mass since all stars in this model have the same properties.
-
-To compute the number of detected planets, we consider the volumes
-within which a signal of a given depth could be detected. At a fixed
-signal-to-noise floor, there is a maximum searchable
-distance~\citep{pepper_using_2003,pepper_searching_2005}.  From
-Equation~\ref{eq:S_N_thresh}, this maximum searchable distance scales
-as
-\begin{equation}
-    d \propto \delta_{\rm obs} \cdot L_{\rm sys}^{1/2}.
-\end{equation}
-Assuming that stars are uniformly distributed in space, the number of
-searchable stars $N_\star$ is then proportional to
-\begin{equation}
-    N_\star \propto n \delta_{\rm obs}^3 L_{\rm sys}^{3/2},
-\label{eq:N_searchable_prop}
-\end{equation}
-where $n$ is the number per unit volume of {\it e.g.}, single star, or
-binary systems.  We neglect the dependence of $n$ on stellar type.
-
-
 \begin{figure}[!tb]
     \begin{center}
         \includegraphics[width=0.6\textwidth]{figures/visualize_volumes.pdf}
@@ -404,93 +336,77 @@ binary systems.  We neglect the dependence of $n$ on stellar type.
     \label{fig:model_1_volumes}
 \end{figure}
 
-The searchable volumes for this example are illustrated in
-Figure~\ref{fig:model_1_volumes}.  At an apparent radius equal to the
-true radius ($r\a=r\p$), single stars with $d<d_0$ are by definition
-searchable.  Binaries with $r\a=r\p$ are also searchable, out to
-$\sqrt{2}d_0$.  However, in this example no such systems exist; all
-planets in twin binaries have true radii $r=r\p$, and so are observed
-with apparent radii $r\a=r\p/\sqrt{2}$, out to $d_0/\sqrt{2}$.  At an
-apparent radius of $r\a=r\p/\sqrt{2}$, there could also be planets
-with true radii $r=r\p/\sqrt{2}$ orbiting singles, but there are no
-such systems in this model.
+Since the effects of binarity are most pronounced when the two
+components are similar, we begin by considering a universe in which
+all stars are identical, with mass $M$, radius $R$, and luminosity
+$L$.  Some fraction of them exist in twin binaries. All planets have
+size $r\p$.  In this scenario, stars are never misclassified because
+the combined light of a binary has the same color and spectrum as a
+single star.  We further assume that planets occur around single stars
+and members of binaries at the same rate, $\Lambda(r\p)$.
 
-How many planets are detected?  If we assume that there are
-$N_\star^0(r\a)$ singles that are searchable for planets with $r\a$,
-and that there are $Z_0$ planets per single, then single stars
-contribute
+The only type of planet in this universe produces a transit signal of
+amplitude $\delta_{\rm obs} = (r\p/R)^2$ when the host is a single
+star.  Our naive observers try to measure the occurrence rate of these
+planets.  They identify all the ``stars'' in their sample that appear
+to be searchable for such a signal, given the size of their telescope.
+These transits are detected within a certain maximum 
+distance~\citep[see][]{pepper_using_2003,pepper_searching_2005}, which from
+Equation~\ref{eq:S_N_thresh} scales as
 \begin{equation}
-n_{\rm det}^0(r\a) = 
-  N_\star^0(r\a) Z_0 p_{\rm tra} \cdot \delta(r\a - r_p)
+  d_{\rm max} \propto \delta_{\rm obs} \cdot L_{\rm sys}^{1/2}.
+  \label{eq:dmax}
 \end{equation}
-planet detections (per unit $r\a$), for $\delta$ the Dirac delta
-function.
+Assuming that stars are uniformly distributed in space, the number of
+searchable stars $N_\star$ is then proportional to
+\begin{equation}
+    N_\star \propto n_i \delta_{\rm obs}^3 L_{\rm sys}^{3/2},
+\label{eq:N_searchable_prop}
+\end{equation}
+where $n_i$ is the number per unit volume of single stars, or
+binary systems. 
+ 
+This selection process inadvertently admits some binaries.  Since the
+binaries are twice as luminous as singles, they are included out to a
+distance that is larger by a factor of $\sqrt{2}$, and if they have
+transiting planets then the signals have an amplitude of
+$(r\p/R)^2/2$.  To detect this half-strength signal, the observers
+need the noise level to be lower by a factor of two, which means the
+flux must be four times higher than that of a single star at distance
+$d_0$.  This is true of single stars within a distance $d_0/2$, and
+binaries within a distance $d_0\sqrt{2}/2$.
+Furthermore the observers will consider any such shrunken signals to
+represent planets of a different type, smaller in radius by a factor
+of $\sqrt{2}$. These searchable volumes are illustrated in 
+Figure~\ref{fig:model_1_volumes}.
 
-We can similarly compute the number of planet detections from
-binaries.  First though, we define a ratio $\mu \equiv N_\star^{\rm
-b}(r\a) / N_\star^0(r\a)$ between the number of searchable binary
-systems and the number of searchable singles at any $r\a$.  This
-quantity is useful because although $N_\star^{\rm b}$ and $N_\star^0$
-vary as a function of the observed transit depth, $\mu$ remains fixed.
-For twin binaries, Equation~\ref{eq:N_searchable_prop} gives
-$\mu = 2^{3/2} n_{\rm b}/n_{\rm s}$, where $n_{\rm b}$ is the number
-density of binaries in a volume-limited sample.
-Applying $\mu$'s definition, at $r\a=r\p/\sqrt{2}$, some detections
-will come from primaries,
+Putting it all together, the {\it apparent} occurrence rate of planets
+of radius $r\p$ will be
 \begin{equation}
-n_{\rm det}^1(r\a) =
-    \mu N_\star^0(r\a) Z_1 p_{\rm tra}
-    \cdot \delta\left(r\a - \frac{r\p}{\sqrt{2}}\right),
+    \Lambda\a(r\p) = 
+        \frac{\Lambda(r\p)~n\s d_0^3}
+        {n\s d_0^3 + n\b (d_0\sqrt{2})^3}
 \end{equation}
-and some from secondaries,
+where $n\s$ and $n\b$ are the number densities of single stars and
+binary stars, respectively, in the local neighborhood.  This apparent
+rate is larger than the true rate by a factor
 \begin{equation}
-n_{\rm det}^2(r\a) = 
-    \mu N_\star^0(r\a) Z_2 p_{\rm tra}
-    \cdot \delta\left(r\a - \frac{r\p}{\sqrt{2}}\right),
+    \frac{\Lambda\a(r\p)}{\Lambda(r\p)} = 
+        \frac{1}{1 + 2^{3/2}(n\b/n\s)}.
+    \label{eq:correction_rp}
 \end{equation}
-where $Z_1$ is the number of planets per primary, $Z_2$ is the number
-of planets per secondary, and $p_{\rm tra}$ is the same for identical
-stars.  
-
-The last item we need to write down the apparent rate density
-$\Gamma\a(r\a)$ is the number of unresolved point-sources on sky that
-the observer thinks are searchable, $N_\star$.  From the definition of
-$\mu$,
+The observers will also claim to have discovered a new type of planet
+with radius $r\p/\sqrt{2}$ and an occurrence rate given by
 \begin{equation}
-    N_\star(r\a) = N_\star^0(r\a) \times (1 + \mu)
-    \label{eq:apparentlysearchable_to_searchable}
+\label{eq:correction_diluted_rp}
+    \frac{\Lambda\a(r\p/\sqrt{2})}{\Lambda(r\p)}
+    =
+    \frac{2n\b (d_0\sqrt{2}/2)^3}
+      {n\s (d_0/2)^3 + n\b (d_0\sqrt{2}/2)^3}
+    =
+    \frac{2\cdot2^{3/2}(n\b/n\s)}{1 + 2^{3/2}
+    (n\b/n\s)}.
 \end{equation}
-relates the number of apparently searchable point-sources and the
-number of searchable singles.  There are in fact $N_\star^0(r\a)\times
-(1 + 2\mu)$ searchable stars at any given $r\a$; the observers are
-under-counting.
-
-Using Equation~\ref{eq:apparent_rate_density}, the apparent rate
-density reported when ignoring binarity is
-\begin{align}
-    \Gamma\a(r\a) &= 
-    \frac{1}{1+\mu} Z_0 \cdot
-    \delta(r\a-r\p)  +
-    \frac{\mu}{1+\mu} (Z_1 + Z_2) \cdot
-    \delta\left(r\a-\frac{r\p}{\sqrt{2}} \right)
-    \label{eq:model_1_apparent_rate_density}
-    %\\
-    %&=
-    %\frac{1}{1+\mu} \left(
-    %\Gamma_0(r\a) + \frac{n\b}{n\s} \left[
-    %2^{3/2}\,2^{1/2} \Gamma_1(2^{1/2}r\a)
-    %+
-    %2^{3/2}\,2^{1/2} \Gamma_2(2^{1/2}r\a)
-    %\right]
-    %\right).
-    %
-\end{align}
-The first term is from singles, and the second is from binaries.  The
-number of searchable singles at a given apparent radius,
-$N_\star^0(r\a)$, makes no appearance.  The observer has erred in
-Equation~\ref{eq:model_1_apparent_rate_density} by under-counting the
-number of searchable stars at any apparent radius, and by inferring
-incorrect planet radii in binary systems.
 
 \begin{figure}[!tb]
     \begin{center}
@@ -502,237 +418,368 @@ incorrect planet radii in binary systems.
         singles $\Lambda_0$, for a model with one type of star, one
         type of planet, and twin binaries (same as
         Figure~\ref{fig:model_1_volumes}).  We assume a twin binary
-        fraction of $0.1$, and that single, primary, and secondary
+        fraction of $0.05$, and that single, primary, and secondary
         stars host planets at equal rates.  If the true planet radius
         is $r\p$, all planets detected in binaries will have apparent
-        radii $r\a = r\p/\sqrt{2}$;
-        Equation~\ref{eq:model_1_apparent_rate_density} gives the
+        radii $r\a = r\p/\sqrt{2}$; Equation~\ref{eq:ratios} gives the
         normalizations.
     }
     \label{fig:occ_rate_model_1}
 \end{figure}
 
-To assess the severity of these errors, we must assume both a binary
-fraction, and also the true number of planets per single, primary, and
-secondary star ($Z_0,Z_1,Z_2$).  For the
-former,~\citet{raghavan_survey_2010} found a multiplicity fraction of
-0.44 for primaries with masses from $0.7M_\odot$ to $1.3M_\odot$.  By
-multiplicity fraction, they meant ``fraction of systems in a
-volume-limited sample that are multiple'', which we simplistically
-conflate with the fraction of systems in a volume-limited sample that
-are binaries:
+We can now assess the severity of these errors, given the
+binary-to-single ratio $n\b/n\s$. For stars with masses from 0.7 to
+1.3~$M_\odot$, \citet{raghavan_survey_2010} found the multiplicity
+fraction to be 0.44, where multiplicity fraction is defined as
+the fraction of systems in a volume-limited sample that are multiple.
+Since we assume all multiple systems are binaries, this implies
 \begin{equation}
-    {\rm binary\ fraction} \equiv \frac{n\b}{n\s + n\b} = 0.44,
+    \frac{n\b}{n\s + n\b} \approx 0.44,
 \end{equation}
-Of course not all of these are binaries are close to being ``twin''
-binaries as we have assumed in our simple calculation.  Perhaps only a
-tenth of them have pairs of stars close enough in their basic
-properties to produce errors as significant as those we have been
-considering.  Thus, an appropriate estimate for the binary fraction is
-of order $0.05$.  The ratio of the apparent to single star rate
-densities,
+which corresponds to a specific $n\b/n\s$.  Of course not all of these
+binaries are close to being ``twin'' binaries as we have assumed in
+our simple calculation. Perhaps only a tenth of them have pairs of
+stars close enough in their basic properties to produce errors as
+significant as those we have been considering.  Thus, an appropriate
+estimate for $n\b/(n\s+n\b)$ is of order $0.05$, leading to
 \begin{equation}
-    X_\Gamma(r) \equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)}
-      \right|_{r\a \rightarrow r},
+    \frac{\Lambda\a(r\p)}{\Lambda(r\p)} = 0.87,~~
+    \frac{\Lambda\a(r\p/\sqrt{2})}{\Lambda(r\p)} = 0.26.
+    \label{eq:ratios}
 \end{equation}
-can then be evaluated as a ``correction factor''.  At the true planet
-radius, $X_\Gamma(r\p)=1/(1+\mu)$.  This yields a correction
-$X_\Gamma$ of 0.87~(0.76) if the binary fraction is 0.05~(0.10).  All
-together the various effects produce biases of order 10\% in the
+All together the various effects produce biases of order 10\% in the
 occurrence rates.  We will see that this level of error is
 characteristic of many of our more complicated models, as well.
 
-An alternative assumption is that secondaries do not host planets. In
-that case, the correction to the rate density at the true planet
-radius becomes $X_\Gamma(r\p) = (1+2\mu)/(1+\mu)^2$.  This gives a
-correction of 0.98~(0.94) if the binary fraction is 0.05~(0.10).
-Although the secondaries certainly should have planets, the
-sensitivity of $\Gamma\a/\Gamma_0$ to the relative number of planets
-per single, primary, and secondary will also become important as we
-proceed.
 
-\subsection{One type of star, two types of planets}
+\subsection{Formula Based on Apparent Rate Density}
+\label{sec:model_1_density}
 
-A simple extension to the previous example helps distinguish between
-the apparent and underlying planet populations.  Consider now a
-universe that is the same as in Section~\ref{sec:model_1}, except that
-half of planets have radii $r\p$, while the other half have radii
-$r\p/\sqrt{2}$.  The rate densities are
+There is a different way to conceptualize the preceding results that
+will be useful in the subsequent discussion.  Here we broaden the
+discussion to consider a spectrum of planet sizes, by introducing the
+occurrence rate density
 \begin{equation}
-    \Gamma_i(r) = \frac{Z_i}{2} \left[
-    \delta(r-r\p) + \delta\left(r-\frac{r\p}{\sqrt{2}}\right)
-    \right], \quad {\rm for}\  i \in \{ 0,1,2 \},
+    \Gamma(r) \equiv \frac{d\Lambda}{dr},
 \end{equation}
-where $i=0$ corresponds to singles, $i=1$ to primaries, and $i=2$ to
-secondaries, and the $Z_i$'s are the number of planets per star of
-each type.
+the average number of planets per star per unit planet radius.
 
-Following an identical line of reasoning as in
-Section~\ref{sec:model_1}, the apparent rate density can be written
+To clarify our terminology, we define ``apparent properties'' as the
+properties that one would infer about a system under the assumption
+that the host star is single. For instance, the  ``apparent planet
+radius'', $r\a$, is the planet radius that one would infer from a
+transit signal, assuming that the host star is single.  The observed
+transit depth is given by the ratio of the apparent planet radius and
+the apparent stellar radius, $R\a$:
+\begin{equation}
+  \delta_{\rm obs}
+  = \left(\frac{r\a}{R\a}\right)^2
+  = \left[{r\over R_{\rm host}}\right]^2\times {L_{\rm host} \over
+          L_{\rm sys}},
+  \label{eq:delta_obs_general} 
+\end{equation}
+for $r$ the planet radius, $R_{\rm host}$ ($L_{\rm host}$) the host
+star's radius (luminosity), and $L_{\rm sys}$ the entire system's
+luminosity. This gives $r\a=r\p/\sqrt{2}$ in our ``twin binary''
+model.
+
+With this definition we may say that naive observers are measuring
+$\Gamma\a(r\a)$, the apparent occurrence rate density of planets with
+an apparent radius of $r\a$.  Analogous to
+Equation~\ref{eq:occ_rate_simple},  
+\begin{equation}
+  \Gamma\a(r\a) = \frac{n_{\rm det}(r\a)}{N_\star(r\a)}
+      \times \frac{1}{p_{\rm tra}},
+\label{eq:apparent_rate_density}
+\end{equation}
+where $n_{\rm det}$ is the number of detected planets, per unit $r\a$,
+with apparent radius $r\a$.  In
+Equation~\ref{eq:apparent_rate_density}, we neglect the dependence on
+stellar mass since all stars in this model have the same properties.
+Since $\delta_{\rm obs}$ and $r\a$ are related by $R\a$, which is
+simply assumed by an observer, measuring $\Gamma\a(r\a)$ is equivalent
+to measuring the true occurrence rate density of {\it transit signals}
+of amplitude $\delta_{\rm obs}$.
+
+Let us evaluate the contributions to $n_{\rm det}$ from singles and
+binaries.  As in the previous subsection, for each apparent planet
+radius $r\a$, the observers select $N_\star(r\a)$ unresolved
+point-sources on sky, based on Equation \ref{eq:dmax}.  If we let $\mu
+\equiv N\star^{\rm b}(r\a)/N_\star^0(r\a)$ be the ratio of the number
+of searchable binary systems to single systems, then the number of
+single and binary point-sources thought to be searchable are
+\begin{equation}
+  \frac{N_\star(r\a)}{1+\mu}~~{\rm and}~~\frac{\mu N_\star(r\a)}{1+\mu},
+\end{equation}
+respectively.  Earlier we showed that due to Malmquist bias, $\mu =
+2^{3/2}(n\b/n\s)$.
+
+We further stipulate that the true occurrence rate densities for
+planets around single stars, primaries, and secondaries are
+$\Gamma_0(r)$, $\Gamma_1(r)$, and $\Gamma_2(r)$, respectively.  
+Then single stars contribute
+\begin{equation}
+  n_{\rm det}^0(r\a) = 
+    {N_\star(r\a) \over {1+\mu}} p_{\rm tra} \Gamma_0(r\a)
+  \label{eq:n0}
+\end{equation}
+planet detections per unit $r\a$.  We can similarly compute the number
+of planet detections from binaries.  Since $r\p=\sqrt{2}r\a$ for
+planets in twin binaries, 
+\begin{equation}
+  n_{\rm det}^1(r\a)\mathrm{d}r\a =
+      {\mu N_\star(r\a) \over {1+\mu}} p_{\rm tra}
+      \Gamma_1(\sqrt{2}r\a)\mathrm{d}(\sqrt{2}r\a),
+	\label{eq:n1}
+\end{equation}
+detections come from primaries, and
+\begin{equation}
+  n_{\rm det}^2(r\a)\mathrm{d}r\a =
+      {\mu N_\star(r\a) \over {1+\mu}} p_{\rm tra}
+      \Gamma_2(\sqrt{2}r\a)\mathrm{d}(\sqrt{2}r\a),
+	\label{eq:n2}
+\end{equation}
+from secondaries.  Here the transit probability $p_{\rm tra}$ is the
+same in all three cases because the stars are all identical. 
+
+Using Equation~\ref{eq:apparent_rate_density}, the apparent rate
+density reported when ignoring binarity is
+\begin{equation}
+	\label{eq:formula_twin_binary}
+  \Gamma\a(r\a) =
+    \frac{1}{1+\mu}\,\Gamma_0(r\a) +
+    \frac{\mu}{1+\mu}\,\sqrt{2}\,\Gamma_1(\sqrt{2}r\a) +
+    \frac{\mu}{1+\mu}\,\sqrt{2}\,\Gamma_2(\sqrt{2}r\a).
+\end{equation}
+If we further assume 
+\begin{equation}
+	\Gamma_i=Z \cdot \delta(r\a-r\p)
+\end{equation} 
+as we did in the previous ``one planet" example,
+the above apparent rate density reduces to
 \begin{align}
-    \notag
-    \Gamma\a(r\a) &=
-    \frac{1}{2(1+\mu)} \left[
-    Z_0 \cdot \delta(r\a - r\p)
-    +
-    \left[Z_0 + \mu (Z_1 + Z_2)
-    \right] \cdot \delta\left(r\a - \frac{r\p}{\sqrt{2}}\right) 
-    \right. \\
-    &\quad\quad\quad\quad\quad\quad\quad\quad+
-    \left.
-    \mu(Z_1 + Z_2) \cdot \delta\left(r\a - \frac{r\p}{2}\right)
-    \right].
-    \label{eq:two_radii_twins}
+    \Gamma\a(r\a) &= Z \left[
+    \frac{1}{1+\mu} \cdot
+    \delta(r\a-r\p)  +
+    \frac{2\mu}{1+\mu} \cdot
+    \delta\left(r\a-\frac{r\p}{\sqrt{2}} \right) \right].
+    \label{eq:model_1_apparent_rate_density}
 \end{align}
-Just as in Equation~\ref{eq:model_1_apparent_rate_density}, the
-$N_\star^0(r\a)$ terms cancel, leaving only the $\mu$ weights.
-However, there are now three detected planet sizes.  Also different is
-that two populations contribute at $r\a = r\p/\sqrt{2}$: the first
-population is singles with $r=r\p/\sqrt{2}$, and the second is twin
-binaries with $r=r\p$.  Both populations are detected out to the same
-maximum searchable distance.  More generally, at any given apparent
-radius, there will be contributions from both singles, primaries, and
-secondaries~---~but the relative weights between these contributions
-will depend on the underlying occurrence rates.
+Integrating over $r\a$, this yields
+\begin{equation}
+	\Lambda\a(r_{\rm p})=\frac{Z}{1+\mu},\quad
+	\Lambda\a(r_{\rm p}/\sqrt{2})=\frac{2\mu Z}{1+\mu},
+\end{equation}
+which reproduce Equations~\ref{eq:correction_rp}
+and~\ref{eq:correction_diluted_rp}.
 
+\begin{comment}
+    The ratio of the apparent to single star rate
+    densities,
+    \begin{equation}
+        X_\Gamma(r) \equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)}
+          \right|_{r\a \rightarrow r},
+    \end{equation}
+    can then be evaluated as a ``correction factor''.  At the true and
+    diluted planet radii, $X_\Gamma(r\p)=1/(1+\mu)$ and
+    $X_\Gamma(r\p/\sqrt{2})=2\mu/(1+\mu)$.  This yields a correction
+    $X_\Gamma$ of 0.87~(0.76) if the binary fraction is 0.05~(0.10).
+    All together the various effects produce biases of order 10\% in the
+    occurrence rates.  
+\end{comment}
 
+\begin{comment}
+    \subsection{One type of star, two types of planets}
+
+    A simple extension to the previous example helps distinguish between
+    the apparent and underlying planet populations.  Consider now a
+    universe that is the same as in Section~\ref{sec:model_1}, except that
+    half of planets have radii $r\p$, while the other half have radii
+    $r\p/\sqrt{2}$.  The rate densities are
+    \begin{equation}
+        \Gamma_i(r) = \frac{Z_i}{2} \left[
+        \delta(r-r\p) + \delta\left(r-\frac{r\p}{\sqrt{2}}\right)
+        \right], \quad {\rm for}\  i \in \{ 0,1,2 \},
+    \end{equation}
+    where $i=0$ corresponds to singles, $i=1$ to primaries, and $i=2$ to
+    secondaries, and the $Z_i$'s are the number of planets per star of
+    each type.
+
+    Following an identical line of reasoning as in
+    Section~\ref{sec:model_1}, the apparent rate density can be written
+    \begin{align}
+        \notag
+        \Gamma\a(r\a) &=
+        \frac{1}{2(1+\mu)} \left[
+        Z_0 \cdot \delta(r\a - r\p)
+        +
+        \left[Z_0 + \mu (Z_1 + Z_2)
+        \right] \cdot \delta\left(r\a - \frac{r\p}{\sqrt{2}}\right) 
+        \right. \\
+        &\quad\quad\quad\quad\quad\quad\quad\quad+
+        \left.
+        \mu(Z_1 + Z_2) \cdot \delta\left(r\a - \frac{r\p}{2}\right)
+        \right].
+        \label{eq:two_radii_twins}
+    \end{align}
+    Just as in Equation~\ref{eq:model_1_apparent_rate_density}, the
+    $N_\star^0(r\a)$ terms cancel, leaving only the $\mu$ weights.
+    However, there are now three detected planet sizes.  Also different is
+    that two populations contribute at $r\a = r\p/\sqrt{2}$: the first
+    population is singles with $r=r\p/\sqrt{2}$, and the second is twin
+    binaries with $r=r\p$.  Both populations are detected out to the same
+    maximum searchable distance.  More generally, at any given apparent
+    radius, there will be contributions from both singles, primaries, and
+    secondaries~---~but the relative weights between these contributions
+    will depend on the underlying occurrence rates.
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{General formula for apparent occurrence rate}
 \label{sec:general_formula}
 
-To generalize the procedure of Section~\ref{sec:simplest}, we consider
-an SNR-limited transit survey in which the singles and primaries can
-have arbitrary properties, but their true masses are known by the
-observer.  We assume that there are some functions $L(M)$ and $R(M)$
-that specify a star's luminosity and radius in terms of its mass, and
-that the volume-limited binary mass ratio distribution, $f(q)$, is
-independent of the primary's mass.  We also allow arbitrary true rate
-densities for singles, primaries, and secondaries ($\Gamma_0,
-\Gamma_1, \Gamma_2$).  We presume that the observers always take the
-properties of a binary system to be those of the primary.
+To generalize the procedure of Section~\ref{sec:model_1_density} to binaries
+with varying mass ratios, we consider an SNR-limited transit survey in which
+stars can have arbitrary properties.  We assume that there are some functions
+$L(M)$ and $R(M)$ that specify a star's luminosity and radius in terms of its
+mass, and that the volume-limited binary mass ratio distribution, $f(q)$, is
+independent of the primary's mass.  We also allow arbitrary true rate densities
+for singles, primaries, and secondaries ($\Gamma_0, \Gamma_1, \Gamma_2$).  We
+presume that the observers always know the true masses of singles and
+primaries, and that they take the primary's properties to be those of an
+unresolved binary.
 
-Given this laundry-list of assumptions, a general formula for the
+Due to the varying mass ratios, we need the following modifications to Equation
+\ref{eq:formula_twin_binary}:
+\begin{enumerate}
+%
+  \item The number of binary systems with mass ratio $(q,
+  q+\mathrm{d}q)$ in the selected sample is now
+  (Equation~\ref{eq:dmax}):
+  \begin{equation}
+      {N_\star(r\a)\over{1+\mu}}\times {n_{\rm b}\over n_{\rm s}}
+      \left[{L_{\rm sys}(M\a, q) \over L(M\a)}\right]^{3/2}
+      f(q)\,\mathrm{d}q,
+  \end{equation}
+  where
+  \begin{equation}
+      \mu({\rm BF},M\a)= 
+      %\frac{N_\star^{\rm b}(r\a)}{N_s^0(r\a)}=
+      \int_0^1 {n_{\rm b}\over n_{\rm s}}\left[{L_{\rm sys}(M\a, q)
+      \over L(M\a)}\right]^{3/2} f(q)\,\mathrm{d}q.
+      \label{eq:mu_general}
+  \end{equation}
+  These should replace ${\mu N_\star(r\a)/(1+\mu)}$ in Equations
+  \ref{eq:n0}--\ref{eq:n2}. Then the result needs to be integrated
+  over $q$.
+
+  \begin{figure}[!tb]
+      \centering
+      \includegraphics[width=0.6\textwidth]{figures/mass_ratio_distribution.pdf}
+      \caption{
+          The mass ratio distribution for a magnitude-limited sample of
+          binary stars, in which the underlying volume-limited
+          distribution is uniform, qualitatively similar to Figure~16 of
+          \citet{raghavan_survey_2010}.  At a given observed transit
+          depth, the searchable binaries in a transit survey are
+          magnitude-limited. For this figure, we assume $L\propto
+          M^{3.5}$
+      }
+      \label{fig:q_distribn_mag_limited}
+  \end{figure}
+
+  As we showed earlier, this can be understood as a Malmquist bias: in
+  the magnitude-limited sample of searchable binaries, those with
+  larger mass ratios are overrepresented by a factor or
+  $\left[{L_{\rm sys}(M\a, q)/L(M\a)}\right]^{3/2}$ because they are
+  brighter. We show this magnitude-limited mass ratio distribution
+  for the flat $f(q)$ in Figure~\ref{fig:q_distribn_mag_limited}.  In
+  Monte Carlo simulations of transit surveys, it is important to
+  draw binaries from an appropriately biased mass-ratio
+  distribution~\citep[\textit{e.g.},][]{
+    bakos_hatsouth:_2013,sullivan_transiting_2015,
+    gunther_new_2017}.
+%
+  \item The relationship between $r\a$ and $r$ are different.  From
+    Equation~\ref{eq:delta_obs_general}, $r=\mathcal{D}_{1/2}r\a$ for
+    primaries and secondaries, where
+  \begin{equation}
+      \mathcal{D}_1(q, M\a)
+      = \sqrt{L_{\rm sys}(M\a, q) \over L(M\a) }
+      = (1+q^\alpha)^{1/2},
+  \end{equation}
+  and
+  \begin{equation}
+    \mathcal{D}_2(q, M\a)
+    = {R(qM\a)\over R(M\a)}\sqrt{L_{\rm sys}(M\a, q) \over L(qM\a)} 
+    = q (1+q^{-\alpha})^{1/2}.
+  \end{equation}
+  So $\sqrt{2}r\a$ in Equations~\ref{eq:n1} and~\ref{eq:n2} needs to be
+  replaced with $\mathcal{D}_1r\a$ and $\mathcal{D}_2r\a$, respectively.
+
+  \item The transit probability around secondaries are smaller than
+  that around primaries, the latter of which is the same as
+  primaries under our assumption. At a fixed orbital period, this
+  changes $p_{\rm tra}$ in Equation~\ref{eq:n2} by a factor of
+  \begin{equation}
+    {R(qM\a) \over R(M\a)}q^{-1/3}.
+  \end{equation}
+
+\end{enumerate}
+
+Taking these modifications into account, a general formula for the
 apparent rate density follows:
 \begin{align}
     \notag
     \Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)}\times
     \left\{ \Gamma_0(r\a, M\a)+ 
-    \frac{{\rm BF}}{1 - {\rm BF}}
+    \frac{n\b}{n\s}
     \left[ \int_0^1 \mathrm{d}q \,
-           \frac{f(q)}{\mathcal{A}^3}\cdot
-           \frac{1}{\mathcal{A}} \Gamma_1\left({r\a\over \mathcal{A}},
+           \mathcal{D}_1^3 f(q)\cdot
+          \mathcal{D}_1 \Gamma_1\left(\mathcal{D}_1r\a,
     M\a\right)\,
     \right.   
     \right. \\
     & \quad\quad\quad\quad\quad \left.\left.
     +\int_0^1 {\rm d}q\, 
-         \frac{f(q)}{\mathcal{A}^3}\cdot \frac{q}{\mathcal{B}}
-        \Gamma_2\left({r\a\over \mathcal{B}}, qM\a\right)\cdot
+         \mathcal{D}_1^3 f(q)\cdot \mathcal{D}_2 q
+        \Gamma_2\left(\mathcal{D}_2r\a, qM\a\right)\cdot
     {R(qM\a) \over R(M\a)}
-    q^{-1/3} \right]	\right\},
+    q^{-1/3} \right] \right\}.
     \label{eq:general_Gamma_a}
 \end{align}
-where ${\rm BF}=n\b/(n\s+n\b)$ is the volume-limited binary fraction,
-and $\mathcal{A}(q,M\a)$ [$\mathcal{B}(q,M\a)$] are the dilution terms
-for primaries [secondaries], whose functional dependences are omitted
-for notational simplicity.  The dilution terms can be written
-\begin{equation}
-    \mathcal{A}(q, M\a)
-    = \sqrt{L(M\a) \over L_{\rm sys}(M\a, q)}
-    = (1+q^\alpha)^{-1/2},
-\end{equation}
-and
-\begin{equation}
-  \mathcal{B}(q, M\a)
-  = {R(M\a)\over R(qM\a)}\sqrt{{L(qM\a) \over L_{\rm sys}(M\a, q)} }
-  = q^{-1} (1+q^{-\alpha})^{-1/2}
-\end{equation}
-where the latter equalities assume $L\propto M^\alpha \propto
-R^\alpha$ (the former are more general).  The rate densities depend on
-both apparent radius and mass because even if the primaries and
-singles were to have fixed mass, the mass of secondaries would vary,
-and so this dependence cannot be immediately omitted.
-
-A derivation of Equation~\ref{eq:general_Gamma_a} is given in the
-\hyperref[sec:appendix]{Appendix}; its qualitative features are the
-same as from our simple model
-(Equation~\ref{eq:model_1_apparent_rate_density}).  The terms inside
-the curly braces $\{ \ldots \}$ are the sum of the apparent rate
-densities from singles, primaries, and secondaries.  The contribution
-from singles is not affected by binarity.  In the contributions from
-primaries and secondaries, planets with $(r\a, M\a)$ are associated
-with systems of different planetary and stellar properties, as
-determined by the mass ratio $q$ of each binary.  This corresponds to
-true planet radii and stellar masses $(r\a/\mathcal{A},M\a)$ for
-primaries, and $(r\a/\mathcal{B},qM\a)$ for secondaries.  These
-contributions are then integrated over the mass ratio distribution
-including the effect of Malmquist bias, $f(q)/\mathcal{A}^3$,
-discussed further below. Finally, the latter term in the apparent rate
-density of secondaries comes from a correction for the overestimated
-transit probability.
-
-
-\paragraph{Ratio of searchable binaries to singles}
-
-We must also specify the exact form of $\mu$, the ratio of the number
-of searchable binary systems to singles.  Given the observed signal
-$\delta_{\rm obs}$ and apparent stellar mass $M\a$, recall that the
-maximum searchable distances for singles and binaries are proportional
-to $\delta_{\rm obs}\cdot L(M\a)^{1/2}$ and $\delta_{\rm obs}\cdot
-[L(M\a)+L(qM\a)]^{1/2}$.  Applying
-Equation~\ref{eq:N_searchable_prop},
-\begin{equation}
-    \mu({\rm BF},M\a)
-    = 
-    \frac{N_\star^{\rm b}(r\a)}{N_s^0(r\a)}
-    =
-    \int_0^1 {n_{\rm b}\over n_{\rm s}}\left[1+{L(qM\a) \over
-        L(M\a)}\right]^{3/2} f(q)\,\mathrm{d}q.
-    \label{eq:mu_general}
-\end{equation}
-If the binary fraction is independent of $q$, $L \propto M^\alpha$,
-and $f(q) \propto q^\beta$, this simplifies to
-\begin{equation}
-    \mu =\frac{{\rm BF}}{1 - {\rm BF}}\cdot {1\over{1+\beta}}\int_0^1
-    \left(1+q^\alpha\right)^{3/2} q^\beta \,\mathrm{d}q.
-    \label{eq:mu_power_laws}
-\end{equation}
-%which can also be rewritten using the hypergeometric function.
-\begin{figure}[!tb]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/mass_ratio_distribution.pdf}
-    \caption{
-        The mass ratio distribution for a magnitude-limited sample of
-        binary stars, in which the underlying volume-limited
-        distribution is uniform, qualitatively similar to Figure~16 of
-        \citet{raghavan_survey_2010}.  At a given observed transit
-        depth, the searchable binaries in a transit survey are
-        magnitude-limited.
-    }
-    \label{fig:q_distribn_mag_limited}
-\end{figure}
-This can be understood as a Malmquist bias: at fixed observed transit
-depth, for singles and primaries with the same luminosity, binaries
-are searchable to a greater distance.  Specifically, the sample of
-searchable binaries is magnitude-limited.  Given a searchable binary,
-the probability that it has a mass ratio $q$ scales as
-\begin{equation}
-    p({\rm draw\ }q\,|\,{\rm system\ is\ binary}) \propto
-    (1+q^\alpha)^{3/2} q^\beta 
-    \label{eq:Malmquist_bias}
-\end{equation}
-where $q^\beta$ is the volume-limited probability of drawing a binary
-of mass ratio $q$, and the first term is the Malmquist bias when
-$L\propto M^\alpha$.  We show this magnitude-limited mass ratio
-distribution for the $\beta=0$ case in
-Figure~\ref{fig:q_distribn_mag_limited}.  In Monte Carlo simulations
-of transit surveys, it is important to draw binaries from a correctly
-biased mass-ratio distribution~\citep[\textit{e.g.},][]{
-  bakos_hatsouth:_2013,sullivan_transiting_2015, gunther_new_2017}.
-
-
+We also give a more formal derivation in the
+\hyperref[sec:appendix]{Appendix}.
+With the definition of $\mu$ in Equation~\ref{eq:mu_general},
+Equation~\ref{eq:general_Gamma_a} can also be expressed as
+\begin{align}
+    \notag
+    \notag
+    \Gamma\a(r\a,M\a)
+    &= 
+    {1\over 1+\mu(\mathrm{BF}, M\a)} \cdot
+    \left[
+       \Gamma_0(r\a, M\a)\phantom{\tilde \Gamma}\right.&\\
+       &\left.+\mu(\mathrm{BF}, M\a)\cdot
+       \left\langle
+       \mathcal{D}_1\cdot\Gamma_1\left(\mathcal{D}_1r\a, M\a\right)
+       +
+       {q \mathcal{D}_2}\cdot\Gamma_2\left(\mathcal{D}_2r\a,
+       qM\a\right) \cdot {R(qM\a) \over R(M\a)}q^{-1/3}
+       \right\rangle
+    \right],
+\end{align}
+where the angle brackets denote averaging over $\mathcal{D}_1^3f(q)$.
+This form shows that the fraction $\mu$ and mass ratio distribution
+$\mathcal{D}_1^3f(q)$ of binaries {\it in the searchable volume} are
+enough to describe the contributions from binaries to $\Gamma\a$.  The
+fraction $\mu$ gives the relative contributions from singles and
+binaries, and $\mathcal{D}_1^3 f(q)$ weights the contributions from
+binaries with various mass ratios.  The apparent rate density at each
+mass ratio ({\it i.e.}, the terms in the angle brackets) is the rate
+density of systems that give the apparent $(r\a, M\a)$, corrected for
+the overestimated transit probability around secondaries.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -966,7 +1013,7 @@ Section~\ref{sec:further_models}.
     \centering
     \includegraphics[width=\textwidth]{figures/ndet_vs_radius_logx_model_3_fraclines_rpu_22.5_manyZs.pdf}
     \caption{
-        Fraction of detected planet at a given apparent planet radius
+        Fraction of detected planets at a given apparent planet radius
         coming from singles (solid lines), primaries (dashed lines),
         and secondaries (dotted lines).  Three different values for
         $Z_2/Z_0$ are selected: $1$ (blue), $0.5$ (orange), $0$
@@ -1226,7 +1273,7 @@ imperfect stellar properties'' must also be at play.
 Binarity might affect the inferred occurrence rates because 
 radial velocity and transit surveys treat binaries differently.
 Radial velocity surveys typically reject both visual and spectroscopic
-binaries \citep[\textit{e.g.},][]{wright_frequency_2012}.  Transit
+binaries \citep{wright_frequency_2012}.  Transit
 surveys observe binaries, but the question of whether they were
 searchable to begin with is left for later interpretation.  In
 spectroscopic follow-up of transiting planet candidates, the
@@ -1297,7 +1344,7 @@ unlikely to resolve the HJ rate discrepancy.
 To apply this study to real transit surveys, a few practical concerns
 become pressing.  One issue is that space-based missions with
 telemetric requirements are often required to select target stars.
-Even if the selection process is aimed at creating an SNR-limited
+Even if the selection process aims to create an SNR-limited
 survey, as~\citet{batalha_selection_2010} did for {\it Kepler},
 uncertainties in stellar parameters and the modeled instrument
 performance can lead to deviations away from an SNR-limited stellar
@@ -1337,9 +1384,9 @@ Finally, our calculations also ignore the fact that any given transit
 survey's finite SNR floor might censor the apparent rate density.  If
 the surveyed stars all have the same size, this is equivalent to
 saying that there might be a cutoff in apparent planet radii, below
-which no planets are detected.  The effects on our main results (e.g.,
-Figs.~\ref{fig:occ_rate_model_3_log},~\ref{fig:frac_model_3},
-and~\ref{fig:gaussian_HJ}) would be that the apparent rate density
+which no planets are detected.  The effects on 
+Figures~\ref{fig:occ_rate_model_3_log},~\ref{fig:frac_model_3},
+and~\ref{fig:gaussian_HJ} would be that the apparent rate density
 below the cutoff in apparent radius would simply drop to zero.
 
 \begin{comment}
@@ -1384,8 +1431,8 @@ occurrence rate (\citealt{fulton_california-_2017};
 \citealt{petigura_CKS_2017}).  
 While these are good first steps, the
 denominator remains uncorrected.  To count the number of stars that
-were searched, further work on understanding the multiplicity
-statistics of KOI and non-KOI stars is necessary. In particular,
+were searched, further effort to understand the multiplicity
+statistics of KOI vs.~non-KOI stars is necessary. In particular,
 a non-KOI star high-resolution imaging effort could help estimate
 the systematic errors incurred by assuming all surveyed stars are
 single.
@@ -1400,9 +1447,9 @@ identifying the transit host star for detected planets in binaries.
 The current wisdom is that, unless the planet can be confirmed to
 orbit either component through analysis of the transit durations or
 centroids, little can be said about the likelihood of a
-planet orbiting the primary vs. the
-secondary~\citep[\textit{e.g.},][but see~\citealt{hirsch_assessing_2017}'s 
-approach to weighting radius corrections by planet 
+planet orbiting the primary vs.~the
+secondary~\citep[\textit{e.g.},][though~\citealt{hirsch_assessing_2017}'s 
+do weight radius corrections by planet 
 occurrence]{ciardi_understanding_2015,ziegler_robo-ao_2017}.
 
 \begin{comment}
@@ -1569,9 +1616,9 @@ rates.
 
 
 \acknowledgements{
-It was a pleasure discussing this study with T.
-Barclay, W.  Bhatti, and F. Dai.  This work made use of NASA's
-Astrophysics Data System Bibliographic Services.
+It was a pleasure discussing this study with T.~Barclay, W.~Bhatti,
+J.~Christiansen and F.~Dai.  This work made use of NASA's Astrophysics
+Data System Bibliographic Services.
 %
 \newline
 %
@@ -1587,7 +1634,8 @@ Astrophysics Data System Bibliographic Services.
 \section{Derivation of general formula for apparent occurrence rate}
 \label{sec:appendix}
 
-In this appendix, we derive Equation~\ref{eq:general_Gamma_a}.  First,
+This appendix derives Equation~\ref{eq:general_Gamma_a} in a more
+rigorous manner than in Section~\ref{sec:general_formula}.  First,
 recall our definition of apparent rate density
 (Equation~\ref{eq:apparent_rate_density}).  We assume that $R$ and $L$
 are uniquely determined from the assumed stellar
@@ -1645,7 +1693,7 @@ Since we assume $\ps\a=\ps_1$,
     \delta(M\a-M).
 \end{equation}
 In this case, $\mathcal{N}_{{\rm s},q}^1$ is non-zero only at
-$r\a=R_a\sqrt{\delta_{\rm obs}}$, and the observed depth is
+$r\a=R\a\sqrt{\delta_{\rm obs}}$, and the observed depth is
 \begin{equation}
     \delta_{\rm obs}
     = \left[{r\over R(M\a)}\right]^2\times {L(M\a) \over L_{\rm sys}(M\a, q)}
@@ -1686,7 +1734,7 @@ In this case, $M=qM_1=qM\a$, so
     \label{eq:fancyN_s_2_prop}
 \end{equation}
 Again $\mathcal{N}_\star^2$ is non-zero only at
-$r\a=R_a\sqrt{\delta_{\rm obs}}$, but this time
+$r\a=R\a\sqrt{\delta_{\rm obs}}$, but this time
 \begin{equation}
     \delta_{\rm obs} = \left[{r\over R(qM\a)}\right]^2 \times {L(qM\a) 
       \over L_{\rm sys}(M\a, q)}
@@ -1792,7 +1840,7 @@ evaluates to
     \label{eq:final_formula}
 \end{align}
 This equation is used to derive
-Eqs.~\ref{eq:model5_apparent_rate_density}
+Equations~\ref{eq:model5_apparent_rate_density}
 and~\ref{eq:powerlaw_vary_binary}, and is numerically integrated to
 create Figs.~\ref{fig:occ_rate_model_3_log},~\ref{fig:model_4},
 and~\ref{fig:gaussian_HJ}.  It is validated in limits in which it is
@@ -1801,30 +1849,6 @@ Equation~\ref{eq:model_1_apparent_rate_density}), and also against a
 Monte Carlo realization of the twin binary models
 (Secs.~\ref{sec:model_1} and~\ref{sec:model_2}).
 
-Noting the definition of $\mu$ in Equation~\ref{eq:mu_general},
-Equation~\ref{eq:final_formula} can also be expressed as
-\begin{align}
-    \notag
-    \notag
-    \Gamma\a(r\a,M\a) &= {1\over 1+\mu(\mathrm{BF}, M\a)} \cdot
-       \left[ \Gamma_0(r\a, M\a)\phantom{\tilde \Gamma}\right.&\\
-       &\left.+\mu(\mathrm{BF}, M\a)\cdot
-       %\tilde\Gamma_1(r\a, M\a)
-       \left\langle {1 \over \mathcal{A}}\cdot\Gamma_1\left({r\a\over\mathcal{A}}, M\a\right)
-       +%\tilde\Gamma_2(r\a, M\a)
-       {q \over \mathcal{B}}\cdot\Gamma_2\left({r\a\over\mathcal{B}}, qM\a\right) \cdot {R(qM\a) \over R(M\a)}q^{-1/3}\right\rangle
-       \right],
-\end{align}
-where the angle brackets denote averaging over $f(q)/\mathcal{A}^3$.
-This form shows that the fraction $\mu$ and mass ratio distribution
-$f(q)/\mathcal{A}^3$ of binaries {\it in the searchable volume} are
-enough to describe the contributions from binaries to $\Gamma\a$.  The
-fraction $\mu$ gives the relative contributions from singles and
-binaries, and $f(q)/\mathcal{A}^3$ weights the contributions from
-binaries with various mass ratios.  The apparent rate density at each
-mass ratio ({\it i.e.}, the terms in the angle brackets) is the rate
-density of systems that give the apparent $(r\a, M\a)$, corrected for
-the overestimated transit probability around secondaries.
 
 
 
