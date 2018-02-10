@@ -326,12 +326,9 @@ regardless of whether the host star is single or part of a binary.
         searched twin binaries out to a distance $\sqrt{2}\times$ that
         of single stars.  Because of dilution, there are no planets in
         twin binaries with $r\a=r\p$.
-        {\it Middle:} At $r\a=r\p/\sqrt{2}$, the maximum searchable
+        {\it Bottom:} At $r\a=r\p/\sqrt{2}$, the maximum searchable
         distances are half those at $r\a=r\p$.  The only detected
         planets with $r\a=r\p/\sqrt{2}$ orbit twin binaries.
-        {\it Bottom:} Planets with a true radius $r=r\p$ are
-        searchable to a maximum distance $d_0$ around singles, and
-        $d_0/\sqrt{2}$ around twin binaries.
     }
     \label{fig:model_1_volumes}
 \end{figure}
@@ -505,7 +502,7 @@ Let us evaluate the contributions to $n_{\rm det}$ from singles and
 binaries.  As in the previous subsection, for each apparent planet
 radius $r\a$, the observers select $N_\star(r\a)$ unresolved
 point-sources on sky, based on Equation \ref{eq:dmax}.  If we let $\mu
-\equiv N\star^{\rm b}(r\a)/N_\star^0(r\a)$ be the ratio of the number
+\equiv N_\star^{\rm b}(r\a)/N_\star^0(r\a)$ be the ratio of the number
 of searchable binary systems to single systems, then the number of
 single and binary point-sources thought to be searchable are
 \begin{equation}
@@ -791,46 +788,51 @@ We will now apply our general equation for the apparent rate density
 (Equation~\ref{eq:general_Gamma_a}) to study binarity's effects in
 regimes of observational interest.  In the following, we write the
 rate density for each type of star, $\Gamma_i(r)$, as the product of a
-shape function and a constant:
+shape function, normalized to unity, and a constant:
 \begin{equation}
     \Gamma_i(r) = Z_i f_i(r), \quad {\rm for\ }i\in\{0,1,2\},
 \end{equation}
 where $i=0$ corresponds to single stars, $i=1$ to primaries of
-binaries, and $i=2$ to secondaries of binaries.  The shape function is
-normalized to unity.  The $Z_i$'s are each system type's occurrence
+binaries, and $i=2$ to secondaries of binaries.
+The $Z_i$'s are each system type's occurrence
 rate $\Lambda_i$, integrated over all planetary radii. In other words,
-they are number of planets per single, primary, or secondary star.  We
-want to consider the effects of varying not only $f_i(r)$ but also the
-relative values of the $Z_i$'s.
+they are number of planets per single, primary, or secondary star.
+While our main interest is in varying the radius shape function
+and the relative values of integrated occurrence rates, we 
+will also briefly discuss shape functions in stellar mass.
+To keep things analytically simple, we will assume throughout this
+section that stars are a one-parameter family, given by 
+$L \propto M^\alpha \propto R^\alpha$, so that a given value 
+of $q$ determines everything about a secondary.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Power law planet radius distributions}
 \label{sec:model_2}
 
 \subsubsection{Twin binaries}
-We begin introducing realism by keeping all binaries as twins, but
-letting the planet radius distributions vary.  First, we assume a
+As a first step, we keep all binaries as twins, but
+let the planet radius distribution vary.  If we take a
 power law planet radius distribution,
 \begin{equation}
     \Gamma_i(r) = Z_i f(r) = Z_i r^\delta/\mathcal{N}_r,
 \end{equation}
-for $f(r)$ the radius shape function, and $\mathcal{N}_r$ the shape
-function's normalization.  The resulting apparent rate density is 
+for $\mathcal{N}_r$ the shape function's normalization, then
+Equation~\ref{eq:general_Gamma_a} gives the resulting apparent rate density,
 \begin{equation}
     \Gamma\a(r\a) = \frac{r\a^\delta}{\mathcal{N}_r} \left[
     \frac{Z_0}{1+\mu}
     +
     2^{\frac{\delta+1}{2} } \frac{\mu}{1+\mu} \left(Z_1 + Z_2
     \right)
-    \right],
+    \right].
     \label{eq:model5_apparent_rate_density}
 \end{equation}
-which is quite similar to the twin binary, fixed-planet case
-(Equation~\ref{eq:model_1_apparent_rate_density}), except for in the
+This is similar to the twin binary, fixed-planet case
+(Equation~\ref{eq:model_1_apparent_rate_density}), except for the
 radius dependence and normalization.  As in Section~\ref{sec:model_1},
 $\mu = 2^{3/2} n\b/n\s$.  If the $Z_i$'s are equal, the ``correction
-factor'' relative to the rate density for singles becomes quite
-simple:
+factor'' relative to the rate density for singles becomes simple:
 \begin{align}
     \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)} 
     \right|_{r\a\rightarrow r}
@@ -869,28 +871,34 @@ occurrence rates is quite small.
 
 To check whether non-twin binaries change the preceding result, we now
 assume $f(q) = q^\beta/\mathcal{N}_q$, for $\mathcal{N}_q$ the
-normalization.  This changes $\mu$ (Equation~\ref{eq:mu_general}
-simplifies to Equation~\ref{eq:mu_power_laws}).  It may also affect
-the rate density, which could be a function of the varying stellar
-mass.  Absorbing this dependence into a power law as well,
+normalization.
+This changes $\mu$: taking the volume-limited binary mass ratio
+distribution to be $f(q) \propto q^\beta$, Equation~\ref{eq:mu_general} 
+simplifies to
+\begin{equation}
+    \mu = \frac{n\b}{n\s} \frac{1}{1+\beta}
+    \int_0^1 (1+q^\alpha)^{3/2}q^\beta\,{\rm d}q.
+    \label{eq:mu_power_law_q}
+\end{equation}
+ The rate density might now also vary with 
+host star mass.  We can absorb this dependence into a power
+law,
 \begin{equation}
     \Gamma_i(r,M) = Z_i \times \frac{r^\delta}{\mathcal{N}_r} \times
     \frac{M^\gamma}{\mathcal{N}_M},
 \end{equation}
 where $Z_i$ is dimensionless, and the normalization constants carry
-the units (each side has units $[r^{-1} M^{-1}]$).  We assume that
-stars are a one-parameter family, given by $R \propto M \propto
-L^{\frac{1}{\alpha}}$, so that a given value of $q$ determines
-everything about a secondary.
+the units (each side has units $[r^{-1} M^{-1}]$).
 
 We are mostly interested in the apparent rate density's radius
 dependence.  Marginalizing Equation~\ref{eq:general_Gamma_a} over
-apparent stellar mass, we find that when $Z_0=Z_1=Z_2$,
+apparent stellar mass, we find that when all stars host the same number
+of planets ($Z_0=Z_1=Z_2$),
 \begin{align}
-    X_\Gamma &\equiv \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)} 
-    \right|_{r\a\rightarrow r} \\
-    &=
     \notag
+    \left. \frac{\Gamma\a(r\a)}{\Gamma_0(r)} 
+    \right|_{r\a\rightarrow r}
+    &=
     \frac{1}{1+\mu}
     \left[1 + \frac{1}{\mathcal{N}_q} \frac{n\b}{n\s}\times 
     \left(
@@ -898,7 +906,7 @@ apparent stellar mass, we find that when $Z_0=Z_1=Z_2$,
     \right.
     \right. \\
     %isn't latex great?
-    &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
+    &\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
     \left.\left.
     \int_0^1 {\rm d}q\,q^{\beta+\delta+\frac{5}{3}} 
     (1+q^\alpha)^{\frac{3}{2}}
@@ -909,7 +917,7 @@ apparent stellar mass, we find that when $Z_0=Z_1=Z_2$,
 where $\gamma$ does not appear because of the marginalization over
 $M\a$.  For $\alpha = 3.5$, $\beta=0$, $\gamma=0$, $\delta=-2.92$, the
 summed integrals in Equation~\ref{eq:powerlaw_vary_binary} give
-$(\ldots)\approx 1.50249$. %171211_model_integrals.nb
+$(\ldots)\approx 1.503$. %171211_model_integrals.nb
 For $n\b / (n\b + n\s)=0.44$, this yields $\Gamma\a/\Gamma_0 = 1.048$;
 the relative difference between the apparent rate density and the rate
 density around singles is 4.8\%.  This indicates that considering only
@@ -917,7 +925,7 @@ twin binaries gave us correct intuition: for a power law radius
 distribution ($2r_\oplus \lesssim r\a \lesssim 17r_\oplus$) in which
 there are the same number of planets orbiting singles, primaries, and
 secondaries, binarity influences apparent planet occurrence rates
-around Sun-like stars at the $\sim$few percent level.
+around Sun-like stars at the few percent level.
 
 
 
@@ -949,9 +957,8 @@ around Sun-like stars at the $\sim$few percent level.
 
 Though the details of the planet radius distribution $\Gamma_i(r)$ at
 $r<2r_\oplus$ are currently an active topic of research, we can
-consider how binarity affects this regime under different plausible
-assumptions.  For instance, assume that the true radius shape function
-is
+investigate how binarity affects this regime by making plausible
+assumptions.  For instance, we can assume a broken power-law:
 \begin{align}
     f(r)
     &\propto
@@ -963,14 +970,13 @@ is
     \right.
     \label{eq:model3_radius_distribution}
 \end{align}
-As in the previous model, we presume that the observers know the true
-properties of all singles and primaries. The masses, radii, and
-luminosities of stars vary as $R \propto M \propto
-L^{\frac{1}{\alpha}}$.  Our ``nominal model'' remains the same:
+Our ``nominal model'' remains the same:
+$L\propto M^\alpha \propto R^\alpha$, and
 $\alpha=3.5$, $\beta=\gamma=0$, $\delta=-2.92$.
 
-At apparent radii $r\a > 2r_\oplus$, the results of this model are the
-same as those from Section~\ref{sub:powerlaw_varying_binaries}.  For
+At apparent radii $r\a > 2r_\oplus$, the apparent rate density in
+this model is the same as from
+Section~\ref{sub:powerlaw_varying_binaries}.  For
 $r\a < 2r_\oplus$, the equations are tedious, but still tractable.
 For simplicity, we insert Equation~\ref{eq:model3_radius_distribution}
 into Equation~\ref{eq:general_Gamma_a}, and integrate using a computer
@@ -980,15 +986,14 @@ The output is validated against analytic predictions in the $r\a >
 2r_\oplus$ and the $r\a < 2r_\oplus/\sqrt{2}$ regimes, and is plotted
 in Figure~\ref{fig:occ_rate_model_3_log}.
 
-
 \paragraph{The rate of Earth analogs} The immediately arresting result
 there is a ``bump'' in the apparent rate density at $r\a < 2r_\oplus$:
 the true rate for singles is less than the inferred rate.  For the
 case in which secondaries host as many (half as many) planets as
-single stars, this means an overestimate of the absolute occurrence
+single stars, this means an overestimate of the occurrence
 rate by $\approx 50\%$ ($\approx 25\%$).  The ``bump'' exists even for
 the $Z_2/Z_0=0$ case as a $\approx 10\%$ effect.  The magnitude of
-this evidently error depends strongly on the prevalence of planets
+this error evidently depends strongly on the prevalence of planets
 around secondaries.
 
 \paragraph{Hot Jupiter occurrence rates} Taking
@@ -998,7 +1003,7 @@ the true rate for singles.  In the most extreme case of $Z_2/Z_0=0$,
 we find that $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 1.13$, where
 \begin{equation}
     \Lambda_{\rm HJ,a} =
-      \int_{8r_\oplus}^{\infty} \Gamma\a(r)\,{\rm d}r,
+      \int_{8r_\oplus}^{\infty} \Gamma\a(r\a)\,{\rm d}r\a,
 \end{equation}
 and similarly for $\Lambda_{\rm HJ,0}$.
 %occ_rate_vs_radius_model_3_withtext_Zsub2_0.00_rpu_22.5.pdf
