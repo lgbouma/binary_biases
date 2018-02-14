@@ -193,7 +193,7 @@ both large, then the astronomers' estimate for the occurrence rate
 ($\Lambda$) is simply
 \begin{equation}
   \Lambda = \frac{N_{\rm det}}{N_\star}
-                    \times \frac{1}{p_{\rm tra}},
+                    \cdot \frac{1}{p_{\rm tra}},
 \label{eq:occ_rate_simple}
 \end{equation}
 where the geometric transit probability, $p_{\rm tra}$, accounts for
@@ -279,7 +279,6 @@ distances from the Earth.  Thus for any planet and star pair, adding a
 stellar companion both helps and hinders transit detection: the extra
 photons help by lowering the noise, and hinder by diminishing the
 observed transit depth.
-% Accounting for each effect requires some care.
 
 Planet occurrence rates are often presented as two-dimensional density
 functions in the space of planet radius and orbital period.
@@ -645,7 +644,7 @@ detectable, $\mu$, has changed.  At any $(r\a,M\a)$ pair, the number
 of binary systems in the searchable volume with mass ratio $(q,
 q+\mathrm{d}q)$ is now
 \begin{equation}
-    {N_\star(r\a)\over{1+\mu}}\times {n_{\rm b}\over n_{\rm s}}
+    {N_\star(r\a)\over{1+\mu}}\cdot {n_{\rm b}\over n_{\rm s}}
     \left[{L_{\rm tot}(M\a, q) \over L(M\a)}\right]^{3/2}
     f(q)\,\mathrm{d}q,
     \label{eq:N_binaries}
@@ -815,11 +814,9 @@ factor'' relative to the rate density for singles is
 For a binary fraction of $0.1$, $\mu\approx 0.15$. Taking
 $\gamma=-2.92$ from \citet{howard_planet_2012},  we find that the
 apparent rate density is a mere 0.4\% larger than the rate density of
-single stars.
-%relative difference $\Delta \Gamma_0 = |\Gamma_0~-~\Gamma\a|/\Gamma_0$
-Fortuitously, the exponent of the radius distribution is close to
-$-3$, and the errors from neglecting binaries almost entirely
-cancel out.
+single stars.  Fortuitously, the exponent of the radius distribution
+is close to $-3$, and the errors from neglecting binaries almost
+entirely cancel out.
 
 The above estimate cannot apply at small radii, since the shape
 function diverges. \citet{howard_planet_2012}'s results indicate that
@@ -875,7 +872,7 @@ that are searched at any transit depth
 The rate density now varies not only with planet radius, but also
 host star mass.  We can absorb this dependence into a power law,
 \begin{equation}
-    \Gamma_i(r,M) = Z_i \times \frac{r^\gamma}{\mathcal{N}_r} \times
+    \Gamma_i(r,M) = Z_i \cdot \frac{r^\gamma}{\mathcal{N}_r} \cdot
     \frac{M^\zeta}{\mathcal{N}_M},
 \end{equation}
 where $Z_i$ is dimensionless, and the normalization constants carry
@@ -884,7 +881,7 @@ the units.% (each side has units $[r^{-1} M^{-1}]$).
 Our main interest is in the apparent rate density's radius
 dependence.  Marginalizing Equation~\ref{eq:general_Gamma_a} over
 apparent stellar mass, we find that when all stars host the same number
-of planets ($Z_0=Z_1=Z_2$),
+of planets,
 \begin{align}
     %see annoying_q_factor_dec22.pdf for derivation
     \notag
@@ -892,7 +889,7 @@ of planets ($Z_0=Z_1=Z_2$),
     &=
     \frac{1}{1+\mu}
     \left[
-      1 + \frac{1}{\mathcal{N}_q} \frac{n\b}{n\s}\times 
+      1 + \frac{1}{\mathcal{N}_q} \frac{n\b}{n\s}
     \left(
       \int_0^1 {\rm d}q\,q^\beta (1+q^\alpha)^{\frac{\gamma+4}{2}} +
       \right.
@@ -1025,13 +1022,12 @@ Section~\ref{sec:further_models}.
 A common situation during transit survey follow-up is for
 high-resolution imaging to reveal multiple stars in a system that
 shows planetary transits.  It is often impossible to rule which star
-hosts the detected planet.  Intuitively, one would expect that the
-primary star would be the more likely host because at fixed
-planet size, planetary transits around secondaries have smaller
-amplitudes (Equations~\ref{eq:dil_1} and~\ref{eq:dil_2} imply
+hosts the detected planet.  One would intuitively expect that the
+primary star would be the more likely host because at fixed planet
+size, planetary transits around secondaries have smaller amplitudes
+(Equations~\ref{eq:dil_1} and~\ref{eq:dil_2} imply
 $\mathcal{D}_2>\mathcal{D}_1$, if $\alpha=3.5$).  However, this
-reasoning is qualitative, and its assumptions might not always
-hold.
+reasoning is qualitative, and its assumptions might not always hold.
 
 Our formalism lets us calculate the relative probability that a
 detected planet orbits a single, primary, or secondary star in a more
@@ -1059,9 +1055,9 @@ primaries and secondaries, then there is a turn-over radius,
 $\approx\!0.4r_\oplus$, below which more of the detected planets in
 binaries come from secondaries~--~they have all been ``diluted down''
 from larger true planetary radii!  Rephrased, going from apparent
-radii of $2r_\oplus$ to $1.4r_\oplus$, the fraction of detected
-planets with binary companions increases by anywhere from $6\%$ to
-$12\%$, depending on the relative occurrence of planets about
+radii of $2r_\oplus$~to~$1.4r_\oplus$, the fraction of detected
+planets with binary companions increases by anywhere from
+$6\%$~to~$12\%$, depending on the relative occurrence of planets about
 primaries and secondaries.  We compare this prediction with recent
 observations in Section~\ref{sec:discussion}.
 %~\footnote{
@@ -1073,12 +1069,6 @@ observations in Section~\ref{sec:discussion}.
 %Eqs~\ref{eq:n_det_0} and~\ref{eq:n_det_1} semi-analytically and show
 %that $F_1(2r_\oplus/\sqrt{2})/F_1(2r_\oplus) \approx 1.19$.
 %check_companion_fractions.py, and LB's notes 2017/12/21.0 }.
-%This effect will appear in any radius distribution that declines at
-%large radii, and flattens below some cutoff radius, $r_{\rm c}$.  This
-%is because (for dilution about primaries) at apparent radii $r\a <
-%r_{\rm c}/\sqrt{2}$, relatively more planets will be ``diluted'' into
-%the given $r\a$, since there are more planets in the undiluted
-%distribution from $r\a$ to $\sqrt{2}r\a$.
 
 
 
@@ -1161,8 +1151,6 @@ apparent HJ rate is {\it greater} than the true rate for singles.  For
 instance, if the hot Jupiter rate about secondaries and singles
 is equal, then $\Lambda_{{\rm HJ},0}/\Lambda_{\rm HJ,a} = 0.81$.
 %int_rate_density_vs_radius_model_7_withtext*manyZs.pdf
-%For the case when no hot Jupiters orbit secondaries, $\Lambda_{{\rm
-%HJ},0} \approx \Lambda_{\rm HJ,a}$ to within one percent.
 Qualitatively, the apparent HJ rate is greater than the true rate for
 singles because binary systems have extra uncounted stars that
 yield hot Jupiter detections.
@@ -1613,13 +1601,13 @@ Astrophysics Data System Bibliographic Services.
 \label{sec:appendix}
 
 This appendix derives Equation~\ref{eq:general_Gamma_a} through a more
-straight-forward, but also more tedious, method than that presented in
+straight-forward, but also more tedious, procedure than that of
 Section~\ref{sec:general_formula}.   First, note that analogous to
 Equation~\ref{eq:occ_rate_simple}, the apparent rate density $\Gamma\a$ can be
 written
 \begin{equation}
     \Gamma\a(r\a,M\a) = \frac{n_{\rm det}(r\a,M\a)}{N_\star(r\a,M\a)}
-    \times \frac{1}{p_{\rm tra}(M\a)},
+    \cdot \frac{1}{p_{\rm tra}(M\a)},
 \label{eq:apparent_rate_density}
 \end{equation}
 where $n_{\rm det}$ is the number of detected planets, per unit
@@ -1679,8 +1667,8 @@ In this case, $\mathcal{N}_{{\rm s},q}^1$ is non-zero only at
 $r\a=R\a\sqrt{\delta}$, and the observed depth is
 \begin{equation}
     \delta
-    = \left[{r\over R(M\a)}\right]^2\times {L(M\a) \over L_{\rm tot}(M\a, q)}
-    \equiv \left[{r\over R(M\a)}\right]^2\times 
+    = \left[{r\over R(M\a)}\right]^2\cdot {L(M\a) \over L_{\rm tot}(M\a, q)}
+    \equiv \left[{r\over R(M\a)}\right]^2\cdot 
     \frac{1}{\mathcal{D}_1^2}
     \label{eq:delta_obs_primaries} 
 \end{equation}
@@ -1692,15 +1680,16 @@ The normalization of $\mathcal{N}_{{\rm s},q}^1$ is given by the
 number of binaries that are searchable for a signal $\delta$
 and that have mass ratio $q$:
 \begin{equation}
-    N_\star^0(\delta, 
-    L(M\a))\cdot
+    N_\star^0(r\a, M\a)\cdot
     {n\b\over n\s}\left[L_{\rm tot}(M\a, q) \over L(M\a)\right]^{3/2}.
     \label{eq:primary_normalization}
 \end{equation}
-Thus,
+where the argument for the number of searchable single stars,
+$N_\star^0$, could also be expressed as $(\delta, L(M\a))$.
+Applying Equation~\ref{eq:primary_normalization},
 \begin{align}
     \mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M)
-    &=N_\star^0(\delta, L(M\a))
+    &=N_\star^0(r\a, M\a)
     \cdot {n\b\over n\s} \cdot \mathcal{D}_1^3
     \cdot\hat{\delta} \left[r\a-\frac{r}{\mathcal{D}_1}\right]\hat{\delta}(M\a-M).
     \label{eq:N_s_1}
@@ -1718,10 +1707,10 @@ Again $\mathcal{N}_\star^2$ is non-zero only at
 $r\a=R\a\sqrt{\delta}$, but this time
 \begin{equation}
       \delta =
-      \left[{r\over R(qM\a)}\right]^2 \times
+      \left[{r\over R(qM\a)}\right]^2 \cdot
       {L(qM\a) \over L_{\rm tot}(M\a, q)}
       \equiv
-      \left[{r\over R(M\a)}\right]^2\times
+      \left[{r\over R(M\a)}\right]^2\cdot
       \frac{1}{\mathcal{D}_2^2},
 \end{equation}
 where
@@ -1741,7 +1730,7 @@ the total luminosity of the binary is the same.  Thus,
 where
 \begin{align}
     \mathcal{N}_{{\rm s},q}^2(r\a, M\a, q; r, M)
-    =N_\star^0(\delta, L(M\a)) \cdot \frac{n\b}{n\s} 
+    =N_\star^0(r\a, M\a) \cdot \frac{n\b}{n\s} 
     \cdot \mathcal{D}_1^3
     \cdot \hat{\delta} \left[r\a-\frac{r}{\mathcal{D}_2}\right]
     \hat{\delta} \left(M\a-{M\over q}\right).
@@ -1764,7 +1753,7 @@ Marginalizing per Equation~\ref{eq:n_det}, we find
     n_{\rm det}^0(r\a, M\a)
     &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^0(r\a, M\a; r, M)
     \cdot\Gamma_0(r, M) \cdot p_{\rm tra}(M)\\
-    &=N_\star^0(\delta, L(M\a))\cdot\Gamma_0(r\a, M\a) \cdot p_{\rm 
+    &=N_\star^0(r\a, M\a)\cdot\Gamma_0(r\a, M\a) \cdot p_{\rm 
         tra}(M\a),
     \label{eq:n_det_0}
 \end{align}
@@ -1774,7 +1763,7 @@ and
     n_{\rm det}^1(r\a, M\a)
     &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^1(r\a, M\a; r, M)
     \cdot\Gamma_1(r, M) \cdot p_{\rm tra}(M)\\
-    &=N_\star^0(\delta, L(M\a))\cdot p_{\rm tra}(M\a) \cdot
+    &=N_\star^0(r\a, M\a)\cdot p_{\rm tra}(M\a) \cdot
     \frac{n\b}{n\s}
     \int \mathrm{d}q \,
          \mathcal{D}_1^3 f(q)\cdot
@@ -1788,7 +1777,7 @@ Finally,
     &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^2(r\a, M\a; r, M)
     \cdot\Gamma_2(r, M) \cdot p_{\rm tra}(M)\\
     &=
-    N_\star^0(\delta, L(M\a))\cdot \frac{n\b}{n\s}
+    N_\star^0(r\a, M\a)\cdot \frac{n\b}{n\s}
     +\int {\rm d}q\, 
          \mathcal{D}_1^3 f(q)\cdot q \mathcal{D}_2
          \Gamma_2(\mathcal{D}_2r\a, qM\a)\cdot
@@ -1802,7 +1791,7 @@ Combining the above results with Equation~\ref{eq:N_searched}, the
 apparent rate density,
 \begin{align}
     \Gamma\a(r\a,M\a) &= 
-    \frac{1}{N_\star(r\a,M\a) p_{\rm tra}(r\a,M\a)} \times
+    \frac{1}{N_\star(r\a,M\a) p_{\rm tra}(r\a,M\a)} \cdot
     \sum_i n_{\rm det}^i (r\a,M\a),
 \end{align}
 evaluates to
