@@ -18,7 +18,7 @@
 
 
 \shortauthors{Bouma et al.}
-\shorttitle{Binarity and Occurrence Rates}
+\shorttitle{Binary Biases}
 
 
 \newcommand{\pp}{\mathcal{P}}
@@ -691,6 +691,13 @@ $p_{\rm tra}$ in Equation~\ref{eq:n2} by a factor of
   {R(qM\a) \over R(M\a)}q^{-1/3}.
 \end{equation}
 
+\item The contribution to the apparent rate density from
+secondaries now depends on the mass of the secondary, $qM\a$. The
+associated measure on the right-hand side of
+Equation~\ref{eq:n2} becomes ${\rm d}(qM\a)$, and gives rise to an
+extra multiplicative factor of $q$.
+
+
 \end{enumerate}
 
 Taking these modifications into account, a general formula for the
@@ -977,10 +984,10 @@ predictions in the $r\a > 2r_\oplus$ and the $r\a <
 is a ``bump'' in the apparent rate density at apparent radii below
 $2r_\oplus$: the true rate for singles is less than the apparent rate.
 If secondaries host as many planets as single stars, the occurrence of
-these small planets is overestimated by $\approx 50\%$.  The magnitude
+these small planets is overestimated by about $50\%$.  The magnitude
 of the systematic error decreases if there are fewer planets around
 secondaries; if secondaries host no planets at all, the apparent rate
-is overestimated by only $\approx 10\%$.  
+is overestimated by only $10\%$.  
 
 \paragraph{Hot Jupiter occurrence rates}
 By integrating the rate density from
@@ -1042,24 +1049,23 @@ the primary.
 
 If the apparent radius of the system is above $2r_\oplus$, and planets
 exist about primaries and secondaries at equal rates, then the planet
-is $\approx\!3$ times more likely to orbit the primary than the
+is $3$ times more likely to orbit the primary than the
 secondary.  If secondaries host half as many planets as primaries,
-then a detected planet is $\approx\!5$ times more likely to orbit the
+then a detected planet is $5$ times more likely to orbit the
 primary.
 
 The situation for apparent radii below $2r_\oplus$ is more nuanced.
 For the two cases in which secondaries host fewer planets than
 primaries, detected planets in binaries are still always more likely
 to orbit the primary.  However, if planets exist at the same rate in
-primaries and secondaries, then there is a turn-over radius,
-$\approx\!0.4r_\oplus$, below which more of the detected planets in
-binaries come from secondaries~--~they have all been ``diluted down''
-from larger true planetary radii!  Rephrased, going from apparent
-radii of $2r_\oplus$~to~$1.4r_\oplus$, the fraction of detected
-planets with binary companions increases by anywhere from
-$6\%$~to~$12\%$, depending on the relative occurrence of planets about
-primaries and secondaries.  We compare this prediction with recent
-observations in Section~\ref{sec:discussion}.
+primaries and secondaries, then below apparent radii of $0.4r_\oplus$,
+more of the detected planets in binaries come from secondaries~--~they
+have all been diluted down from larger true planetary radii.
+Rephrased, going from apparent radii of $2r_\oplus$~to~$1.4r_\oplus$,
+the fraction of detected planets with binary companions increases by
+anywhere from $6\%$~to~$12\%$, depending on the relative occurrence of
+planets about primaries and secondaries.  We compare this prediction
+with recent observations in Section~\ref{sec:discussion}.
 %~\footnote{
 %The increase can be derived analytically.  Let the fraction of total
 %detected planets from primaries at a given apparent radius be
@@ -1219,10 +1225,11 @@ $\eta_\oplus$ beyond our rough estimate.
 \paragraph{Hot Jupiter rate discrepancy}
 While unresolved binaries may bias $\eta_\oplus$ measurements, our
 approach suggests that they do not influence the hot Jupiter rate
-discrepancy.  The ``discrepancy'' is that hot Jupiter occurrence rates
-measured by transit surveys ($\approx 0.5\%$) are lower than those
-found by radial velocity surveys ($\approx 1\%$; see
-Table~\ref{tab:hj_rates}).
+discrepancy.  The ``discrepancy'' is that RV surveys find roughly
+twice as many hot Jupiters per Sun-like star as do transit surveys
+($\approx 1\%$~vs.~$\approx 0.5\%$, respectively).  We summarize hot
+Jupiter rates reported by different surveys in
+Table~\ref{tab:hj_rates}.
 
 Though the disagreement is only weakly significant ($<3\sigma$), one
 reason to expect a difference is that the RV sample is biased towards
@@ -1240,8 +1247,8 @@ M/H}] }$, \citeauthor{guo_metallicity_2017}\! found $\beta = 2.1\pm
 0.2\% of the needed 0.5\% difference between the measured CKS
 and {\it Kepler}\ rates\footnote{ \citet{petigura_CKS_2017} recently
 found $\beta = 3.4^{0.9}_{-0.8}$.  If true, this implies that
-metallicity could account for about half of the ``hot Jupiter rate
-discrepancy''.  }.  \citeauthor{guo_metallicity_2017}\!  concluded
+metallicity could account for about half of the hot Jupiter rate
+discrepancy.  }.  \citeauthor{guo_metallicity_2017}\!  concluded
 that ``other factors, such as binary contamination and imperfect
 stellar properties'' must also be at play.
 
@@ -1365,7 +1372,7 @@ observations.
 
 Occurrence rate calculations are beginning to incorporate the results
 of high-resolution imaging surveys.  For example, recent studies have
-reduced contamination in the ``numerator'' of the occurrence rate by
+reduced contamination in the numerator of the occurrence rate by
 using~\citet{furlan_kepler_2017}'s catalog to test the effects of
 removing KOI hosts with known companions
 (\citealt{fulton_california-_2017}; \citealt{petigura_CKS_2017}).
@@ -1543,20 +1550,20 @@ Applying Equation~\ref{eq:general_Gamma_a}, we then showed that:
 %
 \item Assuming a broken-power law planet radius distribution, with the
   \citet{howard_planet_2012} exponent above $2r_\oplus$ and a constant
-    occurrence below $2r_\oplus$, there is a ``bump'' in the apparent
-    rate density at $r\a < 2r_\oplus$. This can lead to
-    overestimates in occurrence, $\Delta \Gamma_0 = |\Gamma_0 -
-    \Gamma\a|/\Gamma_0$, of roughly $50\%$
+    occurrence below $2r_\oplus$, the rate density for radii below
+    $2r_\oplus$ is overestimated. The overestimate, $\Delta \Gamma_0 =
+    |\Gamma_0 - \Gamma\a|/\Gamma_0$, can easily reach $50\%$
     (Figure~\ref{fig:occ_rate_model_3_log}).  Although this is smaller
     than current systematic uncertainties on the occurrence rates of
     Earth-sized planets, this implies that binarity could eventually
     become an important component of the $\eta_\oplus$ error budget.
 %
-\item Binarity ``fills in'' gaps in the radius distribution
+\item Binarity blurs sharp features in the radius distribution
   (Figure~\ref{fig:model_4}), to a degree that could affect precise
-    measurements of the depth, width, and slope
-    of~\citet{fulton_california-_2017}'s radius gap, in the event that
-    planets are not carefully vetted with high-resolution imaging.
+    measurements of the depth, width, and slope of
+    the~\citet{fulton_california-_2017} radius gap.
+    %in the event that
+    %planets are not carefully vetted with high-resolution imaging.
 %
 \item Binarity does not lead to smaller apparent HJ occurrence rates
   (Figure~\ref{fig:gaussian_HJ}).  This assumes a Gaussian planet
@@ -1567,7 +1574,7 @@ Applying Equation~\ref{eq:general_Gamma_a}, we then showed that:
   revealed by high-resolution imaging surveys to exist in binaries are
     more likely to orbit the primary (Figure~\ref{fig:frac_model_3}).
 %
-\item Near the ``break'' in occurrence rate as a function of planet
+\item Near the break in occurrence rate as a function of planet
   radius ($\approx 2r_\oplus$), the fraction of detected planets with
     binary companions should increase by roughly $5$~-~$10\%$
     (Figure~\ref{fig:frac_model_3}).
