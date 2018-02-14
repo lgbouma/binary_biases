@@ -9,6 +9,7 @@ rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 rc('text', usetex=True)
 
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import numpy as np
 from scipy.integrate import trapz
 
@@ -28,8 +29,9 @@ ax.plot(q, yvals, label='volume-limited', zorder=1)
 
 ax.legend(loc='best',fontsize='medium')
 
-ax.set_xlabel('$q=M_2/M_1$', fontsize='large')
-ax.set_ylabel('$p(\mathrm{draw\ }q\,|\,\mathrm{system\ is\ binary})$', fontsize='large')
+ax.set_xlabel('binary mass ratio, $q=M_2/M_1$', fontsize='large')
+#ax.set_ylabel('$p(\mathrm{draw\ }q\,|\,\mathrm{system\ is\ binary})$', fontsize='large')
+ax.set_ylabel('relative probability', fontsize='large')
 ax.set_ylim([-0.1,2.3])
 ax.set_xlim([-0.05,1.05])
 

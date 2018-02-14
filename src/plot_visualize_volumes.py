@@ -10,6 +10,7 @@ rc('text', usetex=True)
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import numpy as np
 from mpl_toolkits.mplot3d import proj3d
 
@@ -74,11 +75,11 @@ def make_sphere(radius, txt, ax, ind):
     ax.patch.set_alpha(0.) # make background transparent
 
 
-fig = plt.figure(figsize=(4,4))
+fig = plt.figure(figsize=(4.1,4))
 
 inds = [1,2,3,4]
-radii = [1, 2**(1/2), 1, 2**(-1/2)]
-txts = ['$d_0$', '$\sqrt{2}d_0$', '$d_0$', '$d_0/\sqrt{2}$']
+radii = [1, 2**(1/2), 1/2, 2**(-1/2)]
+txts = ['$d_0$', '$\sqrt{2}d_0$', '$d_0/2$', '$d_0/\sqrt{2}$']
 
 for ind, r, txt in zip(inds, radii, txts):
 
@@ -93,9 +94,9 @@ ax.text2D(.3, .05, 'single stars', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
 ax.text2D(.7, .05, 'twin binaries', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
-ax.text2D(.05, .3, '$r_{\mathrm{a}}=r_{\mathrm{p}}$', transform=fig.transFigure,
+ax.text2D(.05, .3, '$r_{\mathrm{a}}=r_{\mathrm{p}}/\sqrt{2}$', transform=fig.transFigure,
      fontsize='large', va='center', ha='left', rotation=90)
-ax.text2D(.05, .7, '$r_{\mathrm{a}}=r_{\mathrm{p}}/\sqrt{2}$', transform=fig.transFigure,
+ax.text2D(.05, .7, '$r_{\mathrm{a}}=r_{\mathrm{p}}$', transform=fig.transFigure,
         fontsize='large', va='center', ha='left', rotation=90)
 
 fig.savefig('../results/visualize_volumes.pdf', dpi=300,
