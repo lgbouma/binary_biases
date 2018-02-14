@@ -18,7 +18,7 @@
 
 
 \shortauthors{Bouma et al.}
-\shorttitle{Binary Biases}
+\shorttitle{Binarity's Biases}
 
 
 \newcommand{\pp}{\mathcal{P}}
@@ -974,11 +974,10 @@ For simplicity, we insert Equation~\ref{eq:model3_radius_distribution}
 into Equation~\ref{eq:general_Gamma_a}, and integrate using a computer
 program. We refer the interested reader to our online
 implementation\footnote{\url{https://github.com/lgbouma/binary_biases}}.
-As before, $L\propto M^\alpha \propto R^\alpha$, and $\alpha=3.5$,
-$\beta=0$, $\gamma=-2.92$.  The output, shown in
-Figure~\ref{fig:occ_rate_model_3_log}, is validated using analytic
-predictions in the $r\a > 2r_\oplus$ and the $r\a <
-2r_\oplus/\sqrt{2}$ regimes.
+The output, shown in Figure~\ref{fig:occ_rate_model_3_log}, is
+validated using analytic predictions in the $r\a > 2r_\oplus$ and the
+$r\a < 2r_\oplus/\sqrt{2}$ regimes.  As before, $L\propto M^\alpha
+\propto R^\alpha$, and $\alpha=3.5$, $\beta=0$, $\gamma=-2.92$.  
 
 \paragraph{The rate of Earth analogs} The immediately arresting result
 is a ``bump'' in the apparent rate density at apparent radii below
@@ -1227,7 +1226,7 @@ While unresolved binaries may bias $\eta_\oplus$ measurements, our
 approach suggests that they do not influence the hot Jupiter rate
 discrepancy.  The ``discrepancy'' is that RV surveys find roughly
 twice as many hot Jupiters per Sun-like star as do transit surveys
-($\approx 1\%$~vs.~$\approx 0.5\%$, respectively).  We summarize hot
+(roughly $1\%$~vs.~$0.5\%$, respectively).  We summarize hot
 Jupiter rates reported by different surveys in
 Table~\ref{tab:hj_rates}.
 
@@ -1333,10 +1332,10 @@ the planet most likely orbits the primary.
 
 \paragraph{Fraction of detected planets with binary companions}
 A related effect is that some detected planets are more likely to be
-in binary systems than others.  Notably,
-Figure~\ref{fig:frac_model_3} predicts that the fraction of detected
-planets with binary companions should increase by $\approx 6-12\%$
-going from $2r_\oplus$ to $1.4r_\oplus$.
+in binary systems than others.  Notably, Figure~\ref{fig:frac_model_3}
+predicts that the fraction of detected planets with binary companions
+should increase by $6$~to~$12\%$ going from $2r_\oplus$ to
+$1.4r_\oplus$.
 
 In \citet{ziegler_robo-ao_2017}'s recent summary of the Robo-AO KOI
 survey, they reported the fraction of planet-hosting stars with
@@ -1368,7 +1367,7 @@ be interesting to see whether this effect is borne out by further
 observations.
 
 
-\paragraph{Connecting high-resolution imaging to occurrence rates}
+\paragraph{Connection between high-resolution imaging and occurrence rates}
 
 Occurrence rate calculations are beginning to incorporate the results
 of high-resolution imaging surveys.  For example, recent studies have
@@ -1381,21 +1380,21 @@ This is a good first step, but the denominator remains uncorrected.
 Even if the multiplicity of every star that {\it Kepler} surveyed were
 known, the problem would not be solved. In this scenario, it would be
 possible to tabulate planet occurrence for single and binary star
-systems separately.  The number of planets per single star would thus
+systems separately.  The number of planets per single star would
 be known.  However the number of planets per primary and secondary
-would still be convolved.  An observational approach to
-separating the two populations might be to analyze the centroids, or the transit
-durations (and thus host star densities)
-for a representative sample of planets in binary systems. 
+would still be convolved.  An observational approach to separating the
+two populations might be to analyze the centroids, or the transit
+durations (and thus host star densities) for a representative sample
+of planets in binary systems. 
 
 A theory-driven solution might entail probabilistic population
 inference, with a parametrized model for planet populations around
-primary and secondary stars.  Such an approach might find the
-populations to differ, given that secondary stars are less
-massive, and so are perhaps more likely to host smaller
-planets~\citep{dressing_occurrence_2015}.  Given the difficulty of
-writing a correct likelihood function in a survey with systematic
-biases, this might only be feasible by forward-modeling the survey in
+primary and secondary stars.  Such an approach might be expected to
+find that the primary and secondary populations are different, since
+single M dwarfs host more small planets than FGK
+dwarfs~\citep{dressing_occurrence_2015}.  Given the difficulty of
+writing a likelihood function in a survey with systematic
+biases, one possible approach might be to forward-model the survey in
 the framework of approximate Bayesian
 computation~\citep[\textit{e.g.},][]{morehead_understanding_2016}.
 
@@ -1574,17 +1573,17 @@ Applying Equation~\ref{eq:general_Gamma_a}, we then showed that:
   revealed by high-resolution imaging surveys to exist in binaries are
     more likely to orbit the primary (Figure~\ref{fig:frac_model_3}).
 %
-\item Near the break in occurrence rate as a function of planet
-  radius ($\approx 2r_\oplus$), the fraction of detected planets with
-    binary companions should increase by roughly $5$~-~$10\%$
+\item Near the break in occurrence as a function of planet
+  radius at $2r_\oplus$, the fraction of detected planets with
+    binary companions should increase by roughly $5$~to~$10\%$
     (Figure~\ref{fig:frac_model_3}).
 \end{itemize}
 
 These results are only strictly applicable for idealized transit
 surveys meeting the criteria mentioned above.  For real transit
 surveys, although our approach is only suggestive, we hope that it
-provides a rough estimate for the systematic errors that can be
-incurred by ignoring binarity when calculating planetary occurrence
+provides a useful estimate for the systematic errors that can be
+incurred by ignoring binarity in calculations of planetary occurrence
 rates.
 
 
