@@ -1,5 +1,20 @@
-This code supports the results presented by Bouma, Masuda, and Winn in a paper
-entitled "Binarity's Biases on Transit Survey Occurrence Rates''.
+The code in this repository supports the results presented by Bouma, Masuda,
+and Winn in a paper entitled "Binarity's Biases on Transit Survey Occurrence
+Rates''.
+
+## Dependencies
+
+For calculations:
+  * `python3`
+  * `numpy`
+  * `scipy`
+  * `pandas`
+
+For plots:
+  * `matplotlib`
+  * `brokenaxes`: `pip install brokenaxes`, [source here](https://github.com/bendichter/brokenaxes)
+
+One easy way to install all of the above is with the [Anaconda python distribution](https://conda.io/docs/user-guide/install/index.html).
 
 ## To reproduce the main plots:
 
