@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 '''
 visualize the selected and searchable volumes for single stars and twin
 binaries.
 '''
-# -*- coding: utf-8 -*-
 from __future__ import division, print_function
 from matplotlib import rc
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 This script plots the output of the Monte Carlo simulation.
 
@@ -8,21 +9,10 @@ then:
 
 makes plot for Model # 1 of paper
 '''
-# -*- coding: utf-8 -*-
 from __future__ import division, print_function
-import matplotlib as mpl
-mpl.use('pgf')
-pgf_with_custom_preamble = {
-    'pgf.texsystem': 'pdflatex', # xelatex is default; i don't have it
-    'font.family': 'serif', # use serif/main font for text elements
-    'text.usetex': True,    # use inline math for ticks
-    'pgf.rcfonts': False,   # don't setup fonts from rc parameters
-    'pgf.preamble': [
-        '\\usepackage{amsmath}',
-        '\\usepackage{amssymb}'
-        ]
-    }
-mpl.rcParams.update(pgf_with_custom_preamble)
+from matplotlib import rc
+rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+rc('text', usetex=True)
 
 import matplotlib.pyplot as plt
 import pandas as pd

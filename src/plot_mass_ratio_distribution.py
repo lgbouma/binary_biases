@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 '''
 plot the mass ratio distribution for a volume-limited sample, and a
 magnitude-limited sample.
 '''
-# -*- coding: utf-8 -*-
 from __future__ import division, print_function
 from matplotlib import rc
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
