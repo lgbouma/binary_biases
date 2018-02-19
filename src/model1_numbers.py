@@ -1,3 +1,7 @@
+'''
+calculate the ratios of apparent to true occurrence rates for the
+order-of-magnitude toy model.
+'''
 BF = 0.05
 nb_by_ns = 1 / ( (1/BF) - 1 )
 

@@ -26,7 +26,7 @@ optional arguments:
 
 The models are as follows:
 /Model #1: twin binary, same planet
-XModel #2: varying q, same planet (WARNING: not implemented)
+XModel #2: varying q, same planet (NOTE: not implemented)
 /Model #3: varying q, powerlaw+const r
 /Model #4: varying q, r with a gap
 /Model #5: twin binary, powerlaw r
@@ -218,8 +218,9 @@ def run_unit_tests(
     elif model_number == 2:
 
         print('analytic comparison not yet working')
-        import IPython; IPython.embed()
         raise NotImplementedError
+        #NOTE: this is because there is a funky derivative that I never got
+        #around to working out numerically here.
 
         q_grid = np.arange(1e-6, 1+1e-6, 1e-6)
         prob_vl_q = q_grid**β
@@ -393,6 +394,9 @@ def run_unit_tests(
 
 
 def get_mu(BF, model_number):
+    # mu is defined as (number of searchable binary systems)/(number of
+    # searchable single systems). Since each of these scale as (transit
+    # depth)^3, it is independent of apparent planet radius.
 
     if model_number in [1,5]:
         μ = BF/(1-BF) * 2**(3/2)
@@ -540,6 +544,7 @@ def get_apparent_radius_grid(model_number, slowrun=False):
 
 
 def get_q_grid(model_number):
+    # grid of binary mass ratios
 
     if model_number in [1,5]:
         q = np.arange(0.1,1+0.1,0.1)
@@ -562,6 +567,7 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
 
     gaussianparams = None if model_number != 7 else [14,2]
 
+    # Get the radius normalization constant, N_r (\mathcal{N}_r in the text)
     if model_number in [5,6]:
         norm_r = trapz(r_a_grid**δ, r_a_grid)
     elif model_number == 3:
@@ -581,6 +587,8 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
         prob_r = np.exp(- (r_grid-mean)**2 / (2 * sigma**2) )
         norm_r = trapz(prob_r, r_grid)
 
+    # Compute the dilution factors, A(q) \equiv 1/\mathcal{D}_1, and likewise
+    # for the secondaries B(q) \equiv 1/\mathcal{D}_2.
     A_q = A(q)
     B_q = B(q)
 
@@ -588,6 +596,7 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
 
     print('ind/max_ind, rvalue')
 
+    # Compute the apparent rate density at each apparent radius.
     for r_a_ind, r_a in enumerate(r_a_grid):
         for M_a in M_a_grid:
 
@@ -654,9 +663,12 @@ if __name__ == '__main__':
     r_pu = args.upperradiuscutoff
     ##########################################
 
+    # We use an arbitrary apparent stellar mass throughout
     M_a_grid = np.array([1.0])
 
-    r_a_grid = get_apparent_radius_grid(model_number, args.slowrun)
+    r_a_grid = get_apparent_radius_grid(
+            model_number,
+            args.slowrun)
 
     Γ_a, Γ_0, ndet_a0, ndet_a1, ndet_a2 = get_apparent_rate_density(
             r_a_grid,
