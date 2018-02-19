@@ -40,11 +40,8 @@ appropriate magnitude-limited distribution (given α and β).
 The procedure for assigning planets is then as follows:
 
     * each selected star of type i gets a planet at rate `Λ_i`
-
     * the radii of planets are assigned independently of any host system
-    property, as sampled from p_r(r) ~ r^δ for Model #3 or a δ function for
-    Models #1 and #2.
-
+    property -- a δ function for Models #1 and #2.
     * a planet is detected when a) it transits, and and b) its host star is
     searchable.
 
