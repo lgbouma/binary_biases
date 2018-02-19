@@ -1,13 +1,11 @@
 ----------
 DESCRIPTION
 
-This program simulates the following toy surveys:
+`numerical_models.py` simulates the following toy surveys:
 
 MODEL #1: Fixed stars, fixed planets, twin binaries.
 
 MODEL #2: Fixed planets and primaries, varying secondaries.
-
-MODEL #3: Fixed primaries, varying planets and secondaries.
 
 In the "nominal" models, all classes of errors are included when calculating
 what the observer infers. These errors are
@@ -16,14 +14,11 @@ what the observer infers. These errors are
    b/c of wrongly assumed host star radii),
 2. incorrectly assumed number of selected stars.
 
-The detection efficiency, rather surprisingly, does not seem to be biased in
-any leading-order manner.
-
 ----------
 The simulation works as follows.
 
 First, the user specifies their inputs: the binary fraction, the model class
-(#1,2,3), various exponents (α,β,γ,δ), and the `Z_i`'s.
+(1,2), various exponents (α,β,γ,δ), and the integrated occurrence rates, `Z_i`.
 
 The population of selected stars is constructed as follows.  First, we note
 that each selected star has a `star_type` (single, primary, secondary), a
@@ -94,16 +89,3 @@ Model #2:
 * numerical value of `X_Γ` at `r_p` matches analytic prediction
 * the inferred rate from 0.73rtrue to 0.99rtrue is that predicted analytically,
   to within 0.5%. (No more precise b/c # of Poisson noise in bins).
-
-Model #3:
-* the numerically realized TRUE rate (for the selected stars) agrees with the
-  analytic one (from 3rearth to 22rearth).
-
-Model #4:
-* none
-
-Model #5:
-* the analytic and numeric (true, for selected stars) Λ(r) distributions, above
-  3rearth and below 22rearth, agree.
-* the analytic and numeric (apparent) Λa(ra) distributions, above ra ~=
-  2r\oplus and below rpu/sqrt(2) agree to within 1%.
