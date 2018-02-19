@@ -92,7 +92,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         #ax.step(xvals, ytrueselected, where='post', label='true (selected)',
         #        c=colors[1])
 
-        ax.step(xvals, ytruesingle, where='post', label='$\Lambda_0(r)$',
+        ax.step(xvals, ytruesingle, where='post', label='$\Lambda(r)$',
                 linestyle='-', c=colors[1])
 
     elif not standardlines:
@@ -115,7 +115,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$r_{\mathrm p}$]', fontsize='large')
 
     ax.set_ylabel('number of planets per star', fontsize='large')
 
