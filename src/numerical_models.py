@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 '''
-See README.md for full description.
+See monte_carlo_readme.md for a description of what this does.
 
 The models are as follows:
 Model #1: twin binary, same planet
 Model #2: varying q, same planet
-Model #3: varying q, varying r
-Model #4: varying q, r with a gap
-Model #5: twin binary, varying r
 
 Example usage, for each model type:
 >>> python numerical_models.py --modelnumber 1 --ZsubTwo 0.5 --binaryfrac 0.1
 >>> python numerical_models.py --modelnumber 2 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
->>> python numerical_models.py --modelnumber 3 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
->>> python numerical_models.py --modelnumber 4 --ZsubTwo 0.5 --binaryfrac 0.44 --upperradiuscutoff 22.5
->>> python numerical_models.py --modelnumber 5 --ZsubTwo 0.5 --binaryfrac 0.1 --upperradiuscutoff 22.5
 
 Alternatively, use a wrapper like `run_numerical_models.py`.
 '''
@@ -40,7 +34,7 @@ def check_inputs(γ, Z_2, model_number, BF, r_pu):
         # File names assume 2 digits of precision for Z_2.
         raise NotImplementedError
 
-    if model_number > 5 or model_number < 1:
+    if model_number > 2 or model_number < 1:
         raise NotImplementedError
 
     if not (BF > 0):
@@ -86,11 +80,11 @@ def make_stellar_population(quickrun, model_number, BF, α, β, γ, δ):
     B = BF / (1-BF) # prefactor in definition of μ
 
     # Get number of selected primaries.
-    if model_number == 1 or model_number == 5:
+    if model_number == 1:
         q = 1
         μ = B * (1 + q**α)**(3/2)
         N_1 = int(N_0 * μ) # number of selected primaries
-    elif model_number == 2 or model_number == 3 or model_number == 4:
+    elif model_number == 2:
         integral = 0.484174086070513 # 17/10/14.2 analytic result
         N_d = N_0 * B * (2**(3/2) - 3*integral)
         N_1 = int(N_d) # number of primaries = number of double star systems
@@ -104,12 +98,12 @@ def make_stellar_population(quickrun, model_number, BF, α, β, γ, δ):
         ), ignore_index=True )
 
     # Assign values of `q` to primaries and secondaries
-    if model_number == 1 or model_number == 5:
+    if model_number == 1:
         df['q'] = q
         df.loc[df['star_type'] == 'single', 'q'] = np.nan
         q = np.ones(N_1)
 
-    elif model_number == 2 or model_number == 3 or model_number == 4:
+    elif model_number == 2:
         df['q'] = np.nan
 
         # Inverse transform sampling to get samples of q
@@ -201,58 +195,6 @@ def make_planet_population(model_number, df, q, is_searchable, Z_0, Z_1, Z_2,
         r_p = 1
         r_pu = r_p
         df['r'] = r_p
-        df.loc[df['has_planet'] == False, 'r'] = np.nan
-
-    elif model_number == 3 or model_number == 5:
-        r_pl = 2 # [Rearth]. Lower bound for truncation.
-
-        # Inverse transform sample to get radii. Drawing from powerlaw
-        # distribution above r_pl, and constant below (to avoid pileup).
-        Δr = 1e-3
-        r_grid = np.arange(0, r_pu+Δr, Δr)
-        prob_r = np.minimum( r_grid**δ, r_pl**δ )
-        norm_r = trapz(prob_r, r_grid)
-        prob_r /= norm_r
-        cdf_r = np.append(0, np.cumsum(prob_r)/np.max(np.cumsum(prob_r)))
-        func = interp1d(cdf_r, np.append(0, r_grid))
-        r_samples = func(np.random.uniform(size=N_0+N_1+N_2))
-
-        np.testing.assert_almost_equal(trapz(prob_r, r_grid), 1)
-
-        if debugging:
-            # The below plot is a sanity check that I ran one time.
-            import matplotlib.pyplot as plt
-            plt.close('all')
-            bin_width = 0.5
-            r_bins = np.arange(0,22.5+bin_width,bin_width)
-            plt.hist(r_samples, bins=r_bins, normed=False, alpha=0.5,
-                    histtype='stepfilled', color='steelblue', edgecolor='none')
-
-            prob_r_on_bins = np.minimum( r_bins**δ, r_pl**δ )
-            prob_r_on_bins /= trapz(prob_r_on_bins, r_bins)
-            analytic = prob_r_on_bins*(N_0+N_1+N_2)*bin_width
-            plt.plot(r_bins, analytic)
-            plt.yscale('log')
-            plt.savefig('temp3.pdf')
-
-        df['r'] = r_samples
-        df.loc[df['has_planet'] == False, 'r'] = np.nan
-
-    elif model_number == 4:
-        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
-
-        # Inverse transform sample to get radii. Drawing from powerlaw
-        # distribution above r_pl, and constant below (to avoid pileup).
-        Δr = 1e-3
-        r_grid = np.arange(0, r_pu+Δr, Δr)
-        prob_r = np.minimum( r_grid**δ, r_pl**δ )
-        prob_r[(r_grid > 1.5) & (r_grid < 2)] = 0
-        prob_r /= trapz(prob_r, r_grid)
-        cdf_r = np.append(0, np.cumsum(prob_r)/np.max(np.cumsum(prob_r)))
-        func = interp1d(cdf_r, np.append(0, r_grid))
-        r_samples = func(np.random.uniform(size=N_0+N_1+N_2))
-
-        df['r'] = r_samples
         df.loc[df['has_planet'] == False, 'r'] = np.nan
 
     ###########################################################################
@@ -349,13 +291,6 @@ def calculate_true_and_apparent_rates(
     if model_number == 1 or model_number == 2:
         Δr = 0.01
         radius_bins = np.arange(0, 1+Δr, Δr)
-    elif model_number == 3 or model_number == 5:
-        Δr = 0.5
-        radius_bins = np.arange(0, r_pu+Δr, Δr)
-    elif model_number == 4:
-        Δr = 0.25
-        radius_bins = np.arange(0, r_pu+Δr, Δr)
-        #radius_bins = np.logspace(-2,4/3,21) # thought about it, opted against
 
     true_dict = {}
     inferred_dict = {}
@@ -561,175 +496,6 @@ def run_unit_tests(
         del vals_num, vals_anal
 
 
-    elif model_number == 3:
-
-        r_a_anal = np.array(inferred_dict['r'])[1:] - np.diff(inferred_dict['r'])/2
-        r_anal = np.array(true_dict['r'])[1:] - np.diff(true_dict['r'])/2
-
-        # Compare the analytic and numeric (true) Λ(r) distributions, above
-        # 2r_\oplus
-        Λ_num = np.array(true_dict['Λ'])
-
-        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
-        Δr = 1e-3
-        r_grid = np.arange(0, r_pu+Δr, Δr)
-        prob_r = np.minimum( r_grid**δ, r_pl**δ )
-        norm_r = trapz(prob_r, r_grid)
-
-        Λ_anal = r_anal**δ/norm_r * (
-                Z_0/(1+2*μ) + (Z_1+Z_2) * μ/(1+2*μ)
-                )
-
-        vals_num = Λ_num[(r_anal>3) & (r_anal<=22)]
-
-        assert np.allclose(np.diff(true_dict['r']), np.diff(true_dict['r'])[0])
-        bin_width = np.diff(true_dict['r'])[0]
-        vals_anal = bin_width * Λ_anal[(r_anal>3) & (r_anal<=22)]
-
-        # TEST: ensure that the numerically realized values for the true
-        # distribution are within 1% of the expected analytic values.
-        # (Not exact because of Poisson noise). Print a warning if it seems
-        # that Poisson noise is too high.
-        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-        if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
-            print('\n'*10)
-            print('WARNING: you should use more points to lower Poisson noise')
-            print('\n'*10)
-
-        if debugging:
-            import matplotlib.pyplot as plt
-            plt.close('all')
-            f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num, label='numeric')
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_anal, label='analytic')
-            ax.set_yscale('log')
-            ax.legend(loc='best')
-            f.savefig('temp_true.pdf')
-
-        # NOTE: It would be ideal if we could compare the analytic and numeric
-        # (apparent) Λ_a(r_a) distributions, above r_a ~= 2r_\oplus and below
-        # r_pu/sqrt(2).  By analogy with the fixed planet radius, variable mass
-        # ratio model -- this might seemingly work.  However if you think about
-        # it more closely, it won't. You can derive an analytic result for the
-        # f(r)~r^δ case.  But numerically, we have finite edge effects. A
-        # r=20rearth planet can be diluted to much below 20rearth/sqrt(2), if
-        # it orbits a secondary.  So to make a sufficiently precise analytic
-        # prediction, you need to include the finite edge effects.  This might
-        # be possible, but it'd certainly be painful.  We've validated enough
-        # other cases that the numerics should be trusted (provided they're
-        # tested for a variety of upper cutoffs on the radius distribution).
-
-
-    elif model_number == 5:
-
-        r_a_anal = np.array(inferred_dict['r'])[1:] - \
-                   np.diff(inferred_dict['r'])/2
-        r_anal = np.array(true_dict['r'])[1:] - \
-                 np.diff(true_dict['r'])/2
-
-        # Compare the analytic and numeric (true) Λ(r) distributions, above
-        # 2r_\oplus
-
-        Λ_num = np.array(true_dict['Λ'])
-
-        Δr = 1e-3
-        r_pl = 2 # [Rearth]. Lower and upper bound for truncation.
-        r_grid = np.arange(0, r_pu+Δr, Δr)
-        prob_r = np.minimum( r_grid**δ, r_pl**δ )
-        norm_r = trapz(prob_r, r_grid)
-        prob_r /= norm_r
-
-        Λ_anal = r_anal**δ/norm_r * (
-                Z_0/(1+2*μ) + (Z_1+Z_2) * μ/(1+2*μ)
-                )
-
-        vals_num = Λ_num[(r_anal>3) & (r_anal<=22)]
-
-        assert np.allclose(np.diff(true_dict['r']), np.diff(true_dict['r'])[0])
-        bin_width = np.diff(true_dict['r'])[0]
-        vals_anal = bin_width * Λ_anal[(r_anal>3) & (r_anal<=22)]
-
-        if debugging:
-            # The following was a sanity check that I ran one time.
-            import matplotlib.pyplot as plt
-            plt.close('all')
-            f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=22)], vals_num/vals_anal,
-                    label='numeric/analytic')
-            ax.legend(loc='best')
-            f.savefig('temp2.pdf')
-
-        # TEST: ensure that the numerically realized values for the true
-        # distribution are within 1% of the expected analytic values.  (Not
-        # exact because of Poisson noise). Print a warning if it seems that
-        # Poisson noise is too high.
-
-        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-        if not np.max(np.abs(1-vals_num/vals_anal))<0.1:
-            print('\n'*10)
-            print('WARNING: you should use more points to lower Poisson noise')
-            print('\n'*10)
-
-        # Compare the analytic and numeric (apparent) Λ_a(r_a) distributions,
-        # above r_a ~= 2r_\oplus and below r_pu/sqrt(2).  (I didn't derive the
-        # analytic form from r_pu/sqrt(2) to r_pu, but you expect to see a drop
-        # in the numeric value because of those HJs being diluted, but it's a
-        # small effect and the resulting numerics look fine, CF. the "temp"
-        # test plots below).
-
-        del vals_num, vals_anal
-        Λ_a_num = np.array(inferred_dict['Λ'])
-
-        # As derived 2017/11/29.3
-        Λ_a_anal = r_a_anal**δ / (norm_r *(1+μ)) * (
-                Z_0 + 2**((δ+1)/2) * μ * (Z_1+Z_2)
-                )
-
-        vals_num = Λ_a_num[(r_a_anal>3) & (r_a_anal<=r_pu/2**(1/2))]
-
-        assert np.allclose(np.diff(inferred_dict['r']),
-                           np.diff(inferred_dict['r'])[0])
-        bin_width = np.diff(true_dict['r'])[0]
-
-        vals_anal = bin_width * Λ_a_anal[(r_a_anal>3) & (r_a_anal<=r_pu/2**(1/2))]
-
-        # TEST: ensure that the numerically realized values for the apparent
-        # distribution are within 1% of the expected analytic values.
-
-        assert np.isclose(np.mean(vals_num/vals_anal), 1, rtol=1e-2)
-
-        if debugging:
-            import matplotlib.pyplot as plt
-            plt.close('all')
-            f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_num/vals_anal,
-                    label='numeric/analytic')
-            ax.legend(loc='best')
-            f.savefig('temp2.pdf')
-
-            plt.close('all')
-            f,ax = plt.subplots()
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_num, label='numeric')
-            ax.plot(r_anal[(r_anal>3) & (r_anal<=r_pu/2**(1/2))], vals_anal, label='analytic')
-            ax.set_yscale('log')
-            ax.legend(loc='best')
-            f.savefig('temp1.pdf')
-
-        # TEST: Eq 55 of the 2017/12/04 email to JNW and KM. In the regime for
-        # which "power law" applies and there are no edge effects, ensure the
-        # analytics and numerics agree to 0.5% relative tolerance. NOTE for
-        # this to actually be convincing, it is better to use e.g., δ=-2, or
-        # δ=-1.  (Because δ=-2.92 leads to a very small shift). The test passes
-        # for these cases. E.g., here μ=0.3142696, if δ=-1, Γ_a/Γ_sel is
-        # approximately 1.72 (analytically). The numerics agree.
-        X_num = Λ_a_num/Λ_num
-        mu = N_1/N_0
-        assert np.isclose(
-                np.mean(X_num[(r_anal>3) & (r_anal<=r_pu/2**(1/2))]),
-                (1+2**((δ+3)/2)*mu)/(1+mu),
-                rtol=5e-3
-                )
-
 
 def numerical_transit_survey(
         quickrun,
@@ -818,7 +584,7 @@ if __name__ == '__main__':
     parser.add_argument('-qr', '--quickrun', action='store_true',
         help='use --quickrun if you want models to run fast.')
     parser.add_argument('-mn', '--modelnumber', type=int, default=None,
-        help='1, 2 or 3.')
+        help='1 or 2.')
     parser.add_argument('-ztwo', '--ZsubTwo', type=float, default=None,
         help='integrated occ rate for secondaries')
     parser.add_argument('-bf', '--binaryfrac', type=float, default=None,
