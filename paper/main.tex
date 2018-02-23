@@ -521,7 +521,7 @@ the following modifications to Equation~\ref{eq:formula_twin_binary}:
   number of binary systems in the searchable sample with mass ratio
   $(q, q+\mathrm{d}q)$ is
 \begin{equation}
-    {N_\star(r\a)\over{1+\mu}}\cdot {n_{\rm b}\over n_{\rm s}}
+    {N_\star(r\a)\over{1+\mu}}\, {n_{\rm b}\over n_{\rm s}}
     \left[{L(M) + L(qM) \over L(M)}\right]^{3/2}
     f(q)\,\mathrm{d}q,
     \label{eq:N_binaries}
@@ -1000,165 +1000,109 @@ searched than are accounted for in the rate calculation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Discussion}
+\section{Summary and Discussion}
 \label{sec:discussion}
 
-
-\paragraph{How bad is ignoring binarity?}
-This study has shown that under a reasonable set of simplifying
-assumptions, ignoring binarity introduces systematic errors to star
-and planet counts in transit surveys, which then biases derived
-occurrence rates.  Thus far, occurrence rate calculations\footnote{ A
-list of occurrence rate papers is maintained at
-\url{https://exoplanetarchive.ipac.caltech.edu/docs/occurrence_rate_papers.html}
-} using transit survey data have mostly ignored stellar
+Ignoring binarity introduces systematic errors to star and planet
+counts in transit surveys, which in turn lead to biases in the derived
+planet occurrence rates.  Thus far, occurrence rate calculations using
+transit survey data have mostly ignored stellar
 multiplicity~\citep[\textit{e.g.},][]{howard_planet_2012,fressin_false_2013,foreman-mackey_exoplanet_2014,dressing_occurrence_2015,burke_terrestrial_2015}.
-For {\it Kepler} occurrence rates specifically, it seems that no one
-has yet carefully assessed binarity's importance, or lack thereof.
-This study does not resolve the problem; it only suggests the
-approximate scale of the systematic errors.  Section~\ref{sec:model_2}
-suggests that for apparent radii above $2r_\oplus$, binarity can be
-ignored down to a precision of a few percent.  For apparent radii
-below $2r_\oplus$, the picture is less forgiving:
-Section~\ref{sec:model_3} suggests that the apparent rates around
-single stars could be overestimated by as much as 50\%.
+We do not claim to have solved this problem. Our aim was to clarify
+the various effects and assess the size of the errors in various
+situations. We hope that our formalism will also be useful to those
+investigators who do attempt more realistic calculations of occurrence
+rates.
 
-\paragraph{The rate of Earth analogs}
+The calculations presented in Section~\ref{sec:model_2} suggest that
+for planets around Sun-like stars with periods shorter than a few
+months and apparent radii exceeding $2\,R_\oplus$, binarity can
+basically be ignored.  The errors are only of order a few percent.
+For apparent radii below $2\,R_\oplus$, nature may not be as
+forgiving.  The size of the effect depends on the true radius
+distribution and in particular whether it continues to vary as
+$\sim$$r^{-3}$ down to 1\,$R_\oplus$ and below.  The calculations
+presented in Section~\ref{sec:model_3} suggest that the apparent rates
+could be overestimated by as much as 50\%.
+
+\paragraph{Earth-like planets} For the specific problem of calculating the occurrence rate
+$\eta_\oplus$ of Earth-like planets with periods of order one year,
+even a 50\% systematic error would not be the dominant source of
+uncertainty at the moment.  Estimates by
 \citet{youdin_exoplanet_2011},~\citet{petigura_prevalence_2013},~\citet{dong_fast_2013},~\citet{foreman-mackey_exoplanet_2014},
-and~\citet{burke_terrestrial_2015} have found that between $0.03$ and
-$1$ Earth-like planets exist per Sun-like star, depending on
-assumptions that are made when calculating the
-rate~\citep[see][Figure~17]{burke_terrestrial_2015}.  Assuming a
-broken power-law, we showed that unrecognized binaries could cause
-overestimates in the rate of Earth analogs of up to 50\%.  This
-systematic effect is smaller than the other factors that currently
-dominate the dispersion in $\eta_\oplus$ measurements.  If future
-analyses determine absolute values of $\eta_\oplus$ to better than a
-factor of two, binarity will likely merit closer attention.
-
-One caveat is that none of our models included the rate density's
-period-dependence. However, binaries with separations $\lesssim
-10\,{\rm AU}$ could provoke dynamical instabilities, leading to fewer
-Earth-like planets per
+and~\citet{burke_terrestrial_2015} have found values of $\eta_\oplus$
+ranging from $0.03$ to unity, with the wide variance arising from
+small-number statistics as well as a host of other systematic
+errors~\citep[see][Figure~17]{burke_terrestrial_2015}.  Rapid progress
+is expected soon, though, and binarity will merit closer attention in
+the future.  It may also be worth investigating the possible effects
+of any dependence of occurrence rate densities on the period of the
+binary.  Binaries with separations $\lesssim 10\,{\rm AU}$ could
+provoke dynamical instabilities, leading to fewer Earth-like planets
+per
 star~\citep[\textit{e.g.},][]{holman_long-term_1999,wang_influence_2014,
-kraus_impact_2016}.  This would affect transit survey measurements of
-$\eta_\oplus$ beyond our rough estimate.
-
-\paragraph{Hot Jupiter rate discrepancy}
-While unresolved binaries may bias $\eta_\oplus$ measurements, our
-approach suggests that they do not influence the hot Jupiter rate
-discrepancy.  The ``discrepancy'' is that RV surveys find roughly
-twice as many hot Jupiters per Sun-like star as do transit surveys
-(roughly $1\%$~vs.~$0.5\%$, respectively).  We summarize hot
-Jupiter rates reported by different surveys in
-Table~\ref{tab:hj_rates}.
-
-Though the disagreement is only weakly significant ($<3\sigma$), one
-reason to expect a difference is that the RV sample is biased towards
-metal-rich stars, which host more giant
-planets~\citep{santos_spectroscopic_2004,fischer_planet-metallicity_2005,gould_frequency_2006}.
-Investigating the discrepancy from the metallicty
-angle,~\citet{guo_metallicity_2017} measured the {\it Kepler} field's
-mean metallicity to be $[{\rm M/H}]_{\rm Kepler}= -0.045\pm0.009$,
-which is lower than the California Planet Search's mean of $[{\rm
-M/H}]_{\rm CPS}= -0.005\pm0.006$.  The former value agrees with that
-found by \citet{dong_metallicities_2014}.  Refitting for the
-metallicity exponent in $\Lambda_{\rm HJ} \propto 10^{\beta [{\rm
-M/H}] }$, \citeauthor{guo_metallicity_2017}\! found $\beta = 2.1\pm
-0.7$, and noted that the metallicity difference could account for
-0.2\% of the needed 0.5\% difference between the measured CKS
-and {\it Kepler}\ rates\footnote{ \citet{petigura_CKS_2017} recently
-found $\beta = 3.4^{0.9}_{-0.8}$.  If true, this implies that
-metallicity could account for about half of the hot Jupiter rate
-discrepancy.  }.  \citeauthor{guo_metallicity_2017}\!  concluded
-that ``other factors, such as binary contamination and imperfect
-stellar properties'' must also be at play.
-
-Radial velocity surveys usually reject visual and spectroscopic
-binaries~\citep{wright_frequency_2012}, so their hot Jupiter rates are
-closer to the rate for single stars than the rates reported by transit
-surveys.  However, we found in Section~\ref{sec:further_models} that
-when assuming a Gaussian radius distribution, apparent hot Jupiter
-rates are {\it greater} than the true rate around singles: the effect
-goes the wrong way.  There could be other systematic factors behind
-the difference~--~but they are unlikely to be related to binarity.
-
-%in spectroscopic follow-up of transiting planet candidates, the
-%prevalence of astrophysical false-positives may also lead to a
-%tendency against confirming transiting planets in binary systems.  A
-%separate observational bias is that the RV surveys typically observe
-%chromospherically ``quiet'' stars, which may bias their detection
-%probability high~\citep{bastien_radial_2014}.
-
-\begin{comment}
-  If we believe the assumed power law radius distribution, we can ask
-  whether this ``correction factor'' might help resolve the
-  discrepancy.  Explicitly, we ask: what is the probability of
-  \citet{wright_frequency_2012}'s result, given a rate drawn from the
-  stated bounds of~\citet{petigura_CKS_2017}?  In other words, we
-  first take the true HJ rate per thousand stars as $\Lambda_{\rm HJ}
-  = 5.7 \pm 1.3$, with Gaussian uncertainties.  We then draw from a
-  Poisson distribution and compute the probability of detecting at
-  least 10 hot Jupiters in a sample of 836 stars.  Without accounting
-  for binarity or metallicity, only 4\% of RV surveys would detect at
-  least 10 hot Jupiters.  If we multiply $\Lambda_{\rm HJ}$ by $1.2$
-  to account for~\citet{guo_metallicity_2017}'s measured metallicity
-  difference between the {\it Kepler}\ field and the local solar
-  neighborhood, 9\% of RV surveys would detect at least 10 hot
-  Jupiters.  If we multiply once more by $1.13$ to account for
-  binarity's supposed bias, we find that 14\% of RV surveys would
-  detect at least 10 hot Jupiters, still suggesting a weak
-  discrepancy.  This suggestion should be taken with caution, because
-  it (incorrectly) assumes a power law radius distribution.
-\end{comment}
+  kraus_impact_2016}.  This would affect transit survey measurements
+of $\eta_\oplus$ beyond our rough estimate.
 
 
-\paragraph{Does a detected planet orbit the primary or secondary?}
+\paragraph{Hot Jupiters} Another frequently discussed problem
+involving occurrence rates is the discrepancy between the occurrence
+rates of hot Jupiters that have been measured in different surveys, as
+summarized in Table~\ref{tab:hj_rates}.  In particular, the California
+Planet Search (CPS), a Doppler survey, found a higher rate ($12\pm 2$
+per thousand stars) than the {\it Kepler} transit survey
+($5.7^{+1.4}_{-1.2}$).  It has been suggested that unresolved binaries
+in the {\it Kepler} sample might be an important factor, but the
+calculations presented in Section~\ref{sec:further_models} suggest
+that this is not the case.  We found that the effects of unresolved
+binaries are likely to result in an overestimation of the hot-Jupiter
+occurrence rate, which would worsen the discrepancy, rather than
+relieve it. Some other possibilities are errors in stellar
+classification of the {\it Kepler} stars, as well as differences in
+the metallicity of the stars in each survey.  The occurrence rate of
+hot Jupiters is known to vary strongly with stellar metallicity, with
+$\Lambda \propto 10^{3.4{\rm [M/H]}}$ according to a recent
+study~\citep{petigura_CKS_2017}.  \citet{guo_metallicity_2017} found
+the mean metallicity of the {\it Kepler} stars to be [M/H]~$=-0.045\pm
+0.009$, which is only slightly lower than that of the stars in the
+Doppler survey, $-0.005\pm 0.006$.  Nevertheless, given the strong
+dependence of occurrence on metallicity, even a difference of
+$0.04$~dex could account for a factor of $10^{3.4\cdot 0.04} = 1.37$
+in the occurrence rate.  After correcting for metallicity, the
+discrepancy between the {\it Kepler} and CPS occurrence rates is
+reduced to the 1.7$\sigma$ level.
 
-A separate reason to address stellar multiplicity in transit surveys
-is that it can radically alter the interpretation of planet candidates
-on a system-by-system level.  To identify and correct for unseen
-stellar companions, high-resolution imaging campaigns have surveyed
-almost all {\it Kepler}\ Objects of Interest~\citep{
+
+\paragraph{Radius corrections} Another application of our formalism is
+to help in those cases in which it is not clear whether the primary or
+secondary star is the source of a transit signal.  By this point
+almost all of the {\it Kepler}\ Objects of Interest have been examined
+with high resolution imaging~\citep{
   howell_speckle_2011,adams_adaptive_2012,adams_adaptive_2013,horch_observations_2012,
   horch_most_2014,lillo-box_multiplicity_2012,lillo-box_high-resolution_2014,dressing_adaptive_2014,
   law_robotic_2014,cartier_revision_2015,everett_high-resolution_2015,gilliland_hubble_2015,
   wang_influence_2015,wang_influence_2015-1,baranec_robo-ao_2016,ziegler_robo-ao_2017}.
 The results of these programs have been summarized
-by~\citet{furlan_kepler_2017}, and they represent an important advance
-in understanding the KOI sample's multiplicity statistics.
-
-An immediate application is to reassess the radii of detected planets.
-Doing so, \citet{hirsch_assessing_2017} recently found that for their
-sample of KOIs in binaries, the planet radii are underestimated by
-factors $r/r\a = 1.17$ if all planets orbit primaries, and $r/r\a =
-1.65$ if detected planets are equally likely to orbit primaries and
-singles.  This approach makes minimal assumptions about the likelihood
-that a planet orbits the primary vs.~the secondary
-(though~\citealt{hirsch_assessing_2017} do also consider weighting
-radius corrections by planet occurrence).
-
-Our approach provides a suggestion of how to assess the probability
-that a detected planet in a binary system orbits either component.
-The problem requires assuming both the underlying radius distribution,
-and the relative number of planets per primary and secondary star.  We
-found that for a broken power law radius distribution, with equal
-occurrence rates about primaries and secondaries, detected planets in
-binary systems are usually more likely to orbit the primary
-(Figure~\ref{fig:frac_model_3}).  For apparent radii greater than
-$2r_\oplus$, the odds of primary:secondary are 8:3.  The odds increase
-for the planet to orbit the secondary increase at smaller apparent
-radii, and reach 1:1 at $r\a=0.4r_\oplus$.  For {\it Kepler}, this
-suggests that for almost all confirmed KOIs in multiple star systems,
-the planet most likely orbits the primary.
+by~\citet{furlan_kepler_2017}. Based on this information,
+\citet{hirsch_assessing_2017} re-assessed the radius measurements of
+the {\it Kepler} planets in binaries. They found that planet radii are
+generally underestimated by a factor $r/r\a = 1.17$ if all planets
+orbit primaries, and $r/r\a = 1.65$ if detected planets are equally
+likely to orbit primaries and singles.  Our formalism provides a way
+to assess the relative probabilities that a detected planet orbits the
+primary or secondary star.  The calculations presented in
+\S\,\ref{subsec:whichstar} suggest that in almost all cases the planet
+most likely orbits the primary star.
 
 
-\paragraph{Fraction of detected planets with binary companions}
+\begin{comment}
+% JNW: These 2 sections do not seem very interesting.
+  {\paragraph{Fraction of detected planets with binary companions}
 A related effect is that some detected planets are more likely to be
 in binary systems than others.  Notably, Figure~\ref{fig:frac_model_3}
 predicts that the fraction of detected planets with binary companions
-should increase by $6$~to~$12\%$ going from $2r_\oplus$ to
-$1.4r_\oplus$.
+should increase by $6$~to~$12\%$ going from $2R_\oplus$ to
+$1.4R_\oplus$.
 
 In \citet{ziegler_robo-ao_2017}'s recent summary of the Robo-AO KOI
 survey, they reported the fraction of planet-hosting stars with
@@ -1166,12 +1110,12 @@ Robo-AO detected companion stars, binned over apparent planet radii.
 The fraction of KOIs with nearby stars and their $1\sigma$
 uncertainties are:
 \begin{itemize}
-    \item Earths ($r\a < 1.6r_\oplus$): $16.3 \pm 1.0\%$, from 1480
+    \item Earths ($r\a < 1.6R_\oplus$): $16.3 \pm 1.0\%$, from 1480
     systems.
-    \item Neptunes ($1.6r_\oplus < r\a < 3.9 r_\oplus$): $13.0 \pm
+    \item Neptunes ($1.6R_\oplus < r\a < 3.9 R_\oplus$): $13.0 \pm
     0.8\%$, from 2058 systems.
-    \item Saturns ($3.9r_\oplus < r\a < 9 r_\oplus$): $13.6 \pm 2.0\%$, from 338 systems. 
-    \item Jupiters ($r\a > 9r_\oplus$): $19.0 \pm 2.8\%$, from 247 systems. 
+    \item Saturns ($3.9R_\oplus < r\a < 9 R_\oplus$): $13.6 \pm 2.0\%$, from 338 systems. 
+    \item Jupiters ($r\a > 9R_\oplus$): $19.0 \pm 2.8\%$, from 247 systems. 
 \end{itemize} 
 The uncertainties were calculated
 following~\citet{burgasser_binarity_2003}.  The absolute values of the
@@ -1187,8 +1131,7 @@ large astrophysical false positive rate~\citep{santerne_sophie_2012}.
 Going from Neptunes to Earths, the data suggest a weak increase in the
 detected planet companion fraction, perhaps of a few percent.  It will
 be interesting to see whether this effect is borne out by further
-observations.
-
+observations.}
 
 \paragraph{Connection between high-resolution imaging and occurrence rates}
 
@@ -1221,6 +1164,7 @@ biases, one possible approach might be to forward-model the survey in
 the framework of approximate Bayesian
 computation~\citep[\textit{e.g.},][]{morehead_understanding_2016}.
 
+\end{comment}
 
 \begin{comment}
 %LB: the below paragraph seems like it is just making caveats for no
@@ -1270,7 +1214,6 @@ computation~\citep[\textit{e.g.},][]{morehead_understanding_2016}.
   this would not change any of our findings.
 
 \end{comment}
-
 
 \begin{comment}
 %LB: the following are paragraphs from earlier discussion iterations
@@ -1324,10 +1267,10 @@ computation~\citep[\textit{e.g.},][]{morehead_understanding_2016}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{comment}
 \section{Conclusion}
-\label{sec:conclusion}
-
-This study presented a framework for estimating the impact of
+% JNW: Material seems redundant.
+  This study presented a framework for estimating the impact of
 unresolved binaries on transit survey occurrence rates. From
 the order-of-magnitude argument presented in
 Section~\ref{sec:simplest}, we showed that for Sun-like stars in the
@@ -1367,13 +1310,13 @@ Applying Equation~\ref{eq:general_Gamma_a}, we then showed that:
   of planets per star, and the planet radius distribution is a power
     law with the exponent reported by~\citet{howard_planet_2012}, then
     binarity influences apparent planet occurrence rates at the few
-    percent level. This applies for apparent radii from $2r_\oplus$ to
-    $17r_\oplus$ (Section~\ref{sec:model_2}).
+    percent level. This applies for apparent radii from $2R_\oplus$ to
+    $17R_\oplus$ (Section~\ref{sec:model_2}).
 %
 \item Assuming a broken-power law planet radius distribution, with the
-  \citet{howard_planet_2012} exponent above $2r_\oplus$ and a constant
-    occurrence below $2r_\oplus$, the rate density for radii below
-    $2r_\oplus$ is overestimated. The magnitude of the error, $\Delta
+  \citet{howard_planet_2012} exponent above $2R_\oplus$ and a constant
+    occurrence below $2R_\oplus$, the rate density for radii below
+    $2R_\oplus$ is overestimated. The magnitude of the error, $\Delta
     \Gamma_0 = |\Gamma_0 - \Gamma\a|/\Gamma_0$, can easily reach
     $50\%$ (Figure~\ref{fig:occ_rate_model_3_log}).  Although this is
     smaller than current systematic uncertainties on the occurrence
@@ -1393,13 +1336,13 @@ Applying Equation~\ref{eq:general_Gamma_a}, we then showed that:
     radius distribution, similar to that reported
     by~\citet{petigura_CKS_2017}.
 %
-\item Detected planets with apparent radii greater than $0.5r_\oplus$
+\item Detected planets with apparent radii greater than $0.5R_\oplus$
   that are revealed by high-resolution imaging surveys to exist in
     binaries are more likely to orbit the primary
     (Figure~\ref{fig:frac_model_3}).
 %
 \item Near the break in occurrence as a function of planet
-  radius at $2r_\oplus$, the fraction of detected planets with
+  radius at $2R_\oplus$, the fraction of detected planets with
     binary companions should increase by roughly $5$~to~$10\%$
     (Figure~\ref{fig:frac_model_3}).
 \end{itemize}
@@ -1410,6 +1353,7 @@ surveys, although our approach is only suggestive, we hope that it
 provides a useful estimate for the systematic errors that can be
 incurred by ignoring binarity in calculations of planetary occurrence
 rates.
+\end{comment}
 
 \acknowledgements{
 It was a pleasure discussing this study with T.~Barclay, W.~Bhatti,
@@ -1431,48 +1375,46 @@ Astrophysics Data System Bibliographic Services.
 \section{Alternative derivation of apparent rate density}
 \label{sec:appendix}
 
-This appendix derives Equation~\ref{eq:general_Gamma_a} through a more
-straight-forward, but also more tedious, procedure than that of
-Section~\ref{sec:general_formula}.   First, note that analogous to
-Equation~\ref{eq:occ_rate_simple}, the apparent rate density $\Gamma\a$ can be
-written
+Here we present an alternative derivation of
+Equation~\ref{eq:general_Gamma_a}.  We also generalize a bit further,
+by allowing the occurrence rate density to depend on stellar mass $M$
+as well as planet radius $r$.  We begin by writing the apparent rate
+density $\Gamma\a$ as (in analogy to
+Equation~\ref{eq:occ_rate_simple})
 \begin{equation}
     \Gamma\a(r\a,M\a) = \frac{n_{\rm det}(r\a,M\a)}{N_\star(r\a,M\a)}
     \, \frac{1}{p_{\rm tra}(M\a)},
 \label{eq:apparent_rate_density}
 \end{equation}
-where $n_{\rm det}$ is the number of detected planets, per unit
-$(r\a, M\a)$, with apparent radius $r\a$ orbiting stars of
-apparent mass $M\a$.   The planets with $(r\a, M\a)$ are associated
-with systems of many different planetary and stellar properties, so
-$n_{\rm det}(r\a, M\a)$ is given by the convolution of the true rate
-density, $\Gamma(r, M)$, and $\mathcal{N}_\star(r\a, M\a; r, M)$, the
-number of searchable stars per unit $(r\a, M\a)$ that give $(r\a,
-M\a)$  when the true system actually has properties $(r, M)$.
-Mathematically,
+where $n_{\rm det}(r\a,M\a)$ is the number of detected planets per
+star with radius $r\a$ orbiting stars of apparent mass $M\a$, per unit
+$r\a$ and $M\a$.  This collection of planets with the same apparent
+properties actually includes planets with a variety of true sizes and
+host star masses.  We may write $n_{\rm det}(r\a, M\a)$ as the
+convolution of the true occurrence rate density, $\Gamma(r, M)$; and
+$\mathcal{N}_\star(r\a, M\a; r, M)$, the number of searchable stars
+per unit $(r\a, M\a)$ for which a planet with true properties $(r, M)$
+would appear to be a planet with apparent properties $(r\a, M\a)$:
 \begin{align}
     n_{\rm det}(r\a, M\a) &=
-    \sum_i n_{\rm det}^i(r\a, M\a) \\
+    \sum_{i=0}^2 n_{\rm det}^i(r\a, M\a) \\
     &=
-    \sum_i \int \mathrm{d}r \mathrm{d}M \,
+    \sum_{i=0}^2 \int \mathrm{d}r \int \mathrm{d}M \,
     \mathcal{N}_\star^i(r\a,M\a; r,M)
-    \, \Gamma_i(r,M) \, p_{\rm tra}(r,M),
+    \,\Gamma_i(r,M) \, p_{\rm tra}(M),
     \label{eq:n_det}
 \end{align}
-where $i$ specifies the type of true host star (0: single, 1:
-primary, 2: secondary).  The problem reduces to the evaluation of
-\begin{equation}
-    \mathcal{N}_\star^i(\pp\a,\ps\a; \pp, \ps)
-\end{equation}
-for planets around single stars, primaries in binaries, and
-secondaries in binaries. 
+where $i$ specifies the true type of host star, with 0 for single
+stars, 1 for primary stars, and 2 for secondary stars.  We now proceed
+to calculate $\mathcal{N}_\star^i(r\a,M\a; r,M)$.
 
-\paragraph{Single stars} For $i=0$, 
+\paragraph{Single stars}
+For single stars,
 \begin{equation}
     \mathcal{N}_\star^0(r\a,M\a; r,M)
     =\hat{\delta}(r\a-r)\hat{\delta}(M\a-M) N_\star^0(r,M),
 \end{equation}
-where $\hat{\delta}$ is the Dirac delta function, so
+where $\hat{\delta}$ is the Dirac delta function.  Therefore,
 \begin{equation}
     n_{\rm det}^0(r\a, M\a)=N_\star^0(r\a,M\a)\, \Gamma_0(r\a, 
     M\a) \, p_{\rm tra}(r\a, M\a).
