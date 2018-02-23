@@ -154,44 +154,45 @@ results in Section~\ref{sec:discussion}.
 \section{Understanding the errors}
 \label{sec:concept}
 
-Imagine a group of astronomers that wants to measure the mean number of
-planets of a certain type per star of a certain type.  They perform a
-wide-field photometric search for planets that transit, and discover
-all for which
+Imagine that a group of astronomers wants to measure the mean number
+of planets per star.  They are particularly interested in planets of
+radius $r$ and stars of mass $M$ and radius $R$.  They obtain a time
+series of images of some region of the sky, and prepare light curves
+for a large number of unresolved sources.  Then they search these
+light curves for transit signals and detect all the signals for which
 \begin{equation}
   \frac{\delta}{\sigma}
   >
   \left(\frac{{\rm S}}{{\rm N}}\right)_{\rm min}.
 \label{eq:S_N_thresh}
 \end{equation}
-Here the signal S is the observed transit depth $\delta$, in units of
-relative flux.  The noise N is the uncertainty in the determination of
-the flux ratio of the star inside and outside of transits.  The
-minimum signal-to-noise for detection, $({\rm S}/{\rm N})_{\rm min}$,
-depends on the properties of the telescope.  We will assume throughout
-this paper that the photometric uncertainty scales as the inverse
-square root of the number of photons collected from the source, {\it
-i.e.}, the dependence on stellar properties is $\sigma \propto (L_{\rm
-tot}/d^2)^{-1/2}$, where $L_{\rm tot}$ is the total luminosity of the
-stellar system and $d$ is its distance from Earth.  The observed
-signal amplitude $\delta$ depends on the fraction of the total
-luminosity that comes from the planet-hosting star, since light from
-unresolved stellar companions is not affected by the planet's transit.
+Here the signal, $\delta$, is the observed transit depth, the
+dimensionless fraction by which the total light fades during transits.
+Note that although $\delta$ is often equated with $(r/R)^2$, this is
+not true when the host star is a member of an unresolved binary.  In
+those cases, $\delta$ is smaller than $(r/R)^2$ because of the
+constant light from the binary companion, an effect often called the
+``dilution'' of the transit signal.  The noise, $\sigma$, is the
+fractional uncertainty in the determination of the flux of the source,
+which may include multiple stars that are blended together.  The
+threshold signal-to-noise ratio depends on the desired level of
+confidence that the signal is real.
 % The transit duration also affects detectability, but we omit it in
 % this work for brevity.
 
-The astronomers analyze their data assuming that all stars are
-single.  In particular they do not have accurate enough parallaxes to
-tell that some of the stars are apparently overluminous.  They want to
-compute the number of planets with size $r$ per star of mass $M$.  If
-the total number of stars for which such planets could be detected
-($N_\star$) and the number of detected planets ($N_{\rm det}$) are
-both large, then the astronomers' estimate for the occurrence rate
-($\Lambda$) is simply
+The astronomers analyze their data assuming that all the sources are
+single stars.  In particular they do not have accurate enough
+parallaxes to tell that some of the stars appear to be overluminous.
+They count the number $N_{\rm det}$ of transit signals that appear to
+be produced by the desired type of planet around the desired type of
+star.  They also count the number $N_\star$ of ``searchable stars'' in
+their survey, i.e., the number of stars of the desired type that are
+bright enough to have allowed for the detection of a transit signal
+with amplitude $(r/R)^2$.  They estimate the occurrence rate to be
 \begin{equation}
   \Lambda = \frac{N_{\rm det}}{N_\star}
                     \, \frac{1}{p_{\rm tra}},
-\label{eq:occ_rate_simple}
+  \label{eq:occ_rate_simple}
 \end{equation}
 where the geometric transit probability, $p_{\rm tra}$, accounts for
 the fact that most planetary orbits are not aligned close enough with
@@ -202,27 +203,32 @@ transit signals are missed even if they formally exceed the
 signal-to-noise threshold, because of the probabilistic nature of
 transit detection.  Planets can be misclassified due to statistical
 and systematic errors in the catalogued properties of the stars.  Some
-apparent transit signals are spurious, arising from noise fluctuations
-or failures of ``detrending'' the astrophysical or instrumental
+transit-like signals are spurious, arising from noise fluctuations or
+failures of ``detrending'' the astrophysical or instrumental
 variations in the photometric signal.  Poor angular resolution leads
 to blends between eclipsing binary stars and other stars along nearly
 the same line of sight, producing signals that mimic those of
 transiting planets.
 
-We will focus exclusively on problems that arise from the fact that
-many stars exist in gravitationally bound binary systems.  Even with
-this narrow focus, there are numerous sources of error.  All three of
-the quantities in Equation~\ref{eq:occ_rate_simple} are subject to
-observational bias:
+Here, though, we will focus exclusively on problems that arise from
+the fact that many stars exist in gravitationally bound binary
+systems.  We will also focus on the errors in planet occurrence as a
+function of radius, rather than orbital period. This is because when
+more than one transit is detected (as is usually required by the
+surveyors), the orbital periods can be measured without ambiguity
+regardless of whether the host star is single or one member of a
+binary.  Even with this narrow focus, there are numerous sources of
+error.  All three of the quantities in
+Equation~\ref{eq:occ_rate_simple} are biased:
 \begin{enumerate}
 %    
-    \item The detected planet count, $N_{\det}$, is actually the
+    \item The number of detected planets, $N_{\det}$, is actually the
       number of detected planets that {\it appear} to have size $r$,
       orbiting stars that {\it appear} to have mass $M$.  Whenever the
       planet-hosting star is part of a binary,
 %    
     \begin{itemize}
-        \item the planet's size will be misclassified because of the
+        \item the planet's size could be misclassified because of the
           reduction in the amplitude of the photometric signal;
 %        
         \item the host star's properties could be misclassified
@@ -231,64 +237,56 @@ observational bias:
 %        
     \end{itemize}
 %    
-    \item The apparent number of stars that were searched, $N_\star$,
-      is biased
+    \item The number of searchable stars, $N_\star$, is biased
 %    
     \begin{itemize}
 %        
         \item toward lower values, because it does not include all of
-          the secondary stars that were searched for transiting
-          planets;
+          the secondary stars that were inadvertently searched for
+          transiting planets;
 %        
         \item toward higher values, because some of the stars that
-          appeared to be suitably small and bright to detect the
-          desired type of planet are in fact binaries for which the
-          amplitude of the photometric signal would be reduced to an
-          undetectable level.
+          appeared to be searchable are in fact binaries for which the
+          amplitude of the photometric signal would have been reduced
+          to an undetectable level.
 %        
     \end{itemize}
 %    
-    \item The transit probability $p_{\rm tra}$, which scales with the
-      stellar mean density as $\rho^{-1/3}$, is biased because the
-      planet-hosting star could be misclassified.
+    \item The transit probability $p_{\rm tra}$ is biased because the
+      planet-hosting star could be misclassified.  At fixed orbital
+      period, the transit probability is proportional to
+      $\rho^{-1/3}$, where $\rho$ is the stellar mean
+      density~\citep{Winn2010}.  Therefore, any errors in determining
+      the host star's mean density lead to errors in the correction
+      for the transit probability.
 %    
 \end{enumerate}
 
-Two other problems that may arise are not represented in
-Equation~\ref{eq:occ_rate_simple}.  One is astrophysical: the true
-occurrence rate of the desired type of planet may depend on whether
-the host is a single star, the primary star of a binary, or the
-secondary star of a binary.  Such differences could be caused by the
-requirement for long-term dynamical stability, or differences in the
-planet formation process.  When the search sample includes both
-singles and binaries, the detected planets are thereby drawn from
-different occurrence 
-distributions~\citep[see][]{
-    wang_occurrence_2015,kraus_impact_2016}.
+There are at least two other complications that may arise, which are
+not represented in Equation~\ref{eq:occ_rate_simple}.  The first one
+is an observational effect. Within the sample of apparently searchable
+stars, the ratio between the number of binary and single stars will
+differ from the ratio that would be found in a volume-limited sample.
+This is due to a type of Malmquist bias.  The total luminosity of a
+binary is larger than the luminosity of either the primary or
+secondary star.  This means that for transit signals of a given
+amplitude, sources that are binaries appear to be searchable at
+greater distances from the Earth.  Binaries are therefore
+over-represented in the collection of apparently searchable stars.
 
-The other problem is an observational effect. In the searched sample,
-the ratio between the number of binary and single stars will differ
-from that in a volume-limited sample due to a type of Malmquist bias.
-The total luminosity of a binary is larger than the luminosity of
-either the primary or secondary star.  This means that for transit
-signals of a given amplitude, the binaries are searchable at greater
-distances from the Earth.  Thus for any planet and star pair, adding a
-stellar companion both helps and hinders transit detection: the extra
-photons help by lowering the noise, and hinder by diminishing the
-observed transit depth.
-
-Planet occurrence rates are often presented as two-dimensional density
-functions in the space of planet radius and orbital period.
-Thankfully none of the errors we have enumerated lead to errors in the
-period distribution.  When more than one transit is detected (as is
-usually required by the surveyors), the orbital periods can be
-measured without ambiguity regardless of whether the host star is
-single or one member of a binary.  Hence in what follows, we focus on
-the radius distribution and assume the periods are measured without
-significant uncertainty.
+The other complication is astrophysical: the true occurrence rate of a
+certain type of planet may depend on whether the host is a single
+star, the primary star of a binary, or the secondary star of a binary.
+The rate might also depend on the characteristics of the binary, such
+as the mass ratio and orbital period.  Such differences could be
+caused by the requirement for long-term dynamical stability, or
+differences in the planet formation process.  When the search sample
+includes both singles and binaries, the detected planets are thereby
+drawn from different occurrence distributions~\citep[see][]{
+  wang_occurrence_2015,kraus_impact_2016}.
 
 Given all of the confusing and opposing sources of error, we will
-proceed in stages. We start from a barebones model in which everything
+proceed in stages.  We start with a model so simple that everything
 can be written down on the back of a napkin, and build up to an
 analytic model allowing for generality in the distribution of the
 binaries and the planets they host.  
@@ -302,28 +300,6 @@ binaries and the planets they host.
 
 \subsection{One type of star, one type of planet}
 \label{sec:model_1}
-
-\begin{figure}[!tb]
-    \begin{center}
-        \includegraphics[width=0.6\textwidth]{figures/visualize_volumes.pdf}
-    \end{center}
-    \caption{
-        Searchable volumes for single stars ({\it left}) and twin
-        binaries ({\it right}), assuming that all stars have the same
-        mass, radius, and luminosity, and that all planets have the
-        same radius $r\p$.
-        {\it Top:} At an apparent radius $r\a=r\p$, the
-        binarity-ignoring observers search twin binaries out to a
-        distance $\sqrt{2}$ times greater than they search single
-        stars.  Because the transit depths are diluted, there are no 
-        planets in twin binaries with $r\a=r\p$.
-        {\it Bottom:} At $r\a=r\p/\sqrt{2}$, the observed transit
-        depths are smaller by a factor of two, so the maximum
-        searchable distances are half those at $r\a=r\p$.  The only
-        detected planets with $r\a=r\p/\sqrt{2}$ orbit twin binaries.
-    }
-    \label{fig:model_1_volumes}
-\end{figure}
 
 Since the effects of binarity are most pronounced when the two stellar
 components are similar, we begin by considering a universe in which
@@ -363,6 +339,28 @@ searchable stars $N_\star$ is proportional to
 \end{equation}
 where $n$ is the number per unit volume of single or binary star
 systems. 
+
+\begin{figure}[!tb]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{figures/visualize_volumes.pdf}
+    \end{center}
+    \caption{
+        Searchable volumes for single stars ({\it left}) and twin
+        binaries ({\it right}), assuming that all stars have the same
+        mass, radius, and luminosity, and that all planets have the
+        same radius $r\p$.
+        {\it Top:} At an apparent radius $r\a=r\p$, the
+        binarity-ignoring observers search twin binaries out to a
+        distance $\sqrt{2}$ times greater than they search single
+        stars.  Because the transit depths are diluted, there are no 
+        planets in twin binaries with $r\a=r\p$.
+        {\it Bottom:} At $r\a=r\p/\sqrt{2}$, the observed transit
+        depths are smaller by a factor of two, so the maximum
+        searchable distances are half those at $r\a=r\p$.  The only
+        detected planets with $r\a=r\p/\sqrt{2}$ orbit twin binaries.
+    }
+    \label{fig:model_1_volumes}
+\end{figure}
 
 When selecting sources that appear to have been searched, the
 observers admit some binaries.  Since the binaries are twice as
