@@ -18,8 +18,7 @@
 
 
 \shortauthors{Bouma, Masuda, Winn}
-\shorttitle{Binarity's Biases}
-
+\shorttitle{Binarity and planet occurrence rates}
 
 \newcommand{\pp}{\mathcal{P}}
 \newcommand{\ps}{\mathcal{S}}
@@ -54,32 +53,31 @@
 %
 \begin{abstract}
 %
-
 Wide-field surveys for transiting planets, such as the NASA {\it
-Kepler} and {\it TESS} missions, are usually conducted without knowing
-which stars are binaries. Unresolved and unrecognized binary stars
-give rise to systematic errors in planet occurrence rates, including
-misclassified planets and miscounts in the number of searched stars.
-The individual errors can have different signs, making it difficult to
-anticipate the net effect on inferred occurrence rates. Here we use
-simplified models of signal-to-noise limited transit surveys to try
-and clarify the situation. We derive a formula for the apparent
-occurrence rate density measured by an observer who falsely assumes
-all stars are single. The formula depends on the binary fraction; the
-mass function of the secondary stars; and the true occurrence of
-planets around primaries, secondaries, and single stars. It also takes
-into account the Malmquist bias by which binaries are over-represented
-in flux-limited samples. Application of the formula to an idealized
-{\it Kepler}-like survey shows that for planets larger than
-$2r_\oplus$, the net systematic error is of order 10\%.  One
-consequence is that unrecognized binaries cannot account for the
-apparent discrepancy between hot Jupiter occurrence rates measured by
-transit and RV surveys.  For smaller planets the errors are
-potentially larger: the occurrence of Earth-sized planets could be
-overestimated by as much as a factor of two. We also show that if
-high-resolution imaging reveals a transit host star to be a binary,
-the planet is usually more likely to orbit the primary star than the
-secondary star.
+  Kepler} and {\it TESS} missions, are usually conducted without
+knowing which stars have binary companions. Unresolved and
+unrecognized binaries give rise to systematic errors in planet
+occurrence rates, including misclassified planets and mistakes in
+completeness corrections.  The individual errors can have different
+signs, making it difficult to anticipate the net effect on inferred
+occurrence rates. Here we use simplified models of signal-to-noise
+limited transit surveys to try and clarify the situation. We derive a
+formula for the apparent occurrence rate density measured by an
+observer who falsely assumes all stars are single. The formula depends
+on the binary fraction; the mass function of the secondary stars; and
+the true occurrence of planets around primaries, secondaries, and
+single stars. It also takes into account the Malmquist bias by which
+binaries are over-represented in flux-limited samples. Application of
+the formula to an idealized {\it Kepler}-like survey shows that for
+planets larger than 2\,$R_\oplus$, the net systematic error is of
+order 5\%.  In particular, unrecognized binaries are unlikely to be
+the reason for the apparent discrepancies between hot Jupiter
+occurrence rates measured in different surveys.  For smaller planets
+the size the errors are potentially larger: the occurrence of
+Earth-sized planets could be overestimated by as much as 50\%. We also
+show that whenever high-resolution imaging reveals a transit host star
+to be a binary, the planet is usually more likely to orbit the primary
+star than the secondary star.
 %
 \end{abstract}
 %
@@ -99,40 +97,41 @@ One of the goals of exoplanetary science is to establish how common,
 or rare, are planets of various types.  Knowledge of planet occurrence
 rates is helpful for inspiring and testing theories of planet
 formation, designing the next generation of planet-finding surveys,
-and simply satisfying our curiosity about other worlds.  One method
-for measuring occurrence rates is to monitor the brightnesses of many
-stars over a wide field, seeking evidence for planetary transits.
-Measuring occurrence rates using this method was the highest priority
-of the NASA {\it Kepler} mission.  Great strides have been made in the
-analysis of {\it Kepler} data, including progress towards measuring
-the fraction of Sun-like stars that harbor Earth-like planets~\citep{
+and simply satisfying our curiosity.  One method for measuring
+occurrence rates is to monitor the brightnesses of many stars over a
+wide field, seeking evidence for planetary transits.  This was the
+highest priority of the NASA {\it Kepler} mission.  Great strides have
+been made in the analysis of {\it Kepler} data, including progress
+towards measuring the fraction of Sun-like stars that harbor
+Earth-like planets~\citep{
   youdin_exoplanet_2011,petigura_prevalence_2013,dong_fast_2013,
-  foreman-mackey_exoplanet_2014,burke_terrestrial_2015}
+  foreman-mackey_exoplanet_2014,burke_terrestrial_2015}.
 
-A lingering concern in occurrence rate studies is that in most cases,
-investigators have assumed that all of the sources of light that were
-monitored are single stars~\citep[\textit{e.g.},][]{
+A lingering concern about these studies is that in most cases,
+investigators have assumed that all of the targets in the survey
+are single stars~\citep[\textit{e.g.},][]{
   howard_planet_2012,fressin_false_2013,
   dressing_occurrence_2015,burke_terrestrial_2015}. 
-In reality, many of the point sources seen in a transit survey are
-unresolved multiple-star systems, especially binaries.  Unrecognized
+In reality, many of the sources that are monitored in a transit survey are
+unresolved multiple-star systems, mainly binaries.  Unrecognized
 binaries cause numerous systematic errors in the planetary occurrence
 rates.  For example, when there is a transiting planet around a star
 in a binary, the additive constant light from the second star reduces
 the fractional loss of light due to the planet.  This makes transit
 signals harder to detect and lowers the number of detections.  On the
-other hand, in a binary there are two opportunities to detect
+other hand, a binary system presents two opportunities to detect
 transiting planets, which could increase the overall number of
 detections.
 
 At the outset of this study it was not clear to us whether the neglect
-of binaries was a serious issue at all, or even whether the net effect
-of all the errors is positive or negative.  The goals of this study
-were to provide a framework for dealing with these issues, and to
-calculate a leading-order estimate for the net systematic effects.  In
-this spirit, our models are idealized and analytic, and we do not
-attempt a detailed correction of the results from {\it Kepler} or any
-other real transit survey.  
+of binaries is a serious problem, or even whether the net effect of
+the errors is positive or negative.  The goals of this study were to
+provide a framework for dealing with these issues, and to gauge at
+least the order of magnitude of the systematic errors.  In this
+spirit, our models are idealized.  We do not attempt a detailed
+correction of the results from {\it Kepler} or any other real transit
+survey.  We took inspiration from the insightful analytic model for
+transit surveys by~\citet{pepper_using_2003}.
 
 This paper is organized as follows.  The next section enumerates the
 various errors that arise from unrecognized binaries.  Then in
@@ -142,15 +141,14 @@ are identical except that some fraction are in binary systems.  This
 simple model motivates the derivation of a general formula, given in
 Section~\ref{sec:general_formula}, that allows for more realistic
 stellar and planetary populations.  We use this formula in
-Section~\ref{sec:more_complicated} to explore more complicated but
-nevertheless still analytic models.  In Section~\ref{sec:discussion}
-we discuss the errors due to unrecognized binaries for specific cases
+Section~\ref{sec:more_complicated} to explore more realistic models.
+We discuss the errors due to unrecognized binaries for specific cases
 of current interest: the occurrence of Earth-like planets; the
-apparent discrepancy between hot Jupiter occurrence rates in different
-surveys; and the shape of the ``evaporation valley'' in the planet
-radius distribution that was brought to light by
-\citet{fulton_california-_2017}.  We review all the results in
-Section~\ref{sec:conclusion}.
+apparent discrepancy between hot Jupiter occurrence rates measured in
+different surveys; and the shape of the ``evaporation valley'' in the
+planet radius distribution that was brought to light by
+\citet{fulton_california-_2017}.  We summarize and discuss all the
+results in Section~\ref{sec:discussion}.
 
 
 \section{Understanding the errors}
