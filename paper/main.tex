@@ -304,149 +304,131 @@ binaries and the planets they host.
 Since the effects of binarity are most pronounced when the two stellar
 components are similar, we begin by considering a universe in which
 all stars are identical, with mass $M$, radius $R$, and luminosity
-$L$.  Some fraction of them exist in twin binaries. All planets have
-size $r\p$.  In this scenario, stellar radii are never misclassified
-because the combined light of a binary has the same color and spectrum
-as a single star.  We further assume that planets occur around single
-stars and members of binaries at the same rate, $\Lambda(r\p)$.
+$L$.  Single stars are uniformly distributed in space with a number
+density of $n\s$ stars per cubic parsec, and binaries are uniformly
+distributed with number density $n\b$.  In this scenario, stars are
+never misclassified because the combined light of a binary has the
+same color and spectrum as a single star.  We further assume that all
+planets have the same radius, $r$, and occur around single stars and
+members of binaries at the same rate, $\Lambda(r)$.
 
-Our naive observers detect transiting planets with two different
-depths. Since 
+Our naive observers conduct a transit survey. To calculate the
+occurrence rate of planets with radius $r$, they count the number of
+detections of signals with amplitude $(r/R)^2$.  Then they identify
+all the sources that appear to have been searchable for a signal of
+amplitude $(r/R)^2$.  Here and throughout the rest of this paper, we
+assume that the limiting source of noise is the photon-counting noise
+from the source, i.e., $\sigma \propto 1/\sqrt{F}$, where
+where $F$ is the total flux of the source.
+Thus the observers determine the minimum $F_0$ for which detection would have been
+possible, and count the number of sources with $F_{\rm tot}>F_0$. This will
+include all the single stars out to a maximum distance
 \begin{equation}
-    \delta = \left(\frac{r\p}{R}\right)^2 \frac{L}{L_{\rm tot}},
-    \label{eq:delta_obs_general} 
-\end{equation}
-one class of transit signal, with depth $(r\p/R)^2$, occurs in single
-star systems. The other class, with half the depth, occurs in twin
-binary systems, leading to apparent planet radii $\sqrt{2}$ smaller
-than the true radii.
-
-To calculate the occurrence rate of each planet type, our observers
-identify the ``stars'' from their survey that appear to have been
-searched for signals of each depth.  These transits are detected
-within a certain maximum
-distance~\citep[see][]{pepper_using_2003,pepper_searching_2005}, which
-from Equation~\ref{eq:S_N_thresh} scales as
-\begin{equation}
-  d_{\rm max} \propto \delta \, L_{\rm tot}^{1/2}.
+  d_0 = \sqrt{\frac{L}{4\pi F_0}}.
   \label{eq:dmax}
 \end{equation}
-Assuming that stars are uniformly distributed in space, the number of
-searchable stars $N_\star$ is proportional to
+Since binaries are twice as luminous, the condition $F>F_0$ will
+include binaries out to the larger distance of $d_0\sqrt{2}$.
+None of the stars in binaries will
+appear to have a planet of radius $r$, because of the dilution of
+the transit signal.  Thus, the {\it apparent} occurrence rate $\Lambda\a$ of
+planets of radius $r$ is
 \begin{equation}
-    N_\star \propto n \delta^3 L_{\rm tot}^{3/2},
-\label{eq:N_searchable_prop}
+    \Lambda\a(r) = 
+        \frac{\Lambda(r) \, n\s d_0^3}
+        {n\s d_0^3 + n\b (d_0\sqrt{2})^3}.
+    \label{eq:rate_at_rp}
 \end{equation}
-where $n$ is the number per unit volume of single or binary star
-systems. 
+This apparent rate is larger than the true rate by a factor
+\begin{equation}
+    \frac{\Lambda\a(r)}{\Lambda(r)} = 
+        \frac{1}{1 + 2^{3/2}(n\b/n\s)}.
+    \label{eq:correction_rp}
+\end{equation}
+
+The observers will also detect some transiting planets around stars
+with binary companions.  The amplitude of these signals is
+\begin{equation}
+  \frac{L(r/R)^2}{L + L} = \frac{1}{2}\left(\frac{r}{R}\right)^2 =
+  \left(\frac{r/\sqrt{2}}{R}\right)^2,
+    \label{eq:delta_obs_general} 
+\end{equation}
+leading the astronomers to believe they have discovered a population
+of planets with radius $r/\sqrt{2}$.  To calculate the corresponding
+occurrence rate, they count the stars for which this type of signal
+would have been detectable.  The limiting flux for detection in this
+case is $4F_0$, because the signal amplitude hase been reduced by a
+factor of two and the noise level must also be reduced by a factor of
+two.  The condition $F>4F_0$ is met for single stars within a distance
+$d_0/2$, and binaries within a distance $d_0\sqrt{2}/2$.  Therefore,
+the observers will calculate the occurrence rate of this new type of
+planet to be
+\begin{equation}
+    \Lambda\a\left( \frac{r}{\sqrt{2}} \right) = 
+        \frac{2\Lambda(r) \, n\b (d_0\sqrt{2}/2)^3}
+        {n\s (d_0/2)^3 + n\b (d_0\sqrt{2}/2)^3}
+    =
+    \frac{2\Lambda(r)\cdot2^{3/2}(n\b/n\s)}{1 + 2^{3/2} (n\b/n\s)}.
+    \label{eq:correction_diluted_rp}
+\end{equation}
+Figure~\ref{fig:model_1_volumes} illustrates the
+volumes enclosing the apparently searchable single and binary stars.
 
 \begin{figure}[!tb]
     \begin{center}
         \includegraphics[width=0.6\textwidth]{figures/visualize_volumes.pdf}
     \end{center}
-    \caption{
-        Searchable volumes for single stars ({\it left}) and twin
-        binaries ({\it right}), assuming that all stars have the same
-        mass, radius, and luminosity, and that all planets have the
-        same radius $r\p$.
-        {\it Top:} At an apparent radius $r\a=r\p$, the
-        binarity-ignoring observers search twin binaries out to a
-        distance $\sqrt{2}$ times greater than they search single
-        stars.  Because the transit depths are diluted, there are no 
-        planets in twin binaries with $r\a=r\p$.
-        {\it Bottom:} At $r\a=r\p/\sqrt{2}$, the observed transit
-        depths are smaller by a factor of two, so the maximum
-        searchable distances are half those at $r\a=r\p$.  The only
-        detected planets with $r\a=r\p/\sqrt{2}$ orbit twin binaries.
-    }
+    \caption{ {\it Top.}---Volumes within which sources appear to be
+      searchable for planets of radius $r$.  Single stars are
+      searchable out to a distance $d_0$, at which point they become
+      too faint to allow the detection of transits.  Binaries
+      are brighter and therefore appear to be searchable out to a
+      larger distance.  {\it Bottom.}---Volumes within which within
+      which stars appear to be searchable for planets of radius
+      $r/\sqrt{2}$.  }
     \label{fig:model_1_volumes}
 \end{figure}
-
-When selecting sources that appear to have been searched, the
-observers admit some binaries.  Since the binaries are twice as
-luminous as singles, at fixed $\delta$ they are included out to a
-distance that is larger by a factor of $\sqrt{2}$.  To detect the
-half-strength signal, the observers need the noise level to be lower
-by a factor of two, which means the flux must be four times higher
-than that of a single star at distance $d_0$.  This is true of single
-stars within a distance $d_0/2$, and binaries within a distance
-$d_0\sqrt{2}/2$.  The searchable volumes are illustrated in
-Figure~\ref{fig:model_1_volumes}.
-
-Putting it all together, the {\it apparent} occurrence rate
-$\Lambda\a$ of planets of radius $r\p$ will be
-\begin{equation}
-    \Lambda\a(r\p) = 
-        \frac{\Lambda(r\p) \, n\s d_0^3}
-        {n\s d_0^3 + n\b (d_0\sqrt{2})^3}
-    \label{eq:rate_at_rp}
-\end{equation}
-where $n\s$ and $n\b$ are the number densities of single and binary
-star systems, respectively.  This apparent rate is larger than the
-true rate by a factor
-\begin{equation}
-    \frac{\Lambda\a(r\p)}{\Lambda(r\p)} = 
-        \frac{1}{1 + 2^{3/2}(n\b/n\s)}.
-    \label{eq:correction_rp}
-\end{equation}
-The observers will also claim to have discovered a class of planet
-with radius $r\p/\sqrt{2}$ and an occurrence rate given by
-\begin{equation}
-    \frac{\Lambda\a(r\p/\sqrt{2})}{\Lambda(r\p)}
-    =
-    \frac{2n\b (d_0\sqrt{2}/2)^3}
-      {n\s (d_0/2)^3 + n\b (d_0\sqrt{2}/2)^3}
-    =
-    \frac{2\cdot2^{3/2}(n\b/n\s)}{1 + 2^{3/2}
-    (n\b/n\s)}.
-    \label{eq:correction_diluted_rp}
-\end{equation}
 
 \begin{figure}[!tb]
     \begin{center}
         \includegraphics[width=.6\textwidth]{figures/occ_rate_vs_radius_model_1_brokenx.pdf}
     \end{center}
     \vspace{-0.5cm}
-    \caption{
-        Apparent occurrence rate $\Lambda\a$, and occurrence rate $\Lambda$, 
-        for a model with one type of star, one
-        type of planet, and twin binaries (same as
-        Figure~\ref{fig:model_1_volumes}).  We assume a twin binary
-        fraction of $0.05$, and that single, primary, and secondary
-        stars host planets at equal rates.  If the true planet radius
-        is $r\p$, all planets detected in binaries will have apparent
-        radii $r\a = r\p/\sqrt{2}$; Equation~\ref{eq:ratios} gives the
-        normalizations.
-    }
+    \caption{ Apparent occurrence rate $\Lambda\a$, and true
+    occurrence rate $\Lambda$ in a universe with only one type of
+    star, one type of planet (with radius $R_\oplus$), and a number
+    density of binary stars 5\% that of single stars.  The occurrence
+    rate of planets with radius $R_\oplus$ is underestimated, and the
+    occurrence rate of planets with radius
+    $R_\oplus/\sqrt{2}$ is overestimated.}
     \label{fig:occ_rate_model_1}
 \end{figure}
 
-We can now assess the severity of these errors, given the
+We can now assess the severity of the errors, for a given value of the
 binary-to-single ratio $n\b/n\s$. For stars with masses from 0.7 to
 1.3~$M_\odot$, \citet{raghavan_survey_2010} found the multiplicity
 fraction~--~the fraction of systems in a volume-limited sample that
 are multiple~--~to be 0.44.  Assuming all multiple systems are
-binaries, this means
+binaries, this gives a binary fraction
 \begin{equation}
-    \frac{n\b}{n\s + n\b} \approx 0.44.
+  \frac{n\b}{n\s + n\b} \approx 0.44,
 \end{equation}
-Of course not all of these binaries are ``twin'' binaries as we have
-assumed in our simple calculation. Perhaps only a tenth of the
-binaries have pairs of stars close enough in their basic properties to
-produce errors as significant as those we have been considering. In
-detail, this fraction depends on the binary mass ratio distribution
-and stellar mass-luminosity relation (see
-Section~\ref{sec:general_formula}).  Taking a leading-order estimate
-of $n\b/(n\s+n\b)\approx0.05$, we find
+which implies $n\b/n\s \approx 0.79$.  Of course not all of
+these binaries are ``twin'' binaries as we have assumed in our simple
+calculation.  Later, in Section~\ref{sec:general_formula}, we will
+allow for a continuum of properties for the secondary stars. For now,
+we might guess that only a tenth of the binaries have pairs of stars
+close enough in brightness to produce errors as significant as those
+we have been considering.  Adopting the value $n\b/n\s\approx0.05$, we
+find
 \begin{equation}
-    \frac{\Lambda\a(r\p)}{\Lambda(r\p)} = 0.87,~~
-    \frac{\Lambda\a(r\p/\sqrt{2})}{\Lambda(r\p)} = 0.26.
+    \frac{\Lambda\a(r\p)}{\Lambda(r\p)} = 0.88,~~
+    \frac{\Lambda\a(r\p/\sqrt{2})}{\Lambda(r\p)} = 0.25.
     \label{eq:ratios}
 \end{equation}
 All together, the various effects produce biases of order 10\% in the
 occurrence rates.  We will see that this level of error is
 characteristic of many of our more complicated models as well.
-
 
 \subsection{Formula Based on Apparent Rate Density}
 \label{sec:model_1_density}
