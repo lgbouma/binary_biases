@@ -94,9 +94,9 @@ ax.text2D(.3, .05, 'single stars', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
 ax.text2D(.7, .05, 'twin binaries', transform=fig.transFigure,
      fontsize='large', va='bottom', ha='center')
-ax.text2D(.05, .3, '$r_{\mathrm{a}}=r_{\mathrm{p}}/\sqrt{2}$', transform=fig.transFigure,
+ax.text2D(.05, .3, '$r_{\mathrm{a}}=r/\sqrt{2}$', transform=fig.transFigure,
      fontsize='large', va='center', ha='left', rotation=90)
-ax.text2D(.05, .7, '$r_{\mathrm{a}}=r_{\mathrm{p}}$', transform=fig.transFigure,
+ax.text2D(.05, .7, '$r_{\mathrm{a}}=r$', transform=fig.transFigure,
         fontsize='large', va='center', ha='left', rotation=90)
 
 fig.savefig('../results/visualize_volumes.pdf', dpi=300,

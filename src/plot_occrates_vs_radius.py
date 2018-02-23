@@ -105,7 +105,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius [$r_{\mathrm p}$]', fontsize='large')
+    ax.set_xlabel('planet radius [$R_{\oplus}$]', fontsize='large')
 
     ax.set_ylabel('number of planets per star', fontsize='large')
 

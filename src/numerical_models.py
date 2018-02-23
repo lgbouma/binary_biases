@@ -318,7 +318,10 @@ def calculate_true_and_apparent_rates(
 
         if model_number == 1 or model_number == 2:
             rs = np.array(df['r'])
-            assert np.all(rs[np.greater(rs, np.zeros_like(rs))] == rs[0])
+            assert np.all(
+                rs[np.greater(rs, np.zeros_like(rs))] == \
+                rs[np.greater(rs, np.zeros_like(rs))][0]
+            )
             r_p = rs[0]
             N_p_at_r_p_inferred += (len(r_a[r_a == r_p])/Q_g0)
             N_p_at_r_p_true += len(r[r == r_p])
