@@ -87,8 +87,11 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     if not many_Zs:
         ax.step(xvals, yinferred, label=lambdastr, c=colors[0], where='post')
     else:
-        ax.step(xvals, yinferred, label=lambdastr+', $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=colors[0], where='post')
+        if Z_2/Z_0 == 0.5:
+            labelstr = lambdastr+', $Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
+        else:
+            labelstr = lambdastr+', $Z_2/Z_0$={:d}'.format(int(Z_2/Z_0))
+        ax.step(xvals, yinferred, label=labelstr, c=colors[0], where='post')
 
     if many_Zs:
         for ind, Z_2 in enumerate([0.25,0]):
@@ -117,8 +120,12 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            ax.step(xvals, yinferred, label=lambdastr+', $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=c[ind], linestyle=ls[ind], where='post')
+            if Z_2/Z_0 == 0.5:
+                labelstr = lambdastr+', $Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
+            else:
+                labelstr = lambdastr+', $Z_2/Z_0$={:d}'.format(int(Z_2/Z_0))
+            ax.step(xvals, yinferred, label=labelstr, c=c[ind],
+                    linestyle=ls[ind], where='post')
 
     if standardlines:
 
@@ -126,15 +133,19 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 linestyle='-', c=colors[1])
 
     if brokenx:
-        ax.legend(loc='upper left',fontsize='medium')
+        leg = ax.legend(loc='upper left',fontsize='medium')
+        leg.get_frame().set_linewidth(0.)
+        leg.get_frame().set_facecolor('none')
     else:
         if model_number != 7:
-            ax.legend(loc='best',fontsize='medium')
+            leg = ax.legend(loc='best',fontsize='medium')
+            leg.get_frame().set_linewidth(0.)
+            leg.get_frame().set_facecolor('none')
         else:
             ax.legend(loc='upper left',fontsize='small')
 
 
-    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$R_\oplus$]', fontsize='large')
 
     ax.set_ylabel('number of planets per star', fontsize='large')
 
@@ -247,36 +258,36 @@ if __name__ == '__main__':
     #note: not running
     #make_plot(2, logy=True, Z_2=0.5, r_pu=1)
 
-    make_plot(5, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
-    make_plot(6, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(5, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(6, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(3, Z_2=0.5, r_pu=22.5)
-    make_plot(3, withtext=True, Z_2=0.5, r_pu=22.5)
-    make_plot(3, logx=False, logy=True, Z_2=0.5, r_pu=22.5)
-    make_plot(3, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, withtext=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, logx=False, logy=True, Z_2=0.5, r_pu=22.5)
+    #make_plot(3, logx=True, logy=True, Z_2=0.5, r_pu=22.5)
 
-    make_plot(4, Z_2=0.5, xcut=True, r_pu=22.5)
-    make_plot(4, logy=True, Z_2=0.5, xcut=True, r_pu=22.5)
+    #make_plot(4, Z_2=0.5, xcut=True, r_pu=22.5)
+    #make_plot(4, logy=True, Z_2=0.5, xcut=True, r_pu=22.5)
 
-    # Change as a function of Z_2/Z_0
-    for Z_2 in [0, 0.25]:
-        make_plot(3, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, logx=True, logy=True, Z_2=Z_2, r_pu=22.5)
-        make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
+    ## Change as a function of Z_2/Z_0
+    #for Z_2 in [0, 0.25]:
+    #    make_plot(3, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, logy=True, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, logx=True, logy=True, Z_2=Z_2, r_pu=22.5)
+    #    make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
 
     # As a function of Z_2/Z_0, on the same plot (...)
     make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5)
     make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True)
     make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5)
-    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, withtext=True)
+    #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, withtext=True)
 
     # Change as a function of r_pu
-    for r_pu in [15,17.5,20,22.5,25]:
-        make_plot(3, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
-        make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
+    #for r_pu in [15,17.5,20,22.5,25]:
+    #    make_plot(3, Z_2=0.5, r_pu=r_pu)
+    #    make_plot(3, logy=True, Z_2=0.5, r_pu=r_pu)
+    #    make_plot(3, withtext=True, stdout=True, Z_2=0.5, r_pu=r_pu)
 
-    # If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
-    # discrepancy" do you get?
-    make_plot(3, withtext=True, stdout=True, Z_2=0, r_pu=15)
+    ## If you fine-tune both r_pu AND Z_2/Z_0 preferentially, how big of a "HJ
+    ## discrepancy" do you get?
+    #make_plot(3, withtext=True, stdout=True, Z_2=0, r_pu=15)

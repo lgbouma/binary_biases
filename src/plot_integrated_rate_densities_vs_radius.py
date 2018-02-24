@@ -68,8 +68,11 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     if not many_Zs:
         ax.plot(xvals, yinferred, label=gammastr, c=colors[0])
     else:
-        ax.plot(xvals, yinferred, label=gammastr+', $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=colors[0])
+        if Z_2/Z_0 == 0.5:
+            labelstr = gammastr+', $Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
+        else:
+            labelstr = gammastr+', $Z_2/Z_0$={:d}'.format(int(Z_2/Z_0))
+        ax.plot(xvals, yinferred, label=labelstr, c=colors[0])
 
     if many_Zs:
         for ind, Z_2 in enumerate([0.25,0]):
@@ -84,8 +87,13 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            ax.plot(xvals, yinferred, label=gammastr+', $Z_2/Z_0$={:.1f}'.format(
-            Z_2/Z_0), c=c[ind], linestyle=ls[ind])
+            if Z_2/Z_0 == 0.5:
+                labelstr = gammastr+', $Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
+            else:
+                labelstr = gammastr+', $Z_2/Z_0$={:d}'.format(int(Z_2/Z_0))
+
+            ax.plot(xvals, yinferred, label=labelstr, c=c[ind],
+                    linestyle=ls[ind])
 
 
     if standardlines:
@@ -94,15 +102,19 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 c=colors[1])
 
     if model_number != 7:
-        ax.legend(loc='best',fontsize='medium')
+        leg = ax.legend(loc='best',fontsize='medium')
+        leg.get_frame().set_linewidth(0.)
+        leg.get_frame().set_facecolor('none')
     elif model_number == 7 and not logy:
-        ax.legend(loc='upper left',fontsize='small')
+        leg = ax.legend(loc='upper left',fontsize='small')
+        leg.get_frame().set_linewidth(0.)
+        leg.get_frame().set_facecolor('none')
     else:
         ax.legend(loc='lower right',fontsize='small')
 
-    ax.set_xlabel('planet radius [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('planet radius [$R_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('rate density [$r_\oplus^{-1}$]', fontsize='large')
+    ax.set_ylabel('occurrence rate density [$R_\oplus^{-1}$]', fontsize='large')
 
     if logx:
         ax.set_xscale('log')
@@ -233,12 +245,12 @@ if __name__ == '__main__':
     #    make_plot(3, withtext=True, stdout=True, Z_2=Z_2, r_pu=22.5)
 
     ## As a function of Z_2/Z_0, on the same plot (...)
-    #make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5)
-    #make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True)
-    #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5)
+    make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5)
+    make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True)
+    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5)
     #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, withtext=True)
 
-    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, logy=True)
+    #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, logy=True)
 
     # Change as a function of r_pu
     #for r_pu in [15,17.5,20,22.5,25]:

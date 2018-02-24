@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+python plot_visualize_volumes.py
+python plot_occrates_vs_radius.py
+python plot_mass_ratio_distribution.py
+python plot_integrated_rate_densities_vs_radius.py
+python plot_integrated_occrates_vs_radius.py
+python plot_ndet_apparent_vs_radius.py

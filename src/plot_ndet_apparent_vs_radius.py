@@ -89,16 +89,17 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
             c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
             ls = ['--', ':'] # shades of blue for vs function of Z_2
 
-            Zstr = ', $Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
-            ax.plot(xvals, y_0/y_a,
-                    label='$n_{\mathrm{det}}^0(r_{\mathrm{a}})$'+ndetstr+Zstr,
-                    c=colors[ind], linestyle='-')
-            ax.plot(xvals, y_1/y_a,
-                    label='$n_{\mathrm{det}}^1(r_{\mathrm{a}})$'+ndetstr+Zstr,
-                    c=colors[ind], linestyle='--')
-            ax.plot(xvals, y_2/y_a,
-                    label='$n_{\mathrm{det}}^2(r_{\mathrm{a}})$'+ndetstr+Zstr,
-                    c=colors[ind], linestyle=':')
+            if Z_2/Z_0 == 0.5:
+                Zstr = '$Z_2/Z_0$={:.1f}'.format(Z_2/Z_0)
+            else:
+                Zstr = '$Z_2/Z_0$={:d}'.format(int(Z_2/Z_0))
+
+            ax.plot(xvals, y_0/y_a, label='single stars, '+Zstr, c=colors[ind],
+                    linestyle='-')
+            ax.plot(xvals, y_1/y_a, label='primaries, '+Zstr, c=colors[ind],
+                    linestyle='--')
+            ax.plot(xvals, y_2/y_a, label='secondaries, '+Zstr, c=colors[ind],
+                    linestyle=':')
 
             print(Z_2, min(y_1/y_a), max(y_1/y_a), max(y_1/y_a)/min(y_1/y_a))
 
@@ -107,7 +108,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         box = ax.get_position()
         ax.set_position([box.x0, box.y0, box.width * 5/5, box.height])
 	# put a legend to the right of the current axis
-        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        leg = ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        leg.get_frame().set_linewidth(0.)
+        leg.get_frame().set_facecolor('none')
 
     if model_number != 7 and not many_Zs:
         ax.legend(loc='best',fontsize='medium')
@@ -115,7 +118,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     if model_number ==7 and not many_Zs:
         ax.legend(loc='upper left',fontsize='small')
 
-    ax.set_xlabel('apparent planet radius, $r_{\mathrm{a}}$ [$r_\oplus$]', fontsize='large')
+    ax.set_xlabel('apparent planet radius, $r_{\mathrm{a}}$ [$R_\oplus$]', fontsize='large')
 
     #ax.set_ylabel('number of planets detected [$N_{\mathrm{s}}^0(r_{\mathrm{a}})\cdot p_{\mathrm{tra}}$]', fontsize='large')
     ax.set_ylabel('fraction of detected planets', fontsize='large')
@@ -258,11 +261,11 @@ if __name__ == '__main__':
             logx=True)
     #make_plot(3, r_pu=22.5, many_Zs=True, Z_2=0.5, standardlines=False)
     #make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True, standardlines=False)
-    make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True,
-            standardlines=False, logx=True)
+    #make_plot(4, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True,
+    #        standardlines=False, logx=True)
 
-    make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True,
-            standardlines=False, logx=True)
+    #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, xcut=True,
+    #        standardlines=False, logx=True)
     #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, standardlines=False)
     #make_plot(7, r_pu=22.5, many_Zs=True, Z_2=0.5, withtext=True, standardlines=False)
 

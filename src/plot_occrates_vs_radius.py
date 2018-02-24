@@ -101,7 +101,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
                 linestyle='-', c=colors[1])
 
     if brokenx:
-        ax.legend(loc='upper left',fontsize='medium')
+        leg = ax.legend(loc='upper left',fontsize='medium')
+        leg.get_frame().set_linewidth(0.)
+        leg.get_frame().set_facecolor('none')
     else:
         ax.legend(loc='best',fontsize='medium')
 

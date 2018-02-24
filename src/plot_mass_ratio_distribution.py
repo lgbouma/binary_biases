@@ -27,7 +27,9 @@ yvals = np.ones_like(q)
 yvals[(q>1)|(q<0)] = 0
 ax.plot(q, yvals, label='volume-limited', zorder=1)
 
-ax.legend(loc='best',fontsize='medium')
+leg = ax.legend(loc='best',fontsize='medium')
+leg.get_frame().set_linewidth(0.)
+leg.get_frame().set_facecolor('none')
 
 ax.set_xlabel('binary mass ratio, $q=M_2/M_1$', fontsize='large')
 #ax.set_ylabel('$p(\mathrm{draw\ }q\,|\,\mathrm{system\ is\ binary})$', fontsize='large')
