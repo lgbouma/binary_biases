@@ -462,15 +462,15 @@ observers sum the number of detections $dN_{\rm det}$ of planets
 with an apparent radius between $r\a$ and $r\a + dr\a$.  There will be
 three contributions to this sum,
 \begin{align}
-  dN_{{\rm det},0} &= 
+  {\rm d}N_{{\rm det},0} &= 
       \frac{N_\star(r\a) p_{\rm tra}}{1+\mu}
       \Gamma_0(r\a)\mathrm{d}r\a,
   \label{eq:n0} \\
-  dN_{{\rm det},1} &= 
+  {\rm d}N_{{\rm det},1} &= 
       \frac{\mu N_\star(r\a) p_{\rm tra}}{1+\mu} 
       \Gamma_1(\sqrt{2}r\a)\mathrm{d}(\sqrt{2}r\a),
 	\label{eq:n1} \\
-  dN_{{\rm det},2} &=
+  {\rm d}N_{{\rm det},2} &=
       \frac{\mu N_\star(r\a) p_{\rm tra}}{1+\mu} 
       \Gamma_2(\sqrt{2}r\a)\mathrm{d}(\sqrt{2}r\a).
 	\label{eq:n2}
@@ -479,7 +479,7 @@ where here and elsewhere, the subscript 0 refers to single stars, 1
 refers to primary stars of binaries, and 2 refers to secondary stars
 of binaries. The apparent occurrence rate density is therefore
 \begin{equation}
-  \Gamma\a(r\a) = \frac{dN_{\rm det}}{dr\a} \frac{1}{N_\star(r\a) p_{\rm tra}} =
+  \Gamma\a(r\a) = \frac{{\rm d}N_{\rm det}}{{\rm d}r\a} \frac{1}{N_\star(r\a) p_{\rm tra}} =
   \frac{\Gamma_0(r\a)}{1+\mu} +
   \frac{\mu\sqrt{2}\,\Gamma_1(\sqrt{2}r\a)}{1+\mu} +
   \frac{\mu\sqrt{2}\,\Gamma_2(\sqrt{2}r\a)}{1+\mu}.
@@ -1399,7 +1399,7 @@ would appear to be a planet with apparent properties $(r\a, M\a)$:
     n_{\rm det}(r\a, M\a) &=
     \sum_{i=0}^2 n_{\rm det}^i(r\a, M\a) \\
     &=
-    \sum_{i=0}^2 \int \mathrm{d}r \int \mathrm{d}M \,
+    \sum_{i=0}^2 \int \mathrm{d}r \!\int\! \mathrm{d}M \,
     \mathcal{N}_\star^i(r\a,M\a; r,M)
     \,\Gamma_i(r,M) \, p_{\rm tra}(M),
     \label{eq:n_det}
@@ -1420,24 +1420,24 @@ where $\hat{\delta}$ is the Dirac delta function.  Therefore,
     M\a) \, p_{\rm tra}(r\a, M\a).
 \end{equation}
 
-\paragraph{Primaries in binaries}
-The number of primaries with apparent parameters $(r\a,M\a)$ given the
-true parameters $(r,M)$ is
+\paragraph{Primary stars}
+For primary stars in binary systems, 
 \begin{equation}
     \mathcal{N}_\star^1(r\a, M\a; r, M)
-    = \int 
-      \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M),
+    = \int_0^1 
+      \mathrm{d}q\,f(q)\,\mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M),
     \label{eq:fancyN_s_1}
 \end{equation}
-where $f(q)$ is the volume-limited binary mass ratio distribution.
-Since we assume that binaries are assigned the mass of the primary,
+where $f(q)$ is the binary mass ratio distribution in a volume-limited sample
+of stars.  Since we are assuming that the observer will perceive a binary to be a single
+star with the same properties as the primary star,
 \begin{equation}
     \mathcal{N}_{{\rm s},q}^1(r\a, M\a, q; r, M)
     \propto
     \hat{\delta}(M\a-M).
 \end{equation}
 In this case, $\mathcal{N}_{{\rm s},q}^1$ is non-zero only at
-$r\a=R\a\sqrt{\delta}$, and the observed depth is
+$r\a=R\a\sqrt{\delta}$, and the observed transit depth is
 \begin{equation}
     \delta
     = \left[{r\over R(M\a)}\right]^2\, {L(M\a) \over L_{\rm tot}(M\a, q)}
@@ -1447,7 +1447,7 @@ $r\a=R\a\sqrt{\delta}$, and the observed depth is
 \end{equation}
 where
 \begin{equation}
-    \mathcal{D}_1=\sqrt{L_{\rm tot}(M\a, q) \over L(M\a)}.
+    L_{\rm tot}(M\a,q) = L(M\a) + L(qM\a),~~\mathcal{D}_1=\sqrt{L_{\rm tot}(M\a, q) \over L(M\a)}.
 \end{equation}
 The normalization of $\mathcal{N}_{{\rm s},q}^1$ is given by the
 number of binaries that are searchable for a signal $\delta$
@@ -1457,19 +1457,18 @@ and that have mass ratio $q$:
     {n\b\over n\s}\left[L_{\rm tot}(M\a, q) \over L(M\a)\right]^{3/2}.
     \label{eq:primary_normalization}
 \end{equation}
-where the argument for the number of searchable single stars,
-$N_\star^0$, could also be expressed as $(\delta, L(M\a))$.
+%where the argument for the number of searchable single stars,
+%$N_\star^0$, could also be expressed as $(\delta, L(M\a))$.
 Applying Equation~\ref{eq:primary_normalization},
 \begin{align}
     \mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M)
     &=N_\star^0(r\a, M\a)
     \, {n\b\over n\s} \, \mathcal{D}_1^3
-    \,\hat{\delta} \left(r\a-\frac{r}{\mathcal{D}_1}\right)\hat{\delta}(M\a-M).
+    \,\hat{\delta} \left[r\a-\frac{r}{\mathcal{D}_1}\right]\hat{\delta}(M\a-M).
     \label{eq:N_s_1}
 \end{align}
 
-
-\paragraph{Secondaries in binaries}
+\paragraph{Secondary stars}
 In this case, $M=qM_1=qM\a$, so
 \begin{equation}
     \mathcal{N}_{{\rm s},q}^2(r\a, M\a, q; r, M)
@@ -1498,7 +1497,7 @@ counting the searchable stars at a given observed depth $\delta$, and
 the total luminosity of the binary is the same.  Thus,
 \begin{equation}
     \mathcal{N}_\star^2(r\a, M\a; r, M)
-    =\int \mathrm{d}q\,f(q)\mathcal{N}_{{\rm s}, q}^2(r\a, M\a, q; r, M),
+    =\int_0^1 \mathrm{d}q~f(q)\,\mathcal{N}_{{\rm s}, q}^2(r\a, M\a, q; r, M),
 \end{equation}
 where
 \begin{align}
@@ -1510,93 +1509,75 @@ where
     \label{eq:mathcal_N_s_2}
 \end{align}
 
-One might worry in Equation~\ref{eq:mathcal_N_s_2} that we opt to
-write $\mathcal{N}\s^2 \propto \hat{\delta}(M\a - M/q)$, rather than
-$\propto \hat{\delta}(M\a q - M)$ or some other delta function with the same
-functional dependence, but a different normalization once integrated.
-We do this because the delta function in
-Equation~\ref{eq:mathcal_N_s_2} is defined with respect to the measure
-${\rm d}M\a$, not ${\rm d}M$.  This is because $\mathcal{N}\s^2$ is
-defined as a number per $r\a$, per $M\a$.
-
 \paragraph{Number of detected planets}
-Marginalizing per Equation~\ref{eq:n_det}, we find
+Inserting the results into Equation~\ref{eq:n_det}, we find
 \begin{align}
     \notag
     n_{\rm det}^0(r\a, M\a)
-    &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^0(r\a, M\a; r, M)
-    \,\Gamma_0(r, M) \, p_{\rm tra}(M)\\
-    &=N_\star^0(r\a, M\a)\,\Gamma_0(r\a, M\a) \, p_{\rm 
-        tra}(M\a),
-    \label{eq:n_det_0}
-\end{align}
-and
-\begin{align}
+    &=\int\mathrm{d}r\,\mathrm{d}M~\mathcal{N}_\star^0(r\a, M\a; r, M)
+    \, \Gamma_0(r, M) \, p_{\rm tra}(M)\\
+    &=N_\star^0(r\a, M\a)\, \Gamma_0(r\a, M\a) \, p_{\rm 
+        tra}(M\a),\\
     \notag
     n_{\rm det}^1(r\a, M\a)
-    &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^1(r\a, M\a; r, M)
-    \,\Gamma_1(r, M) \, p_{\rm tra}(M)\\
+    &=\int\mathrm{d}r\,\mathrm{d}M~\mathcal{N}_\star^1(r\a, M\a; r, M)
+    \, \Gamma_1(r, M) \, p_{\rm tra}(M)\\
     &=N_\star^0(r\a, M\a)\, p_{\rm tra}(M\a) \,
     \frac{n\b}{n\s}
     \int \mathrm{d}q \,
-         \mathcal{D}_1^3 f(q)\,
-         \mathcal{D}_1 \Gamma_1(\mathcal{D}_1r\a, M\a).
-    \label{eq:n_det_1}
-\end{align}
-Finally,
-\begin{align}
+         \mathcal{D}_1^3 f(q)\cdot
+         \mathcal{D}_1 \Gamma_1(\mathcal{D}_1r\a, M\a),\\
     n_{\rm det}^2(r\a, M\a)
     \notag
-    &=\int\mathrm{d}r\mathrm{d}M\,\mathcal{N}_\star^2(r\a, M\a; r, M)
-    \,\Gamma_2(r, M) \, p_{\rm tra}(M)\\
+    &=\int\mathrm{d}r\,\mathrm{d}M~\mathcal{N}_\star^2(r\a, M\a; r, M)
+    \, \Gamma_2(r, M) \, p_{\rm tra}(M)\\
     &=
-    N_\star^0(r\a, M\a)\, \frac{n\b}{n\s}
+    N_\star^0(r\a, M\a)\, p_{\rm tra}(M\a) \, \frac{n\b}{n\s}
     \int {\rm d}q\, 
-         \mathcal{D}_1^3 f(q)\, q \mathcal{D}_2
-         \Gamma_2(\mathcal{D}_2r\a, qM\a)\,
+         \mathcal{D}_1^3 f(q)\cdot q \mathcal{D}_2
+         \Gamma_2(\mathcal{D}_2r\a, qM\a)\cdot
          \frac{R(qM\a)}{R(M\a)} q^{-1/3}.
     \label{eq:n_det_2}
 \end{align}
 
-
-\paragraph{General formula for apparent occurrence rate}
-Combining the above results with Equation~\ref{eq:N_searched}, the
-apparent rate density,
+Finally, combining these results, the
+apparent occurrence rate density
 \begin{align}
     \Gamma\a(r\a,M\a) &= 
     \frac{1}{N_\star(r\a,M\a) p_{\rm tra}(r\a,M\a)} \,
-    \sum_i n_{\rm det}^i (r\a,M\a),
+    \sum_{i=0}^2 n_{\rm det}^i (r\a,M\a)
 \end{align}
-evaluates to
+becomes
 \begin{align}
     \notag
     \Gamma\a(r\a,M\a) &= \frac{1}{1+\mu} \,
     \left\{ \Gamma_0(r\a, M\a)+ 
     \frac{n\b}{n\s}
     \left[ \int_0^1 \mathrm{d}q \,
-           \mathcal{D}_1^3 f(q)\,
+           \mathcal{D}_1^3 f(q)\cdot
            \mathcal{D}_1 \Gamma_1(\mathcal{D}_1r\a, M\a)\,
     \right.   
     \right. \\
     & \quad\quad\quad\quad\quad \left.\left.
     +\int_0^1 {\rm d}q\, 
-         \mathcal{D}_1^3 f(q)\, q \mathcal{D}_2
-         \Gamma_2(\mathcal{D}_2r\a, qM\a)\,
+         \mathcal{D}_1^3 f(q)\cdot q \mathcal{D}_2
+         \Gamma_2(\mathcal{D}_2r\a, qM\a)\cdot
          \frac{R(qM\a)}{R(M\a)} q^{-1/3}
     \right] \right\}.
 \end{align}
-We validate this equation in limits where it is possible to write down
-the answer (e.g., Equation~\ref{eq:formula_twin_binary}), and also
-against a Monte Carlo realization of the twin binary models
-(Sections~\ref{sec:model_1} and~\ref{sec:model_2}).
+%We validate this equation in limits where it is possible to write down
+%the answer (e.g., Equation~\ref{eq:formula_twin_binary}), and also
+%against a Monte Carlo realization of the twin binary models
+%(Sections~\ref{sec:model_1} and~\ref{sec:model_2}).
 
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 \input{hj_rates.tex}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
 \bibliographystyle{yahapj}                            
