@@ -56,7 +56,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         bigax = brokenaxes(
                 xlims=((0.695, .715), (.985, 1.005)),
                 d=0.02,
-                tilt=85,
+                tilt=87.5,
                 hspace=.05,
                 despine=True)
         ax=bigax

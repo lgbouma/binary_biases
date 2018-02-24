@@ -250,6 +250,9 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     if many_Zs:
         outname += '_manyZs'
 
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+
     f.savefig(outname+'.pdf', bbox_inches='tight')
 
 

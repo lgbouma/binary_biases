@@ -37,5 +37,8 @@ ax.set_ylabel('relative probability', fontsize='large')
 ax.set_ylim([-0.1,2.3])
 ax.set_xlim([-0.05,1.05])
 
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+
 outname = '../results/mass_ratio_distribution'
 f.savefig(outname+'.pdf', bbox_inches='tight')
