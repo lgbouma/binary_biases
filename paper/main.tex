@@ -211,15 +211,14 @@ the same line of sight, producing signals that mimic those of
 transiting planets.
 
 Here, though, we will focus exclusively on problems that arise from
-the fact that many stars exist in gravitationally bound binary
-systems.  We will also focus on the errors in planet occurrence as a
-function of radius, rather than orbital period. This is because when
-more than one transit is detected (as is usually required by the
-surveyors), the orbital periods can be measured without ambiguity
-regardless of whether the host star is single or one member of a
-binary.  Even with this narrow focus, there are numerous sources of
-error.  All three of the quantities in
-Equation~\ref{eq:occ_rate_simple} are biased:
+the fact that many stars exist in unresolved binary systems.  We will
+also focus on the errors in planet occurrence as a function of radius,
+rather than orbital period. This is because when more than one transit
+is detected (as is usually required by the surveyors), the orbital
+periods can be measured without ambiguity regardless of whether the
+host star is single or one member of a binary.  Even with this narrow
+focus, there are numerous sources of error.  All three of the
+quantities in Equation~\ref{eq:occ_rate_simple} are biased:
 \begin{enumerate}
 %    
     \item The number of detected planets, $N_{\det}$, is actually the
@@ -305,12 +304,12 @@ Since the effects of binarity are most pronounced when the two stellar
 components are similar, we begin by considering a universe in which
 all stars are identical, with mass $M$, radius $R$, and luminosity
 $L$.  Single stars are uniformly distributed in space with a number
-density of $n\s$ stars per cubic parsec, and binaries are uniformly
-distributed with number density $n\b$.  In this scenario, stars are
-never misclassified because the combined light of a binary has the
-same color and spectrum as a single star.  We further assume that all
-planets have the same radius, $r$, and occur around single stars and
-members of binaries at the same rate, $\Lambda(r)$.
+density of $n\s$ stars per cubic parsec, and binary systems are
+uniformly distributed with number density $n\b$.  In this scenario,
+stars are never misclassified because the combined light of a binary
+has the same color and spectrum as a single star.  We further assume
+that all planets have the same radius, $r$, and occur around single
+stars and members of binaries at the same rate, $\Lambda(r)$.
 
 Our naive observers conduct a transit survey. To calculate the
 occurrence rate of planets with radius $r$, they count the number of
@@ -321,7 +320,7 @@ assume that the limiting source of noise is the photon-counting noise
 from the source, i.e., $\sigma \propto 1/\sqrt{F}$, where
 where $F$ is the total flux of the source.
 Thus the observers determine the minimum $F_0$ for which detection would have been
-possible, and count the number of sources with $F_{\rm tot}>F_0$. This will
+possible, and count the number of sources with $F>F_0$. This will
 include all the single stars out to a maximum distance
 \begin{equation}
   d_0 = \sqrt{\frac{L}{4\pi F_0}}.
@@ -357,7 +356,7 @@ leading the astronomers to believe they have discovered a population
 of planets with radius $r/\sqrt{2}$.  To calculate the corresponding
 occurrence rate, they count the stars for which this type of signal
 would have been detectable.  The limiting flux for detection in this
-case is $4F_0$, because the signal amplitude hase been reduced by a
+case is $4F_0$, because the signal amplitude has been reduced by a
 factor of two and the noise level must also be reduced by a factor of
 two.  The condition $F>4F_0$ is met for single stars within a distance
 $d_0/2$, and binaries within a distance $d_0\sqrt{2}/2$.  Therefore,
@@ -458,7 +457,7 @@ stars is proportional to $1/(1+\mu)$ and the number of binaries is
 proportional to $\mu/(1+\mu)$.
 
 From within this sample of apparently searchable sources, the
-observers sum the number of detections $dN_{\rm det}$ of planets
+observers sum the number of detections ${\rm d}N_{\rm det}$ of planets
 with an apparent radius between $r\a$ and $r\a + dr\a$.  There will be
 three contributions to this sum,
 \begin{align}
@@ -803,14 +802,14 @@ computation: \url{github.com/lgbouma/binary_biases}, commit
 results, again for the case $n\b/n\s=0.79$, $\alpha = 3.5$, $\beta=0$,
 and $\gamma=-2.92$.
 
-The most obvious aspect of the results is that the occurrence rate
-density of planets smaller than the breakpoint radius of 2\,$R_\oplus$
-is now substantially overestimated.  If secondary stars have the same
-planet population as the single stars, then the occurrence rate
-density of small planets is overestimated by $50\%$.  The magnitude of
-the systematic error decreases if there are fewer planets around
-secondaries; if secondaries host no planets at all, the apparent rate
-is overestimated by only $10\%$.
+The most obvious aspect of the results is that the occurrence rate of
+planets smaller than the breakpoint radius of 2\,$R_\oplus$ is now
+substantially overestimated.  If secondary stars have the same planet
+population as the single stars, then the occurrence rate density of
+small planets is overestimated by $50\%$.  The magnitude of the
+systematic error decreases if there are fewer planets around
+secondaries; if secondaries host no planets at all, the occurrence
+rate is overestimated by only $10\%$.
 
 The effects on larger planets are not as substantial.  To be
 quantitative we consider the occurrence rate of giant planets with
@@ -826,7 +825,7 @@ in Figure~\ref{fig:occ_rate_model_3_log}:
 In this case the occurrence rate density is underestimated.  The
 difference between the apparent and true rates is largest when the
 secondary stars do not host any planets, and has a magnitude
-$\Lambda_{{\rm g},0}/\Lambda_{\rm g,a} = 1.13$.
+$\Lambda_{{\rm giant},0}/\Lambda_{\rm giant,a} = 1.13$.
 %occ_rate_vs_radius_model_3_withtext_Zsub2_0.00_rpu_22.5.pdf
 If instead the secondary stars have half as many giant planets as single
 stars, then the factor is reduced from 1.13 to 1.06.
@@ -918,15 +917,14 @@ planets, during the first 100~Myr of the age of the system when the
 host star produces a higher flux of ultraviolet and X-ray
 radiation~\citep{owen_evaporation_2017}.
 
-The occurrence calculations that led to this discovery, like almost
-all occurrence calculations, did not carefully account for
-unresolved binaries.  Intuitively we expect the effect of unresolved
-binaries to have a blurring effect on the radius distribution, filling
-in any gaps in the radius distribution and making them appear less
-empty than in reality.  To investigate the quantitative effects we
-make identical assumptions as in Section~\ref{sec:model_3}, except
-that the radius distribution is assumed to have a complete absence of
-planets with sizes between 1.5 and 2\,$R_\oplus$:
+The occurrence rate calculations that led to this discovery did not
+carefully account for unresolved binaries.  Intuitively we expect
+unresolved binaries to have a blurring effect, filling in any gaps in
+the radius distribution and making them appear less empty than in
+reality.  To investigate the quantitative effects we make identical
+assumptions as in Section~\ref{sec:model_3}, except that the radius
+distribution is assumed to have a complete absence of planets with
+sizes between 1.5 and 2\,$R_\oplus$:
 \begin{align}
     f(r)
     &\propto
@@ -976,11 +974,12 @@ distribution, $\Gamma\a(r\a)$.  As one would expect, the effect is to
 smear the radius distribution toward smaller values, because some of
 the hot Jupiters now appear to be smaller planets.  Less obviously,
 the integrated rate of hot Jupiters is also affected.  We calculate
-the apparent hot Jupiter rate by integrating the apparent rate density
-for $r\a > 8\,R_\oplus$.  If secondaries host any planets at all, the
-apparent rate is {\it greater} than the true rate.  For instance, when
-hot Jupiters are just as common around secondary stars as single or primary
-stars, then $\Lambda_{\rm HJ,a}/\Lambda_{{\rm HJ},0} = 1.23$.
+the apparent hot Jupiter rate $\Lambda_{\rm HJ,a}$ by integrating the
+apparent rate density for $r\a > 8\,R_\oplus$.  If secondaries host
+any planets at all, the apparent rate is {\it greater} than the true
+rate.  For instance, when hot Jupiters are just as common around
+secondary stars as single or primary stars, then $\Lambda_{\rm
+HJ,a}/\Lambda_{{\rm HJ},0} = 1.23$.
 %int_rate_density_vs_radius_model_7_withtext*manyZs.pdf
 The apparent rate is higher because a larger number of stars were
 searched than are accounted for in the rate calculation.
