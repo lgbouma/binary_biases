@@ -44,6 +44,8 @@
     Department of Astrophysical Sciences,
     Princeton University,
     4 Ivy Lane, Princeton, NJ 08540, USA}
+\affiliation{
+    NASA Sagan Fellow}
 \author[0000-0002-4265-047X]{J. N. Winn}
 \affiliation{
     Department of Astrophysical Sciences,
@@ -309,7 +311,7 @@ uniformly distributed with number density $n\b$.  In this scenario,
 stars are never misclassified because the combined light of a binary
 has the same color and spectrum as a single star.  We further assume
 that all planets have the same radius, $r$, and occur around single
-stars and members of binaries at the same rate, $\Lambda(r)$.
+stars and members of binaries at the same rate, $\Lambda_r$.
 
 Our naive observers conduct a transit survey. To calculate the
 occurrence rate of planets with radius $r$, they count the number of
@@ -317,7 +319,7 @@ detections of signals with amplitude $(r/R)^2$.  Then they identify
 all the sources that appear to have been searchable for a signal of
 amplitude $(r/R)^2$.  Here and throughout the rest of this paper, we
 assume that the limiting source of noise is the photon-counting noise
-from the source, i.e., $\sigma \propto 1/\sqrt{F}$, where
+from the source, i.e., $\sigma \propto 1/\sqrt{F}$,
 where $F$ is the total flux of the source.
 Thus the observers determine the minimum $F_0$ for which detection would have been
 possible, and count the number of sources with $F>F_0$. This will
@@ -333,14 +335,14 @@ appear to have a planet of radius $r$, because of the dilution of
 the transit signal.  Thus, the {\it apparent} occurrence rate $\Lambda\a$ of
 planets of radius $r$ is
 \begin{equation}
-    \Lambda\a(r) = 
-        \frac{\Lambda(r) \, n\s d_0^3}
+    \Lambda_{{\rm{a}},r} = 
+        \frac{\Lambda_r \, n\s d_0^3}
         {n\s d_0^3 + n\b (d_0\sqrt{2})^3}.
     \label{eq:rate_at_rp}
 \end{equation}
-This apparent rate is larger than the true rate by a factor
+This apparent rate is smaller than the true rate by a factor
 \begin{equation}
-    \frac{\Lambda\a(r)}{\Lambda(r)} = 
+    \frac{\Lambda_{{\rm{a}},r}}{\Lambda_r} = 
         \frac{1}{1 + 2^{3/2}(n\b/n\s)}.
     \label{eq:correction_rp}
 \end{equation}
@@ -363,11 +365,11 @@ $d_0/2$, and binaries within a distance $d_0\sqrt{2}/2$.  Therefore,
 the observers will calculate the occurrence rate of this new type of
 planet to be
 \begin{equation}
-    \Lambda\a\left( \frac{r}{\sqrt{2}} \right) = 
-        \frac{2\Lambda(r) \, n\b (d_0\sqrt{2}/2)^3}
+    \Lambda_{{\rm{a}},r/\sqrt{2}} = 
+        \frac{2\, \Lambda_r \, n\b (d_0\sqrt{2}/2)^3}
         {n\s (d_0/2)^3 + n\b (d_0\sqrt{2}/2)^3}
     =
-    \frac{2\Lambda(r)\cdot2^{3/2}(n\b/n\s)}{1 + 2^{3/2} (n\b/n\s)}.
+    \frac{2\, \Lambda_r \cdot2^{3/2}(n\b/n\s)}{1 + 2^{3/2} (n\b/n\s)}.
     \label{eq:correction_diluted_rp}
 \end{equation}
 Figure~\ref{fig:model_1_volumes} illustrates the
@@ -395,12 +397,13 @@ volumes enclosing the apparently searchable single and binary stars.
     \vspace{-0.5cm}
     \caption{ Apparent occurrence rate $\Lambda\a$, and true
     occurrence rate $\Lambda$ in a universe with only one type of
-    star, one type of planet (with radius $R_\oplus$), and 
-    a binary system number density 5\% that of single stars.
+    star, one type of planet (with radius $r$), and
+    $n\b/n\s=0.05$, for $n\b$ the number density of binary
+    systems, and $n\s$ the number density of single stars.
     The occurrence
-    rate of planets with radius $R_\oplus$ is underestimated, and the
+    rate of planets with radius $r$ is underestimated, and the
     occurrence rate of planets with radius
-    $R_\oplus/\sqrt{2}$ is overestimated.}
+    $r/\sqrt{2}$ is overestimated.}
     \label{fig:occ_rate_model_1}
 \end{figure}
 
@@ -422,8 +425,8 @@ close enough in brightness to produce errors as significant as those
 we have been considering.  Adopting the value $n\b/n\s\approx0.05$, we
 find
 \begin{equation}
-    \frac{\Lambda\a(r)}{\Lambda(r)} = 0.88,~~
-    \frac{\Lambda\a(r/\sqrt{2})}{\Lambda(r)} = 0.25.
+    \frac{\Lambda_{{\rm{a}},r}}{\Lambda_r} = 0.88,~~
+    \frac{\Lambda_{{\rm{a}},r/\sqrt{2}}}{\Lambda_r} = 0.25.
     \label{eq:ratios}
 \end{equation}
 All together, the various effects produce biases of order 10\% in the
@@ -434,14 +437,15 @@ characteristic of many of our more complicated models as well.
 \label{sec:model_1_density}
 
 We will now generalize to allow for a continuum of planet sizes.   We
-introduce the occurrence rate density
+introduce the occurrence rate density $\Gamma$,
+the number of planets per star per unit planet radius, so that
 \begin{equation}
-    \Gamma(r) \equiv \frac{{\rm d}\Lambda}{{\rm d}r},
+    \Gamma(r) {\rm d}r \equiv \frac{ {\rm d}N_{\rm det} }{N_\star}
+            \, \frac{1}{p_{\rm tra}}.
     \label{eq:rate_density_defn}
 \end{equation}
-the number of planets per star per unit planet radius.  The naive
-observers are measuring $\Gamma\a(r\a)$, the apparent occurrence rate
-density of planets with an ``apparent radius''
+The naive observers are measuring $\Gamma\a(r\a)$, the apparent
+occurrence rate density of planets with an ``apparent radius''
 \begin{equation}
   r\a = R \sqrt{\delta}.
 \end{equation}
@@ -488,10 +492,11 @@ Our earlier results, Equations~\ref{eq:rate_at_rp}
 and~\ref{eq:correction_diluted_rp}, are recovered by integrating this formula
 over $r$ after inserting
 \begin{equation}
-  \Gamma_i(r) = \Lambda(r\p)\, \hat{\delta}(r-r\p),~~{\rm for}\ i\in\{0,1,2\}
+  \Gamma_i(r) = \Lambda_{r\p}\, \hat{\delta}(r-r\p),~~{\rm for}\ i\in\{0,1,2\}
 \end{equation}
-where $\hat{\delta}$ is the Dirac delta function, and $r\p$ is the
-single planet size considered in Section~\ref{sec:model_1}.
+where $\hat{\delta}$ is the Dirac delta function, and $\Lambda_{r\p}$ is the
+number of planets with size $r\p$ per star considered in 
+Section~\ref{sec:model_1}.
 
 \subsection{Binaries with different mass ratios}
 \label{sec:general_formula}
@@ -533,10 +538,10 @@ where $\mu$ is given by
     \over L(M\a)}\right]^{3/2} f(q)\,\mathrm{d}q.
     \label{eq:mu_general}
 \end{equation}
-To obtain the total number of searchable binaries,
-Equation~\ref{eq:N_binaries} needs to be integrated over $q$. The
-result of the integration replaces ${\mu N_\star(r\a)/(1+\mu)}$ in
-Equations~\ref{eq:n1} and~\ref{eq:n2}.
+Equation~\ref{eq:N_binaries} replaces ${\mu N_\star(r\a)/(1+\mu)}$
+in Equations~\ref{eq:n1} and~\ref{eq:n2}.
+The whole equation is then integrated to give the number of
+detected planets.
 
 \item The apparent radius of a planet in a binary system now depends
 on whether the host star is the primary or the secondary star. When the host
@@ -587,9 +592,8 @@ apparent rate density is
     \right] \right\}.
     \label{eq:general_Gamma_a}
 \end{align}
-The \hyperref[sec:appendix]{appendix} gives an alternative derivation
-of this equation.
-
+%The \hyperref[sec:appendix]{appendix} gives a more formal derivation
+%of this equation.
 We note that the combination $\mathcal{D}_1^3f(q)$ is the mass-ratio
 distribution for binaries contained within the searchable sample of
 sources.  With this in mind we may rewrite
@@ -607,7 +611,7 @@ Equation~\ref{eq:general_Gamma_a} as
        \left\langle
        \mathcal{D}_1\cdot\Gamma_1\left(\mathcal{D}_1r\a\right)
        +
-       {q \mathcal{D}_2}\cdot\Gamma_2\left(\mathcal{D}_2r\a\right)
+       {\mathcal{D}_2}\cdot\Gamma_2\left(\mathcal{D}_2r\a\right)
        \cdot
        {R(qM) \over R(M)}q^{-1/3}
        \right\rangle
@@ -761,8 +765,8 @@ on the order of a few percent.
       Three different cases are plotted, with different choices for
       the number of planets per secondary star relative to
       that for single stars ($Z_2/Z_0$).
-      {\it Right.}---Same, but for apparent occurrence
-      rate ($\Lambda\a$) within $0.5\,R_\oplus$ bins.
+      {\it Right.}---Same, integrated over $0.5\,R_\oplus$
+      bins to give apparent and true occurrence rates.
       In both cases the true planet
       radius distribution is specified by
       Equation~\ref{eq:model3_radius_distribution}.
@@ -780,7 +784,7 @@ much smaller planet sizes, the results of the preceding section will
 hold.  But there is no particular reason to think this will be the
 case and indeed, some investigators have concluded that the rate
 density begins to level off to a constant value as $r$ decreases below
-$R_\oplus$~\citep{petigura_plateau_2013}.  To investigate the
+$2R_\oplus$~\citep{petigura_plateau_2013}.  To investigate the
 implications we consider a broken power-law:
 \begin{align}
     f(r)
@@ -849,10 +853,9 @@ stars, then the factor is reduced from 1.13 to 1.06.
 
 Our formalism also provides a way to calculate the relative
 probability that a detected planet orbits a single star, the primary
-star, or a secondary star.  These can be obtained from the
-generalizations of Equations~\ref{eq:n0}--\ref{eq:n2}, which are
-derived in the \hyperref[sec:appendix]{appendix}.  This information
-can be used to help interpret the results of a transit survey.  It is
+star, or a secondary star.  
+This information can be used to help interpret the results of
+a transit survey.  It is
 also relevant to the fairly common situation in which transits are
 detected from a source, and subsequent high-resolution imaging reveals
 the source to be a multiple-star system.  The question then arises:
@@ -862,10 +865,11 @@ the scenario described in the previous section: a broken power-law
 radius distribution with $\gamma=-2.92$, along with the choices
 $n\b/n\s=0.79$, $\alpha = 3.5$, and $\beta=0$.  We also try different
 assumptions for the rate of planets around secondaries, i.e.,
-different choices for $Z_2/Z_0$.  We use
-Equations~\ref{eq:n_det_0}--\ref{eq:n_det_2} to compute the number of
-detections from single stars, primaries, and secondaries, and divide
-by the total number of detections at each apparent radius.
+different choices for $Z_2/Z_0$.  
+Dividing each component of Equation~\ref{eq:general_Gamma_a} by
+the total rate density, we get the fraction of
+detections from single stars, primaries, and secondaries as a function
+of apparent radius.
 
 Figure~\ref{fig:frac_model_3} shows the results.  When the apparent
 radius exceeds $2\,R_\oplus$, and planets exist about secondaries at
@@ -964,7 +968,9 @@ distribution extending to smaller planets and longer periods.
 For this reason we test the effects of unresolved binaries
 on a Gaussian radius distribution,
 \begin{equation}
-    f(r) \propto \exp \left[ -\frac{(r-\bar{r})^2}{2\sigma_r^2} \right],
+    f(r) = 
+    \frac{1}{\sqrt{2 \pi \sigma_r^2}} \,
+    \exp \left[ -\frac{(r-\bar{r})^2}{2\sigma_r^2} \right],
 \end{equation}
 with $\bar{r} = 14\,R_\oplus$ and $\sigma_r = 2\,R_\oplus$.  As before,
 we allow for different normalizations of the planet populations around
@@ -1358,6 +1364,9 @@ rates.
 It was a pleasure discussing this study with T.~Barclay, W.~Bhatti,
 J.~Christiansen, F.~Dai, and T.~Morton.  This work made use of NASA's
 Astrophysics Data System Bibliographic Services.
+This work was performed in part under contract with the California Institute 
+of Technology (Caltech)/Jet Propulsion Laboratory (JPL) funded by NASA through 
+the Sagan Fellowship Program executed by the NASA Exoplanet Science Institute.
 %
 \newline
 %
@@ -1370,11 +1379,13 @@ Astrophysics Data System Bibliographic Services.
 }
 
 \newpage
+
+\begin{comment}
 \appendix
 \section{Alternative derivation of apparent rate density}
 \label{sec:appendix}
 
-Here we present an alternative derivation of
+Here we present a more formal derivation of
 Equation~\ref{eq:general_Gamma_a}.  We also generalize a bit further,
 by allowing the occurrence rate density to depend on stellar mass $M$
 as well as planet radius $r$.  We begin by writing the apparent rate
@@ -1413,33 +1424,34 @@ For single stars,
     \mathcal{N}_\star^0(r\a,M\a; r,M)
     =\hat{\delta}(r\a-r)\hat{\delta}(M\a-M) N_\star^0(r,M),
 \end{equation}
-where $\hat{\delta}$ is the Dirac delta function.  Therefore,
-\begin{equation}
-    n_{\rm det}^0(r\a, M\a)=N_\star^0(r\a,M\a)\, \Gamma_0(r\a, 
-    M\a) \, p_{\rm tra}(r\a, M\a).
-\end{equation}
+where $\hat{\delta}$ is the Dirac delta function.
+%Therefore,
+%\begin{equation}
+%    n_{\rm det}^0(r\a, M\a)=N_\star^0(r\a,M\a)\, \Gamma_0(r\a, 
+%    M\a) \, p_{\rm tra}(r\a, M\a).
+%\end{equation}
 
 \paragraph{Primary stars}
 For primary stars in binary systems, 
 \begin{equation}
     \mathcal{N}_\star^1(r\a, M\a; r, M)
     = \int_0^1 
-      \mathrm{d}q\,f(q)\,\mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M),
+      \mathrm{d}q\,f(q)\,\mathcal{N}_{\star, q}^1(r\a, M\a, q; r, M),
     \label{eq:fancyN_s_1}
 \end{equation}
 where $f(q)$ is the binary mass ratio distribution in a volume-limited sample
 of stars.  Since we are assuming that the observer will perceive a binary to be a single
 star with the same properties as the primary star,
 \begin{equation}
-    \mathcal{N}_{{\rm s},q}^1(r\a, M\a, q; r, M)
+    \mathcal{N}_{\star,q}^1(r\a, M\a, q; r, M)
     \propto
     \hat{\delta}(M\a-M).
 \end{equation}
-In this case, $\mathcal{N}_{{\rm s},q}^1$ is non-zero only at
+In this case, $\mathcal{N}_{\star,q}^1$ is non-zero only at
 $r\a=R\a\sqrt{\delta}$, and the observed transit depth is
 \begin{equation}
     \delta
-    = \left[{r\over R(M\a)}\right]^2\, {L(M\a) \over L_{\rm tot}(M\a, q)}
+    = \left({r\over R(M\a)}\right)^2\, {L(M\a) \over L_{\rm tot}(M\a, q)}
     \equiv \left[{r\over R(M\a)}\right]^2\, 
     \frac{1}{\mathcal{D}_1^2}
     \label{eq:delta_obs_primaries} 
@@ -1448,7 +1460,7 @@ where
 \begin{equation}
     L_{\rm tot}(M\a,q) = L(M\a) + L(qM\a),~~\mathcal{D}_1=\sqrt{L_{\rm tot}(M\a, q) \over L(M\a)}.
 \end{equation}
-The normalization of $\mathcal{N}_{{\rm s},q}^1$ is given by the
+The normalization of $\mathcal{N}_{\star,q}^1$ is given by the
 number of binaries that are searchable for a signal $\delta$
 and that have mass ratio $q$:
 \begin{equation}
@@ -1458,19 +1470,19 @@ and that have mass ratio $q$:
 \end{equation}
 %where the argument for the number of searchable single stars,
 %$N_\star^0$, could also be expressed as $(\delta, L(M\a))$.
-Applying Equation~\ref{eq:primary_normalization},
+Applying the preceding arguments, we find
 \begin{align}
-    \mathcal{N}_{{\rm s}, q}^1(r\a, M\a, q; r, M)
+    \mathcal{N}_{\star, q}^1(r\a, M\a, q; r, M)
     &=N_\star^0(r\a, M\a)
     \, {n\b\over n\s} \, \mathcal{D}_1^3
-    \,\hat{\delta} \left[r\a-\frac{r}{\mathcal{D}_1}\right]\hat{\delta}(M\a-M).
+    \,\hat{\delta} \left(r\a-\frac{r}{\mathcal{D}_1}\right)\hat{\delta}(M\a-M).
     \label{eq:N_s_1}
 \end{align}
 
 \paragraph{Secondary stars}
 In this case, $M=qM_1=qM\a$, so
 \begin{equation}
-    \mathcal{N}_{{\rm s},q}^2(r\a, M\a, q; r, M)
+    \mathcal{N}_{\star,q}^2(r\a, M\a, q; r, M)
     \propto \hat{\delta}\left(M\a-{M\over q}\right).
     \label{eq:fancyN_s_2_prop}
 \end{equation}
@@ -1496,11 +1508,11 @@ counting the searchable stars at a given observed depth $\delta$, and
 the total luminosity of the binary is the same.  Thus,
 \begin{equation}
     \mathcal{N}_\star^2(r\a, M\a; r, M)
-    =\int_0^1 \mathrm{d}q~f(q)\,\mathcal{N}_{{\rm s}, q}^2(r\a, M\a, q; r, M),
+    =\int_0^1 \mathrm{d}q~f(q)\,\mathcal{N}_{\star, q}^2(r\a, M\a, q; r, M),
 \end{equation}
 where
 \begin{align}
-    \mathcal{N}_{{\rm s},q}^2(r\a, M\a, q; r, M)
+    \mathcal{N}_{\star,q}^2(r\a, M\a, q; r, M)
     =N_\star^0(r\a, M\a) \, \frac{n\b}{n\s} 
     \, \mathcal{D}_1^3
     \, \hat{\delta} \left(r\a-\frac{r}{\mathcal{D}_2}\right)
@@ -1570,6 +1582,7 @@ becomes
 %the answer (e.g., Equation~\ref{eq:formula_twin_binary}), and also
 %against a Monte Carlo realization of the twin binary models
 %(Sections~\ref{sec:model_1} and~\ref{sec:model_2}).
+\end{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

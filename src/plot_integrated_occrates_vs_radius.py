@@ -83,7 +83,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
     c = ['#4ca8e8', '#85c5f2'] # shades of blue for vs function of Z_2
 
-    lambdastr = r'$\Lambda_{\mathrm{a}}(r_{\mathrm{a}})$'
+    lambdastr = r'$\Gamma_{\mathrm{a}}(r_{\mathrm{a}}) \Delta r_{\mathrm{a}}$'
     if not many_Zs:
         ax.step(xvals, yinferred, label=lambdastr, c=colors[0], where='post')
     else:
@@ -129,7 +129,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     if standardlines:
 
-        ax.step(xvals, ytruesingle, where='post', label='$\Lambda_0(r)$',
+        ax.step(xvals, ytruesingle, where='post', label='$\Gamma_0(r) \Delta r$',
                 linestyle='-', c=colors[1])
 
     if brokenx:

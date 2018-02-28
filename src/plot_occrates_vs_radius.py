@@ -55,9 +55,10 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
         f = plt.figure(figsize=(4,4))
         bigax = brokenaxes(
                 xlims=((0.695, .715), (.985, 1.005)),
-                d=0.02,
+                d=0.0,
+                #d=0.02,
                 tilt=87.5,
-                hspace=.05,
+                hspace=.0,
                 despine=True)
         ax=bigax
 
@@ -74,16 +75,17 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
 
-    lambdastr = r'$\Lambda_{\mathrm{a}}(r_{\mathrm{a}})$'
-    ax.step(xvals, yinferred, where='post', label=lambdastr, c=colors[0])
+    lambdastr = 'apparent' #r'$\Lambda_{\mathrm{a}}(r_{\mathrm{a}})$'
+    ax.step(xvals, yinferred, where='post', label=lambdastr, c=colors[0],
+            zorder=2)
 
     if standardlines:
 
         #ax.step(xvals, ytrueselected, where='post', label='true (selected)',
         #        c=colors[1])
 
-        ax.step(xvals, ytruesingle, where='post', label='$\Lambda(r)$',
-                linestyle='-', c=colors[1])
+        ax.step(xvals, ytruesingle, where='post', label='true',#'$\Lambda(r)$',
+                linestyle='--', c=colors[1], zorder=3)
 
     elif not standardlines:
 
@@ -107,7 +109,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
     else:
         ax.legend(loc='best',fontsize='medium')
 
-    ax.set_xlabel('planet radius [$R_{\oplus}$]', fontsize='large')
+    ax.set_xlabel('planet radius', fontsize='large')
 
     ax.set_ylabel('number of planets per star', fontsize='large')
 
