@@ -12,11 +12,11 @@ For calculations:
 
 For plots:
   * `matplotlib`
-  * `brokenaxes`: `pip install brokenaxes`, [source here](https://github.com/bendichter/brokenaxes)
+  * `src/brokenaxes.py` [forked from here](https://github.com/bendichter/brokenaxes)
 
 One easy way to install all of the above is with the [Anaconda python distribution](https://conda.io/docs/user-guide/install/index.html).
 
-## To reproduce the main plots:
+## To reproduce the main plots
 
 `src/integrate_for_apparent_rate_density.py`: integrate the general equation
 for apparent rate density. The output from this code is written to
@@ -28,7 +28,7 @@ paper.
 `src/plot_integrated_rate_densities_vs_radius.py` make plots of apparent radius
 density as a function of planet radius.
 
-## Other goodies:
+## Other goodies
 
 `src/numerical_models.py`: run Monte Carlo surveys for (A) twin binary,
 varying planet populations, and for (B) fixed planet radius, varying binary
