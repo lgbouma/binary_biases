@@ -28,7 +28,8 @@
 \renewcommand{\b}{_{\rm b}}
 \begin{document}
     
-\title{ Binarity's Biases on Transit Survey Occurrence Rates }
+\title{ Biases in Planet Occurrence Caused by Unresolved Binaries in
+        Transit Surveys }
 %
 \correspondingauthor{L. Bouma}
 \email{luke@astro.princeton.edu}
@@ -128,7 +129,7 @@ At the outset of this study it was not clear to us whether the neglect
 of binaries is a serious problem, or even whether the net effect of
 the errors is positive or negative.  The goals of this study were to
 provide a framework for dealing with these issues, and to gauge at
-least the order of magnitude of the systematic errors.  In this
+least the order of magnitude of the systematic effects.  In this
 spirit, our models are idealized.  We do not attempt a detailed
 correction of the results from {\it Kepler} or any other real transit
 survey.  We took inspiration from the insightful analytic model for
@@ -485,7 +486,7 @@ of binaries. The apparent occurrence rate density is therefore
 \end{equation}
 Our earlier results, Equations~\ref{eq:rate_at_rp}
 and~\ref{eq:correction_diluted_rp}, are recovered by integrating this
-formula over $r$ after inserting
+formula over $r$ after letting the respective rate densities be
 \begin{equation}
   \Gamma_i(r) = \Lambda_{r\p}\, \hat{\delta}(r-r\p),~~{\rm for}\ i\in\{0,1,2\}
 \end{equation}
@@ -529,7 +530,7 @@ where $\mu$ is given by
 \begin{equation}
     \mu= 
     \int_0^1 {n_{\rm b}\over n_{\rm s}}\left[{L(M) + L(qM)
-    \over L(M\a)}\right]^{3/2} f(q)\,\mathrm{d}q.
+    \over L(M)}\right]^{3/2} f(q)\,\mathrm{d}q.
     \label{eq:mu_general}
 \end{equation}
 Equation~\ref{eq:N_binaries} replaces ${\mu N_\star(r\a)/(1+\mu)}$
@@ -598,10 +599,10 @@ Equation~\ref{eq:general_Gamma_a} as
        \Gamma_0(r\a)
        +\mu\,
        \left\langle
-       \mathcal{D}_1\cdot\Gamma_1\left(\mathcal{D}_1r\a\right)
+       \mathcal{D}_1 \, \Gamma_1\left(\mathcal{D}_1r\a\right)
        +
-       {\mathcal{D}_2}\cdot\Gamma_2\left(\mathcal{D}_2r\a\right)
-       \cdot
+       {\mathcal{D}_2} \, \Gamma_2\left(\mathcal{D}_2r\a\right)
+       \,
        {R(qM) \over R(M)}q^{-1/3}
        \right\rangle
     \right],
@@ -871,11 +872,12 @@ more likely to arise from the primary star.  However, if planets exist
 at the same rate in primaries and secondaries ($Z_2/Z_0=1$), then
 below apparent radii of $0.4\,R_\oplus$, more of the detected planets
 in binaries come from secondaries.  They are actually much larger
-planets for which $\delta$ has been substantially reduced by the light
-from the primary star.  As we consider apparent radii ranging from 2
-to 1.4\,$R_\oplus$, the fraction of detected planets with binary
-companions increases by anywhere from $6\%$~to~$12\%$, depending on
-the relative occurrence of planets about primaries and secondaries.
+planets for which the transit signal amplitude has been substantially
+reduced by the light from the primary star.  As we consider apparent
+radii ranging from 2 to 1.4\,$R_\oplus$, the fraction of detected
+planets with binary companions increases by anywhere from
+$6\%$~to~$12\%$, depending on the relative occurrence of planets about
+primaries and secondaries.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1058,7 +1060,7 @@ the mean metallicity of the {\it Kepler} stars to be [M/H]~$=-0.045\pm
 0.009$, which is only slightly lower than that of the stars in the
 Doppler survey, $-0.005\pm 0.006$.  Nevertheless, given the strong
 dependence of occurrence on metallicity, even a difference of
-$0.04$~dex could account for a factor of $10^{3.4\cdot 0.04} = 1.37$
+$0.04$~dex could account for a factor of $10^{3.4(0.04)} = 1.37$
 in the occurrence rate.  After correcting for metallicity, the
 discrepancy between the {\it Kepler} and CPS occurrence rates is
 reduced to the 1.7$\sigma$ level.
