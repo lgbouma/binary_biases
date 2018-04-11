@@ -532,7 +532,7 @@ def get_apparent_radius_grid(model_number, slowrun=False):
         if not slowrun:
             r_a_grid = np.arange(1e-1,r_pu+1e-1,1e-1)
         elif slowrun:
-            r_a_grid = np.arange(2e-2,r_pu+2e-2,2e-2)
+            r_a_grid = np.arange(2e-2,r_pu+2e-2,5e-3)
 
     elif model_number == 7:
         if not slowrun:
@@ -575,7 +575,7 @@ def get_apparent_rate_density(r_a_grid, M_a_grid, model_number):
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
         norm_r = trapz(prob_r, r_grid)
     elif model_number == 4:
-        r_grid = np.arange(1e-3, r_pu+1e-3, 1e-3)
+        r_grid = np.arange(1e-3, r_pu+1e-3, 1e-4)
         prob_r = np.minimum( r_grid**δ, r_pl**δ )
         prob_r[(r_grid > 1.5) & (r_grid < 2)] = 0
         norm_r = trapz(prob_r, r_grid)
