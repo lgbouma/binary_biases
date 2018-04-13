@@ -1,4 +1,4 @@
-\documentclass[12pt,modern]{aastex61}
+\documentclass[12pt,modern,trackchanges]{aastex61}
 \usepackage{graphics,graphicx}
 \usepackage{hyperref}
 \usepackage{amssymb}
@@ -58,7 +58,8 @@
 Wide-field surveys for transiting planets, such as the NASA {\it
 Kepler} and {\it TESS} missions, are usually conducted without
 knowing which stars have binary companions. Unresolved and
-unrecognized binaries give rise to systematic errors in planet
+unrecognized binaries give rise to systematic 
+\deleted{errors}\added{uncertainty} in planet
 occurrence rates, including misclassified planets and mistakes in
 completeness corrections.  The individual errors can have different
 signs, making it difficult to anticipate the net effect on inferred
@@ -116,7 +117,8 @@ are single stars~\citep[\textit{e.g.},][]{
   dressing_occurrence_2015,burke_terrestrial_2015}. 
 In reality, many of the sources that are monitored in a transit survey are
 unresolved multiple-star systems, mainly binaries.  Unrecognized
-binaries cause numerous systematic errors in the planetary occurrence
+binaries cause numerous systematic \deleted{errors}\added{uncertainties} in 
+the planetary occurrence
 rates.  For example, when there is a transiting planet around a star
 in a binary, the additive constant light from the second star reduces
 the fractional loss of light due to the planet.  This makes transit
@@ -204,7 +206,8 @@ There are many potential pitfalls in this calculation.  Some genuine
 transit signals are missed even if they formally exceed the
 signal-to-noise threshold, because of the probabilistic nature of
 transit detection.  Planets can be misclassified due to statistical
-and systematic errors in the catalogued properties of the stars.  Some
+and systematic \deleted{errors}\added{uncertainties} in the catalogued 
+properties of the stars.  Some
 transit-like signals are spurious, arising from noise fluctuations or
 failures of ``detrending'' the astrophysical or instrumental
 variations in the photometric signal.  Poor angular resolution leads
@@ -257,8 +260,10 @@ quantities in Equation~\ref{eq:occ_rate_simple} are biased:
       planet-hosting star could be misclassified.  At fixed orbital
       period, the transit probability is proportional to
       $\rho^{-1/3}$, where $\rho$ is the stellar mean
-      density~\citep{Winn2010}.  Therefore, any errors in determining
-      the host star's mean density lead to errors in the correction
+      density~\citep{Winn2010}.  Therefore, any 
+      \deleted{errors}\added{uncertainties} in determining
+      the host star's mean density lead to 
+      \deleted{errors}\added{uncertainties} in the correction
       for the transit probability.
 %    
 \end{enumerate}
@@ -302,8 +307,9 @@ binaries and the planets they host.
 \subsection{One type of star, one type of planet}
 \label{sec:model_1}
 
-Since the effects of binarity are most pronounced when the two stellar
-components are similar, we begin by considering a universe in which
+Since binarity produces \deleted{the largest}\added{large} errors in inferred
+planetary radii when the two stellar components are similar, we
+begin by considering a universe in which
 all stars are identical, with mass $M$, radius $R$, and luminosity
 $L$.  Single stars are uniformly distributed in space with a number
 density of $n\s$ stars per cubic parsec, and binary systems are
@@ -617,8 +623,13 @@ searchable sample.
 \section{Case Studies}
 \label{sec:more_complicated}
 
-We can now gauge the size of the systematic errors associated
-with unresolved binaries, for cases of interest.  Throughout this
+\input{case_study_toc.tex}
+
+We can now gauge the size of the systematic 
+\deleted{errors}\added{uncertainties} associated
+with unresolved binaries, for \deleted{cases of interest.}\added{the cases of 
+interest listed in Table~\ref{tab:case_study_toc}.}
+Throughout this
 section we assume $R\propto M$, and $L \propto M^{\alpha}$ where
 $\alpha = 3.5$, as is roughly the case for main-sequence stars.
 With these assumptions, Equations~\ref{eq:dil_1} and~\ref{eq:dil_2}
@@ -628,6 +639,7 @@ become
   =  (1+q^\alpha)^{1/2}~~{\rm and}~~\mathcal{D}_2
   = q(1+q^{-\alpha})^{1/2}.
 \end{equation}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Power-law planet radius distribution}
@@ -734,9 +746,14 @@ Adopting the realistic numerical values $n\b/n\s=0.79$, $\alpha =
 3.5$, $\beta=0$, and $\gamma=-2.92$, the summed integrals in
 Equation~\ref{eq:powerlaw_vary_binary} give $(\ldots)\approx 1.503$,
 and $\Gamma\a/\Gamma_0 = 1.048$.  The apparent occurrence rate density
-is 4.8\% higher than the true value.  We conclude that for planets around
+is 4.8\% higher than the true value.
+\added{Exploring different values for the power-law index,
+we find that $\Gamma\a/\Gamma_0$ lies between $0.99$ and 
+$1.10$, for $\gamma=-3.5$ and $\gamma=-2.5$, respectively.}
+We conclude that for planets around
 Sun-like stars with orbits within 0.25\,AU and radii in the range
-2--17\,$R_\oplus$, the systematic errors associated with binarity are
+2--17\,$R_\oplus$, the systematic \deleted{errors}\added{uncertainties} 
+associated with binarity are
 on the order of a few percent.
 
 
@@ -766,7 +783,8 @@ on the order of a few percent.
 
 For planets smaller than 2\,$R_\oplus$, the true occurrence rate
 density is more uncertain because such planets are more difficult to
-detect.  To investigate the systematic errors associated with binarity
+detect.  To investigate the systematic \deleted{errors}\added{uncertainties} 
+associated with binarity
 on the inferred occurrence rate of Earth-sized planets, we need to
 make plausible assumptions about the true occurrence rate density.
 Obviously if the rate density continues to vary as $r^{-3}$ down to
@@ -892,7 +910,12 @@ primaries and secondaries.
       and {\it right.}---occurrence rates, as a function of planet
       radius, using a model for the radius distribution that exhibits
       a gap between 1.5 and 2\,$R_\oplus$
-      (Equation~\ref{eq:model4_radius_distribution}). }
+      (Equation~\ref{eq:model4_radius_distribution}). 
+      \added{The peak in apparent occurrence rate density between 1.3 and 
+      1.5$\,R_\oplus$ (solid dark blue line, relative to dotted light blue 
+      line) is the contribution from secondaries with true radii greater
+      than 2\,$R_\oplus$.}
+    }
     \label{fig:model_4}
 \end{figure}
 
@@ -907,15 +930,19 @@ feature had been predicted as a consequence of the gradual
 photo-evaporation of the hydrogen-helium atmospheres of small rocky
 planets, during the first 100~Myr of the age of the system when the
 host star produces a higher flux of ultraviolet and X-ray
-radiation~\citep{owen_evaporation_2017}.
+radiation\added{~\citep[\textit{e.g.},][]{lopez_role_2013,owen_kepler_2013,owen_evaporation_2017}}.
 
-The occurrence rate calculations that led to this discovery did not
-carefully account for unresolved binaries.  Intuitively we expect
+The occurrence rate calculations that led to this discovery \deleted{did not
+carefully account for}\added{gave only a preliminary accounting for} 
+unresolved binaries.
+Intuitively we expect
 unresolved binaries to have a blurring effect, filling in any gaps in
-the radius distribution and making them appear less empty than in
+the \added{true} radius distribution and making them appear less empty than in
 reality.  To investigate the quantitative effects we make identical
-assumptions as in Section~\ref{sec:model_3}, except that the radius
-distribution is assumed to have a complete absence of planets with
+assumptions as in Section~\ref{sec:model_3}, except that \deleted{the radius
+distribution is assumed to have}\added{in analogy with
+\citet{fulton_california-_2017}'s findings we assume the true radius 
+distribution has} a complete absence of planets with
 sizes between 1.5 and 2\,$R_\oplus$:
 \begin{align}
     f(r)
@@ -931,7 +958,7 @@ sizes between 1.5 and 2\,$R_\oplus$:
 \end{align}
 Figure~\ref{fig:model_4} shows the resulting true and apparent
 occurrence rate densities.  For the case $Z_2/Z_0=1$, unresolved
-binaries reduces the contrast of the gap by nearly a factor of two,
+binaries reduce the contrast of the gap by nearly a factor of two,
 while also producing spurious features for apparent sizes beneath
 1.5\,$R_\oplus$.  Thus the gap identified by
 \citet{fulton_california-_2017} may be even more devoid of planets
@@ -947,6 +974,7 @@ than it appears.
 %associated blurring in the planet radius dimension.
 
 \subsection{Gaussian radius distribution}
+\label{sec:hjs}
 
 The planet population may include some special members with a distinct
 radius distribution.  For example in the recent study
@@ -1002,7 +1030,8 @@ planet occurrence rates.  Thus far, occurrence rate calculations using
 transit survey data have mostly ignored stellar
 multiplicity~\citep[\textit{e.g.},][]{howard_planet_2012,fressin_false_2013,foreman-mackey_exoplanet_2014,dressing_occurrence_2015,burke_terrestrial_2015}.
 We do not claim to have solved this problem. Our aim was to clarify
-the various effects and assess the size of the errors in various
+the various effects and assess the size of the 
+\deleted{errors}\added{uncertainties} in various
 situations. We hope that our formalism will also be useful to those
 investigators who do attempt more realistic calculations of occurrence
 rates.
@@ -1026,7 +1055,8 @@ dominant source of uncertainty at the moment.  Estimates by
 and~\citet{burke_terrestrial_2015} have found values of $\eta_\oplus$
 ranging from $0.03$ to unity, with the wide variance arising from
 small-number statistics as well as a host of other systematic
-errors~\citep[see][Figure~17]{burke_terrestrial_2015}.  Rapid progress
+\deleted{errors}\added{uncertainties}~\citep[see][Figure~17]{burke_terrestrial_2015}.
+  Rapid progress
 is expected soon, though, and binarity will merit closer attention in
 the future.  It may also be worth investigating the possible effects
 of any dependence of occurrence rate densities on the period of the
@@ -1046,7 +1076,8 @@ Planet Search (CPS), a Doppler survey, found a higher rate ($12\pm 2$
 per thousand stars) than the {\it Kepler} transit survey
 ($5.7^{+1.4}_{-1.2}$).  It has been suggested that unresolved binaries
 in the {\it Kepler} sample might be an important factor, but the
-calculations presented in Section~\ref{sec:further_models} suggest
+calculations presented in 
+Section~\added{\ref{sec:hjs}}\deleted{\ref{sec:further_models}} suggest
 that this is not the case.  We found that the effects of unresolved
 binaries are likely to result in an overestimation of the hot-Jupiter
 occurrence rate, which would worsen the discrepancy, rather than
@@ -1087,6 +1118,28 @@ primary or secondary star.  The calculations presented in
 \S\,\ref{subsec:whichstar} suggest that in almost all cases the planet
 most likely orbits the primary star.
 
+\added{\paragraph{Caveats \& outlook}
+Unresolved binaries corrupt occurrence rate distributions along
+dimensions other than planet radius. 
+In particular, since binarity can lead to incorrect
+assessment of a planet's host stellar mass, the occurrence
+distributions in semi-major axis and insolation must also be corrected.
+Though we leave consideration of such biases for future work,
+we take solace in the fact that the NASA {\it TESS} mission
+emphasizes stars within a few hundred parsecs.
+Through a combination of high-resolution imaging and 
+{\it Gaia}'s astrometry and spectroscopy, it will be possible
+to characterize the {\it TESS} target stars more thoroughly than
+was possible with {\it Kepler}.
+This is essential for inferring properties of planet populations, since
+a population inference model with parameters controlling both the planet 
+and binary star populations might be necessary to consistently 
+account for binarity.
+Given the difficulty of writing a correct likelihood function for such
+a model, one plausible path might be to
+forward-model transit surveys with likelihood-free 
+techniques~\citep[\textit{e.g.},][]{morehead_understanding_2016,hsu_improving_2018}.
+}
 
 \acknowledgements{
 It was a pleasure discussing this study with T.~Barclay, W.~Bhatti,
@@ -1110,6 +1163,11 @@ the Sagan Fellowship Program executed by the NASA Exoplanet Science Institute.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \input{hj_rates.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1119,4 +1177,5 @@ the Sagan Fellowship Program executed by the NASA Exoplanet Science Institute.
 \bibliographystyle{yahapj}                            
 \bibliography{bibliography} 
 
+\listofchanges
 \end{document}

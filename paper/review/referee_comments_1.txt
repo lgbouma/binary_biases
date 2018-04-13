@@ -1,0 +1,69 @@
+Referee Report
+Reviewer's Comments:
+
+This paper derives formalism for the occurrence rate density of exoplanets
+detected by wide-field transit surveys, where unresolved binaries may bias
+measured occurrence rates. The goal of the study is to provide clarity, and
+quantify the impact of this bias for different parameter spaces and generative
+models. The main result is that given various planet occurrence rate
+distributions and a distribution for stellar binarity from the literature, the
+bias is of the order of 5% for planet larger that 2 Earth radii, and for
+smaller planets, the occurrence rate could be overestimated by as much as 50%.
+The authors also show that when a binary is detected via high-resolution
+follow-up, the planet is more likely to be orbiting the primary star. The
+formalism presented in this paper provides much needed clarity and a foundation
+for people to start including the impact of binarity into their occurrence rate
+estimates. I recommend publication after the authors have addressed the
+following points:
+
+Section 2, end of paragraph 2, For each of the 4 points regarding missed
+transit signals, how often do they occur? (could add references). 
+
+Section 3.1, first sentence, "Since the effects of binarity are most pronounced
+when the two stellar components are similar" <- please also point to the place
+in the text where this is explained. 
+
+Section 3.2, following equations 4, you may want to change "stars" to "host
+star". 
+
+Section 4.1, when exploring the Howard et al. planet radius distribution, how
+sensitive are the results to the choice of gamma? Do mathematical artifacts
+here make the results insensitive to the choice of the value of gamma? 
+
+Section 4.4, end of paragraph 1, Add Lopez and Fortney citation. 
+
+Section 4.4, paragraph 2, "radius distribution is assumed to have a complete
+absence of planets with sizes between 1.5 and 2R_Earth", might clarify that the
+"true" radius distribution is assumed to have this feature after fitting the
+apparent distribution. 
+
+Section 4.4, paragraph 2, More discussion of the spurious feature below 1.5
+R_Earth would be helpful. 
+
+Section 4.4, paragraph 2, "may be even more devoid of planets than it appears",
+might want to emphasize again here that this conclusion is very dependent on
+the true distribution model plugged into the formalism. 
+
+Section 5, Hot Jupiter paragraph, states that result of this study find that
+unresolved binaries likely result in an overestimated of hot-Jupiter occurrence
+rates, implied by the Fulton gap model in Section 4.4. Previously, in section
+4.2, paragraph 3, it states the occurrence rate density of planets greater than
+8 Earth radii are underestimated. The abstract just says net systematic error
+of order 5%. It would help to include a table describing the different tests in
+this study, and how parameters are varied (how knobs are turned). 
+
+Other: 
+
+- Recommend using the term "uncertainty" instead of "errors" . 
+
+- May want to comment on paper by Danley Hsu: Occurrence rates from Kepler
+  using approximate Bayesian computation. You could speculate on what their
+  data generating process would yield when plugged into this formalism. 
+
+- May want to comment on the parameter space and telescopes for resolving
+  binaries of various separations, etc. and the probability of being able to
+  resolve binaries with followup. 
+
+- May want to comment on parameterizing the occurrence rate in terms of planet
+  radius and insolation flux. The semi major axis will depend on which star in
+  the binary the planet orbits.

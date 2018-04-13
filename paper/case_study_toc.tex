@@ -1,0 +1,72 @@
+%% \begin{deluxetable}{} command tell LaTeX how many columns
+%% there are and how to align them.
+\begin{deluxetable}{cccc}
+    
+%% Keep a portrait orientation
+
+%% Over-ride the default font size
+%% Use Default (12pt)
+
+%% Use \tablewidth{?pt} to over-ride the default table width.
+%% If you are unhappy with the default look at the end of the
+%% *.log file to see what the default was set at before adjusting
+%% this value.
+
+%% This is the title of the table.
+\caption{Case study table of contents.}
+\label{tab:case_study_toc}
+
+%% This command over-rides LaTeX's natural table count
+%% and replaces it with this number.  LaTeX will increment 
+%% all other tables after this table based on this number
+\tablenum{1}
+
+%% The \tablehead gives provides the column headers.  It
+%% is currently set up so that the column labels are on the
+%% top line and the units surrounded by ()s are in the 
+%% bottom line.  You may add more header information by writing
+%% another line between these lines. For each column that requries
+%% extra information be sure to include a \colhead{text} command
+%% and remember to end any extra lines with \\ and include the 
+%% correct number of &s.
+\tablehead{
+  \colhead{Section} &
+  \colhead{True rate density} &
+  \colhead{Apparent rate density} & 
+  \colhead{Applicable where?}
+}
+
+%% All data must appear between the \startdata and \enddata commands
+\startdata
+  \ref{sec:model_2} & power-law & Eqs.~\ref{eq:power_law_correction}
+  \&~\ref{eq:powerlaw_vary_binary} & 2-17\,$R_\oplus$; no gap; no HJs
+  \\
+  \ref{sec:model_3} \& \ref{subsec:whichstar} & broken power-law &
+  Fig.~\ref{fig:occ_rate_model_3_log} & 0-17\,$R_\oplus$; 
+  no gap; no HJs
+  \\
+  \ref{sec:further_models} & broken power-law + gap & Fig.~\ref{fig:model_4} & 
+  0-17\,$R_\oplus$; has gap; no HJs
+  \\
+  \ref{sec:hjs} & gaussian & Fig.~\ref{fig:gaussian_HJ} & only hot Jupiters
+  \\
+\enddata
+
+%% Include any \tablenotetext{key}{text}, \tablerefs{ref list},
+%% or \tablecomments{text} between the \enddata and 
+%% \end{deluxetable} commands
+
+%% General table comment marker
+\tablecomments{
+    Aside from varying the true rate density, within each case study we also 
+    vary the number of planets orbiting secondary stars, relative to the 
+    number orbiting single stars. We use the following notation throughout.
+    $\alpha$---power-law exponent in stellar mass-luminosity relation, 
+    $L\propto M^\alpha$;
+    $\beta$---power-law exponent in volume-limited binary mass-ratio 
+    distribution, $f(q)\propto q^\beta$;
+    $\gamma$---power-law exponent in true rate density above 2\,$R_\oplus$, 
+    $\Gamma(r)\propto r^\gamma$.
+}
+
+\end{deluxetable}

@@ -1,0 +1,231 @@
+Dear Dr. Sigurdsson,
+
+We thank you for organizing the review of our paper, and the referee
+for constructive criticism.  We have considered the referee's remarks
+carefully and revised our manuscript accordingly.
+
+Below, we have reproduced the referee's report, along with our
+point-by-point responses. A list of changes is also appended to the
+manuscript.
+
+Sincerely,
+
+Luke Bouma, Kento Masuda, and Joshua Winn.
+
+********************************************************************************
+
+Referee comment:
+
+Section 2, end of paragraph 2, For each of the 4 points regarding missed
+transit signals, how often do they occur? (could add references). 
+
+  Response:
+
+  We cannot identify "4 points regarding missed transit signals" in section 2,
+  end of paragraph 2.
+
+  Assuming that the referee is referring to points #1, #2, #3, enumerated at
+  the end of section 2, paragraph 4:
+
+  We do not know how often each of these effects happen -- the goal of this
+  section is simply to introduce the existence of these sources of uncertainty.
+  Could the referee please clarify their request, or perhaps give some indication
+  of which references we might add?
+
+
+********************************************************************************
+
+Referee comment:
+
+Section 3.1, first sentence, "Since the effects of binarity are most pronounced
+when the two stellar components are similar" <- please also point to the place
+in the text where this is explained. 
+
+  Response:
+
+  The original idea was that binarity produces the largest errors in inferred
+  planetary radii when the two stellar components are similar.  However, this
+  is only true if the detected planet orbits the primary.  If it orbits the
+  secondary, it is false.  
+
+  We have accordingly reworded this sentence.
+
+********************************************************************************
+
+Referee comment:
+
+Section 3.2, following equations 4, you may want to change "stars" to "host
+star". 
+
+  Response:
+
+  Equation 4 is in Section 3.1, and the word "stars" does not appear around
+  that equation in an immediately obvious way.
+
+  Perhaps the referee meant around equation 14 of section 3.2?
+
+  We have not taken any action on this point.
+
+********************************************************************************
+
+Referee comment:
+
+Section 4.1, when exploring the Howard et al. planet radius distribution, how
+sensitive are the results to the choice of gamma? Do mathematical artifacts
+here make the results insensitive to the choice of the value of gamma? 
+
+  Response:
+
+  Consider the cases of γ=-2.5, and γ=-3.5. (Well outside the power laws needed
+  to fit Howard et al's results).  Applying Equations 28 and 30, we find:
+
+                   γ=-2.5      γ=-2.92      γ=-3.5
+  --------------------------------------------------
+  Equation 28
+  Γ_a/Γ_0           1.023        1.003      0.980
+
+
+  Equation 30 
+  Γ_a/Γ_0           1.095        1.048      0.993
+
+  We have added a sentence summarizing this result.
+
+********************************************************************************
+
+Referee comment:
+
+Section 4.4, end of paragraph 1, Add Lopez and Fortney citation. 
+
+  Response:
+
+  We have corrected this omission.  In addition to referencing the work by
+  Lopez & Fortney 2013, we now also refer to that by Owen & Wu 2013.
+
+
+********************************************************************************
+
+Referee comment:
+
+Section 4.4, paragraph 2, "radius distribution is assumed to have a complete
+absence of planets with sizes between 1.5 and 2R_Earth", might clarify that the
+"true" radius distribution is assumed to have this feature after fitting the
+apparent distribution. 
+
+  Response:
+
+  We have clarified the wording in this paragraph, in a manner that should
+  clarify the distinction between Fulton+17's apparent distribution, and the true
+  distribution that we assume for this numerical experiment.
+
+
+********************************************************************************
+
+Referee comment:
+
+Section 4.4, paragraph 2, More discussion of the spurious feature below 1.5
+R_Earth would be helpful. 
+
+  Response:
+
+  The peak in apparent occurrence rate density between 1.3 and 1.5 R_earth
+  (solid blue line relative to dotted light blue line) is the contribution from
+  secondaries with true radii greater than 2R_earth.
+
+  We have added a comment to this effect in the caption of Figure 6. We have
+  also increased the resolution of the grid in planet radius, to emphasize that
+  this is a feature, rather than a bug.
+
+  [
+  OPTIONAL:
+  As an aside, consider the numerical experiment of a single planet size, and a
+  distribution of binary light ratios. I.e., imagine the true occurrence rate
+  density is a delta function around r_p. The resulting apparent occurrence rate
+  density would have contributions from primaries between r_a = r_p/sqrt(2) and
+  r_a = r_p.  It would have contributions from secondaries from (roughly) r_a =
+  0 up to r_p/sqrt(2). We ran this numerical experiment, and though did not
+  mention it in the manuscript, we found that the contribution from secondaries
+  peaked at r_a = r_p/sqrt(2).
+
+  This delta function peak is analogous to what is seen in Figure 6.
+  ]
+
+
+********************************************************************************
+
+Referee comment:
+
+Section 4.4, paragraph 2, "may be even more devoid of planets than it appears",
+might want to emphasize again here that this conclusion is very dependent on
+the true distribution model plugged into the formalism. 
+
+  Response:
+
+  We agree that the apparent rate density distribution is very dependent on
+  the assumed true rate density distribution. However, we have opted not to
+  change our original wording, which we believe accurately states our
+  conclusion.
+
+  Our conclusion here is that for an assumed true rate density distribution
+  that roughly matches observations, there is no way for binarity to
+  cause underestimates of the rate density inside a "dip" of planet occurrence.
+  
+  Restated, if there is a "gap" in the true rate density distribution,
+  the apparent rate density distribution will always fill it in.
+
+  Thus, if a gap is observed in an apparent distribution, the true distribution
+  must have a gap at least as deep, if not deeper.
+
+
+********************************************************************************
+
+Referee comment:
+
+Section 5, Hot Jupiter paragraph, states that result of this study find that
+unresolved binaries likely result in an overestimated of hot-Jupiter occurrence
+rates, implied by the Fulton gap model in Section 4.4. Previously, in section
+4.2, paragraph 3, it states the occurrence rate density of planets greater than
+8 Earth radii are underestimated. The abstract just says net systematic error
+of order 5%. It would help to include a table describing the different tests in
+this study, and how parameters are varied (how knobs are turned). 
+
+  Response:
+
+  In Section 5, Hot Jupiter paragraph, we erroneously referred to Section 4.4;
+  this should have been a reference to Section 4.5 (the gaussian radius
+  distribution model).  We have corrected the error.
+
+  We have now also added a table summarizing the case studies, as well as
+  the parameters that are varied.
+  
+
+********************************************************************************
+
+Referee comment:
+
+- Recommend using the term "uncertainty" instead of "errors" . 
+
+  Response:
+
+  We have changed our terminology accordingly in many places throughout the
+  manuscript (see list of changes).
+
+********************************************************************************
+
+Referee comment:
+
+- May want to comment on parameterizing the occurrence rate in terms of planet
+  radius and insolation flux. The semi major axis will depend on which star in
+  the binary the planet orbits.
+
+- May want to comment on paper by Danley Hsu: Occurrence rates from Kepler
+  using approximate Bayesian computation. You could speculate on what their
+  data generating process would yield when plugged into this formalism. 
+
+- May want to comment on the parameter space and telescopes for resolving
+  binaries of various separations, etc. and the probability of being able to
+  resolve binaries with followup. 
+
+  Response:
+
+  We have added a "Caveats and Outlook" paragraph that touches on all three of
+  these issues.
