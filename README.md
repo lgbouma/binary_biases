@@ -1,6 +1,6 @@
 The code in this repository supports the results presented by Bouma, Masuda,
-and Winn in a paper entitled "Binarity's Biases on Transit Survey Occurrence
-Rates''.
+and Winn in a paper entitled "Biases in Planet Occurrence Caused by Unresolved
+Binaries in Transit Surveys".
 
 ## Dependencies
 
