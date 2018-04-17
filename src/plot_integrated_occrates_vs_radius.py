@@ -4,6 +4,8 @@ from matplotlib import rc
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 rc('text', usetex=True)
 
+import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import matplotlib.pyplot as plt, pandas as pd, numpy as np
 from scipy.integrate import trapz
 
@@ -147,7 +149,7 @@ def make_plot(model_number, logx=None, logy=None, withtext=None,
 
     ax.set_xlabel('planet radius [$R_\oplus$]', fontsize='large')
 
-    ax.set_ylabel('number of planets per star', fontsize='large')
+    ax.set_ylabel('number of planets per star per bin', fontsize='large')
 
     if logx:
         ax.set_xscale('log')
