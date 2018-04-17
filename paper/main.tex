@@ -228,8 +228,9 @@ quantities in Equation~\ref{eq:occ_rate_simple} are biased:
 %    
     \item The number of detected planets, $N_{\det}$, is actually the
       number of detected planets that {\it appear} to have size $r$,
-      orbiting stars that {\it appear} to have mass $M$.  Whenever the
-      planet-hosting star is part of a binary,
+      orbiting stars that {\it appear} to have mass $M$ \added{and
+      radius $R$}.  Whenever the planet-hosting star is part of a
+      binary,
 %    
     \begin{itemize}
         \item the planet's size could be misclassified because of the
@@ -541,8 +542,8 @@ where $\mu$ is given by
 \end{equation}
 Equation~\ref{eq:N_binaries} replaces ${\mu N_\star(r\a)/(1+\mu)}$
 in Equations~\ref{eq:n1} and~\ref{eq:n2}.
-The whole equation is then integrated to give the number of
-detected planets.
+The whole equation is then integrated \added{over $q$} to give the
+number of detected planets.
 
 \item The apparent radius of a planet in a binary system now depends
 on whether the host star is the primary or the secondary star. When the host
@@ -1112,11 +1113,11 @@ by~\citet{furlan_kepler_2017}. Based on this information,
 the {\it Kepler} planets in binaries. They found that planet radii are
 generally underestimated by a factor $r/r\a = 1.17$ if all planets
 orbit primaries, and $r/r\a = 1.65$ if detected planets are equally
-likely to orbit primaries and singles.  Our formalism provides a way
-to assess the relative probabilities that a detected planet orbits the
-primary or secondary star.  The calculations presented in
-\S\,\ref{subsec:whichstar} suggest that in almost all cases the planet
-most likely orbits the primary star.
+likely to orbit primaries and \deleted{singles}\added{secondaries}.
+Our formalism provides a way to assess the relative probabilities that
+a detected planet orbits the primary or secondary star.  The
+calculations presented in \S\,\ref{subsec:whichstar} suggest that in
+almost all cases the planet most likely orbits the primary star.
 
 \added{\paragraph{Caveats \& outlook}
 Unresolved binaries corrupt occurrence rate distributions along
@@ -1124,21 +1125,19 @@ dimensions other than planet radius.
 In particular, since binarity can lead to incorrect
 assessment of a planet's host stellar mass, the occurrence
 distributions in semi-major axis and insolation must also be corrected.
-Though we leave consideration of such biases for future work,
-we take solace in the fact that the NASA {\it TESS} mission
-emphasizes stars within a few hundred parsecs.
-Through a combination of high-resolution imaging and 
-{\it Gaia}'s astrometry and spectroscopy, it will be possible
-to characterize the {\it TESS} target stars more thoroughly than
-was possible with {\it Kepler}.
-This is essential for inferring properties of planet populations, since
-a population inference model with parameters controlling both the planet 
-and binary star populations might be necessary to consistently 
-account for binarity.
-Given the difficulty of writing a correct likelihood function for such
-a model, one plausible path might be to
+We leave consideration of such biases for future work.}
+
+\added{
+It seems likely that to consistently account for binarity in
+planet occurrence rate calculation, one must stipulate a
+population inference model with parameters controlling both the
+planet and binary star populations.
+Given the difficulty of writing a correct likelihood function
+for such a model, one feasible computational approach might be to
 forward-model transit surveys with likelihood-free 
 techniques~\citep[\textit{e.g.},][]{morehead_understanding_2016,hsu_improving_2018}.
+The NASA {\it TESS} mission should provide ample opportunity
+for such a study.
 }
 
 \acknowledgements{
