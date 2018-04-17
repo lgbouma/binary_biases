@@ -229,3 +229,13 @@ Referee comment:
 
   We have added a "Caveats and Outlook" paragraph that touches on all three of
   these issues.
+
+
+********************************************************************************
+
+Other:
+
+* We have changed the ylabel in Figures 4b and 6b from "number of planets per
+  star" to "number of planets per star per bin".
+
+* We now mention Figure 2 in the text (cf. appended List of Changes)
