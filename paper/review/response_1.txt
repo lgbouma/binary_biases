@@ -21,18 +21,13 @@ transit signals, how often do they occur? (could add references).
 
   Response:
 
-  We cannot identify "4 points regarding missed transit signals" in section 2,
-  end of paragraph 2.
-
-  Assuming that the referee is referring to points #1, #2, #3, enumerated at
-  the end of section 2, paragraph 4:
-
-  We do not know how often each of these effects happen -- the goal of this
-  section is simply to introduce the existence of these sources of uncertainty.
-  Could the referee please clarify their request, or perhaps give some indication
-  of which references we might add?
-
-
+  We assume the referee is referring to paragraph 3.  All of these
+  effects are quite common, both in the Kepler survey and ground-based
+  surveys, though we are not aware of any source that would allow us
+  to estimate the probabilities.  Since these "pitfalls" are not the
+  topic of this paper, we do not want to attempt such a calculation
+  here.
+ 
 ********************************************************************************
 
 Referee comment:
@@ -43,12 +38,11 @@ in the text where this is explained.
 
   Response:
 
-  The original idea was that binarity produces the largest errors in inferred
-  planetary radii when the two stellar components are similar.  However, this
-  is only true if the detected planet orbits the primary.  If it orbits the
-  secondary, it is false.  
-
-  We have accordingly reworded this sentence.
+  We decided to omit this sentence.  The original idea was that
+  binarity produces the largest errors in inferred planetary radii
+  when the two stellar components are similar.  However, this is only
+  true if the detected planet orbits the primary.  If it orbits the
+  secondary, it is false.
 
 ********************************************************************************
 
@@ -59,12 +53,11 @@ star".
 
   Response:
 
-  Equation 4 is in Section 3.1, and the word "stars" does not appear around
-  that equation in an immediately obvious way.
-
-  Perhaps the referee meant around equation 14 of section 3.2?
-
-  We have not taken any action on this point.
+  Equation 4 is in Section 3.1 (not Section 3.2) and is not followed
+  by a sentence with the word "stars". Perhaps the referee is
+  referring to equation 14?  We do not understand why it would be an
+  improvement here to replace "stars" with "host star", so we have not
+  taken any action.
 
 ********************************************************************************
 
@@ -76,8 +69,10 @@ here make the results insensitive to the choice of the value of gamma?
 
   Response:
 
-  Consider the cases of γ=-2.5, and γ=-3.5. (Well outside the power laws needed
-  to fit Howard et al's results).  Applying Equations 28 and 30, we find:
+  We addressed this point by considering the cases of γ=-2.5, and
+  γ=-3.5, which bracket the result from Howard et al. and are well
+  outside the quoted uncertainty range.  Applying Equations 28 and 30,
+  we find:
 
                    γ=-2.5      γ=-2.92      γ=-3.5
   --------------------------------------------------
@@ -98,25 +93,23 @@ Section 4.4, end of paragraph 1, Add Lopez and Fortney citation.
 
   Response:
 
-  We have corrected this omission.  In addition to referencing the work by
-  Lopez & Fortney 2013, we now also refer to that by Owen & Wu 2013.
-
+  We have corrected this omission, and also added a citation to Owen &
+  Wu (2013).
 
 ********************************************************************************
 
 Referee comment:
 
-Section 4.4, paragraph 2, "radius distribution is assumed to have a complete
-absence of planets with sizes between 1.5 and 2R_Earth", might clarify that the
-"true" radius distribution is assumed to have this feature after fitting the
-apparent distribution. 
+Section 4.4, paragraph 2, "radius distribution is assumed to have a
+complete absence of planets with sizes between 1.5 and 2R_Earth",
+might clarify that the "true" radius distribution is assumed to have
+this feature after fitting the apparent distribution.
 
   Response:
 
-  We have clarified the wording in this paragraph, in a manner that should
-  clarify the distinction between Fulton+17's apparent distribution, and the true
-  distribution that we assume for this numerical experiment.
-
+  We have tried to clarify this passage, to distinguish between the
+  apparent rate distribution measured by Fulton et al. (2017) and the
+  distribution assumed in our numerical experiment.
 
 ********************************************************************************
 
@@ -127,28 +120,12 @@ R_Earth would be helpful.
 
   Response:
 
-  The peak in apparent occurrence rate density between 1.3 and 1.5 R_earth
-  (solid blue line relative to dotted light blue line) is the contribution from
-  secondaries with true radii greater than 2R_earth.
-
-  We have added a comment to this effect in the caption of Figure 6. We have
-  also increased the resolution of the grid in planet radius, to emphasize that
-  this is a feature, rather than a bug.
-
-  [
-  OPTIONAL:
-  As an aside, consider the numerical experiment of a single planet size, and a
-  distribution of binary light ratios. I.e., imagine the true occurrence rate
-  density is a delta function around r_p. The resulting apparent occurrence rate
-  density would have contributions from primaries between r_a = r_p/sqrt(2) and
-  r_a = r_p.  It would have contributions from secondaries from (roughly) r_a =
-  0 up to r_p/sqrt(2). We ran this numerical experiment, and though did not
-  mention it in the manuscript, we found that the contribution from secondaries
-  peaked at r_a = r_p/sqrt(2).
-
-  This delta function peak is analogous to what is seen in Figure 6.
-  ]
-
+  The peak in apparent occurrence rate density between 1.3 and 1.5
+  R_earth (solid blue line relative to dotted light blue line) is the
+  contribution from secondaries with true radii greater than 2R_earth.
+  This is now stated in the caption of Figure 6.  We have also
+  increased the resolution of the grid in planet radius, to emphasize
+  that this is a feature, rather than a bug.
 
 ********************************************************************************
 
@@ -160,21 +137,13 @@ the true distribution model plugged into the formalism.
 
   Response:
 
-  We agree that the apparent rate density distribution is very dependent on
-  the assumed true rate density distribution. However, we have opted not to
-  change our original wording, which we believe accurately states our
-  conclusion.
-
-  Our conclusion here is that for an assumed true rate density distribution
-  that roughly matches observations, there is no way for binarity to
-  cause underestimates of the rate density inside a "dip" of planet occurrence.
-  
-  Restated, if there is a "gap" in the true rate density distribution,
-  the apparent rate density distribution will always fill it in.
-
-  Thus, if a gap is observed in an apparent distribution, the true distribution
-  must have a gap at least as deep, if not deeper.
-
+  We have added a few sentences to make our point more clearly:
+  "The quantitative results of this numerical experiment obviously
+  depend on the input assumptions.  The more general point is that
+  whenever there is a gap-like feature in the true rate density
+  distribution, the effects of binarity will tend to fill it in.  If a
+  gap is observed in an apparent distribution, the true distribution
+  must have a gap at least as deep, if not deeper."
 
 ********************************************************************************
 
@@ -190,13 +159,14 @@ this study, and how parameters are varied (how knobs are turned).
 
   Response:
 
-  In Section 5, Hot Jupiter paragraph, we erroneously referred to Section 4.4;
-  this should have been a reference to Section 4.5 (the gaussian radius
-  distribution model).  We have corrected the error.
+  We see now that in Section 5 (Hot Jupiter paragraph) we erroneously
+  referred to Section 4.4; this should have been a reference to
+  Section 4.5 (the gaussian radius distribution model).  We have
+  corrected the error.
 
-  We have now also added a table summarizing the case studies, as well as
-  the parameters that are varied.
-  
+  We have also followed the referee's advice and added a table
+  summarizing the case studies, as well as the parameters that are
+  varied.
 
 ********************************************************************************
 
@@ -206,8 +176,10 @@ Referee comment:
 
   Response:
 
-  We have changed our terminology accordingly in many places throughout the
-  manuscript (see list of changes).
+  We appreciate the suggestion but we prefer to leave the text as it
+  is.  The term "systematic error" is in more common use than
+  "systematic uncertainty", by about a factor of 5 according to Google
+  Ngram viewer.
 
 ********************************************************************************
 
@@ -217,19 +189,28 @@ Referee comment:
   radius and insolation flux. The semi major axis will depend on which star in
   the binary the planet orbits.
 
-- May want to comment on paper by Danley Hsu: Occurrence rates from Kepler
-  using approximate Bayesian computation. You could speculate on what their
-  data generating process would yield when plugged into this formalism. 
+  Response: We have added a "Caveats and Outlook" paragraph that
+  touches on all three of these issues.
+
+- May want to comment on paper by Danley Hsu: Occurrence rates from
+  Kepler using approximate Bayesian computation. You could speculate
+  on what their data generating process would yield when plugged into
+  this formalism.
+
+  Response: The work by Hsu et al. does look interesting, but since we
+  lack experience with their technique we do not wish to speculate on
+  how to modify it to accommodate binarity.
 
 - May want to comment on the parameter space and telescopes for resolving
   binaries of various separations, etc. and the probability of being able to
   resolve binaries with followup. 
 
-  Response:
-
-  We have added a "Caveats and Outlook" paragraph that touches on all three of
-  these issues.
-
+  Response: Given that there are so many possible approaches and
+  instruments for imaging, RV, and astrometry, a quantitative analysis
+  of this issue would be beyond the scope of this article.  In the
+  revision, we have simply acknowledged that the combination of Gaia
+  and TESS data will lessen the severity of the problem, compared to
+  the situation with Kepler.
 
 ********************************************************************************
 
